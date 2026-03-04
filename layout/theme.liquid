@@ -52,4 +52,36 @@
 
   <script src="{{ 'albino.js' | asset_url }}" defer></script>
 </body>
+<script>
+  (function () {
+    function closeAgeGate() {
+      var gate = document.getElementById('age-gate');
+      if (gate) gate.remove();
+      document.body.style.overflow = '';
+      document.body.removeAttribute('data-age-gate-active');
+    }
+
+    document.addEventListener('click', function (e) {
+      if (e.target && e.target.id === 'age-gate-yes') {
+        localStorage.setItem('albino_age_verified', 'true');
+        closeAgeGate();
+      } else if (e.target && e.target.id === 'age-gate-no') {
+        // Mostrar estado "No podemos continuar"
+        var ask = document.getElementById('age-gate-ask');
+        var denied = document.getElementById('age-gate-denied');
+        if (ask) ask.hidden = true;
+        if (denied) denied.hidden = false;
+      } else if (e.target && e.target.id === 'age-gate-back') {
+        var ask2 = document.getElementById('age-gate-ask');
+        var denied2 = document.getElementById('age-gate-denied');
+        if (denied2) denied2.hidden = true;
+        if (ask2) ask2.hidden = false;
+      } else if (e.target && e.target.id === 'age-gate-leave') {
+        e.preventDefault();
+        if (window.history.length > 1) window.history.back();
+        else window.location.href = 'about:blank';
+      }
+    });
+  })();
+</script>
 </html>
