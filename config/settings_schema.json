@@ -1,1 +1,173 @@
-[]
+[
+  {
+    "name": "Página Nosotros (Elaboración)",
+    "settings": [
+      {
+        "type": "text",
+        "id": "nosotros_hero_title",
+        "label": "Nosotros — título hero",
+        "default": "ORIGEN"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage1_label",
+        "label": "Etapa 1 — etiqueta",
+        "default": "01 · TIERRA"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage1_title",
+        "label": "Etapa 1 — título",
+        "default": "Todo empieza aquí."
+      },
+      {
+        "type": "textarea",
+        "id": "nosotros_stage1_text",
+        "label": "Etapa 1 — texto",
+        "default": "La tierra arcillosa retiene el agua…"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage1_image",
+        "label": "Etapa 1 — URL imagen"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage1_image_alt",
+        "label": "Etapa 1 — alt imagen",
+        "default": "Textura arcillosa de la tierra"
+      },
+
+      {
+        "type": "text",
+        "id": "nosotros_stage2_label",
+        "label": "Etapa 2 — etiqueta",
+        "default": "02 · CULTIVO"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage2_title",
+        "label": "Etapa 2 — título",
+        "default": "La vid no se fuerza."
+      },
+      {
+        "type": "textarea",
+        "id": "nosotros_stage2_text",
+        "label": "Etapa 2 — texto",
+        "default": "Se poda. Se espera. Se acompaña. Cada gesto influye."
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage2_image",
+        "label": "Etapa 2 — URL imagen"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage2_image_alt",
+        "label": "Etapa 2 — alt imagen",
+        "default": "Manos trabajando la vid"
+      },
+
+      {
+        "type": "text",
+        "id": "nosotros_stage3_label",
+        "label": "Etapa 3 — etiqueta",
+        "default": "03 · MADURACIÓN"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage3_title",
+        "label": "Etapa 3 — título",
+        "default": "Tradición, ahora."
+      },
+      {
+        "type": "textarea",
+        "id": "nosotros_stage3_text",
+        "label": "Etapa 3 — texto",
+        "default": " "
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage3_image",
+        "label": "Etapa 3 — URL imagen"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage3_image_alt",
+        "label": "Etapa 3 — alt imagen",
+        "default": "Uvas en mano durante la vendimia"
+      },
+
+      {
+        "type": "text",
+        "id": "nosotros_stage4_label",
+        "label": "Etapa 4 — etiqueta",
+        "default": "04 · ALBINO"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage4_title",
+        "label": "Etapa 4 — título",
+        "default": "Esencial."
+      },
+      {
+        "type": "textarea",
+        "id": "nosotros_stage4_text",
+        "label": "Etapa 4 — texto",
+        "default": "La raíz es la misma. La mirada es nueva."
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage4_image",
+        "label": "Etapa 4 — URL imagen"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage4_image_alt",
+        "label": "Etapa 4 — alt imagen",
+        "default": "Depósito de vinificación minimalista"
+      },
+
+      {
+        "type": "text",
+        "id": "nosotros_stage5_label",
+        "label": "Etapa 5 — etiqueta",
+        "default": "05 · EDICIÓN"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage5_title",
+        "label": "Etapa 5 — título",
+        "default": "Albino."
+      },
+      {
+        "type": "textarea",
+        "id": "nosotros_stage5_text",
+        "label": "Etapa 5 — texto",
+        "default": "Producción limitada. Cosecha 2025. Tierra de Barros."
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage5_image",
+        "label": "Etapa 5 — URL imagen"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage5_image_alt",
+        "label": "Etapa 5 — alt imagen",
+        "default": "Botella Albino"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage5_cta_label",
+        "label": "Texto CTA final",
+        "default": "Descubrir la edición"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_stage5_cta_link",
+        "label": "URL CTA final"
+      }
+    ]
+  }
+]
