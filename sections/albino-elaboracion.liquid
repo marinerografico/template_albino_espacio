@@ -86,3 +86,238 @@
       <div class="max-w-[400px]">
         <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block">
           {{ section.settings.stage4_label }}
+        </span>
+        <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-8">
+          <span class="origen-hero-line">{{ section.settings.stage4_title }}</span>
+        </h2>
+        <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light">
+          {{ section.settings.stage4_text }}
+        </p>
+      </div>
+    </div>
+    <div class="w-full md:w-1/2 reveal order-1 md:order-2 flex justify-center md:justify-start">
+      <img src="{{ section.settings.stage4_image | default: 'https://via.placeholder.com/500x625' }}"
+           class="w-full max-w-[500px] aspect-[4/5] object-cover filter grayscale-[20%] contrast-110"
+           alt="{{ section.settings.stage4_image_alt }}" width="500" height="625">
+    </div>
+  </section>
+
+  <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto my-16 md:my-24 reveal"></div>
+
+  <!-- Etapa 5 -->
+  <section class="min-h-[90vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+    <div class="w-full md:w-1/2 reveal order-1 flex justify-center md:justify-end">
+      <img src="{{ section.settings.stage5_image | default: 'https://via.placeholder.com/400x700' }}"
+           class="w-full max-w-[400px] h-auto object-contain mix-blend-multiply opacity-90 filter contrast-110"
+           alt="{{ section.settings.stage5_image_alt }}" width="400" height="700">
+    </div>
+    <div class="w-full md:w-1/2 reveal delay-200 order-2 flex flex-col justify-center items-start">
+      <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block">
+        {{ section.settings.stage5_label }}
+      </span>
+      <h3 class="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111111] mb-8">
+        {{ section.settings.stage5_title }}
+      </h3>
+      <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light max-w-[400px] mb-12">
+        {{ section.settings.stage5_text }}
+      </p>
+      <a href="{{ section.settings.stage5_cta_link | default: routes.root_url }}"
+         class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono text-[#6A6A6A] border-b border-[#a0a09e] hover:border-[#111111] pb-1">
+        <span>{{ section.settings.stage5_cta_label }}</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Albino Nosotros",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Título hero",
+      "default": "ORIGEN"
+    },
+    {
+      "type": "header",
+      "content": "Etapa 1"
+    },
+    {
+      "type": "text",
+      "id": "stage1_label",
+      "label": "Etiqueta etapa 1",
+      "default": "01 · TIERRA"
+    },
+    {
+      "type": "text",
+      "id": "stage1_title",
+      "label": "Título etapa 1",
+      "default": "Todo empieza aquí."
+    },
+    {
+      "type": "textarea",
+      "id": "stage1_text",
+      "label": "Texto etapa 1",
+      "default": "La tierra arcillosa retiene el agua…"
+    },
+    {
+      "type": "url",
+      "id": "stage1_image",
+      "label": "Imagen etapa 1 (URL)"
+    },
+    {
+      "type": "text",
+      "id": "stage1_image_alt",
+      "label": "Alt imagen etapa 1",
+      "default": "Textura arcillosa de la tierra"
+    },
+    {
+      "type": "header",
+      "content": "Etapa 2"
+    },
+    {
+      "type": "text",
+      "id": "stage2_label",
+      "label": "Etiqueta etapa 2",
+      "default": "02 · CULTIVO"
+    },
+    {
+      "type": "text",
+      "id": "stage2_title",
+      "label": "Título etapa 2",
+      "default": "La vid no se fuerza."
+    },
+    {
+      "type": "textarea",
+      "id": "stage2_text",
+      "label": "Texto etapa 2",
+      "default": "Se poda. Se espera. Se acompaña. Cada gesto influye."
+    },
+    {
+      "type": "url",
+      "id": "stage2_image",
+      "label": "Imagen etapa 2 (URL)"
+    },
+    {
+      "type": "text",
+      "id": "stage2_image_alt",
+      "label": "Alt imagen etapa 2",
+      "default": "Manos trabajando la vid"
+    },
+    {
+      "type": "header",
+      "content": "Etapa 3"
+    },
+    {
+      "type": "text",
+      "id": "stage3_label",
+      "label": "Etiqueta etapa 3",
+      "default": "03 · MADURACIÓN"
+    },
+    {
+      "type": "text",
+      "id": "stage3_title",
+      "label": "Título etapa 3",
+      "default": "Tradición, ahora."
+    },
+    {
+      "type": "textarea",
+      "id": "stage3_text",
+      "label": "Texto etapa 3",
+      "default": "."
+    },
+    {
+      "type": "url",
+      "id": "stage3_image",
+      "label": "Imagen etapa 3 (URL)"
+    },
+    {
+      "type": "text",
+      "id": "stage3_image_alt",
+      "label": "Alt imagen etapa 3",
+      "default": "Uvas en mano durante la vendimia"
+    },
+    {
+      "type": "header",
+      "content": "Etapa 4"
+    },
+    {
+      "type": "text",
+      "id": "stage4_label",
+      "label": "Etiqueta etapa 4",
+      "default": "04 · ALBINO"
+    },
+    {
+      "type": "text",
+      "id": "stage4_title",
+      "label": "Título etapa 4",
+      "default": "Esencial."
+    },
+    {
+      "type": "textarea",
+      "id": "stage4_text",
+      "label": "Texto etapa 4",
+      "default": "La raíz es la misma. La mirada es nueva."
+    },
+    {
+      "type": "url",
+      "id": "stage4_image",
+      "label": "Imagen etapa 4 (URL)"
+    },
+    {
+      "type": "text",
+      "id": "stage4_image_alt",
+      "label": "Alt imagen etapa 4",
+      "default": "Depósito de vinificación minimalista"
+    },
+    {
+      "type": "header",
+      "content": "Etapa 5"
+    },
+    {
+      "type": "text",
+      "id": "stage5_label",
+      "label": "Etiqueta etapa 5",
+      "default": "05 · EDICIÓN"
+    },
+    {
+      "type": "text",
+      "id": "stage5_title",
+      "label": "Título etapa 5",
+      "default": "Albino."
+    },
+    {
+      "type": "textarea",
+      "id": "stage5_text",
+      "label": "Texto etapa 5",
+      "default": "Producción limitada. Cosecha 2025. Tierra de Barros."
+    },
+    {
+      "type": "url",
+      "id": "stage5_image",
+      "label": "Imagen etapa 5 (URL)"
+    },
+    {
+      "type": "text",
+      "id": "stage5_image_alt",
+      "label": "Alt imagen etapa 5",
+      "default": "Botella Albino"
+    },
+    {
+      "type": "text",
+      "id": "stage5_cta_label",
+      "label": "Texto CTA final",
+      "default": "Descubrir la edición"
+    },
+    {
+      "type": "url",
+      "id": "stage5_cta_link",
+      "label": "URL CTA final"
+    }
+  ],
+  "presets": [
+    { "name": "Albino Nosotros" }
+  ]
+}
+{% endschema %}
