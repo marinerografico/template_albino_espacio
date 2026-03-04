@@ -1,0 +1,47 @@
+{
+  "name": "Nosotros (Elaboración)",
+  "sections": {
+    "main": {
+      "type": "albino-elaboracion",
+      "settings": {
+        "hero_title": "ORIGEN",
+
+        "stage1_label": "01 · TIERRA",
+        "stage1_title": "Todo empieza aquí.",
+        "stage1_text": "La tierra arcillosa retiene el agua…",
+        "stage1_image": "",
+        "stage1_image_alt": "Textura arcillosa de la tierra",
+
+        "stage2_label": "02 · CULTIVO",
+        "stage2_title": "La vid no se fuerza.",
+        "stage2_text": "Se poda. Se espera. Se acompaña. Cada gesto influye.",
+        "stage2_image": "",
+        "stage2_image_alt": "Manos trabajando la vid",
+
+        "stage3_label": "03 · MADURACIÓN",
+        "stage3_title": "Tradición, ahora.",
+        "stage3_text": " ",
+        "stage3_image": "",
+        "stage3_image_alt": "Uvas en mano durante la vendimia",
+
+        "stage4_label": "04 · ALBINO",
+        "stage4_title": "Esencial.",
+        "stage4_text": "La raíz es la misma. La mirada es nueva.",
+        "stage4_image": "",
+        "stage4_image_alt": "Depósito de vinificación minimalista",
+
+        "stage5_label": "05 · EDICIÓN",
+        "stage5_title": "Albino.",
+        "stage5_text": "Producción limitada. Cosecha 2025. Tierra de Barros.",
+        "stage5_image": "",
+        "stage5_image_alt": "Botella Albino",
+        "stage5_cta_label": "Descubrir la edición",
+        "stage5_cta_link": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
+
