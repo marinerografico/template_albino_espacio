@@ -7,14 +7,18 @@
   </div>
 </section>
 
-  <section class="espacio-section flex items-stretch justify-center px-6 pt-24 md:pt-32 text-center">
+<section class="espacio-section flex items-stretch justify-center px-6 pt-24 md:pt-32 text-center">
   <div class="espacio-layout w-full mx-auto font-body">
-    <h2 class="espacio-title font-display heading-page reveal text-stone-900"><span data-bind="claims.espacio">Esencial</span></h2>
+    <h2 class="espacio-title font-display heading-page reveal text-stone-900">
+      <span>{{ section.settings.hero_title }}</span>
+    </h2>
     {%- comment -%} Versión con motion (oculta en desarrollo, usada por sticky-logo.js si se reactiva)
-    <h2 id="espacio-heading" class="espacio-title font-display heading-page reveal text-stone-900"><span data-bind="claims.espacio">Esencial</span></h2>
+    <h2 id="espacio-heading" class="espacio-title font-display heading-page reveal text-stone-900"><span>{{ section.settings.hero_title }}</span></h2>
     {%- endcomment -%}
     <p class="espacio-line-1 text-base md:text-lg reveal delay-100 text-stone-900">
-      <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono" data-bind="claims.espacioSubline">Tradición, ahora.</span>
+      <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono">
+        {{ section.settings.hero_subtitle }}
+      </span>
     </p>
   </div>
 </section>
@@ -24,8 +28,8 @@
   <div class="absolute inset-0 bg-[#B55239]/20 mix-blend-multiply pointer-events-none"></div>
   <div class="absolute inset-0 z-10 reveal delay-200 flex items-center justify-center px-6">
     <p class="text-center leading-tight">
-      <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono text-[#F5F4F1]">ANTES QUE VINO</span>
-      <span class="block mt-0.5 italic text-[13px] md:text-sm font-db-serif text-[#F5F4F1]" data-bind="claims.heroClay">hubo esfuerzo</span>
+      <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono text-[#F5F4F1]">{{ section.settings.hero_tagline_top }}</span>
+      <span class="block mt-0.5 italic text-[13px] md:text-sm font-db-serif text-[#F5F4F1]">{{ section.settings.hero_tagline_bottom }}</span>
     </p>
   </div>
 </section>
@@ -35,63 +39,69 @@
     <img data-bind-src="assets.bottle" class="md:h-[600px] lg:h-[700px] opacity-90 mix-blend-multiply h-[400px] object-contain mr-auto ml-auto" alt="Botella Albino" width="400" height="700">
   </div>
   <div class="mt-16 md:mt-20 max-w-md mx-auto reveal delay-200">
-    <h3 id="product-heading" class="espacio-title font-display uppercase text-[18px] leading-[22px]" style="letter-spacing: normal;"><span data-bind="claims.productTitle">Albino</span></h3>
+    <h3 id="product-heading" class="espacio-title font-display uppercase text-[18px] leading-[22px]" style="letter-spacing: normal;">
+      <span>{{ section.settings.product_title }}</span>
+    </h3>
     <p class="text-xl md:text-2xl font-light tracking-tight mt-4 text-stone-900">
-      <span class="tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono mr-3">VINO TINTO DULCE</span>
-      <span class="italic font-db-serif" data-bind="claims.productSubtitle"></span>
+      <span class="tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono mr-3">{{ section.settings.product_tagline }}</span>
+      <span class="italic font-db-serif">{{ section.settings.product_subtitle }}</span>
     </p>
     <div class="mt-16 space-y-3">
-      <p class="text-base md:text-lg uppercase font-geist-mono font-light tracking-tight"><span data-bind="prices.single">29€</span></p>
-      <p class="text-sm uppercase font-geist-mono font-light tracking-tight text-stone-900"><span data-bind="claims.productPriceLabel">Edición limitada · Cosecha 2025</span></p>
-      <p class="text-sm font-body font-light text-stone-900"><span data-bind="claims.shipping">Envío en 24-48h. Envío gratuito desde 3 botellas.</span></p>
+      <p class="text-base md:text-lg uppercase font-geist-mono font-light tracking-tight">{{ section.settings.product_price }}</p>
+      <p class="text-sm uppercase font-geist-mono font-light tracking-tight text-stone-900">{{ section.settings.product_price_label }}</p>
+      <p class="text-sm font-body font-light text-stone-900">{{ section.settings.product_shipping }}</p>
     </div>
     <div class="mt-12 w-full text-left font-body">
       <div class="border-t border-[#e5e4e1]">
         <button type="button" data-accordion-toggle="notas-cata" class="w-full py-6 flex justify-between items-center text-sm tracking-[0.15em] uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B56B80] text-stone-900">
-          <span data-bind="claims.notasCata">Notas de cata</span>
+          <span>{{ section.settings.notas_cata_title }}</span>
           <i data-lucide="chevron-up" stroke-width="1.5" class="w-5 h-5 transition-transform duration-500 ease-in-out text-stone-900" style="transform: rotate(180deg);"></i>
         </button>
         <div id="notas-cata" class="overflow-hidden transition-[max-height] duration-500 ease-in-out" style="max-height: 0px;">
-          <p class="pb-6 text-base font-light leading-relaxed text-stone-900"><span data-bind="claims.notasCataText">Vino de color rojo con irasaciones violáceas…</span></p>
+          <p class="pb-6 text-base font-light leading-relaxed text-stone-900">{{ section.settings.notas_cata_text }}</p>
         </div>
       </div>
       <div class="border-t border-[#e5e4e1]">
         <button type="button" data-accordion-toggle="ficha-tecnica" class="w-full py-6 flex justify-between items-center text-sm tracking-[0.15em] uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B56B80] text-stone-900">
-          <span data-bind="claims.fichaTecnica">Ficha técnica</span>
+          <span>{{ section.settings.ficha_title }}</span>
           <i data-lucide="chevron-up" stroke-width="1.5" class="w-5 h-5 transition-transform duration-500 ease-in-out text-stone-900" style="transform: rotate(180deg);"></i>
         </button>
         <div id="ficha-tecnica" class="overflow-hidden transition-[max-height] duration-500 ease-in-out" style="max-height: 0px;">
           <div class="pb-6 flex flex-col">
             <div class="flex justify-between items-center border-b border-[#e5e4e1] py-4 text-base font-light">
               <span class="text-stone-900">Variedad</span>
-              <span class="text-stone-900" data-bind="claims.fichaVariedad">Tempranillo</span>
+              <span class="text-stone-900">{{ section.settings.ficha_variedad }}</span>
             </div>
             <div class="flex justify-between items-center border-b border-[#e5e4e1] py-4 text-base font-light">
               <span class="text-stone-900">Suelo</span>
-              <span class="text-stone-900" data-bind="claims.fichaSuelo">Arcilloso</span>
+              <span class="text-stone-900">{{ section.settings.ficha_suelo }}</span>
             </div>
             <div class="flex justify-between items-center py-4 text-base font-light">
               <span class="text-stone-900">Alcohol</span>
-              <span class="text-stone-900" data-bind="claims.fichaAlcohol">12.5%</span>
+              <span class="text-stone-900">{{ section.settings.ficha_alcohol }}</span>
             </div>
           </div>
         </div>
       </div>
       <div class="border-t border-b border-[#e5e4e1]">
         <button type="button" data-accordion-toggle="impacto-social" class="w-full py-6 flex justify-between items-center text-sm tracking-[0.15em] uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B56B80] text-stone-900">
-          <span data-bind="claims.impactoSocial">Impacto social</span>
+          <span>{{ section.settings.impacto_title }}</span>
           <i data-lucide="chevron-up" stroke-width="1.5" class="w-5 h-5 transition-transform duration-500 ease-in-out text-stone-900" style="transform: rotate(180deg);"></i>
         </button>
         <div id="impacto-social" class="overflow-hidden transition-[max-height] duration-500 ease-in-out" style="max-height: 0px;">
           <p class="pb-6 text-base font-light leading-relaxed text-stone-900">
-            <span data-bind="claims.impactoSocialText">Crecer para poder aportar. El 5% del beneficio neto se destina a impacto social.</span>
+            {{ section.settings.impacto_text }}
           </p>
         </div>
       </div>
     </div>
     <div class="mt-12 w-full flex flex-row flex-wrap items-center justify-start gap-6">
-      <a href="{{ routes.collections_url | default: '/collections/all' }}" class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0"><span data-bind="claims.addToCart">Comprar edición</span></a>
-      <button type="button" onclick="window.scrollBy({top: 800, behavior: 'smooth'})" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 shrink-0"><span data-bind="claims.verOpciones">Ver opciones</span></button>
+      <a href="{{ section.settings.primary_cta_link | default: routes.collections_url | default: '/collections/all' }}" class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0">
+        <span>{{ section.settings.primary_cta_label }}</span>
+      </a>
+      <button type="button" onclick="window.scrollBy({top: 800, behavior: 'smooth'})" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 shrink-0">
+        <span>{{ section.settings.secondary_cta_label }}</span>
+      </button>
     </div>
   </div>
 </section>
@@ -105,13 +115,13 @@
       <div class="flex flex-row items-center gap-4">
         <img data-bind-src="assets.pack2Img" class="block md:hidden w-16 h-20 object-cover hover-source-img shrink-0" alt="2 Botellas">
         <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-16">
-          <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="claims.pack2Title">2 Botellas</span></h4>
-          <span class="md:text-lg text-base font-light tracking-tight font-body text-stone-900"><span data-bind="claims.pack2Sub">Empezar.</span></span>
+          <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack2_title }}</span></h4>
+          <span class="md:text-lg text-base font-light tracking-tight font-body text-stone-900"><span>{{ section.settings.pack2_sub }}</span></span>
         </div>
       </div>
       <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
-        <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="prices.pack2">58€</span></span>
-        <a href="{{ routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span data-bind="claims.addLabel">Añadir</span></a>
+        <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack2_price }}</span></span>
+        <a href="{{ section.settings.packs_collection_link | default: routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span>{{ section.settings.pack_add_label }}</span></a>
       </div>
     </div>
 
@@ -119,13 +129,13 @@
       <div class="flex flex-row items-center gap-4">
         <img data-bind-src="assets.pack3Img" class="block md:hidden w-16 h-20 object-cover hover-source-img shrink-0" alt="3 Botellas">
         <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-16">
-          <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="claims.pack3Title">3 Botellas</span></h4>
-          <span class="text-base md:text-lg font-body font-light tracking-tight text-stone-900"><span data-bind="claims.pack3Sub">Entender.</span></span>
+          <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack3_title }}</span></h4>
+          <span class="text-base md:text-lg font-body font-light tracking-tight text-stone-900"><span>{{ section.settings.pack3_sub }}</span></span>
         </div>
       </div>
       <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
-        <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="prices.pack3">84€</span></span>
-        <a href="{{ routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span data-bind="claims.addLabel">Añadir</span></a>
+        <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack3_price }}</span></span>
+        <a href="{{ section.settings.packs_collection_link | default: routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span>{{ section.settings.pack_add_label }}</span></a>
       </div>
     </div>
 
@@ -133,13 +143,13 @@
       <div class="flex flex-row items-center gap-4">
         <img data-bind-src="assets.pack6Img" class="block md:hidden w-16 h-20 object-cover hover-source-img shrink-0" alt="6 Botellas">
         <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-16">
-          <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="claims.pack6Title">6 Botellas</span></h4>
-          <span class="text-base md:text-lg font-body font-light tracking-tight text-stone-900"><span data-bind="claims.pack6Sub">Compartir.</span></span>
+          <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack6_title }}</span></h4>
+          <span class="text-base md:text-lg font-body font-light tracking-tight text-stone-900"><span>{{ section.settings.pack6_sub }}</span></span>
         </div>
       </div>
       <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
-        <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="prices.pack6">156€</span></span>
-        <a href="{{ routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span data-bind="claims.addLabel">Añadir</span></a>
+        <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack6_price }}</span></span>
+        <a href="{{ section.settings.packs_collection_link | default: routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span>{{ section.settings.pack_add_label }}</span></a>
       </div>
     </div>
 
@@ -147,13 +157,13 @@
       <div class="flex flex-row items-center gap-4">
         <img data-bind-src="assets.pack12Img" class="block md:hidden w-16 h-20 object-cover hover-source-img shrink-0" alt="12 Botellas">
         <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-16">
-          <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="claims.pack12Title">12 Botellas</span></h4>
-          <span class="text-base md:text-lg font-body font-light tracking-tight text-stone-900"><span data-bind="claims.pack12Sub">Celebrar.</span></span>
+          <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack12_title }}</span></h4>
+          <span class="text-base md:text-lg font-body font-light tracking-tight text-stone-900"><span>{{ section.settings.pack12_sub }}</span></span>
         </div>
       </div>
       <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
-        <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="prices.pack12">300€</span></span>
-        <a href="{{ routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span data-bind="claims.addLabel">Añadir</span></a>
+        <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack12_price }}</span></span>
+        <a href="{{ section.settings.packs_collection_link | default: routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span>{{ section.settings.pack_add_label }}</span></a>
       </div>
     </div>
   </div>
@@ -163,16 +173,16 @@
   <div class="flex flex-col md:flex-row gap-16 md:gap-24 items-center">
     <div class="w-full md:w-[40%] flex flex-col justify-center order-2 md:order-1 reveal">
       <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
-        <span data-bind="claims.tierraHeading1">Nada extraordinario.</span><br><span data-bind="claims.tierraHeading2">Solo constancia.</span>
+        <span>{{ section.settings.story_heading_1 }}</span><br><span>{{ section.settings.story_heading_2 }}</span>
       </h2>
       <div class="text-stone-900">
         <p class="text-sm font-body font-light">
-          Manos curtidas.<br>
-          Decisión.<br>
-          Repetición.
+          {{ section.settings.story_paragraph | newline_to_br }}
         </p>
       </div>
-      <a href="{{ routes.root_url }}pages/elaboracion" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 w-fit mt-12 text-stone-900"><span data-bind="claims.elaboracionCta">Ir a Nosotros</span></a>
+      <a href="{{ section.settings.story_cta_link | default: routes.root_url | append: 'pages/elaboracion' }}" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 w-fit mt-12 text-stone-900">
+        <span>{{ section.settings.story_cta_label }}</span>
+      </a>
     </div>
     <div class="md:w-[60%] order-1 md:order-2 reveal delay-200 w-full">
       <img data-bind-src="assets.manosUvas" class="aspect-[4/5] filter grayscale-[30%] contrast-125 w-full object-cover" alt="Manos con uvas" width="800" height="1000">
@@ -182,20 +192,20 @@
 
 <section class="py-32 md:py-40 lg:py-52 text-center reveal">
   <div class="font-body text-base md:text-lg tracking-[0.2em] space-y-3 text-stone-900">
-    <p class="font-geist-mono font-light tracking-tight"><span data-bind="claims.coords">38° 48' 44" N</span></p>
-    <p class="font-geist-mono font-light tracking-tight"><span data-bind="claims.coords2">6° 39' 56" O</span></p>
+    <p class="font-geist-mono font-light tracking-tight">{{ section.settings.coords_1 }}</p>
+    <p class="font-geist-mono font-light tracking-tight">{{ section.settings.coords_2 }}</p>
   </div>
-  <p class="text-2xl md:text-3xl mt-12 font-display font-light tracking-tight text-stone-900"><span data-bind="claims.extremadura">Extremadura</span></p>
+  <p class="text-2xl md:text-3xl mt-12 font-display font-light tracking-tight text-stone-900"><span>{{ section.settings.region_name }}</span></p>
 </section>
 
 <section class="py-32 md:py-40 lg:py-52 px-6 max-w-[600px] mx-auto text-center reveal">
   <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-16">
-    <span data-bind="claims.newsletterTitle">Te avisamos cuando haya nueva edición.</span>
-    <span class="text-sm md:text-base mt-4 block font-body font-light tracking-tight text-stone-900"><span data-bind="claims.newsletterSub">Nada más. Nada menos.</span></span>
+    <span>{{ section.settings.newsletter_title }}</span>
+    <span class="text-sm md:text-base mt-4 block font-body font-light tracking-tight text-stone-900"><span>{{ section.settings.newsletter_subtitle }}</span></span>
   </h2>
   {% form 'customer', class: 'relative group mt-16 max-w-[480px] mx-auto' %}
     <label for="newsletter-email" class="sr-only">Correo electrónico</label>
-    <input id="newsletter-email" type="email" name="contact[email]" placeholder="Tu correo electrónico" class="w-full bg-transparent border-b border-[#111111] py-4 px-2 text-center font-body text-base focus:outline-none focus:border-[#B56B80] transition-colors duration-300 rounded-none placeholder:text-[#a0a09e] placeholder:tracking-wide">
+    <input id="newsletter-email" type="email" name="contact[email]" placeholder="{{ section.settings.newsletter_placeholder }}" class="w-full bg-transparent border-b border-[#111111] py-4 px-2 text-center font-body text-base focus:outline-none focus:border-[#B56B80] transition-colors duration-300 rounded-none placeholder:text-[#a0a09e] placeholder:tracking-wide">
     <button type="submit" class="absolute right-0 top-1/2 -translate-y-1/2 p-4 transition-colors duration-300 hover:text-[#B56B80] text-stone-900" aria-label="Enviar"><iconify-icon icon="solar:arrow-right-linear" width="20" stroke-width="1.5"></iconify-icon></button>
   {% endform %}
 </section>
@@ -203,7 +213,307 @@
 {% schema %}
 {
   "name": "Albino Home",
-  "settings": [],
-  "presets": [{ "name": "Albino Home" }]
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero — ESPACIO"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Título principal",
+      "default": "Esencial"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Subtítulo",
+      "default": "Tradición, ahora."
+    },
+    {
+      "type": "text",
+      "id": "hero_tagline_top",
+      "label": "Línea superior (ANTES QUE VINO)",
+      "default": "ANTES QUE VINO"
+    },
+    {
+      "type": "text",
+      "id": "hero_tagline_bottom",
+      "label": "Línea inferior (hubo esfuerzo)",
+      "default": "hubo esfuerzo"
+    },
+    {
+      "type": "header",
+      "content": "Producto"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Nombre del producto",
+      "default": "Albino"
+    },
+    {
+      "type": "text",
+      "id": "product_tagline",
+      "label": "Linea producto (ej. VINO TINTO DULCE)",
+      "default": "VINO TINTO DULCE"
+    },
+    {
+      "type": "text",
+      "id": "product_subtitle",
+      "label": "Subtítulo producto",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "product_price",
+      "label": "Precio principal",
+      "default": "29€"
+    },
+    {
+      "type": "text",
+      "id": "product_price_label",
+      "label": "Etiqueta de precio",
+      "default": "Edición limitada · Cosecha 2025"
+    },
+    {
+      "type": "text",
+      "id": "product_shipping",
+      "label": "Texto de envío",
+      "default": "Envío en 24-48h. Envío gratuito desde 3 botellas."
+    },
+    {
+      "type": "text",
+      "id": "notas_cata_title",
+      "label": "Título Notas de cata",
+      "default": "Notas de cata"
+    },
+    {
+      "type": "textarea",
+      "id": "notas_cata_text",
+      "label": "Texto Notas de cata",
+      "default": "Vino de color rojo con irasaciones violáceas, una nariz a frutos rojos y toques florales a rosas y golosinas, en boca dulce, equilibrada y untuosa."
+    },
+    {
+      "type": "text",
+      "id": "ficha_title",
+      "label": "Título Ficha técnica",
+      "default": "Ficha técnica"
+    },
+    {
+      "type": "text",
+      "id": "ficha_variedad",
+      "label": "Variedad",
+      "default": "Tempranillo"
+    },
+    {
+      "type": "text",
+      "id": "ficha_suelo",
+      "label": "Suelo",
+      "default": "Arcilloso"
+    },
+    {
+      "type": "text",
+      "id": "ficha_alcohol",
+      "label": "Alcohol",
+      "default": "12.5%"
+    },
+    {
+      "type": "text",
+      "id": "impacto_title",
+      "label": "Título Impacto social",
+      "default": "Impacto social"
+    },
+    {
+      "type": "textarea",
+      "id": "impacto_text",
+      "label": "Texto Impacto social",
+      "default": "Crecer para poder aportar. El 5% del beneficio neto se destina a impacto social."
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "URL botón principal (Comprar edición)"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_label",
+      "label": "Texto botón principal",
+      "default": "Comprar edición"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_label",
+      "label": "Texto botón secundario",
+      "default": "Ver opciones"
+    },
+    {
+      "type": "header",
+      "content": "Packs"
+    },
+    {
+      "type": "url",
+      "id": "packs_collection_link",
+      "label": "URL colección para enlaces de packs"
+    },
+    {
+      "type": "text",
+      "id": "pack_add_label",
+      "label": "Texto botón Añadir",
+      "default": "Añadir"
+    },
+    {
+      "type": "text",
+      "id": "pack2_title",
+      "label": "Pack 2 – título",
+      "default": "2 Botellas"
+    },
+    {
+      "type": "text",
+      "id": "pack2_sub",
+      "label": "Pack 2 – subtítulo",
+      "default": "Empezar."
+    },
+    {
+      "type": "text",
+      "id": "pack2_price",
+      "label": "Pack 2 – precio",
+      "default": "58€"
+    },
+    {
+      "type": "text",
+      "id": "pack3_title",
+      "label": "Pack 3 – título",
+      "default": "3 Botellas"
+    },
+    {
+      "type": "text",
+      "id": "pack3_sub",
+      "label": "Pack 3 – subtítulo",
+      "default": "Entender."
+    },
+    {
+      "type": "text",
+      "id": "pack3_price",
+      "label": "Pack 3 – precio",
+      "default": "84€"
+    },
+    {
+      "type": "text",
+      "id": "pack6_title",
+      "label": "Pack 6 – título",
+      "default": "6 Botellas"
+    },
+    {
+      "type": "text",
+      "id": "pack6_sub",
+      "label": "Pack 6 – subtítulo",
+      "default": "Compartir."
+    },
+    {
+      "type": "text",
+      "id": "pack6_price",
+      "label": "Pack 6 – precio",
+      "default": "156€"
+    },
+    {
+      "type": "text",
+      "id": "pack12_title",
+      "label": "Pack 12 – título",
+      "default": "12 Botellas"
+    },
+    {
+      "type": "text",
+      "id": "pack12_sub",
+      "label": "Pack 12 – subtítulo",
+      "default": "Celebrar."
+    },
+    {
+      "type": "text",
+      "id": "pack12_price",
+      "label": "Pack 12 – precio",
+      "default": "300€"
+    },
+    {
+      "type": "header",
+      "content": "Bloque historia (Nada extraordinario / Solo constancia)"
+    },
+    {
+      "type": "text",
+      "id": "story_heading_1",
+      "label": "Línea 1",
+      "default": "Nada extraordinario."
+    },
+    {
+      "type": "text",
+      "id": "story_heading_2",
+      "label": "Línea 2",
+      "default": "Solo constancia."
+    },
+    {
+      "type": "textarea",
+      "id": "story_paragraph",
+      "label": "Párrafo",
+      "default": "Manos curtidas.\nDecisión.\nRepetición."
+    },
+    {
+      "type": "text",
+      "id": "story_cta_label",
+      "label": "Texto CTA",
+      "default": "Ir a Nosotros"
+    },
+    {
+      "type": "url",
+      "id": "story_cta_link",
+      "label": "URL CTA"
+    },
+    {
+      "type": "header",
+      "content": "Coordenadas"
+    },
+    {
+      "type": "text",
+      "id": "coords_1",
+      "label": "Coordenadas línea 1",
+      "default": "38° 48' 44\" N"
+    },
+    {
+      "type": "text",
+      "id": "coords_2",
+      "label": "Coordenadas línea 2",
+      "default": "6° 39' 56\" O"
+    },
+    {
+      "type": "text",
+      "id": "region_name",
+      "label": "Nombre región",
+      "default": "Extremadura"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Título newsletter",
+      "default": "Te avisamos cuando haya nueva edición."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_subtitle",
+      "label": "Subtítulo newsletter",
+      "default": "Nada más. Nada menos."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Placeholder del campo email",
+      "default": "Tu correo electrónico"
+    }
+  ],
+  "presets": [
+    { "name": "Albino Home" }
+  ]
 }
 {% endschema %}
