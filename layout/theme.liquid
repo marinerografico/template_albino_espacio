@@ -50,9 +50,7 @@
   </main>
   {% render 'footer' %}
 
-  <script src="{{ 'albino.js' | asset_url }}" defer></script>
-</body>
-<script>
+  <script src="{{ 'albino.js' | asset_url }}" defer></script><script>
   (function () {
     function closeAgeGate() {
       var gate = document.getElementById('age-gate');
@@ -84,4 +82,6 @@
     });
   })();
 </script>
+</body>
+
 </html>
