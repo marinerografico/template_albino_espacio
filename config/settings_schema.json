@@ -84,7 +84,7 @@
         "type": "textarea",
         "id": "nosotros_stage3_text",
         "label": "Etapa 3 — texto",
-        "default": " "
+        "default": ". "
       },
       {
         "type": "text",
