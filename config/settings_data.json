@@ -1,5 +1,71 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "general": {}
+    "nosotros_stage2_text": "Se poda. \nSe espera. \nSe acompaña. \nCada gesto influye.",
+    "nosotros_stage4_text": "La raíz es la misma. \nLa mirada es nueva.",
+    "nosotros_stage5_text": "Producción limitada. Cosecha 2025. \nTierra de Barros.",
+    "general": {},
+    "sections": {
+      "albino-home": {
+        "type": "albino-home",
+        "settings": {
+          "hero_title": "Esencial",
+          "hero_subtitle": "Tradición, ahora.",
+          "hero_tagline_top": "ANTES QUE VINO",
+          "hero_tagline_bottom": "hubo esfuerzo",
+          "product_title": "Albino",
+          "product_tagline": "VINO TINTO DULCE",
+          "product_subtitle": "Joven",
+          "product_price": "29€",
+          "product_price_label": "Edición limitada · Cosecha 2025",
+          "product_shipping": "Envío en 24-48h. Envío gratuito desde 3 botellas.",
+          "notas_cata_title": "Notas de cata",
+          "notas_cata_text": "Vino de color rojo con irasaciones violáceas, una nariz a frutos rojos y toques florales a rosas y golosinas, en boca dulce, equilibrada y untuosa.",
+          "ficha_title": "Ficha técnica",
+          "ficha_variedad": "Tempranillo",
+          "ficha_suelo": "Arcilloso",
+          "ficha_alcohol": "12.5%",
+          "impacto_title": "Impacto social",
+          "impacto_text": "Crecer para poder aportar. El 5% del beneficio neto se destina a impacto social.",
+          "primary_cta_link": "",
+          "primary_cta_label": "Comprar edición",
+          "secondary_cta_label": "Ver opciones",
+          "packs_collection_link": "",
+          "pack_add_label": "Añadir",
+          "pack2_title": "2 Botellas",
+          "pack2_sub": "Empezar.",
+          "pack2_price": "58€",
+          "pack3_title": "3 Botellas",
+          "pack3_sub": "Entender.",
+          "pack3_price": "84€",
+          "pack6_title": "6 Botellas",
+          "pack6_sub": "Compartir.",
+          "pack6_price": "156€",
+          "pack12_title": "12 Botellas",
+          "pack12_sub": "Celebrar.",
+          "pack12_price": "300€",
+          "story_heading_1": "Nada extraordinario.",
+          "story_heading_2": "Solo constancia.",
+          "story_paragraph": "Manos curtidas.\nDecisión.\nRepetición.",
+          "story_cta_label": "Ir a Nosotros",
+          "story_cta_link": "",
+          "coords_1": "38° 48' 44\" N",
+          "coords_2": "6° 39' 56\" O",
+          "region_name": "Extremadura",
+          "newsletter_title": "Te avisamos cuando haya nueva edición.",
+          "newsletter_subtitle": "Nada más. Nada menos.",
+          "newsletter_placeholder": "Tu correo electrónico"
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
