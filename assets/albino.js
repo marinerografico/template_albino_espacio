@@ -70,10 +70,13 @@
  */
 (function () {
   function updateCount(count) {
-        if (header) {
-          header.style.opacity = "0";
-          header.style.pointerEvents = "none";
-        }  function refreshCount() {
+    var el = document.getElementById('header-cart-count');
+    if (el) el.textContent = count;
+    document.querySelectorAll('[data-shopify-cart-count]').forEach(function (e) {
+      e.textContent = count;
+    });
+  }
+  function refreshCount() {
     fetch('/cart.js')
       .then(function (r) { return r.json(); })
       .then(function (data) { updateCount(data.item_count || 0); })
