@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Albino — Espacio</title>
+  <meta name="description" content="Albino. Tinto dulce. Dejar sitio a lo esencial. A la tierra, a la uva, al tiempo.">
+  <link rel="canonical" href="">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/albino.css">
+</head>
+<body class="antialiased selection:bg-[#B56B80] selection:text-[#F5F4F1] overflow-x-hidden text-[#111111] font-body bg-[#F5F4F1]">
+  <div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" aria-describedby="age-gate-desc">
+    <div class="age-gate-inner">
+      <div id="age-gate-ask">
+        <h2 id="age-gate-title" class="espacio-title font-display heading-page text-stone-900 mb-1">Antes de entrar,</h2>
+        <h2 class="espacio-title font-display heading-page text-stone-900 mb-6">¿eres mayor de edad?</h2>
+        <p id="age-gate-desc" class="age-gate-micro">Esto es un producto solo para mayores de 18 años.</p>
+        <div class="age-gate-actions">
+          <button type="button" id="age-gate-yes" class="age-gate-btn">Sí</button>
+          <button type="button" id="age-gate-no" class="age-gate-btn">No</button>
+        </div>
+      </div>
+      <div id="age-gate-denied" hidden>
+        <p class="age-gate-denied-text">No podemos continuar.</p>
+        <div class="age-gate-denied-actions">
+          <button type="button" id="age-gate-back" class="age-gate-btn">Volver</button>
+          <a href="#" id="age-gate-leave" class="age-gate-link">Salir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function(){ if (localStorage.getItem('albino_age_verified') !== 'true') { document.body.style.overflow = 'hidden'; document.body.setAttribute('data-age-gate-active', 'true'); } })();
+  </script>
+
+  <h1 class="sr-only">Albino — Espacio</h1>
+
+  <header id="main-header" class="fixed top-0 left-0 w-full z-40 h-[100px] md:h-[120px] flex items-center justify-center px-8 md:px-16 lg:px-24 opacity-0 pointer-events-none transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] bg-transparent">
+    <div class="w-full max-w-[1200px] flex items-center justify-between mx-auto">
+      <nav class="hidden md:flex gap-10 lg:gap-14 flex-1 justify-start items-center min-w-0" aria-label="Menú principal">
+        <a data-bind-href="links.home" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Inicio</a>
+        <a data-bind-href="links.nosotros" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900"><span data-bind="claims.navNosotros">Nosotros</span></a>
+      </nav>
+      <div class="flex-1 md:hidden">
+        <button id="mobile-menu-btn" type="button" class="transition-colors flex items-center hover:text-[#B56B80] text-stone-900" aria-label="Abrir menú">
+          <i data-lucide="menu" stroke-width="1" class="w-6 h-6"></i>
+        </button>
+      </div>
+      <div class="w-[120px] md:w-[150px] shrink-0 flex justify-center items-center flex-shrink-0 pointer-events-none">
+        <a data-bind-href="links.home" class="pointer-events-auto">
+          <img data-bind-src="assets.logo" alt="Albino Logo" class="will-change-transform tracking-wider pointer-events-auto w-[120px] md:w-[150px]">
+        </a>
+      </div>
+      <div class="flex items-center justify-end gap-10 lg:gap-14 flex-1 min-w-0">
+        <a data-bind-href="links.presencia" class="hidden md:block font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900"><span data-bind="claims.navPresencia">Presencia</span></a>
+        <a id="header-cart-link" data-bind-href="links.cart" class="flex items-center gap-3 transition-colors group hover:text-[#B56B80] text-stone-900" data-shopify-cart="header" aria-label="Ir al carrito">
+          <i data-lucide="shopping-bag" stroke-width="1" class="w-5 h-5"></i>
+          <div class="flex items-center gap-1">
+            <span class="hidden md:block font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em]">Carrito</span>
+            <span class="font-geist-mono text-[10px] md:text-xs font-light cart-count">(<span id="header-cart-count" data-bind="cart.count" data-shopify-cart-count>2</span>)</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#F5F4F1] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500" aria-hidden="true">
+    <button id="mobile-close-btn" type="button" class="absolute top-6 right-6 transition-colors hover:text-[#B56B80] text-stone-900" aria-label="Cerrar menú">
+      <i data-lucide="x" stroke-width="1.5" class="w-8 h-8"></i>
+    </button>
+    <nav class="flex flex-col gap-10 text-center" aria-label="Menú principal">
+      <a data-bind-href="links.home" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900">Inicio</a>
+      <a data-bind-href="links.nosotros" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900"><span data-bind="claims.navNosotros">Nosotros</span></a>
+      <a data-bind-href="links.presencia" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900"><span data-bind="claims.navPresencia">Presencia</span></a>
+      <a data-bind-href="links.cart" class="font-display text-4xl font-light tracking-tight transition-colors mt-4 hover:text-[#B56B80] text-stone-900">Carrito</a>
+    </nav>
+  </div>
+
+  <section class="min-h-screen flex flex-col items-center justify-center">
+    <div id="sticky-logo-h1" aria-hidden="true" class="fixed top-0 left-0 w-full z-50 pointer-events-none flex justify-center px-6 will-change-transform opacity-0 translate-y-2">
+      <img data-bind-src="assets.logo" alt="Albino Logo" class="will-change-transform tracking-wider pointer-events-auto w-full max-w-[1000px]" id="sticky-logo-img">
+    </div>
+  </section>
+
+  <section class="espacio-section flex items-stretch justify-center px-6 pt-24 md:pt-32 text-center">
+    <div class="espacio-layout w-full mx-auto font-body">
+      <h2 class="espacio-title font-display heading-page reveal text-stone-900"><span data-bind="claims.espacio">Esencial</span></h2>
+      <!-- Versión con motion (oculta en desarrollo, usada por sticky-logo.js si se reactiva)
+      <h2 id="espacio-heading" class="espacio-title font-display heading-page reveal text-stone-900"><span data-bind="claims.espacio">Esencial</span></h2>
+      -->
+      <p class="espacio-line-1 text-base md:text-lg reveal delay-100 text-stone-900">
+        <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono" data-bind="claims.espacioSubline">Tradición, ahora.</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden reveal">
+    <img data-bind-src="assets.clayTexture" class="w-full h-full object-cover absolute inset-0" alt="Textura de arcilla">
+    <div class="absolute inset-0 bg-[#B55239]/20 mix-blend-multiply pointer-events-none"></div>
+    <div class="absolute inset-0 z-10 reveal delay-200 flex items-center justify-center px-6">
+      <p class="text-center leading-tight">
+        <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono text-[#F5F4F1]">ANTES QUE VINO</span>
+        <span class="block mt-0.5 italic text-[13px] md:text-sm font-db-serif text-[#F5F4F1]" data-bind="claims.heroClay">hubo esfuerzo</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="py-32 md:py-40 lg:py-52 text-center px-6" id="product-section">
+    <div class="reveal">
+      <img data-bind-src="assets.bottle" class="md:h-[600px] lg:h-[700px] opacity-90 mix-blend-multiply h-[400px] object-contain mr-auto ml-auto" alt="Botella Albino">
+    </div>
+    <div class="mt-16 md:mt-20 max-w-md mx-auto reveal delay-200">
+      <h3 id="product-heading" class="espacio-title font-display uppercase text-[18px] leading-[22px]" style="letter-spacing: normal;"><span data-bind="claims.productTitle">Albino</span></h3>
+      <p class="text-xl md:text-2xl font-light tracking-tight mt-4 text-stone-900">
+        <span class="tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono mr-3">VINO TINTO DULCE</span>
+        <span class="italic font-db-serif" data-bind="claims.productSubtitle"></span>
+      </p>
+      <div class="mt-16 space-y-3">
+        <p class="text-base md:text-lg uppercase font-geist-mono font-light tracking-tight"><span data-bind="prices.single">29€</span></p>
+        <p class="text-sm uppercase font-geist-mono font-light tracking-tight text-stone-900"><span data-bind="claims.productPriceLabel">Edición limitada · Cosecha 2025</span></p>
+        <p class="text-sm font-body font-light text-stone-900"><span data-bind="claims.shipping">Envío en 24-48h. Envío gratuito desde 3 botellas.</span></p>
+      </div>
+      <div class="mt-12 w-full text-left font-body">
+        <div class="border-t border-[#e5e4e1]">
+          <button type="button" data-accordion-toggle="notas-cata" class="w-full py-6 flex justify-between items-center text-sm tracking-[0.15em] uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B56B80] text-stone-900">
+            <span data-bind="claims.notasCata">Notas de cata</span>
+            <i data-lucide="chevron-up" stroke-width="1.5" class="w-5 h-5 transition-transform duration-500 ease-in-out text-stone-900" style="transform: rotate(180deg);"></i>
+          </button>
+          <div id="notas-cata" class="overflow-hidden transition-[max-height] duration-500 ease-in-out" style="max-height: 0px;">
+            <p class="pb-6 text-base font-light leading-relaxed text-stone-900"><span data-bind="claims.notasCataText">Vino de color rojo con irasaciones violáceas…</span></p>
+          </div>
+        </div>
+        <div class="border-t border-[#e5e4e1]">
+          <button type="button" data-accordion-toggle="ficha-tecnica" class="w-full py-6 flex justify-between items-center text-sm tracking-[0.15em] uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B56B80] text-stone-900">
+            <span data-bind="claims.fichaTecnica">Ficha técnica</span>
+            <i data-lucide="chevron-up" stroke-width="1.5" class="w-5 h-5 transition-transform duration-500 ease-in-out text-stone-900" style="transform: rotate(180deg);"></i>
+          </button>
+          <div id="ficha-tecnica" class="overflow-hidden transition-[max-height] duration-500 ease-in-out" style="max-height: 0px;">
+            <div class="pb-6 flex flex-col">
+              <div class="flex justify-between items-center border-b border-[#e5e4e1] py-4 text-base font-light">
+                <span class="text-stone-900">Variedad</span>
+                <span class="text-stone-900" data-bind="claims.fichaVariedad">Tempranillo</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-[#e5e4e1] py-4 text-base font-light">
+                <span class="text-stone-900">Suelo</span>
+                <span class="text-stone-900" data-bind="claims.fichaSuelo">Arcilloso</span>
+              </div>
+              <div class="flex justify-between items-center py-4 text-base font-light">
+                <span class="text-stone-900">Alcohol</span>
+                <span class="text-stone-900" data-bind="claims.fichaAlcohol">12.5%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-b border-[#e5e4e1]">
+          <button type="button" data-accordion-toggle="impacto-social" class="w-full py-6 flex justify-between items-center text-sm tracking-[0.15em] uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B56B80] text-stone-900">
+            <span data-bind="claims.impactoSocial">Impacto social</span>
+            <i data-lucide="chevron-up" stroke-width="1.5" class="w-5 h-5 transition-transform duration-500 ease-in-out text-stone-900" style="transform: rotate(180deg);"></i>
+          </button>
+          <div id="impacto-social" class="overflow-hidden transition-[max-height] duration-500 ease-in-out" style="max-height: 0px;">
+            <p class="pb-6 text-base font-light leading-relaxed text-stone-900">
+              <span data-bind="claims.impactoSocialText">Crecer para poder aportar. El 5% del beneficio neto se destina a impacto social.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 w-full flex flex-row flex-wrap items-center justify-start gap-6">
+        <a data-bind-href="links.tienda" class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0"><span data-bind="claims.addToCart">Comprar edición</span></a>
+        <button type="button" onclick="window.scrollBy({top: 800, behavior: 'smooth'})" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 shrink-0"><span data-bind="claims.verOpciones">Ver opciones</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-[1000px] mx-auto px-6 py-24 md:py-40 lg:py-52">
+    <div class="md:space-y-24 space-y-16">
+      <img data-bind-src="assets.hoverPreview" class="fixed md:w-[320px] md:h-[420px] hidden md:block opacity-0 w-48 h-64 object-cover pointer-events-none" style="left: -999px; top: -999px; transform: translate(-50%, -50%) scale(0.85); transition: transform 0.3s, opacity 0.3s;" alt="" id="hover-img-preview-aura" aria-hidden="true">
+
+      <div class="flex flex-col md:flex-row md:items-center gap-6 group cursor-pointer reveal z-10 relative justify-between border-b border-[#e5e4e1] pb-6 md:border-none md:pb-0" data-hover-preview>
+        <div class="flex flex-row items-center gap-4">
+          <img data-bind-src="assets.pack2Img" class="block md:hidden w-16 h-20 object-cover hover-source-img shrink-0" alt="2 Botellas">
+          <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-16">
+            <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="claims.pack2Title">2 Botellas</span></h4>
+            <span class="md:text-lg text-base font-light tracking-tight font-body text-stone-900"><span data-bind="claims.pack2Sub">Empezar.</span></span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
+          <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="prices.pack2">58€</span></span>
+          <a href="#" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span data-bind="claims.addLabel">Añadir</span></a>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer reveal delay-100 relative z-10 border-b border-[#e5e4e1] pb-6 md:border-none md:pb-0" data-hover-preview>
+        <div class="flex flex-row items-center gap-4">
+          <img data-bind-src="assets.pack3Img" class="block md:hidden w-16 h-20 object-cover hover-source-img shrink-0" alt="3 Botellas">
+          <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-16">
+            <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="claims.pack3Title">3 Botellas</span></h4>
+            <span class="text-base md:text-lg font-body font-light tracking-tight text-stone-900"><span data-bind="claims.pack3Sub">Entender.</span></span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
+          <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="prices.pack3">84€</span></span>
+          <a href="#" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span data-bind="claims.addLabel">Añadir</span></a>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-center group cursor-pointer reveal delay-200 relative justify-between border-b border-[#e5e4e1] pb-6 md:border-none md:pb-0" data-hover-preview>
+        <div class="flex flex-row items-center gap-4">
+          <img data-bind-src="assets.pack6Img" class="block md:hidden w-16 h-20 object-cover hover-source-img shrink-0" alt="6 Botellas">
+          <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-16">
+            <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="claims.pack6Title">6 Botellas</span></h4>
+            <span class="text-base md:text-lg font-body font-light tracking-tight text-stone-900"><span data-bind="claims.pack6Sub">Compartir.</span></span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
+          <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="prices.pack6">156€</span></span>
+          <a href="#" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span data-bind="claims.addLabel">Añadir</span></a>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-center group cursor-pointer reveal delay-300 relative justify-between border-b border-[#e5e4e1] pb-6 md:border-none md:pb-0" data-hover-preview>
+        <div class="flex flex-row items-center gap-4">
+          <img data-bind-src="assets.pack12Img" class="block md:hidden w-16 h-20 object-cover hover-source-img shrink-0" alt="12 Botellas">
+          <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-16">
+            <h4 class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="claims.pack12Title">12 Botellas</span></h4>
+            <span class="text-base md:text-lg font-body font-light tracking-tight text-stone-900"><span data-bind="claims.pack12Sub">Celebrar.</span></span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
+          <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span data-bind="prices.pack12">300€</span></span>
+          <a href="#" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span data-bind="claims.addLabel">Añadir</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="md:px-12 md:py-40 lg:py-52 max-w-[1200px] mr-auto ml-auto pt-32 pr-6 pb-32 pl-6">
+    <div class="flex flex-col md:flex-row gap-16 md:gap-24 items-center">
+      <div class="w-full md:w-[40%] flex flex-col justify-center order-2 md:order-1 reveal">
+        <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
+          <span data-bind="claims.tierraHeading1">Nada extraordinario.</span>
+          <br>
+          <span data-bind="claims.tierraHeading2">Solo constancia.</span>
+        </h2>
+        <div class="text-stone-900">
+          <p class="text-sm font-body font-light">
+            Manos curtidas.<br>
+            Decisión.<br>
+            Repetición.
+          </p>
+        </div>
+        <a data-bind-href="links.nosotros" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 w-fit mt-12 text-stone-900"><span data-bind="claims.elaboracionCta">Ir a Nosotros</span></a>
+      </div>
+      <div class="md:w-[60%] order-1 md:order-2 reveal delay-200 w-full">
+        <img data-bind-src="assets.manosUvas" class="aspect-[4/5] filter grayscale-[30%] contrast-125 w-full object-cover" alt="Manos con uvas">
+      </div>
+    </div>
+  </section>
+
+  <section class="py-32 md:py-40 lg:py-52 text-center reveal">
+    <div class="font-body text-base md:text-lg tracking-[0.2em] space-y-3 text-stone-900">
+      <p class="font-geist-mono font-light tracking-tight"><span data-bind="claims.coords">38° 48' 44" N</span></p>
+      <p class="font-geist-mono font-light tracking-tight"><span data-bind="claims.coords2">6° 39' 56" O</span></p>
+    </div>
+    <p class="text-2xl md:text-3xl mt-12 font-display font-light tracking-tight text-stone-900"><span data-bind="claims.extremadura">Extremadura</span></p>
+  </section>
+
+  <section class="py-32 md:py-40 lg:py-52 px-6 max-w-[600px] mx-auto text-center reveal">
+    <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-16">
+      <span data-bind="claims.newsletterTitle">Te avisamos cuando haya nueva edición.</span>
+      <span class="text-sm md:text-base mt-4 block font-body font-light tracking-tight text-stone-900"><span data-bind="claims.newsletterSub">Nada más. Nada menos.</span></span>
+    </h2>
+    <form class="relative group mt-16 max-w-[480px] mx-auto" action="#" method="post" onsubmit="event.preventDefault();">
+      <label for="newsletter-email" class="sr-only">Correo electrónico</label>
+      <input id="newsletter-email" type="email" data-bind-placeholder="claims.newsletterPlaceholder" class="w-full bg-transparent border-b border-[#111111] py-4 px-2 text-center font-body text-base focus:outline-none focus:border-[#B56B80] transition-colors duration-300 rounded-none placeholder:text-[#a0a09e] placeholder:tracking-wide">
+      <button type="submit" class="absolute right-0 top-1/2 -translate-y-1/2 p-4 transition-colors duration-300 hover:text-[#B56B80] text-stone-900" aria-label="Enviar"><iconify-icon icon="solar:arrow-right-linear" width="20" stroke-width="1.5"></iconify-icon></button>
+    </form>
+  </section>
+
+  <footer class="w-full pt-12 pb-6 md:pt-24 reveal">
+    <div class="w-full px-4 md:px-6">
+      <img data-bind-src="assets.logo" alt="Albino" class="w-full h-auto object-contain mb-8 md:mb-12">
+      <div class="flex flex-col md:flex-row justify-between items-center text-sm font-geist-mono font-light tracking-tight border-t border-[#e5e4e1] pt-6 text-stone-900">
+        <p><span data-bind="claims.footerCopy">© 2024 Albino.</span></p>
+        <div class="flex gap-4 mt-4 md:mt-0">
+          <a href="#" class="hover:text-[#111111] transition-colors"><span data-bind="claims.instagram">Instagram</span></a>
+          <a href="#" class="hover:text-[#111111] transition-colors"><span data-bind="claims.terms">Términos y Condiciones</span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../config/site.js"></script>
+  <script src="../js/age-gate.js"></script>
+  <script src="../js/binder.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/reveal.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/mobile-menu.js"></script>
+  <script src="../js/hover-preview.js"></script>
+  <script src="../js/sticky-logo.js"></script>
+</body>
+</html>

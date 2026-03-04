@@ -1,0 +1,12 @@
+{
+  "name": "albino-espacio",
+  "version": "1.0.0",
+  "description": "Albino Espacio — template web + Shopify Theme Liquid",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "lint": "npm run lint:js && npm run lint:html",
+    "lint:js": "echo 'Optional: add eslint src/js'",
+    "lint:html": "echo 'Optional: add html-validate src/pages'"
+  }
+}

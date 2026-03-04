@@ -1,0 +1,50 @@
+{% comment %}
+  Header: en index (home) va con opacity-0 y pointer-events-none; el JS sticky-logo lo muestra al scroll.
+  En páginas internas va visible con logo centrado. z-index 40 (logo sticky 50).
+{% endcomment %}
+{% if template.name == 'index' %}
+  <header id="main-header" class="fixed top-0 left-0 w-full z-40 h-[100px] md:h-[120px] flex items-center justify-center px-8 md:px-16 lg:px-24 opacity-0 pointer-events-none transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] bg-transparent" aria-label="Navegación principal">
+{% else %}
+  <header id="main-header" class="fixed top-0 left-0 w-full z-40 h-[100px] md:h-[120px] flex items-center justify-center px-8 md:px-16 lg:px-24 bg-transparent mix-blend-multiply" aria-label="Navegación principal">
+{% endif %}
+  <div class="w-full max-w-[1200px] flex items-center justify-between mx-auto">
+    <nav class="hidden md:flex gap-10 lg:gap-14 flex-1 justify-start items-center min-w-0" aria-label="Menú principal">
+      <a href="{{ routes.root_url }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}">Inicio</a>
+      <a href="{{ routes.root_url }}pages/elaboracion" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}{% if request.path contains 'elaboracion' %}text-[#B56B80] hover:text-[#111111]{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}{% endif %}">Nosotros</a>
+    </nav>
+    <div class="flex-1 md:hidden">
+      <button id="mobile-menu-btn" type="button" class="transition-colors flex items-center hover:text-[#B56B80] text-stone-900" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <i data-lucide="menu" stroke-width="1" class="w-6 h-6"></i>
+      </button>
+    </div>
+    <div class="w-[120px] md:w-[150px] shrink-0 flex-shrink-0 {% if template.name == 'index' %}pointer-events-none{% else %}flex justify-center items-center{% endif %}">
+      {% if template.name != 'index' %}
+        <a href="{{ routes.root_url }}">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b5f3471a-2cd4-4d4e-8cfe-9b57d216d48d_3840w.png" alt="Albino Logo" class="will-change-transform tracking-wider pointer-events-auto w-[120px] md:w-[150px]" width="150" height="60">
+        </a>
+      {% endif %}
+    </div>
+    <div class="flex items-center justify-end gap-10 lg:gap-14 flex-1 min-w-0">
+      <a href="{{ routes.root_url }}pages/presencia" class="hidden md:block font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Presencia</a>
+      <a id="header-cart-link" href="{{ routes.cart_url }}" class="flex items-center gap-3 transition-colors group hover:text-[#B56B80] text-stone-900" data-shopify-cart="header" aria-label="Ir al carrito">
+        <i data-lucide="shopping-bag" stroke-width="1" class="w-5 h-5"></i>
+        <div class="flex items-center gap-1">
+          <span class="hidden md:block font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em]">Carrito</span>
+          <span class="font-geist-mono text-[10px] md:text-xs font-light">(<span id="header-cart-count" data-shopify-cart-count>{{ cart.item_count }}</span>)</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div id="mobile-menu" class="fixed inset-0 z-50 bg-[#F5F4F1] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500" aria-hidden="true" role="dialog" aria-label="Menú móvil">
+  <button id="mobile-close-btn" type="button" class="absolute top-6 right-6 transition-colors hover:text-[#B56B80] text-stone-900" aria-label="Cerrar menú">
+    <i data-lucide="x" stroke-width="1.5" class="w-8 h-8"></i>
+  </button>
+  <nav class="flex flex-col gap-10 text-center" aria-label="Menú principal">
+    <a href="{{ routes.root_url }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900">Inicio</a>
+    <a href="{{ routes.root_url }}pages/elaboracion" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900 {% if request.path contains 'elaboracion' %}text-[#B56B80]{% endif %}">Nosotros</a>
+    <a href="{{ routes.root_url }}pages/presencia" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900">Presencia</a>
+    <a href="{{ routes.cart_url }}" class="font-display text-4xl font-light tracking-tight transition-colors mt-4 hover:text-[#B56B80] text-stone-900" data-shopify-cart="mobile">Carrito</a>
+  </nav>
+</div>

@@ -1,0 +1,88 @@
+{% comment %} Sección Nosotros: proceso en 5 etapas. {% endcomment %}
+<h1 class="sr-only">{{ shop.name }} — Nosotros</h1>
+
+<section class="min-h-[90vh] flex flex-col items-center justify-center pt-32 px-6">
+  <div class="text-center">
+    <h2 class="espacio-title font-display heading-page reveal text-stone-900" data-bind="elaboration.heroTitle">ORIGEN</h2>
+  </div>
+</section>
+
+<div class="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col pb-32">
+  <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto mb-24 md:mb-32 reveal"></div>
+
+  <section class="min-h-[80vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+    <div class="w-full md:w-1/2 reveal order-1 flex justify-center md:justify-end">
+      <img data-bind-src="assets.tierra" class="w-full max-w-[500px] aspect-[4/5] object-cover filter grayscale-[15%] contrast-110" alt="Textura arcillosa de la tierra" width="500" height="625">
+    </div>
+    <div class="w-full md:w-1/2 reveal delay-200 order-2 flex flex-col justify-center">
+      <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa1Label">01 · TIERRA</span>
+      <h3 class="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111111] mb-8" data-bind="elaboration.etapa1Title">Todo empieza aquí.</h3>
+      <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light max-w-[400px]" data-bind="elaboration.etapa1Text">La tierra arcillosa retiene el agua…</p>
+    </div>
+  </section>
+
+  <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto my-16 md:my-24 reveal"></div>
+
+  <section class="min-h-[80vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+    <div class="w-full md:w-1/2 reveal delay-200 order-2 md:order-1 flex flex-col justify-center md:items-end text-left md:text-right">
+      <div class="max-w-[400px]">
+        <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa2Label">02 · CULTIVO</span>
+        <h3 class="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111111] mb-8" data-bind="elaboration.etapa2Title">La vid no se fuerza.</h3>
+        <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light" data-bind="elaboration.etapa2Text">Se poda. Se espera. Se acompaña. Cada gesto influye.</p>
+      </div>
+    </div>
+    <div class="w-full md:w-1/2 reveal order-1 md:order-2 flex justify-center md:justify-start">
+      <img data-bind-src="assets.cultivo" class="w-full max-w-[500px] aspect-[4/5] object-cover filter grayscale-[30%] contrast-110" alt="Manos trabajando la vid" width="500" height="625">
+    </div>
+  </section>
+
+  <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto my-16 md:my-24 reveal"></div>
+
+  <section class="min-h-[80vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+    <div class="w-full md:w-1/2 reveal order-1 flex justify-center md:justify-end">
+      <img data-bind-src="assets.vendimia" class="w-full max-w-[500px] aspect-[4/5] object-cover filter grayscale-[30%] contrast-110" alt="Uvas en mano durante la vendimia" width="500" height="625">
+    </div>
+    <div class="w-full md:w-1/2 reveal delay-200 order-2 flex flex-col justify-center">
+      <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa3Label">03 · MADURACIÓN</span>
+      <h3 class="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111111] mb-8" data-bind="elaboration.etapa3Title">Tradición, ahora.</h3>
+      <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light max-w-[400px]" data-bind="elaboration.etapa3Text"></p>
+    </div>
+  </section>
+
+  <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto my-16 md:my-24 reveal"></div>
+
+  <section class="min-h-[80vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+    <div class="w-full md:w-1/2 reveal delay-200 order-2 md:order-1 flex flex-col justify-center md:items-end text-left md:text-right">
+      <div class="max-w-[400px]">
+        <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa4Label">04 · ALBINO</span>
+        <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-8"><span class="origen-hero-line" data-bind="elaboration.etapa4Title" data-full-text="Esencial.">Esencial.</span></h2>
+        <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light" data-bind="elaboration.etapa4Text">La raíz es la misma. La mirada es nueva.</p>
+      </div>
+    </div>
+    <div class="w-full md:w-1/2 reveal order-1 md:order-2 flex justify-center md:justify-start">
+      <img data-bind-src="assets.vinificacion" class="w-full max-w-[500px] aspect-[4/5] object-cover filter grayscale-[20%] contrast-110" alt="Depósito de vinificación minimalista" width="500" height="625">
+    </div>
+  </section>
+
+  <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto my-16 md:my-24 reveal"></div>
+
+  <section class="min-h-[90vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+    <div class="w-full md:w-1/2 reveal order-1 flex justify-center md:justify-end">
+      <img data-bind-src="assets.bottle" class="w-full max-w-[400px] h-auto object-contain mix-blend-multiply opacity-90 filter contrast-110" alt="Botella Albino" width="400" height="700">
+    </div>
+    <div class="w-full md:w-1/2 reveal delay-200 order-2 flex flex-col justify-center items-start">
+      <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa5Label">05 · EDICIÓN</span>
+      <h3 class="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111111] mb-8" data-bind="elaboration.etapa5Title">Albino.</h3>
+      <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light max-w-[400px] mb-12" data-bind="elaboration.etapa5Text">Producción limitada. Cosecha 2025. Tierra de Barros.</p>
+      <a href="{{ routes.root_url }}" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono text-[#6A6A6A] border-b border-[#a0a09e] hover:border-[#111111] pb-1"><span data-bind="elaboration.descubrirEdicion">Descubrir la edición</span></a>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Albino Nosotros",
+  "settings": [],
+  "presets": [{ "name": "Albino Nosotros" }]
+}
+{% endschema %}

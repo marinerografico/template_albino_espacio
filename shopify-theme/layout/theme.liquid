@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &ndash; Página {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {{ content_for_header }}
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap">
+  {{ 'albino.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="antialiased selection:bg-[#B56B80] selection:text-[#F5F4F1] overflow-x-hidden text-[#111111] font-body bg-[#F5F4F1]">
+  <div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" aria-describedby="age-gate-desc">
+    <div class="age-gate-inner">
+      <div id="age-gate-ask">
+        <h2 id="age-gate-title" class="espacio-title font-display heading-page text-stone-900 mb-1">Antes de entrar,</h2>
+        <h2 class="espacio-title font-display heading-page text-stone-900 mb-6">¿eres mayor de edad?</h2>
+        <p id="age-gate-desc" class="age-gate-micro">Esto es un producto solo para mayores de 18 años.</p>
+        <div class="age-gate-actions">
+          <button type="button" id="age-gate-yes" class="age-gate-btn">Sí</button>
+          <button type="button" id="age-gate-no" class="age-gate-btn">No</button>
+        </div>
+      </div>
+      <div id="age-gate-denied" hidden>
+        <p class="age-gate-denied-text">No podemos continuar.</p>
+        <div class="age-gate-denied-actions">
+          <button type="button" id="age-gate-back" class="age-gate-btn">Volver</button>
+          <a href="#" id="age-gate-leave" class="age-gate-link">Salir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function(){ if (localStorage.getItem('albino_age_verified') !== 'true') { document.body.style.overflow = 'hidden'; document.body.setAttribute('data-age-gate-active', 'true'); } })();
+  </script>
+
+  {% render 'albino-config' %}
+  {% render 'header' %}
+  <main id="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+  {% render 'footer' %}
+
+  <script src="{{ 'albino.js' | asset_url }}" defer></script>
+</body>
+</html>

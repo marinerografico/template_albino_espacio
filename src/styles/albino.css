@@ -1,0 +1,338 @@
+/* Albino — Espacio — Estilos base */
+@font-face {
+  font-family: 'BDO Grotesk';
+  src: url('BDOGrotesk-DemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-display {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-weight: 600;
+}
+
+.font-body {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-weight: 600;
+}
+
+.font-geist-mono {
+  font-family: 'Geist Mono', monospace !important;
+}
+
+@font-face {
+  font-family: 'DB Serif';
+  src: url('../public/DBSerif-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DB Serif';
+  src: url('../public/DBSerif-RegularItalic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+.font-db-serif {
+  font-family: 'DB Serif', serif;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 300ms; }
+.delay-300 { transition-delay: 450ms; }
+.delay-400 { transition-delay: 600ms; }
+
+/* Reveal más sutil: menos movimiento, más duración, opacidad suave */
+.reveal-subtle {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-subtle.in-view {
+  opacity: 0.85;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-subtle {
+    opacity: 0.85 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Blur text block (home) */
+.blur-text-container {
+  opacity: 0;
+  filter: blur(20px);
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, filter, opacity;
+}
+
+.blur-text-container.in-view {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-text-container {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Layout específico sección ESPACIO */
+.espacio-section {
+  min-height: 135vh;
+}
+.espacio-layout {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20rem; /* espaciado entre ESPACIO, DEJAR SITIO y frase final */
+  padding: 8rem 0;
+}
+.espacio-title,
+.espacio-line-1,
+.espacio-line-2 {
+  width: 100%;
+}
+
+.espacio-line-2 {
+  margin-top: 3rem; /* recupera más aire hacia la frase final */
+}
+
+.espacio-line-1 span {
+  line-height: 1.1;
+}
+
+.espacio-line-1 span + span {
+  margin-top: 0.15rem;
+}
+
+#espacio-heading {
+  display: flex;
+  justify-content: center;
+}
+
+#espacio-heading span {
+  display: inline-block;
+}
+
+/* H2 unificado: mismo estilo y animación que #espacio-heading en todas las páginas */
+.heading-page {
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: normal;
+  margin-right: 0;
+  text-transform: uppercase;
+}
+
+/* Editorial / Presencia page */
+.section-pad {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+  }
+}
+.max-w-editorial {
+  max-width: 1100px;
+}
+.hairline {
+  border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+}
+
+/* Reveal editorial: 16px translateY, 1500ms, cubic-bezier(0.22,1,0.36,1) */
+.reveal-editorial {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-editorial.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-editorial {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Age gate — Laus-level. Primera pantalla, cumplimiento alcohol. */
+body[data-age-gate-active] {
+  overflow: hidden;
+  height: 100vh;
+}
+
+#age-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: #F5F4F1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#age-gate[data-age-gate-exiting] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #age-gate {
+    transition: none;
+  }
+  #age-gate[data-age-gate-exiting] {
+    opacity: 0;
+  }
+}
+
+.age-gate-inner {
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+}
+
+#age-gate .espacio-title.heading-page {
+  margin: 0;
+  color: #111111;
+}
+
+#age-gate .age-gate-micro {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.75rem;
+  color: #6A6A6A;
+  margin: 0 0 0.5rem;
+  line-height: 1.5;
+}
+
+#age-gate .age-gate-micro:last-of-type {
+  margin-bottom: 3rem;
+}
+
+#age-gate .age-gate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#age-gate .age-gate-btn {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #111111;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #111111;
+  padding: 0 0 2px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#age-gate .age-gate-btn:hover,
+#age-gate .age-gate-btn:focus-visible {
+  color: #B55239;
+  border-bottom-color: #B55239;
+  outline: none;
+}
+
+#age-gate .age-gate-btn:focus-visible {
+  border-radius: 0;
+  box-shadow: 0 0 0 2px #F5F4F1, 0 0 0 4px #B55239;
+}
+
+#age-gate .age-gate-link {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #111111;
+  border-bottom: 1px solid #111111;
+  padding-bottom: 2px;
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+#age-gate .age-gate-link:hover,
+#age-gate .age-gate-link:focus-visible {
+  color: #B55239;
+  border-bottom-color: #B55239;
+  outline: none;
+}
+
+#age-gate .age-gate-link:focus-visible {
+  border-radius: 0;
+  box-shadow: 0 0 0 2px #F5F4F1, 0 0 0 4px #B55239;
+}
+
+#age-gate-denied {
+  text-align: center;
+}
+
+#age-gate-denied .age-gate-denied-text {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-weight: 600;
+  color: #111111;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  margin: 0 0 2.5rem;
+}
+
+#age-gate-denied .age-gate-denied-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  justify-content: center;
+}

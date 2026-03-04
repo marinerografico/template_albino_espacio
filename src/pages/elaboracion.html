@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Albino — Nosotros</title>
+  <meta name="description" content="Nosotros. El proceso define el carácter. Tierra, cultivo, vendimia, vinificación y edición de Albino.">
+  <link rel="canonical" href="">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/albino.css">
+</head>
+<body class="antialiased selection:bg-[#B56B80] selection:text-[#F5F4F1] overflow-x-hidden text-[#111111] font-body bg-[#F5F4F1]">
+  <div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" aria-describedby="age-gate-desc">
+    <div class="age-gate-inner">
+      <div id="age-gate-ask">
+        <h2 id="age-gate-title" class="espacio-title font-display heading-page text-stone-900 mb-1">Antes de entrar,</h2>
+        <h2 class="espacio-title font-display heading-page text-stone-900 mb-6">¿eres mayor de edad?</h2>
+        <p id="age-gate-desc" class="age-gate-micro">Esto es un producto solo para mayores de 18 años.</p>
+        <div class="age-gate-actions">
+          <button type="button" id="age-gate-yes" class="age-gate-btn">Sí</button>
+          <button type="button" id="age-gate-no" class="age-gate-btn">No</button>
+        </div>
+      </div>
+      <div id="age-gate-denied" hidden>
+        <p class="age-gate-denied-text">No podemos continuar.</p>
+        <div class="age-gate-denied-actions">
+          <button type="button" id="age-gate-back" class="age-gate-btn">Volver</button>
+          <a href="#" id="age-gate-leave" class="age-gate-link">Salir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function(){ if (localStorage.getItem('albino_age_verified') !== 'true') { document.body.style.overflow = 'hidden'; document.body.setAttribute('data-age-gate-active', 'true'); } })();
+  </script>
+
+  <h1 class="sr-only">Albino — Nosotros</h1>
+
+  <header id="main-header" class="fixed top-0 left-0 w-full z-40 h-[100px] md:h-[120px] flex items-center justify-center px-8 md:px-16 lg:px-24 bg-transparent mix-blend-multiply">
+    <div class="w-full max-w-[1200px] flex items-center justify-between mx-auto">
+      <nav class="hidden md:flex gap-10 lg:gap-14 flex-1 justify-start items-center min-w-0" aria-label="Menú principal">
+        <a data-bind-href="links.home" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] text-[#111111] hover:text-[#B56B80] transition-colors">Inicio</a>
+        <a data-bind-href="links.nosotros" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] text-[#B56B80] hover:text-[#111111] transition-colors"><span data-bind="claims.navNosotros">Nosotros</span></a>
+      </nav>
+      <div class="flex-1 md:hidden">
+        <button id="mobile-menu-btn" type="button" class="text-[#111111] hover:text-[#B56B80] transition-colors flex items-center" aria-label="Abrir menú">
+          <i data-lucide="menu" stroke-width="1" class="w-6 h-6"></i>
+        </button>
+      </div>
+      <div class="w-[120px] md:w-[150px] shrink-0 flex justify-center items-center flex-shrink-0">
+        <a data-bind-href="links.home">
+          <img data-bind-src="assets.logo" alt="Albino Logo" class="will-change-transform tracking-wider pointer-events-auto w-[120px] md:w-[150px]">
+        </a>
+      </div>
+      <div class="flex items-center justify-end gap-10 lg:gap-14 flex-1 min-w-0">
+        <a data-bind-href="links.presencia" class="hidden md:block font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] text-[#111111] hover:text-[#B56B80] transition-colors"><span data-bind="claims.navPresencia">Presencia</span></a>
+        <a id="header-cart-link" data-bind-href="links.cart" class="flex items-center gap-3 text-[#111111] hover:text-[#B56B80] transition-colors group" data-shopify-cart="header" aria-label="Ir al carrito">
+          <i data-lucide="shopping-bag" stroke-width="1" class="w-5 h-5"></i>
+          <div class="flex items-center gap-1">
+            <span class="hidden md:block font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em]">Carrito</span>
+            <span class="font-geist-mono text-[10px] md:text-xs font-light cart-count">(<span id="header-cart-count" data-bind="cart.count" data-shopify-cart-count>2</span>)</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#F5F4F1] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500" aria-hidden="true">
+    <button id="mobile-close-btn" type="button" class="absolute top-6 right-6 text-[#111111] hover:text-[#B56B80] transition-colors" aria-label="Cerrar menú">
+      <i data-lucide="x" stroke-width="1.5" class="w-8 h-8"></i>
+    </button>
+    <nav class="flex flex-col gap-10 text-center" aria-label="Menú principal">
+      <a data-bind-href="links.home" class="font-display text-4xl font-light tracking-tight text-[#111111] hover:text-[#B56B80] transition-colors">Inicio</a>
+      <a data-bind-href="links.nosotros" class="font-display text-4xl font-light tracking-tight text-[#B56B80] transition-colors"><span data-bind="claims.navNosotros">Nosotros</span></a>
+      <a data-bind-href="links.presencia" class="font-display text-4xl font-light tracking-tight text-[#111111] hover:text-[#B56B80] transition-colors"><span data-bind="claims.navPresencia">Presencia</span></a>
+      <a data-bind-href="links.cart" class="font-display text-4xl font-light tracking-tight text-[#111111] hover:text-[#B56B80] transition-colors mt-4">Carrito</a>
+    </nav>
+  </div>
+
+  <section class="min-h-[90vh] flex flex-col items-center justify-center pt-32 px-6">
+    <div class="text-center">
+      <h2 class="espacio-title font-display heading-page reveal text-stone-900" data-bind="elaboration.heroTitle">ORIGEN</h2>
+    </div>
+  </section>
+
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col pb-32">
+    <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto mb-24 md:mb-32 reveal"></div>
+
+    <section class="min-h-[80vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+      <div class="w-full md:w-1/2 reveal order-1 flex justify-center md:justify-end">
+        <img data-bind-src="assets.tierra" class="w-full max-w-[500px] aspect-[4/5] object-cover filter grayscale-[15%] contrast-110" alt="Textura arcillosa de la tierra">
+      </div>
+      <div class="w-full md:w-1/2 reveal delay-200 order-2 flex flex-col justify-center">
+        <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa1Label">01 · TIERRA</span>
+        <h3 class="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111111] mb-8" data-bind="elaboration.etapa1Title">Tierra.</h3>
+        <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light max-w-[400px]" data-bind="elaboration.etapa1Text">Tres generaciones. Tierra de Barros. Extremadura.</p>
+      </div>
+    </section>
+
+    <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto my-16 md:my-24 reveal"></div>
+
+    <section class="min-h-[80vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+      <div class="w-full md:w-1/2 reveal delay-200 order-2 md:order-1 flex flex-col justify-center md:items-end text-left md:text-right">
+        <div class="max-w-[400px]">
+          <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa2Label">02 · CULTIVO</span>
+          <h3 class="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111111] mb-8" data-bind="elaboration.etapa2Title">Tiempo.</h3>
+          <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light" data-bind="elaboration.etapa2Text">Cuidar la vid es un acto lento. No todo necesita acelerarse.</p>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 reveal order-1 md:order-2 flex justify-center md:justify-start">
+        <img data-bind-src="assets.cultivo" class="w-full max-w-[500px] aspect-[4/5] object-cover filter grayscale-[30%] contrast-110" alt="Manos trabajando la vid">
+      </div>
+    </section>
+
+    <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto my-16 md:my-24 reveal"></div>
+
+    <section class="min-h-[80vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+      <div class="w-full md:w-1/2 reveal order-1 flex justify-center md:justify-end">
+        <img data-bind-src="assets.vendimia" class="w-full max-w-[500px] aspect-[4/5] object-cover filter grayscale-[30%] contrast-110" alt="Uvas en mano durante la vendimia">
+      </div>
+      <div class="w-full md:w-1/2 reveal delay-200 order-2 flex flex-col justify-center">
+        <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa3Label">03 · MADURACIÓN</span>
+        <h3 class="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111111] mb-8" data-bind="elaboration.etapa3Title">Tradición, ahora.</h3>
+        <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light max-w-[400px]" data-bind="elaboration.etapa3Text"></p>
+      </div>
+    </section>
+
+    <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto my-16 md:my-24 reveal"></div>
+
+    <section class="min-h-[80vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+      <div class="w-full md:w-1/2 reveal delay-200 order-2 md:order-1 flex flex-col justify-center md:items-end text-left md:text-right">
+        <div class="max-w-[400px]">
+          <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa4Label">04 · ALBINO</span>
+          <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-8"><span class="origen-hero-line" data-bind="elaboration.etapa4Title" data-full-text="Esencial.">Esencial.</span></h2>
+          <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light" data-bind="elaboration.etapa4Text">La raíz es la misma. La mirada es nueva.</p>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 reveal order-1 md:order-2 flex justify-center md:justify-start">
+        <img data-bind-src="assets.vinificacion" class="w-full max-w-[500px] aspect-[4/5] object-cover filter grayscale-[20%] contrast-110" alt="Depósito de vinificación minimalista">
+      </div>
+    </section>
+
+    <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto my-16 md:my-24 reveal"></div>
+
+    <section class="min-h-[90vh] flex flex-col md:flex-row items-center gap-16 md:gap-24 lg:gap-32 py-16 md:py-24">
+      <div class="w-full md:w-1/2 reveal order-1 flex justify-center md:justify-end">
+        <img data-bind-src="assets.bottle" class="w-full max-w-[400px] h-auto object-contain mix-blend-multiply opacity-90 filter contrast-110" alt="Botella Albino">
+      </div>
+      <div class="w-full md:w-1/2 reveal delay-200 order-2 flex flex-col justify-center items-start">
+        <span class="font-geist-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#B56B80] mb-6 block" data-bind="elaboration.etapa5Label">05 · EDICIÓN</span>
+        <h3 class="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111111] mb-8" data-bind="elaboration.etapa5Title">Albino.</h3>
+        <p class="font-body text-base md:text-lg text-[#6A6A6A] leading-[1.6] font-light max-w-[400px] mb-12" data-bind="elaboration.etapa5Text">Producción limitada. Cosecha 2025. Tierra de Barros.</p>
+        <a data-bind-href="links.home" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono text-[#6A6A6A] border-b border-[#a0a09e] hover:border-[#111111] pb-1"><span data-bind="elaboration.descubrirEdicion">Descubrir la edición</span></a>
+      </div>
+    </section>
+  </div>
+
+  <footer class="w-full pt-24 pb-6 border-t border-[#e5e4e1] reveal">
+    <div class="w-full px-4 md:px-6">
+      <img data-bind-src="assets.logo" alt="Albino" class="w-full max-w-[1200px] mx-auto h-auto object-contain mb-8 md:mb-12">
+      <div class="flex flex-col md:flex-row justify-between items-center text-sm text-[#6A6A6A] font-geist-mono font-light tracking-tight pt-6 max-w-[1400px] mx-auto">
+        <p><span data-bind="claims.footerCopy">© 2024 Albino.</span></p>
+        <div class="flex gap-4 mt-4 md:mt-0">
+          <a href="#" class="hover:text-[#111111] transition-colors"><span data-bind="claims.instagram">Instagram</span></a>
+          <a href="#" class="hover:text-[#111111] transition-colors"><span data-bind="claims.terms">Términos y Condiciones</span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../config/site.js"></script>
+  <script src="../js/age-gate.js"></script>
+  <script src="../js/binder.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/reveal.js"></script>
+  <script src="../js/mobile-menu.js"></script>
+</body>
+</html>
