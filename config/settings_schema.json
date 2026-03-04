@@ -1,14 +1,1 @@
-[
-  {
-    "name": "theme_info",
-    "theme_name": "Albino Espacio",
-    "theme_author": "Albino",
-    "theme_version": "1.0.0",
-    "theme_documentation_url": "https://github.com/your-org/albino-espacio",
-    "theme_support_url": "https://github.com/your-org/albino-espacio/issues"
-  },
-  {
-    "name": "General",
-    "settings": []
-  }
-]
+[]
