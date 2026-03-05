@@ -1,0 +1,13 @@
+{
+  "name": "Nosotros",
+  "sections": {
+    "main": {
+      "type": "albino-elaboracion",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
+
