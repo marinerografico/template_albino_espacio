@@ -1,5 +1,16 @@
 [
   {
+    "name": "Menú y navegación",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "Menú principal",
+        "default": "main-menu"
+      }
+    ]
+  },
+  {
     "name": "Página Nosotros (Elaboración)",
     "settings": [
       {
@@ -167,6 +178,65 @@
         "type": "text",
         "id": "nosotros_stage5_cta_link",
         "label": "URL CTA final"
+      }
+    ]
+  },
+  {
+    "name": "Página Presencia",
+    "settings": [
+      {
+        "type": "text",
+        "id": "presencia_hero_title",
+        "label": "Título hero",
+        "default": "Presencia"
+      },
+      {
+        "type": "text",
+        "id": "presencia_tagline_1",
+        "label": "Frase 1",
+        "default": "Albino no busca estar en todas partes"
+      },
+      {
+        "type": "text",
+        "id": "presencia_tagline_2",
+        "label": "Frase 2",
+        "default": "busca lugares esenciales."
+      },
+      {
+        "type": "text",
+        "id": "presencia_listado_title",
+        "label": "Título listado",
+        "default": "Listado"
+      },
+      {
+        "type": "text",
+        "id": "presencia_invitation",
+        "label": "Texto invitación",
+        "default": "Tu espacio podría estar aquí."
+      },
+      {
+        "type": "text",
+        "id": "presencia_form_title",
+        "label": "Título formulario",
+        "default": "Formar parte."
+      },
+      {
+        "type": "textarea",
+        "id": "presencia_form_intro",
+        "label": "Intro formulario",
+        "default": "Si tu espacio conecta con nuestra mirada, nos encantará conocerte."
+      },
+      {
+        "type": "text",
+        "id": "presencia_success_title",
+        "label": "Título éxito",
+        "default": "Gracias."
+      },
+      {
+        "type": "text",
+        "id": "presencia_success_text",
+        "label": "Texto éxito",
+        "default": "Nos pondremos en contacto."
       }
     ]
   }

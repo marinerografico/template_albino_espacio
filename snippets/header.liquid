@@ -1,7 +1,8 @@
 {% comment %}
-  Header: en index (home) va con opacity-0 y pointer-events-none; el JS sticky-logo lo muestra al scroll.
-  En páginas internas va visible con logo centrado. z-index 40 (logo sticky 50).
+  Header: menú desde Shopify (Tienda online → Navegación) o fallback.
+  En index (home) va con opacity-0; el JS sticky-logo lo muestra al scroll.
 {% endcomment %}
+{% assign nav_menu = linklists[settings.main_menu] %}
 {% if template.name == 'index' %}
   <header id="main-header" class="fixed top-0 left-0 w-full z-40 h-[100px] md:h-[120px] flex items-center justify-center px-8 md:px-16 lg:px-24 opacity-0 pointer-events-none transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] bg-transparent" aria-label="Navegación principal">
 {% else %}
@@ -9,8 +10,15 @@
 {% endif %}
   <div class="w-full max-w-[1200px] flex items-center justify-between mx-auto">
     <nav class="hidden md:flex gap-10 lg:gap-14 flex-1 justify-start items-center min-w-0" aria-label="Menú principal">
-      <a href="{{ routes.root_url }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}">Inicio</a>
-      <a href="{{ pages['nosotros'].url | default: routes.root_url | append: 'pages/nosotros' }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}{% if request.path contains 'nosotros' %}text-[#B56B80] hover:text-[#111111]{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}{% endif %}">Nosotros</a>
+      {% if nav_menu and nav_menu.links.size > 0 %}
+        {% for link in nav_menu.links %}
+          <a href="{{ link.url }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if link.active %}text-[#B56B80] hover:text-[#111111]{% elsif template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}">{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}">Inicio</a>
+        <a href="{{ pages['nosotros'].url | default: routes.root_url | append: 'pages/nosotros' }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}{% if request.path contains 'nosotros' %}text-[#B56B80] hover:text-[#111111]{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}{% endif %}">Nosotros</a>
+        <a href="{{ pages['presencia'].url | default: routes.root_url | append: 'pages/presencia' }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}{% if request.path contains 'presencia' %}text-[#B56B80] hover:text-[#111111]{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}{% endif %}">Presencia</a>
+      {% endif %}
     </nav>
     <div class="flex-1 md:hidden">
       <button id="mobile-menu-btn" type="button" class="transition-colors flex items-center hover:text-[#B56B80] text-stone-900" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
@@ -25,7 +33,11 @@
       {% endif %}
     </div>
     <div class="flex items-center justify-end gap-10 lg:gap-14 flex-1 min-w-0">
-      <a href="{{ routes.root_url }}pages/presencia" class="hidden md:block font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Presencia</a>
+      {% if nav_menu and nav_menu.links.size > 0 %}
+        {% comment %} En desktop el menú ya incluye todos los enlaces; solo mostramos Carrito a la derecha. {% endcomment %}
+      {% else %}
+        <a href="{{ pages['presencia'].url | default: routes.root_url | append: 'pages/presencia' }}" class="hidden md:block font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Presencia</a>
+      {% endif %}
       <a id="header-cart-link" href="{{ routes.cart_url }}" class="flex items-center gap-3 transition-colors group hover:text-[#B56B80] text-stone-900" data-shopify-cart="header" aria-label="Ir al carrito">
         <i data-lucide="shopping-bag" stroke-width="1" class="w-5 h-5"></i>
         <div class="flex items-center gap-1">
@@ -42,9 +54,15 @@
     <i data-lucide="x" stroke-width="1.5" class="w-8 h-8"></i>
   </button>
   <nav class="flex flex-col gap-10 text-center" aria-label="Menú principal">
-    <a href="{{ routes.root_url }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900">Inicio</a>
-    <a href="{{ pages['nosotros'].url | default: routes.root_url | append: 'pages/nosotros' }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900 {% if request.path contains 'nosotros' %}text-[#B56B80]{% endif %}">Nosotros</a>
-    <a href="{{ routes.root_url }}pages/presencia" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900">Presencia</a>
+    {% if nav_menu and nav_menu.links.size > 0 %}
+      {% for link in nav_menu.links %}
+        <a href="{{ link.url }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900 {% if link.active %}text-[#B56B80]{% endif %}">{{ link.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a href="{{ routes.root_url }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900">Inicio</a>
+      <a href="{{ pages['nosotros'].url | default: routes.root_url | append: 'pages/nosotros' }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900 {% if request.path contains 'nosotros' %}text-[#B56B80]{% endif %}">Nosotros</a>
+      <a href="{{ pages['presencia'].url | default: routes.root_url | append: 'pages/presencia' }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900 {% if request.path contains 'presencia' %}text-[#B56B80]{% endif %}">Presencia</a>
+    {% endif %}
     <a href="{{ routes.cart_url }}" class="font-display text-4xl font-light tracking-tight transition-colors mt-4 hover:text-[#B56B80] text-stone-900" data-shopify-cart="mobile">Carrito</a>
   </nav>
 </div>

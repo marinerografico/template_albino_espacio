@@ -1,0 +1,86 @@
+{% comment %} Sección Presencia: editable desde Configuración del tema. {% endcomment %}
+<h1 class="sr-only">{{ shop.name }} — Presencia</h1>
+
+<section aria-label="Presencia" class="min-h-[120vh] flex flex-col items-center justify-center px-6 pt-32 bg-[#B56B80] text-white">
+  <h2 class="espacio-title font-display heading-page reveal text-white text-center">
+    {{ settings.presencia_hero_title }}
+  </h2>
+</section>
+
+<section aria-label="Afinidad" class="min-h-[80vh] flex flex-col items-center justify-start px-6 pt-24 md:pt-32 pb-24 md:pb-32 bg-[#B56B80] text-white">
+  <h2 class="sr-only">Afinidad</h2>
+  <div class="max-w-[640px] mx-auto text-center space-y-24 md:space-y-32">
+    <p class="text-center leading-tight">
+      <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono text-white">{{ settings.presencia_tagline_1 }}</span>
+      <span class="block mt-0.5 italic text-[13px] md:text-sm text-white">{{ settings.presencia_tagline_2 }}</span>
+    </p>
+    <ul class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-white/80 space-y-2" aria-label="Tipos de espacios">
+      <li>Restaurantes</li>
+      <li>Tiendas</li>
+      <li>Proyectos independientes</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-label="Listado" class="min-h-[80vh] flex flex-col items-center justify-center px-6 py-24 md:py-32 bg-[#B56B80] text-white">
+  <h2 class="sr-only">Lugares</h2>
+  <p class="espacio-title font-display heading-page text-white text-center mb-16 md:mb-20">
+    {{ settings.presencia_listado_title }}
+  </p>
+  <div class="max-w-[640px] mx-auto w-full text-center text-white/80 font-geist-mono text-sm">
+    <p>Contenido del listado (editable desde Configuración del tema — Página Presencia).</p>
+  </div>
+</section>
+
+<section aria-label="Invitación" class="min-h-[60vh] flex flex-col items-center justify-center px-6 bg-[#B56B80] text-white">
+  <p class="espacio-title font-display heading-page text-white text-center">
+    {{ settings.presencia_invitation }}
+  </p>
+</section>
+
+<section aria-label="Formulario" class="min-h-[100vh] flex flex-col items-center justify-center px-6 py-24 md:py-40 bg-[#B56B80] text-white">
+  <div class="max-w-[640px] mx-auto w-full">
+    <h2 class="font-display text-2xl md:text-3xl font-light tracking-tight text-white mb-6">
+      {{ settings.presencia_form_title }}
+    </h2>
+    <p class="text-base md:text-lg text-white/90 mb-12">
+      {{ settings.presencia_form_intro }}
+    </p>
+    <form action="/contact#contact_form" method="post" class="contact-form space-y-8" accept-charset="UTF-8">
+      <input type="hidden" name="form_type" value="contact">
+      <input type="hidden" name="utf8" value="✓">
+      <div>
+        <label class="block font-geist-mono text-[11px] uppercase tracking-[0.2em] text-white/80 mb-2" for="presencia-name">Nombre</label>
+        <input id="presencia-name" name="contact[name]" type="text" class="w-full bg-transparent border-0 border-b border-white/40 py-3 text-white placeholder-white/40 font-body focus:outline-none focus:border-white rounded-none" placeholder="Tu nombre">
+      </div>
+      <div>
+        <label class="block font-geist-mono text-[11px] uppercase tracking-[0.2em] text-white/80 mb-2" for="presencia-espacio">Espacio</label>
+        <input id="presencia-espacio" name="contact[espacio]" type="text" class="w-full bg-transparent border-0 border-b border-white/40 py-3 text-white placeholder-white/40 font-body focus:outline-none focus:border-white rounded-none" placeholder="Nombre del espacio">
+      </div>
+      <div>
+        <label class="block font-geist-mono text-[11px] uppercase tracking-[0.2em] text-white/80 mb-2" for="presencia-email">Email</label>
+        <input id="presencia-email" name="contact[email]" type="email" required class="w-full bg-transparent border-0 border-b border-white/40 py-3 text-white placeholder-white/40 font-body focus:outline-none focus:border-white rounded-none" placeholder="email@ejemplo.com">
+      </div>
+      <div>
+        <label class="block font-geist-mono text-[11px] uppercase tracking-[0.2em] text-white/80 mb-2" for="presencia-mensaje">Mensaje</label>
+        <textarea id="presencia-mensaje" name="contact[body]" rows="4" class="w-full bg-transparent border-0 border-b border-white/40 py-3 text-white placeholder-white/40 font-body focus:outline-none focus:border-white rounded-none resize-none" placeholder="Cuéntanos sobre tu espacio"></textarea>
+      </div>
+      <div class="pt-4">
+        <button type="submit" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-white border-b border-white pb-1 hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#B56B80]">
+          Enviar
+        </button>
+      </div>
+    </form>
+    <p class="mt-12 text-sm font-geist-mono text-white/70 tracking-tight">
+      Revisamos cada propuesta personalmente.
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Albino Presencia",
+  "settings": [],
+  "presets": [{ "name": "Albino Presencia" }]
+}
+{% endschema %}
