@@ -150,49 +150,73 @@
  * - Intercepta el envío del form, hace POST a /cart/add.js y abre el modal del carrito.
  */
 (function () {
+  function showError(msg) {
+    var el = document.getElementById('product-form-error');
+    if (el) {
+      el.textContent = msg || '';
+      el.classList.toggle('hidden', !msg);
+    } else if (msg) {
+      alert(msg);
+    }
+  }
+
   function init() {
-    document.querySelectorAll('[data-product-variant-select]').forEach(function (select) {
-      var form = select.closest('form');
-      var hidden = form && form.querySelector('[data-product-variant-id]');
-      if (!hidden) return;
+    var form = document.getElementById('product-form-albino');
+    if (!form) {
+      form = document.querySelector('form[data-product-add-form]');
+    }
+    if (!form) return;
+
+    var select = form.querySelector('[data-product-variant-select]');
+    var hidden = form.querySelector('[data-product-variant-id], input[name="id"]');
+    if (select && hidden) {
       select.addEventListener('change', function () {
         hidden.value = select.value;
       });
-    });
+    }
 
-    document.querySelectorAll('form[data-product-add-form]').forEach(function (form) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var idInput = form.querySelector('[data-product-variant-id], input[name="id"]');
-        var qtyInput = form.querySelector('input[name="quantity"]');
-        var variantId = idInput ? idInput.value : null;
-        var quantity = (qtyInput && parseInt(qtyInput.value, 10)) || 1;
-        if (!variantId) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      showError('');
+      var idInput = form.querySelector('[data-product-variant-id], input[name="id"]');
+      var qtyInput = form.querySelector('input[name="quantity"]');
+      var variantId = idInput ? String(idInput.value).trim() : '';
+      var quantity = (qtyInput && parseInt(qtyInput.value, 10)) || 1;
+      if (!variantId) {
+        showError('No se ha seleccionado ninguna variante.');
+        return;
+      }
 
-        var btn = form.querySelector('button[type="submit"], button[name="add"]');
-        if (btn) btn.disabled = true;
+      var btn = form.querySelector('button[type="submit"], button[name="add"]');
+      if (btn) btn.disabled = true;
 
-        fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ id: Number(variantId), quantity: quantity })
-        })
-          .then(function (res) { return res.json(); })
-          .then(function () {
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ id: Number(variantId), quantity: quantity })
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            if (!res.ok) {
+              var msg = (data && (data.description || data.message)) || 'No se pudo añadir al carrito.';
+              showError(msg);
+              return;
+            }
             if (window.AlbinoCart && typeof window.AlbinoCart.refreshCount === 'function') {
               window.AlbinoCart.refreshCount();
             }
             if (window.AlbinoCartModal && typeof window.AlbinoCartModal.open === 'function') {
               window.AlbinoCartModal.open();
             }
-          })
-          .catch(function () {
-            form.submit();
-          })
-          .finally(function () {
-            if (btn) btn.disabled = false;
           });
-      });
+        })
+        .catch(function () {
+          showError('Error de conexión. Intentando envío normal…');
+          form.submit();
+        })
+        .finally(function () {
+          if (btn) btn.disabled = false;
+        });
     });
   }
 

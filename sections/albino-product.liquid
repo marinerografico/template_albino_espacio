@@ -60,6 +60,7 @@
         </div>
       {% endif %}
 
+      <p id="product-form-error" class="hidden mt-3 text-sm text-red-600 font-body" role="alert"></p>
       {% form 'product', product, id: 'product-form-albino', class: 'mt-10', data_product_add_form: '' %}
         <input type="hidden" name="id" value="{{ current_variant.id }}" data-product-variant-id>
 
