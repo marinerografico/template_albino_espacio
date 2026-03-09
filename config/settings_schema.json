@@ -20,6 +20,16 @@
         "default": "ORIGEN"
       },
       {
+        "type": "header",
+        "content": "Vídeo"
+      },
+      {
+        "type": "text",
+        "id": "nosotros_video_url",
+        "label": "URL vídeo (MP4 subido a Shopify)",
+        "info": "Sube el archivo a Archivos de Shopify y pega aquí la URL. Se mostrará debajo del título."
+      },
+      {
         "type": "text",
         "id": "nosotros_stage1_label",
         "label": "Etapa 1 — etiqueta",

@@ -9,6 +9,21 @@
   </div>
 </section>
 
+{% if settings.nosotros_video_url != blank %}
+  <section class="w-full flex items-center justify-center px-6 pb-16 md:pb-24">
+    <div class="w-full max-w-[1000px] mx-auto aspect-video bg-black/5 overflow-hidden">
+      <video
+        src="{{ settings.nosotros_video_url }}"
+        class="w-full h-full object-cover"
+        playsinline
+        muted
+        loop
+        controls
+      ></video>
+    </div>
+  </section>
+{% endif %}
+
 <div class="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col pb-32">
   <div class="w-[1px] h-32 md:h-48 bg-[#e5e4e1] mx-auto mb-24 md:mb-32 reveal"></div>
 
