@@ -29,9 +29,10 @@
 
       // Posición final: centrado en el header (altura del logo dentro de un header de 100/120px)
       var endY = isMd ? 45 : 35;
-      // Posición inicial: algo por encima del borde inferior, manteniendo aire
+      // Posición inicial: más cerca del borde inferior en todas las vistas
       var vh = window.innerHeight;
-      var startY = Math.max(vh * 0.52, vh - startW * 0.4 - 80);
+      var startOffset = isMd ? 260 : 220; // distancia al borde inferior
+      var startY = Math.max(vh * 0.55, vh - startOffset);
 
       var ty = startY + (endY - startY) * t;
       var width = startW + (smallW - startW) * t;

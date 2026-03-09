@@ -348,7 +348,8 @@
 
       var endY = isMd ? 45 : 35;
       var vh = window.innerHeight;
-      var startY = Math.max(vh * 0.52, vh - startW * 0.4 - 80);
+      var startOffset = isMd ? 260 : 220;
+      var startY = Math.max(vh * 0.55, vh - startOffset);
 
       var ty = startY + (endY - startY) * t;
       var width = startW + (smallW - startW) * t;
