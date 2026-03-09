@@ -145,6 +145,65 @@
 })();
 
 /**
+ * Página de producto: formulario add-to-cart.
+ * - Actualiza el hidden variant id cuando cambia el selector de variantes.
+ * - Intercepta el envío del form, hace POST a /cart/add.js y abre el modal del carrito.
+ */
+(function () {
+  function init() {
+    document.querySelectorAll('[data-product-variant-select]').forEach(function (select) {
+      var form = select.closest('form');
+      var hidden = form && form.querySelector('[data-product-variant-id]');
+      if (!hidden) return;
+      select.addEventListener('change', function () {
+        hidden.value = select.value;
+      });
+    });
+
+    document.querySelectorAll('form[data-product-add-form]').forEach(function (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var idInput = form.querySelector('[data-product-variant-id], input[name="id"]');
+        var qtyInput = form.querySelector('input[name="quantity"]');
+        var variantId = idInput ? idInput.value : null;
+        var quantity = (qtyInput && parseInt(qtyInput.value, 10)) || 1;
+        if (!variantId) return;
+
+        var btn = form.querySelector('button[type="submit"], button[name="add"]');
+        if (btn) btn.disabled = true;
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ id: Number(variantId), quantity: quantity })
+        })
+          .then(function (res) { return res.json(); })
+          .then(function () {
+            if (window.AlbinoCart && typeof window.AlbinoCart.refreshCount === 'function') {
+              window.AlbinoCart.refreshCount();
+            }
+            if (window.AlbinoCartModal && typeof window.AlbinoCartModal.open === 'function') {
+              window.AlbinoCartModal.open();
+            }
+          })
+          .catch(function () {
+            form.submit();
+          })
+          .finally(function () {
+            if (btn) btn.disabled = false;
+          });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+/**
  * Carrito modal: abre al hacer clic en "Carrito" o tras añadir al carrito.
  */
 (function () {

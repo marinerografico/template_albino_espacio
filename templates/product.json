@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "albino-product",
+      "settings": {
+        "add_to_cart_label": "Añadir al carrito",
+        "sold_out_label": "Agotado",
+        "show_secondary_link": true,
+        "secondary_link_label": "Seguir comprando"
+      }
+    }
+  },
+  "order": ["main"]
+}
