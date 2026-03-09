@@ -22,7 +22,13 @@
       ul.setAttribute('aria-label', 'Lugares en ' + item.city);
       item.places.forEach(function (place) {
         var li = document.createElement('li');
-        li.textContent = place;
+        var link = document.createElement('a');
+        var query = encodeURIComponent(place + ', ' + item.city);
+        link.href = 'https://www.google.com/maps/search/?api=1&query=' + query;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = place;
+        li.appendChild(link);
         ul.appendChild(li);
       });
       container.appendChild(ul);

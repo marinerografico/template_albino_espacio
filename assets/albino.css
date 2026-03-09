@@ -7,6 +7,12 @@
   font-display: swap;
 }
 
+/* Normalizar fondos de imágenes full-width (evitar fondo blanco) */
+img.w-full {
+  background: unset;
+  background-color: unset;
+}
+
 .font-display {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;

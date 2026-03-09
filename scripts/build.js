@@ -39,7 +39,6 @@ ensureDir(path.join(DIST, 'assets'));
 
 // Pages
 rewriteAndCopyHtml(path.join(SRC, 'pages', 'index.html'), path.join(DIST, 'index.html'));
-rewriteAndCopyHtml(path.join(SRC, 'pages', 'elaboracion.html'), path.join(DIST, 'elaboracion.html'));
 rewriteAndCopyHtml(path.join(SRC, 'pages', 'nosotros.html'), path.join(DIST, 'nosotros.html'));
 rewriteAndCopyHtml(path.join(SRC, 'pages', 'presencia.html'), path.join(DIST, 'presencia.html'));
 
