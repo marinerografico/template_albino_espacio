@@ -11,7 +11,25 @@
   "sections": {
     "main": {
       "type": "albino-nosotros",
-      "settings": {}
+      "settings": {
+        "origen_title": "ORIGEN",
+        "tierra_title": "Tierra",
+        "tierra_subtitle": "Tierra de Barros · Extremadura",
+        "tierra_video_url": "",
+        "tierra_image": "shopify://shop_images/Minimalist_cinematic_video_202602231651.gif",
+        "tierra_image_alt": "Textura de tierra",
+        "manos_title": "Manos",
+        "manos_text": "Esfuerzo que no se exhibe. Se repite cada año.",
+        "manos_video_url": "",
+        "manos_image_alt": "Manos trabajando la vid",
+        "mirada_title": "Mirada",
+        "mirada_text": "No reinventamos la tradición.\nLa miramos distinto.",
+        "equilibrio_title": "Equilibrio",
+        "bottle_image_alt": "Botella Albino",
+        "loesencial_title": "Lo esencial",
+        "loesencial_link": "",
+        "loesencial_cta": "Descubrir la edición"
+      }
     }
   },
   "order": [
