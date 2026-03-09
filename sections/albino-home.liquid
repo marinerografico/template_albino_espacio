@@ -97,15 +97,16 @@
     </div>
     <div class="mt-12 w-full flex flex-row flex-wrap items-center justify-start gap-6">
       {% if section.settings.product_variant_id != blank %}
-        <button
-          type="button"
-          class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0"
-          data-add-to-cart
-          data-variant-id="{{ section.settings.product_variant_id }}"
-          data-quantity="1"
-        >
-          <span>{{ section.settings.primary_cta_label }}</span>
-        </button>
+        <form method="post" action="/cart/add" class="inline-block">
+          <input type="hidden" name="id" value="{{ section.settings.product_variant_id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button
+            type="submit"
+            class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0"
+          >
+            <span>{{ section.settings.primary_cta_label }}</span>
+          </button>
+        </form>
       {% else %}
         <a href="{{ section.settings.primary_cta_link | default: routes.collections_url | default: '/collections/all' }}" class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0">
           <span>{{ section.settings.primary_cta_label }}</span>
@@ -275,6 +276,12 @@
       "id": "product_subtitle",
       "label": "Subtítulo producto",
       "default": "Joven"
+    },
+    {
+      "type": "text",
+      "id": "product_variant_id",
+      "label": "ID de variante del producto",
+      "info": "Pega aquí el ID de la variante del producto principal para activar el botón de añadir al carrito."
     },
     {
       "type": "text",
