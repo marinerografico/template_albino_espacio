@@ -3,7 +3,7 @@
 
 <section aria-label="Presencia" class="min-h-[120vh] flex flex-col items-center justify-center px-6 pt-32 bg-[#B56B80] text-white">
   <h2 class="espacio-title font-display heading-page reveal text-white text-center">
-    {{ settings.presencia_hero_title }}
+    {{ section.settings.hero_title }}
   </h2>
 </section>
 
@@ -11,8 +11,8 @@
   <h2 class="sr-only">Afinidad</h2>
   <div class="max-w-[640px] mx-auto text-center space-y-24 md:space-y-32">
     <p class="text-center leading-tight">
-      <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono text-white">{{ settings.presencia_tagline_1 }}</span>
-      <span class="block mt-0.5 italic text-[13px] md:text-sm text-white">{{ settings.presencia_tagline_2 }}</span>
+      <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono text-white">{{ section.settings.tagline_1 }}</span>
+      <span class="block mt-0.5 italic text-[13px] md:text-sm text-white">{{ section.settings.tagline_2 }}</span>
     </p>
     <ul class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-white/80 space-y-2" aria-label="Tipos de espacios">
       <li>Restaurantes</li>
@@ -25,26 +25,45 @@
 <section aria-label="Listado" class="min-h-[80vh] flex flex-col items-center justify-center px-6 py-24 md:py-32 bg-[#B56B80] text-white">
   <h2 class="sr-only">Lugares</h2>
   <p class="espacio-title font-display heading-page text-white text-center mb-16 md:mb-20">
-    {{ settings.presencia_listado_title }}
+    {{ section.settings.listado_title }}
   </p>
-  <div class="max-w-[640px] mx-auto w-full text-center text-white/80 font-geist-mono text-sm">
-    <p>Contenido del listado (editable desde Configuración del tema — Página Presencia).</p>
+  <div class="max-w-[640px] mx-auto w-full text-left text-white/90 font-geist-mono text-xs md:text-sm space-y-4">
+    {% if section.blocks.size > 0 %}
+      <ul class="space-y-3">
+        {% for block in section.blocks %}
+          <li class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1" {{ block.shopify_attributes }}>
+            <span class="uppercase tracking-[0.2em]">{{ block.settings.name }}</span>
+            <span class="text-white/80">
+              {{ block.settings.city }}
+              {% if block.settings.type != blank %}
+                · {{ block.settings.type }}
+              {% endif %}
+            </span>
+            {% if block.settings.url != blank %}
+              <a href="{{ block.settings.url }}" class="underline underline-offset-4 decoration-white/40 hover:decoration-white text-white/90 text-xs md:text-sm">Ver espacio</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Próximamente compartiremos los espacios donde encontrar Albino.</p>
+    {% endif %}
   </div>
 </section>
 
 <section aria-label="Invitación" class="min-h-[60vh] flex flex-col items-center justify-center px-6 bg-[#B56B80] text-white">
   <p class="espacio-title font-display heading-page text-white text-center">
-    {{ settings.presencia_invitation }}
+    {{ section.settings.invitation }}
   </p>
 </section>
 
 <section aria-label="Formulario" class="min-h-[100vh] flex flex-col items-center justify-center px-6 py-24 md:py-40 bg-[#B56B80] text-white">
   <div class="max-w-[640px] mx-auto w-full">
     <h2 class="font-display text-2xl md:text-3xl font-light tracking-tight text-white mb-6">
-      {{ settings.presencia_form_title }}
+      {{ section.settings.form_title }}
     </h2>
     <p class="text-base md:text-lg text-white/90 mb-12">
-      {{ settings.presencia_form_intro }}
+      {{ section.settings.form_intro }}
     </p>
     <form action="/contact#contact_form" method="post" class="contact-form space-y-8" accept-charset="UTF-8">
       <input type="hidden" name="form_type" value="contact">
@@ -80,7 +99,109 @@
 {% schema %}
 {
   "name": "Albino Presencia",
-  "settings": [],
-  "presets": [{ "name": "Albino Presencia" }]
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Título principal",
+      "default": "Presencia"
+    },
+    {
+      "type": "header",
+      "content": "Afinidad"
+    },
+    {
+      "type": "text",
+      "id": "tagline_1",
+      "label": "Línea superior",
+      "default": "ESPACIOS AFINES"
+    },
+    {
+      "type": "text",
+      "id": "tagline_2",
+      "label": "Línea inferior",
+      "default": "Restaurantes, tiendas y proyectos que comparten mirada."
+    },
+    {
+      "type": "header",
+      "content": "Listado de lugares"
+    },
+    {
+      "type": "text",
+      "id": "listado_title",
+      "label": "Título listado",
+      "default": "Dónde encontrar Albino."
+    },
+    {
+      "type": "header",
+      "content": "Invitación"
+    },
+    {
+      "type": "text",
+      "id": "invitation",
+      "label": "Texto invitación",
+      "default": "Si crees que tu espacio y Albino encajan, hablemos."
+    },
+    {
+      "type": "header",
+      "content": "Formulario"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Título formulario",
+      "default": "Cuéntanos sobre tu espacio."
+    },
+    {
+      "type": "textarea",
+      "id": "form_intro",
+      "label": "Texto introductorio formulario",
+      "default": "Buscamos espacios que compartan sensibilidad y cuidado. Déjanos algunos detalles y te escribimos."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "location",
+      "name": "Lugar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nombre del lugar",
+          "default": "Nombre del lugar"
+        },
+        {
+          "type": "text",
+          "id": "city",
+          "label": "Ciudad / región",
+          "default": "Ciudad"
+        },
+        {
+          "type": "text",
+          "id": "type",
+          "label": "Tipo (restaurante, tienda...)",
+          "default": ""
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL (opcional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Albino Presencia",
+      "blocks": [
+        { "type": "location" },
+        { "type": "location" }
+      ]
+    }
+  ]
 }
 {% endschema %}

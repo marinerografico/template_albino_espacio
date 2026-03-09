@@ -108,7 +108,7 @@
           </button>
         </form>
       {% else %}
-        <a href="{{ section.settings.primary_cta_link | default: routes.collections_url | default: '/collections/all' }}" class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0">
+        <a href="{{ section.settings.primary_cta_link | default: routes.collections_url | default: '/collections/all' }}" class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duración-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0">
           <span>{{ section.settings.primary_cta_label }}</span>
         </a>
       {% endif %}
@@ -193,7 +193,7 @@
           {{ section.settings.story_paragraph | newline_to_br }}
         </p>
       </div>
-      <a href="{{ section.settings.story_cta_link | default: routes.root_url | append: 'pages/elaboracion' }}" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 w-fit mt-12 text-stone-900">
+      <a href="{{ section.settings.story_cta_link | default: routes.root_url | append: 'pages/nosotros' }}" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 w-fit mt-12 text-stone-900">
         <span>{{ section.settings.story_cta_label }}</span>
       </a>
     </div>

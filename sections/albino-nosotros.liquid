@@ -1,0 +1,134 @@
+{% comment %} Sección página Nosotros: bloque editorial con hero, secciones de contenido y CTA. {% endcomment %}
+
+<section class="md:px-12 md:py-40 lg:py-52 max-w-[1200px] mr-auto ml-auto pt-32 pr-6 pb-32 pl-6">
+  <div class="flex flex-col md:flex-row gap-16 md:gap-24 items-start">
+    <div class="w-full md:w-[45%] flex flex-col justify-center order-2 md:order-1">
+      <h1 class="espacio-title font-display heading-page text-stone-900 mb-6">
+        <span>{{ section.settings.hero_title }}</span><br>
+        <span>{{ section.settings.hero_subtitle }}</span>
+      </h1>
+      <div class="text-stone-900 space-y-4">
+        <p class="text-sm font-body font-light">
+          {{ section.settings.hero_paragraph | newline_to_br }}
+        </p>
+      </div>
+      {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+        <a href="{{ section.settings.cta_link }}" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 w-fit mt-10 text-stone-900">
+          <span>{{ section.settings.cta_label }}</span>
+        </a>
+      {% endif %}
+    </div>
+    <div class="md:w-[55%] order-1 md:order-2 w-full">
+      {% if section.settings.hero_image != blank %}
+        <img src="{{ section.settings.hero_image | image_url: width: 1200 }}" alt="{{ section.settings.hero_image_alt | escape }}" class="aspect-[4/5] filter grayscale-[20%] contrast-125 w-full object-cover">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="max-w-[1000px] mx-auto px-6 pb-32 md:pb-40 lg:pb-52 space-y-16">
+  {% for block in section.blocks %}
+    <article class="reveal space-y-4" {{ block.shopify_attributes }}>
+      <h2 class="font-display text-2xl md:text-3xl font-light tracking-tight text-stone-900">
+        <span>{{ block.settings.title }}</span>
+      </h2>
+      {% if block.settings.subtitle != blank %}
+        <p class="text-sm font-geist-mono uppercase tracking-[0.18em] text-stone-500">
+          {{ block.settings.subtitle }}
+        </p>
+      {% endif %}
+      <div class="text-sm md:text-base font-body font-light text-stone-900 leading-relaxed">
+        {{ block.settings.body | newline_to_br }}
+      </div>
+    </article>
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Albino Nosotros",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero — Nosotros"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Título principal",
+      "default": "Nada extraordinario."
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Subtítulo",
+      "default": "Solo constancia."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_paragraph",
+      "label": "Texto introductorio",
+      "default": "Manos curtidas.\nDecisión.\nRepetición."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagen principal"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Texto alternativo de la imagen",
+      "default": "Equipo Albino"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto CTA",
+      "default": "Ver presencia"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "URL CTA"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "section",
+      "name": "Bloque de contenido",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Origen"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo (opcional)",
+          "default": ""
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Texto",
+          "default": "Texto del bloque."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Albino Nosotros",
+      "blocks": [
+        { "type": "section" },
+        { "type": "section" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

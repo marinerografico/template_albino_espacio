@@ -66,3 +66,35 @@
     <a href="{{ routes.cart_url }}" class="font-display text-4xl font-light tracking-tight transition-colors mt-4 hover:text-[#B56B80] text-stone-900" data-shopify-cart="mobile">Carrito</a>
   </nav>
 </div>
+
+<div id="cart-modal" class="fixed inset-0 z-50 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true" role="dialog" aria-label="Carrito">
+  <div class="absolute inset-y-0 right-0 w-full max-w-md bg-[#F5F4F1] shadow-xl flex flex-col">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-[#e5e4e1]">
+      <h2 class="font-geist-mono text-xs tracking-[0.2em] uppercase text-stone-900">Carrito</h2>
+      <button type="button" id="cart-modal-close" class="p-2 hover:text-[#B56B80] text-stone-900" aria-label="Cerrar carrito">
+        <i data-lucide="x" stroke-width="1.5" class="w-5 h-5"></i>
+      </button>
+    </div>
+    <div id="cart-modal-body" class="flex-1 overflow-y-auto px-6 py-4">
+      <div id="cart-modal-items" class="space-y-4 text-sm text-stone-900">
+        <!-- Items del carrito se inyectan vía JS -->
+      </div>
+    </div>
+    <div class="border-t border-[#e5e4e1] px-6 py-4 space-y-4">
+      <div class="flex items-center justify-between text-sm font-geist-mono tracking-tight text-stone-900">
+        <span class="uppercase tracking-[0.18em]">Subtotal</span>
+        <span id="cart-modal-subtotal" class="font-light">0€</span>
+      </div>
+      <div class="flex flex-col gap-3">
+        <form action="/cart" method="post">
+          <button type="submit" name="checkout" class="w-full uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-300 text-xs md:text-sm font-light tracking-tight font-geist-mono border border-[#111111] rounded-none py-3 text-center">
+            Continuar con el pago
+          </button>
+        </form>
+        <button type="button" id="cart-modal-continue" class="w-full uppercase transition-colors duration-300 text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 text-center">
+          Seguir comprando
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

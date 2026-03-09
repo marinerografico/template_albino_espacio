@@ -94,6 +94,197 @@
 })();
 
 /**
+ * Add-to-cart desde botones con data-add-to-cart en la home.
+ * Usa /cart/add.js y luego actualiza el contador y abre el carrito modal.
+ */
+(function () {
+  function handleClick(btn) {
+    var variantId = btn.getAttribute('data-variant-id');
+    if (!variantId) return;
+    var qtyAttr = btn.getAttribute('data-quantity') || '1';
+    var quantity = parseInt(qtyAttr, 10) || 1;
+
+    btn.disabled = true;
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ id: Number(variantId), quantity: quantity })
+    })
+      .then(function (res) { return res.json(); })
+      .then(function () {
+        if (window.AlbinoCart && typeof window.AlbinoCart.refreshCount === 'function') {
+          window.AlbinoCart.refreshCount();
+        }
+        if (window.AlbinoCartModal && typeof window.AlbinoCartModal.open === 'function') {
+          window.AlbinoCartModal.open();
+        }
+      })
+      .catch(function () {
+        btn.disabled = false;
+      });
+  }
+
+  function init() {
+    document.querySelectorAll('[data-add-to-cart]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        handleClick(btn);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+/**
+ * Carrito modal: abre al hacer clic en "Carrito" o tras añadir al carrito.
+ */
+(function () {
+  function qs(id) {
+    return document.getElementById(id);
+  }
+
+  function open() {
+    var modal = qs('cart-modal');
+    if (!modal) return;
+    modal.classList.remove('pointer-events-none');
+    modal.classList.add('opacity-100');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    fetchCart();
+  }
+
+  function close() {
+    var modal = qs('cart-modal');
+    if (!modal) return;
+    modal.classList.add('pointer-events-none');
+    modal.classList.remove('opacity-100');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function renderCart(cart) {
+    var itemsEl = qs('cart-modal-items');
+    var subtotalEl = qs('cart-modal-subtotal');
+    if (!itemsEl) return;
+
+    if (!cart || !cart.items || cart.items.length === 0) {
+      itemsEl.innerHTML = '<p class="text-sm text-stone-900">Tu carrito está vacío.</p>';
+      if (subtotalEl) subtotalEl.textContent = '0€';
+      return;
+    }
+
+    var html = cart.items.map(function (item, index) {
+      var line = index + 1;
+      var price = (item.final_line_price / 100).toFixed(2).replace('.', ',') + '€';
+      return (
+        '<div class="flex items-start justify-between gap-4">' +
+          '<div class="flex-1">' +
+            '<p class="text-sm font-body font-light">' + item.product_title + '</p>' +
+            '<p class="text-xs font-geist-mono tracking-[0.18em] uppercase text-stone-500">Cantidad: ' + item.quantity + '</p>' +
+          '</div>' +
+          '<div class="flex flex-col items-end gap-2">' +
+            '<span class="text-sm font-geist-mono font-light">' + price + '</span>' +
+            '<button type="button" class="text-xs font-geist-mono tracking-[0.18em] uppercase border-b border-[#a0a09e] hover:border-[#111111] text-stone-900" data-cart-remove data-line="' + line + '">Eliminar</button>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+
+    itemsEl.innerHTML = html;
+    if (subtotalEl) {
+      var subtotal = (cart.total_price / 100).toFixed(2).replace('.', ',') + '€';
+      subtotalEl.textContent = subtotal;
+    }
+
+    itemsEl.querySelectorAll('[data-cart-remove]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var line = parseInt(btn.getAttribute('data-line'), 10);
+        if (!line) return;
+        changeLine(line, 0);
+      });
+    });
+  }
+
+  function fetchCart() {
+    fetch('/cart.js')
+      .then(function (r) { return r.json(); })
+      .then(function (cart) {
+        renderCart(cart);
+      })
+      .catch(function () {});
+  }
+
+  function changeLine(line, quantity) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ line: line, quantity: quantity })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (cart) {
+        if (window.AlbinoCart && typeof window.AlbinoCart.refreshCount === 'function') {
+          window.AlbinoCart.refreshCount();
+        }
+        renderCart(cart);
+      })
+      .catch(function () {});
+  }
+
+  function init() {
+    var headerCart = document.getElementById('header-cart-link');
+    if (headerCart) {
+      headerCart.addEventListener('click', function (e) {
+        e.preventDefault();
+        open();
+      });
+    }
+    document.querySelectorAll('[data-shopify-cart="mobile"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        open();
+      });
+    });
+
+    var closeBtn = qs('cart-modal-close');
+    var continueBtn = qs('cart-modal-continue');
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (continueBtn) continueBtn.addEventListener('click', close);
+    var modal = qs('cart-modal');
+    if (modal) {
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) close();
+      });
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+  }
+
+  window.AlbinoCartModal = {
+    open: open
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+/**
  * Data-bind binder: inyecta valores de ALBINO_CONFIG en elementos con data-bind.
  * Uso: data-bind="claims.tagline1" (textContent) o data-bind-href="links.elaboracion"
  */
