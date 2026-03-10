@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "albino-blog-journal",
+      "settings": {
+        "intro": "Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura. Este cuaderno recoge notas sobre el territorio, la cultura del vino y la mirada que sostiene el proyecto.",
+        "show_kicker": true,
+        "read_more_label": "Leer artículo"
+      }
+    }
+  },
+  "order": ["main"]
+}

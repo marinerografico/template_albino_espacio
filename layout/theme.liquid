@@ -18,6 +18,10 @@
       {{ page.title }} — Journal, Albino
     {%- elsif template contains 'page.journal' -%}
       Journal — notas sobre vino, Tierra de Barros y cultura
+    {%- elsif template contains 'article.journal' and article -%}
+      {{ article.title }} — Journal, Albino
+    {%- elsif template contains 'blog.journal' and blog -%}
+      {{ blog.title | default: 'Journal' }} — Albino
     {%- else -%}
       {{ page_title }} — Albino, vino tinto dulce de Tierra de Barros (Extremadura)
     {%- endif -%}
@@ -38,6 +42,10 @@
     {% elsif template contains 'page.journal-article' %}
       <meta name="description" content="{{ page.title }} — Artículo del Journal de Albino sobre vino tinto dulce joven, Tierra de Barros y Extremadura.">
     {% elsif template contains 'page.journal' %}
+      <meta name="description" content="Journal de Albino: artículos editoriales sobre vino tinto dulce joven, Tierra de Barros en Extremadura y la cultura agrícola que sostiene el proyecto.">
+    {% elsif template contains 'article.journal' and article %}
+      <meta name="description" content="{{ article.excerpt | default: article.content | strip_html | truncate: 160 }}">
+    {% elsif template contains 'blog.journal' and blog %}
       <meta name="description" content="Journal de Albino: artículos editoriales sobre vino tinto dulce joven, Tierra de Barros en Extremadura y la cultura agrícola que sostiene el proyecto.">
     {% else %}
       <meta name="description" content="Albino — vino tinto dulce joven de Extremadura, elaborado en Tierra de Barros. Edición limitada que une tradición agrícola y cultura contemporánea.">
@@ -85,6 +93,16 @@
     {% assign og_description = page.title | append: '. Artículo del Journal de Albino sobre vino, Tierra de Barros y cultura.' %}
   {% elsif template contains 'page.journal' %}
     {% assign og_title = 'Journal — Albino, territorio y cultura' %}
+    {% assign og_description = 'Notas editoriales de Albino sobre vino tinto dulce joven, Tierra de Barros (Extremadura) y la cultura del territorio.' %}
+  {% elsif template contains 'article.journal' and article %}
+    {% assign og_title = article.title | append: ' — Journal, Albino' %}
+    {% assign og_description = article.excerpt | default: article.content | strip_html | truncate: 200 %}
+    {% assign og_type = 'article' %}
+    {% if article.image %}
+      {% assign og_image = article.image %}
+    {% endif %}
+  {% elsif template contains 'blog.journal' and blog %}
+    {% assign og_title = blog.title | default: 'Journal' | append: ' — Albino' %}
     {% assign og_description = 'Notas editoriales de Albino sobre vino tinto dulce joven, Tierra de Barros (Extremadura) y la cultura del territorio.' %}
   {% endif %}
 
@@ -145,7 +163,7 @@
         }
       }
       {% endif %}
-      {% if template == 'index' or template contains 'page.' or template contains 'product' %}
+      {% if template == 'index' or template contains 'page.' or template contains 'product' or template contains 'blog' or template contains 'article' %}
       ,{
         "@type": "BreadcrumbList",
         "@id": "{{ canonical_url }}#breadcrumbs",
@@ -189,6 +207,26 @@
             "position": 2,
             "name": "Journal",
             "item": "{{ shop.url }}/pages/journal"
+          }
+          {% elsif template contains 'article.journal' and article %}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ blog.title | default: 'Journal' | escape }}",
+            "item": "{{ shop.url }}{{ blog.url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ article.title | escape }}",
+            "item": "{{ shop.url }}{{ article.url }}"
+          }
+          {% elsif template contains 'blog.journal' and blog %}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ blog.title | default: 'Journal' | escape }}",
+            "item": "{{ shop.url }}{{ blog.url }}"
           }
           {% elsif template contains 'product' and product %}
           ,{

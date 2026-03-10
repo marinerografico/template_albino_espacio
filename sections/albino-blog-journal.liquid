@@ -1,0 +1,127 @@
+{% comment %}
+  Journal — índice del blog. Grid de tarjetas con blog.articles.
+  Usar plantilla "journal" en el blog (Contenido → Blog).
+{% endcomment %}
+
+<section class="px-6 pt-32 pb-24 md:pt-40 md:pb-40 lg:pt-48 lg:pb-48 bg-[#F5F4F1]" aria-labelledby="journal-title">
+  <div class="max-w-[1200px] mx-auto">
+    <header class="reveal-editorial mb-16 md:mb-20">
+      <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.25em] text-stone-500 mb-4">
+        Journal · Territorio · Cultura
+      </p>
+      <h1 id="journal-title" class="espacio-title font-display heading-page text-stone-900 mb-6">
+        {{ blog.title | default: 'Journal' }}
+      </h1>
+      <p class="max-w-[620px] text-sm md:text-base font-body font-light text-stone-700 leading-relaxed">
+        {{ section.settings.intro | default: 'Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura. Este cuaderno recoge notas sobre el territorio, la cultura del vino y la mirada que sostiene el proyecto.' }}
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
+      {% for article in blog.articles %}
+        <article class="reveal-editorial group" aria-labelledby="journal-card-{{ article.id }}">
+          <a href="{{ article.url }}" class="block text-stone-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5F4F1]">
+            <figure class="overflow-hidden aspect-[4/3] mb-5 bg-stone-200">
+              {% if article.image %}
+                <img
+                  src="{{ article.image | image_url: width: 600 }}"
+                  alt="{{ article.image.alt | default: article.title | escape }}"
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                  width="600"
+                  height="450"
+                >
+              {% else %}
+                <img
+                  src="{{ 'journal-placeholder.jpg' | asset_url }}"
+                  alt="{{ article.title | escape }}"
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                  width="600"
+                  height="450"
+                >
+              {% endif %}
+            </figure>
+            <div>
+              {% if article.tags.size > 0 and section.settings.show_kicker %}
+                <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.25em] text-stone-500 mb-2">
+                  {{ article.tags.first }}
+                </p>
+              {% endif %}
+              <h2 id="journal-card-{{ article.id }}" class="espacio-title font-display text-lg md:text-xl tracking-tight text-stone-900 mb-3 group-hover:text-stone-700 transition-colors">
+                {{ article.title }}
+              </h2>
+              {% assign excerpt_text = article.excerpt | default: article.content %}
+              {% if excerpt_text != blank %}
+                <p class="text-sm font-body font-light text-stone-600 leading-relaxed mb-4">
+                  {{ excerpt_text | strip_html | truncate: 140 }}
+                </p>
+              {% endif %}
+              <span class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-stone-500 border-b border-stone-400 group-hover:border-stone-900 pb-0.5 transition-colors">
+                {{ section.settings.read_more_label | default: 'Leer artículo' }}
+              </span>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Blog",
+      "@id": "{{ shop.url }}{{ blog.url }}#blog",
+      "name": {{ blog.title | json }},
+      "url": "{{ shop.url }}{{ blog.url }}",
+      "description": {{ section.settings.intro | strip_html | truncate: 200 | json }}
+    }
+    {% for article in blog.articles %}
+    ,{
+      "@type": ["Article", "BlogPosting"],
+      "@id": "{{ shop.url }}{{ article.url }}#article",
+      "headline": {{ article.title | json }},
+      "description": {{ article.excerpt | default: article.content | strip_html | truncate: 200 | json }},
+      "author": { "@type": "Organization", "name": "Albino" },
+      "publisher": { "@id": "{{ shop.url }}/#organization" },
+      "url": "{{ shop.url }}{{ article.url }}",
+      "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+      "inLanguage": "{{ request.locale.iso_code | default: 'es' }}"
+    }
+    {% endfor %}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Journal (blog)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cabecera"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Texto de introducción",
+      "default": "Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura. Este cuaderno recoge notas sobre el territorio, la cultura del vino y la mirada que sostiene el proyecto."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_kicker",
+      "label": "Mostrar primera etiqueta como kicker",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "read_more_label",
+      "label": "Texto del enlace en cada tarjeta",
+      "default": "Leer artículo"
+    }
+  ]
+}
+{% endschema %}

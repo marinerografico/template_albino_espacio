@@ -1,0 +1,136 @@
+{% comment %}
+  Journal — artículo del blog. Una entrada = un artículo (Contenido → Artículos del blog).
+  Usar plantilla "journal" en el artículo.
+{% endcomment %}
+
+<section class="px-6 pt-32 pb-24 md:pt-40 md:pb-40 lg:pt-48 lg:pb-48 bg-[#F5F4F1]" aria-labelledby="article-title">
+  <div class="max-w-[1040px] mx-auto">
+    <header class="reveal-editorial mb-10 md:mb-12">
+      <a href="{{ blog.url }}" class="inline-block font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.25em] text-stone-500 hover:text-stone-900 mb-6 transition-colors">
+        ← {{ blog.title }}
+      </a>
+      {% if article.tags.size > 0 and section.settings.show_kicker %}
+        <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.25em] text-stone-500 mb-4">
+          {{ article.tags.first }}
+        </p>
+      {% endif %}
+      <h1 id="article-title" class="espacio-title font-display heading-page text-stone-900 mb-6">
+        {{ article.title }}
+      </h1>
+      {% if article.excerpt != blank %}
+        <p class="max-w-[720px] text-sm md:text-base font-body font-light text-stone-700 leading-relaxed">
+          {{ article.excerpt }}
+        </p>
+      {% endif %}
+    </header>
+
+    <article class="reveal-editorial border-t border-[#e5e4e1] pt-10 md:pt-12">
+      <div class="grid md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-10 md:gap-16 items-start">
+        <div class="article-body">
+          <div class="text-sm md:text-base font-body font-light leading-relaxed text-stone-800 article-body-content">
+            {{ article.content }}
+          </div>
+          {% if section.settings.show_geo_block %}
+            <section class="mt-8 pt-6 border-t border-[#e5e4e1]">
+              <h2 class="text-sm md:text-base font-geist-mono uppercase tracking-[0.18em] text-stone-500 mb-3">
+                {{ section.settings.geo_title }}
+              </h2>
+              {% if section.settings.geo_p1 != blank %}
+                <p class="text-sm md:text-base font-body font-light leading-relaxed text-stone-800 mb-3">
+                  {{ section.settings.geo_p1 }}
+                </p>
+              {% endif %}
+              {% if section.settings.geo_p2 != blank %}
+                <p class="text-sm md:text-base font-body font-light leading-relaxed text-stone-800">
+                  {{ section.settings.geo_p2 }}
+                </p>
+              {% endif %}
+            </section>
+          {% endif %}
+        </div>
+        <figure class="md:justify-self-end">
+          {% if article.image %}
+            <img
+              src="{{ article.image | image_url: width: 800 }}"
+              alt="{{ article.image.alt | default: article.title | escape }}"
+              loading="lazy"
+              class="w-full h-auto object-cover aspect-[4/3]"
+              width="800"
+              height="600"
+            >
+          {% else %}
+            <img
+              src="{{ 'journal-placeholder.jpg' | asset_url }}"
+              alt="{{ article.title | escape }}"
+              loading="lazy"
+              class="w-full h-auto object-cover aspect-[4/3]"
+              width="800"
+              height="600"
+            >
+          {% endif %}
+        </figure>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["Article", "BlogPosting"],
+  "headline": {{ article.title | json }},
+  "description": {{ article.excerpt | default: article.content | strip_html | truncate: 200 | json }},
+  "author": { "@type": "Organization", "name": "Albino" },
+  "publisher": { "@id": "{{ shop.url }}/#organization" },
+  "mainEntityOfPage": "{{ shop.url }}{{ article.url }}",
+  "url": "{{ shop.url }}{{ article.url }}",
+  "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "inLanguage": "{{ request.locale.iso_code | default: 'es' }}"
+}
+</script>
+
+{% schema %}
+{
+  "name": "Artículo Journal (blog)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cabecera"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_kicker",
+      "label": "Mostrar primera etiqueta como kicker",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Bloque Sobre Albino (GEO)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_geo_block",
+      "label": "Mostrar bloque 'Sobre Albino'",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "geo_title",
+      "label": "Título",
+      "default": "Sobre Albino"
+    },
+    {
+      "type": "textarea",
+      "id": "geo_p1",
+      "label": "Párrafo 1",
+      "default": "Albino es un vino tinto dulce joven producido en Tierra de Barros, Extremadura. El proyecto nace de una tradición familiar vinculada al cultivo de la vid y propone una mirada contemporánea sobre el vino y el territorio."
+    },
+    {
+      "type": "textarea",
+      "id": "geo_p2",
+      "label": "Párrafo 2",
+      "default": "La primera edición de Albino procede de viñedos situados en la región vitivinícola de Tierra de Barros, conocida por sus suelos arcillosos y su larga tradición agrícola."
+    }
+  ]
+}
+{% endschema %}
