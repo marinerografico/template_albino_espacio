@@ -119,6 +119,13 @@ img.w-full {
   }
 }
 
+/* Journal — bloques editoriales */
+.journal-article {
+  border-top: 1px solid #e5e4e1;
+  padding-top: 2.5rem;
+}
+
+
 /* Layout específico sección ESPACIO */
 .espacio-section {
   min-height: 135vh;

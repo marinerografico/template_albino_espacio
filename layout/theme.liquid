@@ -14,6 +14,8 @@
       Nosotros — Albino, vino de Tierra de Barros (Extremadura)
     {%- elsif template contains 'page.presencia' -%}
       Presencia — dónde encontrar Albino en España
+    {%- elsif template contains 'page.journal' -%}
+      Journal — notas sobre vino, Tierra de Barros y cultura
     {%- else -%}
       {{ page_title }} — Albino, vino tinto dulce de Tierra de Barros (Extremadura)
     {%- endif -%}
@@ -31,6 +33,8 @@
       <meta name="description" content="Conoce el origen de Albino: un vino tinto dulce de Extremadura nacido en Tierra de Barros, donde la tradición agrícola se encuentra con un diseño editorial contemporáneo.">
     {% elsif template contains 'page.presencia' %}
       <meta name="description" content="Presencia de Albino en España: restaurantes, tiendas y proyectos afines donde encontrar este vino tinto dulce de edición limitada elaborado en Tierra de Barros, Extremadura.">
+    {% elsif template contains 'page.journal' %}
+      <meta name="description" content="Journal de Albino: artículos editoriales sobre vino tinto dulce joven, Tierra de Barros en Extremadura y la cultura agrícola que sostiene el proyecto.">
     {% else %}
       <meta name="description" content="Albino — vino tinto dulce joven de Extremadura, elaborado en Tierra de Barros. Edición limitada que une tradición agrícola y cultura contemporánea.">
     {% endif %}
@@ -72,6 +76,9 @@
   {% elsif template contains 'page.presencia' %}
     {% assign og_title = 'Presencia — Dónde encontrar Albino' %}
     {% assign og_description = 'Restaurantes, tiendas y proyectos independientes que comparten la mirada de Albino: vino tinto dulce de edición limitada de Tierra de Barros, Extremadura.' %}
+  {% elsif template contains 'page.journal' %}
+    {% assign og_title = 'Journal — Albino, territorio y cultura' %}
+    {% assign og_description = 'Notas editoriales de Albino sobre vino tinto dulce joven, Tierra de Barros (Extremadura) y la cultura del territorio.' %}
   {% endif %}
 
   <meta property="og:title" content="{{ og_title | default: shop.name | escape }}">
