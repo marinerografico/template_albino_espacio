@@ -480,7 +480,7 @@
 
   function init() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('.reveal, .reveal-subtle').forEach(function (el) { el.classList.add('in-view'); });
+      document.querySelectorAll('.reveal, .reveal-subtle, .reveal-editorial').forEach(function (el) { el.classList.add('in-view'); });
       return;
     }
     var observer = new IntersectionObserver(function (entries, obs) {
@@ -492,7 +492,7 @@
         }
       });
     }, { root: null, rootMargin: '0px', threshold: 0.15 });
-    document.querySelectorAll('.reveal, .reveal-subtle').forEach(function (el) { observer.observe(el); });
+    document.querySelectorAll('.reveal, .reveal-subtle, .reveal-editorial').forEach(function (el) { observer.observe(el); });
   }
 
   if (document.readyState === 'loading') {
