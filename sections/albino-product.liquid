@@ -53,66 +53,49 @@
         </div>
       {% endif %}
 
-      <p id="product-form-error" class="hidden mt-3 text-sm text-red-600 font-body" role="alert"></p>
-      {% form 'product', product, id: 'product-form-albino', class: 'mt-10', data_product_add_form: '' %}
-        <input type="hidden" name="id" value="{{ current_variant.id }}" data-product-variant-id>
+      <p id="product-form-error" class="hidden mt-6 mb-4 text-sm text-red-600 font-body" role="alert"></p>
 
-        {% if product.variants.size > 1 %}
-          <div class="mb-6">
-            <label class="block text-xs font-geist-mono uppercase tracking-[0.18em] text-stone-600 mb-2">Variante</label>
-            <select
-              class="w-full max-w-sm border border-[#e5e4e1] bg-[#F5F4F1] px-4 py-3 font-body text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#B56B80]"
-              data-product-variant-select
-              aria-label="Elegir variante"
-            >
-              {% for variant in product.variants %}
-                <option
-                  value="{{ variant.id }}"
-                  {% if variant.id == current_variant.id %}selected{% endif %}
-                  {% unless variant.available %}disabled{% endunless %}
+      <div class="mt-10 space-y-4 border-t border-[#e5e4e1] pt-6">
+        {% for variant in product.variants %}
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#e5e4e1] pb-4 last:border-b-0">
+            <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-8">
+              <span class="text-sm tracking-[0.15em] uppercase text-stone-900 font-body">
+                {{ variant.title }}
+              </span>
+              <span class="text-base md:text-lg font-geist-mono font-light tracking-tight text-stone-900">
+                {{ variant.price | money_without_trailing_zeros }}
+              </span>
+            </div>
+            <div class="flex items-center gap-4 md:gap-6">
+              {% if variant.available %}
+                <button
+                  type="button"
+                  class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-300 text-xs md:text-sm font-light tracking-tight font-geist-mono border border-[#111111] rounded-none pt-3 pr-8 pb-3 pl-8 text-stone-900"
+                  data-add-to-cart
+                  data-variant-id="{{ variant.id }}"
                 >
-                  {{ variant.title }}{% unless variant.available %} — Agotado{% endunless %}
-                </option>
-              {% endfor %}
-            </select>
+                  {{ section.settings.add_to_cart_label | default: 'Añadir' }}
+                </button>
+              {% else %}
+                <span class="text-xs md:text-sm font-geist-mono uppercase tracking-[0.18em] text-stone-500">
+                  {{ section.settings.sold_out_label | default: 'Agotado' }}
+                </span>
+              {% endif %}
+            </div>
           </div>
-        {% endif %}
+        {% endfor %}
+      </div>
 
-        <div class="mb-6">
-          <label class="block text-xs font-geist-mono uppercase tracking-[0.18em] text-stone-600 mb-2" for="quantity-product-albino">Cantidad</label>
-          <input
-            type="number"
-            id="quantity-product-albino"
-            name="quantity"
-            value="1"
-            min="1"
-            max="99"
-            class="w-24 border border-[#e5e4e1] bg-[#F5F4F1] px-4 py-3 font-body text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#B56B80]"
-          >
-        </div>
-
-        <button
-          type="submit"
-          name="add"
-          class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-300 text-xs md:text-sm font-light tracking-tight font-geist-mono border border-[#111111] rounded-none pt-4 pr-10 pb-4 pl-10 text-stone-900 disabled:opacity-50 disabled:cursor-not-allowed"
-          {% unless current_variant.available %}disabled{% endunless %}
-        >
-          {% if current_variant.available %}
-            {{ section.settings.add_to_cart_label | default: 'Añadir al carrito' }}
-          {% else %}
-            {{ section.settings.sold_out_label | default: 'Agotado' }}
-          {% endif %}
-        </button>
-
-        {% if section.settings.show_secondary_link %}
+      {% if section.settings.show_secondary_link %}
+        <div class="mt-8">
           <a
             href="{{ section.settings.secondary_link | default: routes.root_url }}"
-            class="ml-4 md:ml-6 inline-block uppercase text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900"
+            class="inline-block uppercase text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900"
           >
             {{ section.settings.secondary_link_label | default: 'Seguir comprando' }}
           </a>
-        {% endif %}
-      {% endform %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </section>
