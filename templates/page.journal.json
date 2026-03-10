@@ -1,101 +1,55 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "albino-journal",
+      "settings": {
+        "intro": "Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura. Este cuaderno recoge notas sobre el territorio, la cultura del vino y la mirada que sostiene el proyecto.",
+        "read_more_label": "Leer artículo"
+      },
       "blocks": {
         "tierra": {
           "type": "entry",
           "settings": {
+            "article_url": "/pages/tierra-de-barros",
             "title": "Tierra de Barros",
             "kicker": "Suelo · Origen · Extremadura",
             "intro": "Tierra de Barros es una comarca del sur de Extremadura donde la arcilla aparece a simple vista. El suelo es de un rojo denso, casi terroso, que retiene el agua y obliga a las raíces a profundizar.",
-            "body_1": "Albino se elabora en este paisaje. El vino tinto dulce joven que proponemos no se entiende sin este suelo, sin la mezcla de calores extremos, inviernos fríos y ese horizonte de viñedo bajo que dibuja la comarca.",
-            "body_2": "Hablar de Albino es, en gran parte, hablar de Tierra de Barros y de cómo la tradición agrícola de Extremadura sigue viva en cada viñedo.",
-            "body_3": ".",
-            "image": "shopify://shop_images/ChatGPT_Image_23_feb_2026_17_05_52.png",
-            "image_alt": "Viñedos en Tierra de Barros sobre suelo rojo arcilloso",
-            "caption": "Suelo arcilloso rojo en Tierra de Barros, Extremadura.",
-            "section_label": "Territorio",
-            "show_geo_context": true,
-            "geo_title": "Sobre Albino",
-            "geo_p1": "Albino es un vino tinto dulce joven producido en Tierra de Barros, Extremadura. El proyecto nace de una tradición familiar vinculada al cultivo de la vid y propone una mirada contemporánea sobre el vino y el territorio.",
-            "geo_p2": "La primera edición de Albino procede de viñedos situados en la región vitivinícola de Tierra de Barros, conocida por sus suelos arcillosos y su larga tradición agrícola."
+            "image_alt": "Viñedos en Tierra de Barros sobre suelo rojo arcilloso"
           }
         },
         "vendimia": {
           "type": "entry",
           "settings": {
+            "article_url": "/pages/la-vendimia",
             "title": "La vendimia",
             "kicker": "Manos · Ritmo · Cosecha",
             "intro": "La vendimia en Tierra de Barros sigue siendo, en gran medida, un trabajo manual. No es solo cortar racimos: es leer el viñedo cada día y decidir cuándo entrar.",
-            "body_1": "En Albino entendemos la vendimia como un momento de síntesis entre territorio, clima y manos. El vino tinto dulce joven que proponemos nace de esa decisión de cosechar en el punto justo.",
-            "body_2": "Hablar de Albino es, en gran parte, hablar de Tierra de Barros y de cómo la tradición agrícola de Extremadura sigue viva en cada viñedo.",
-            "body_3": ".",
-            "image_alt": "Viñedos en Tierra de Barros sobre suelo rojo arcilloso",
-            "caption": "Suelo arcilloso rojo en Tierra de Barros, Extremadura.",
-            "section_label": "Cosecha",
-            "show_geo_context": false,
-            "geo_title": "Sobre Albino",
-            "geo_p1": "Albino es un vino tinto dulce joven producido en Tierra de Barros, Extremadura. El proyecto nace de una tradición familiar vinculada al cultivo de la vid y propone una mirada contemporánea sobre el vino y el territorio.",
-            "geo_p2": "La primera edición de Albino procede de viñedos situados en la región vitivinícola de Tierra de Barros, conocida por sus suelos arcillosos y su larga tradición agrícola."
+            "image_alt": "Vendimia en Tierra de Barros"
           }
         },
         "cultura": {
           "type": "entry",
           "settings": {
+            "article_url": "/pages/el-vino-como-objeto-cultural",
             "title": "El vino como objeto cultural",
             "kicker": "Cultura · Memoria · Territorio",
             "intro": "Un vino no es solo una bebida. Es una forma de fijar en el tiempo una cosecha concreta y una manera de entender el trabajo agrícola.",
-            "body_1": "Albino quiere situarse en ese cruce: vino tinto dulce joven que se bebe, pero también objeto cultural que habla de Tierra de Barros y de la tradición vitivinícola de Extremadura.",
-            "body_2": "Hablar de Albino es, en gran parte, hablar de Tierra de Barros y de cómo la tradición agrícola de Extremadura sigue viva en cada viñedo.",
-            "body_3": ".",
-            "image_alt": "Viñedos en Tierra de Barros sobre suelo rojo arcilloso",
-            "caption": "Suelo arcilloso rojo en Tierra de Barros, Extremadura.",
-            "section_label": "Cultura",
-            "show_geo_context": false,
-            "geo_title": "Sobre Albino",
-            "geo_p1": "Albino es un vino tinto dulce joven producido en Tierra de Barros, Extremadura. El proyecto nace de una tradición familiar vinculada al cultivo de la vid y propone una mirada contemporánea sobre el vino y el territorio.",
-            "geo_p2": "La primera edición de Albino procede de viñedos situados en la región vitivinícola de Tierra de Barros, conocida por sus suelos arcillosos y su larga tradición agrícola."
+            "image_alt": "Vino y cultura"
           }
         },
         "mirada": {
           "type": "entry",
           "settings": {
+            "article_url": "/pages/la-mirada",
             "title": "La mirada",
             "kicker": "Equilibrio · Silencio · Esencial",
             "intro": "Albino busca un equilibrio entre dulzor y frescura, entre la materia de Tierra de Barros y una forma de presentarla contenida, casi silenciosa.",
-            "body_1": "La estética minimalista de la marca deja espacio al vino y a la conversación que lo rodea. Menos elementos, más atención a lo esencial.",
-            "body_2": "Hablar de Albino es, en gran parte, hablar de Tierra de Barros y de cómo la tradición agrícola de Extremadura sigue viva en cada viñedo.",
-            "body_3": ".",
-            "image_alt": "Viñedos en Tierra de Barros sobre suelo rojo arcilloso",
-            "caption": "Suelo arcilloso rojo en Tierra de Barros, Extremadura.",
-            "section_label": "Mirada",
-            "show_geo_context": false,
-            "geo_title": "Sobre Albino",
-            "geo_p1": "Albino es un vino tinto dulce joven producido en Tierra de Barros, Extremadura. El proyecto nace de una tradición familiar vinculada al cultivo de la vid y propone una mirada contemporánea sobre el vino y el territorio.",
-            "geo_p2": "La primera edición de Albino procede de viñedos situados en la región vitivinícola de Tierra de Barros, conocida por sus suelos arcillosos y su larga tradición agrícola."
+            "image_alt": "Albino, la mirada"
           }
         }
       },
-      "block_order": [
-        "tierra",
-        "vendimia",
-        "cultura",
-        "mirada"
-      ],
-      "settings": {}
+      "block_order": ["tierra", "vendimia", "cultura", "mirada"]
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }

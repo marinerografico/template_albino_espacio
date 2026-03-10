@@ -14,6 +14,8 @@
       Nosotros — Albino, vino de Tierra de Barros (Extremadura)
     {%- elsif template contains 'page.presencia' -%}
       Presencia — dónde encontrar Albino en España
+    {%- elsif template contains 'page.journal-article' -%}
+      {{ page.title }} — Journal, Albino
     {%- elsif template contains 'page.journal' -%}
       Journal — notas sobre vino, Tierra de Barros y cultura
     {%- else -%}
@@ -33,6 +35,8 @@
       <meta name="description" content="Conoce el origen de Albino: un vino tinto dulce de Extremadura nacido en Tierra de Barros, donde la tradición agrícola se encuentra con un diseño editorial contemporáneo.">
     {% elsif template contains 'page.presencia' %}
       <meta name="description" content="Presencia de Albino en España: restaurantes, tiendas y proyectos afines donde encontrar este vino tinto dulce de edición limitada elaborado en Tierra de Barros, Extremadura.">
+    {% elsif template contains 'page.journal-article' %}
+      <meta name="description" content="{{ page.title }} — Artículo del Journal de Albino sobre vino tinto dulce joven, Tierra de Barros y Extremadura.">
     {% elsif template contains 'page.journal' %}
       <meta name="description" content="Journal de Albino: artículos editoriales sobre vino tinto dulce joven, Tierra de Barros en Extremadura y la cultura agrícola que sostiene el proyecto.">
     {% else %}
@@ -76,6 +80,9 @@
   {% elsif template contains 'page.presencia' %}
     {% assign og_title = 'Presencia — Dónde encontrar Albino' %}
     {% assign og_description = 'Restaurantes, tiendas y proyectos independientes que comparten la mirada de Albino: vino tinto dulce de edición limitada de Tierra de Barros, Extremadura.' %}
+  {% elsif template contains 'page.journal-article' %}
+    {% assign og_title = page.title | append: ' — Journal, Albino' %}
+    {% assign og_description = page.title | append: '. Artículo del Journal de Albino sobre vino, Tierra de Barros y cultura.' %}
   {% elsif template contains 'page.journal' %}
     {% assign og_title = 'Journal — Albino, territorio y cultura' %}
     {% assign og_description = 'Notas editoriales de Albino sobre vino tinto dulce joven, Tierra de Barros (Extremadura) y la cultura del territorio.' %}
@@ -162,6 +169,26 @@
             "position": 2,
             "name": "Presencia",
             "item": "{{ shop.url }}/pages/presencia"
+          }
+          {% elsif template contains 'page.journal-article' %}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Journal",
+            "item": "{{ shop.url }}/pages/journal"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ page.title | escape }}",
+            "item": "{{ canonical_url }}"
+          }
+          {% elsif template contains 'page.journal' %}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Journal",
+            "item": "{{ shop.url }}/pages/journal"
           }
           {% elsif template contains 'product' and product %}
           ,{
