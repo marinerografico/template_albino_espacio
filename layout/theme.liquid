@@ -3,11 +3,43 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page_title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &ndash; Página {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+
+  {%- comment -%} SEO title — específico por tipo de página {%- endcomment -%}
+  <title>
+    {%- if template == 'index' -%}
+      Albino — vino tinto dulce de Tierra de Barros (Extremadura)
+    {%- elsif template contains 'product' and product -%}
+      {{ product.title }} — Albino, vino tinto dulce de Tierra de Barros (Extremadura)
+    {%- elsif template contains 'page.nosotros' -%}
+      Nosotros — Albino, vino de Tierra de Barros (Extremadura)
+    {%- elsif template contains 'page.presencia' -%}
+      Presencia — dónde encontrar Albino en España
+    {%- else -%}
+      {{ page_title }} — Albino, vino tinto dulce de Tierra de Barros (Extremadura)
+    {%- endif -%}
+  </title>
+
+  {%- comment -%} Meta descripción — fallback si no hay page_description {%- endcomment -%}
   {% if page_description %}
     <meta name="description" content="{{ page_description | escape }}">
+  {% else %}
+    {% if template == 'index' %}
+      <meta name="description" content="Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura. Un proyecto editorial y agrícola que combina tradición de viñedo y cultura contemporánea.">
+    {% elsif template contains 'product' and product %}
+      <meta name="description" content="Descubre {{ product.title }} de Albino: vino tinto dulce joven de Tierra de Barros, Extremadura. Edición limitada de vino español con mirada contemporánea.">
+    {% elsif template contains 'page.nosotros' %}
+      <meta name="description" content="Conoce el origen de Albino: un vino tinto dulce de Extremadura nacido en Tierra de Barros, donde la tradición agrícola se encuentra con un diseño editorial contemporáneo.">
+    {% elsif template contains 'page.presencia' %}
+      <meta name="description" content="Presencia de Albino en España: restaurantes, tiendas y proyectos afines donde encontrar este vino tinto dulce de edición limitada elaborado en Tierra de Barros, Extremadura.">
+    {% else %}
+      <meta name="description" content="Albino — vino tinto dulce joven de Extremadura, elaborado en Tierra de Barros. Edición limitada que une tradición agrícola y cultura contemporánea.">
+    {% endif %}
   {% endif %}
+
+  <meta name="robots" content="index,follow">
   <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-albino.png' | asset_url }}">
+
   {{ content_for_header }}
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,6 +49,127 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap">
   {{ 'albino.css' | asset_url | stylesheet_tag }}
+
+  {%- comment -%} Open Graph / social {%- endcomment -%}
+  {% assign og_title = page_title %}
+  {% assign og_description = page_description %}
+  {% assign og_type = 'website' %}
+  {% assign og_image = shop.brand.logo | default: shop.logo %}
+
+  {% if template == 'index' %}
+    {% assign og_title = 'Albino — vino tinto dulce de Tierra de Barros (Extremadura)' %}
+    {% assign og_description = 'Vino tinto dulce joven de edición limitada, elaborado en Tierra de Barros, Extremadura. Tradición agrícola y diseño contemporáneo.' %}
+  {% elsif template contains 'product' and product %}
+    {% assign og_title = product.title | append: ' — Albino' %}
+    {% assign og_description = product.description | strip_html | truncate: 200 %}
+    {% assign og_type = 'product' %}
+    {% if product.featured_image %}
+      {% assign og_image = product.featured_image %}
+    {% endif %}
+  {% elsif template contains 'page.nosotros' %}
+    {% assign og_title = 'Nosotros — Albino, vino de Tierra de Barros' %}
+    {% assign og_description = 'La historia de Albino: un vino tinto dulce de Extremadura que nace en Tierra de Barros, donde la tierra, las manos y la mirada se equilibran.' %}
+  {% elsif template contains 'page.presencia' %}
+    {% assign og_title = 'Presencia — Dónde encontrar Albino' %}
+    {% assign og_description = 'Restaurantes, tiendas y proyectos independientes que comparten la mirada de Albino: vino tinto dulce de edición limitada de Tierra de Barros, Extremadura.' %}
+  {% endif %}
+
+  <meta property="og:title" content="{{ og_title | default: shop.name | escape }}">
+  <meta property="og:description" content="{{ og_description | default: page_description | default: shop.meta_description | escape }}">
+  <meta property="og:type" content="{{ og_type }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {% if og_image %}
+    <meta property="og:image" content="{{ og_image | image_url: width: 1200 }}">
+  {% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+
+  {%- comment -%} Schema.org / JSON-LD para SEO y GEO {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "{{ shop.url }}/#organization",
+        "name": "Albino",
+        "url": "{{ shop.url }}",
+        "logo": "{{ og_image | image_url: width: 512 }}",
+        "description": "Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura (España)."
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "{{ shop.url }}/#local",
+        "name": "Albino",
+        "url": "{{ shop.url }}",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Extremadura",
+          "addressCountry": "ES"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Tierra de Barros, Extremadura"
+        }
+      }
+      {% if template contains 'product' and product %}
+      ,{
+        "@type": "Product",
+        "@id": "{{ shop.url }}{{ product.url }}#product",
+        "name": "{{ product.title | escape }}",
+        "description": "{{ product.description | strip_html | strip_newlines | escape }}",
+        "brand": {
+          "@type": "Brand",
+          "name": "Albino"
+        },
+        "category": "Vino tinto dulce",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "{{ cart.currency.iso_code }}",
+          "price": "{{ product.price | divided_by: 100.0 | round: 2 }}",
+          "availability": "{% if product.available %}http://schema.org/InStock{% else %}http://schema.org/OutOfStock{% endif %}",
+          "url": "{{ shop.url }}{{ product.url }}"
+        }
+      }
+      {% endif %}
+      {% if template == 'index' or template contains 'page.' or template contains 'product' %}
+      ,{
+        "@type": "BreadcrumbList",
+        "@id": "{{ canonical_url }}#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "{{ shop.url }}"
+          }
+          {% if template contains 'page.nosotros' %}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Nosotros",
+            "item": "{{ shop.url }}/pages/nosotros"
+          }
+          {% elsif template contains 'page.presencia' %}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Presencia",
+            "item": "{{ shop.url }}/pages/presencia"
+          }
+          {% elsif template contains 'product' and product %}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ product.title | escape }}",
+            "item": "{{ shop.url }}{{ product.url }}"
+          }
+          {% endif %}
+        ]
+      }
+      {% endif %}
+    ]
+  }
+  </script>
 </head>
 <body class="antialiased selection:bg-[#B56B80] selection:text-[#F5F4F1] overflow-x-hidden text-[#111111] font-body bg-[#F5F4F1]">
   {%- unless request.design_mode -%}
