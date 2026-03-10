@@ -96,6 +96,33 @@
           "form_title": "Cuéntanos sobre tu espacio.",
           "form_intro": "Buscamos espacios que compartan sensibilidad y cuidado. Déjanos algunos detalles y te escribimos."
         }
+      },
+      "albino-journal": {
+        "type": "albino-journal",
+        "blocks": {
+          "entry_rtCrk4": {
+            "type": "entry",
+            "settings": {
+              "title": "La calidad no siempre hace ruido",
+              "kicker": "Vino · Mercado · Calidad · Tradición · Contemporáneo",
+              "intro": "Durante mucho tiempo, la calidad en el vino se ha asociado a visibilidad.\nA denominaciones conocidas, puntuaciones altas o etiquetas que aparecen una y otra vez en las mismas listas.\n\nSin embargo, algunos de los vinos más interesantes rara vez participan en ese ruido.\n\nNo porque no tengan calidad.\nSino porque su lógica es otra.",
+              "body_1": "Cuando el vino se convierte en señal.\n\nEl vino moderno ha aprendido a comunicarse muy bien.\n\nLas puntuaciones, los rankings y las guías han construido un lenguaje común para hablar de calidad.\nEse lenguaje ha sido útil: ha permitido orientar a consumidores, ordenar mercados y proteger territorios.\n\nPero también ha producido una consecuencia curiosa.\n\nA veces confundimos visibilidad con valor.\n\nUn vino del que se habla mucho parece automáticamente mejor que uno del que apenas se habla.\n\nY sin embargo, la historia del vino está llena de botellas extraordinarias que nunca buscaron protagonismo.",
+              "body_2": "La calidad silenciosa.\n\nEn muchas regiones vitivinícolas, la calidad no se construye pensando en el mercado global.\n\nSe construye pensando en el viñedo.\n\nEn el suelo, en el clima, en el ritmo de la vendimia.\nEn la experiencia acumulada durante años de trabajo.\n\nEs una calidad que no necesita llamar la atención inmediatamente.\n\nA veces se revela más tarde.\nEn la mesa.\nEn la conversación.\nEn el recuerdo que deja un vino cuando la botella ya está vacía.",
+              "body_3": "Territorios fuera del foco.\n\nEl mapa del vino contemporáneo es mucho más amplio de lo que suele aparecer en los discursos dominantes.\n\nEspaña es uno de los países con mayor diversidad vitivinícola del mundo.\nSin embargo, durante décadas la conversación se ha concentrado en unas pocas regiones.\n\nFuera de esos focos existen territorios donde el vino sigue siendo, ante todo, agricultura.\n\nLugares donde la viña forma parte del paisaje cotidiano.\nDonde el vino no se concibe como símbolo de prestigio, sino como una expresión directa de la tierra.\n\nEn esos lugares la calidad suele aparecer de otra forma.\n\nMás discreta.\nMás ligada al origen.",
+              "image_alt": "Viñedos en Tierra de Barros sobre suelo rojo arcilloso",
+              "caption": "Suelo arcilloso rojo en Tierra de Barros, Extremadura.",
+              "section_label": "Territorio",
+              "show_geo_context": true,
+              "geo_title": "Sobre Albino",
+              "geo_p1": "<section class=\"context-block\">\n<h2>Sobre Albino</h2>\n\n<p>\nAlbino es un vino tinto dulce joven producido en Tierra de Barros, Extremadura.\nEl proyecto nace de una tradición familiar vinculada al cultivo de la vid\ny propone una mirada contemporánea sobre el vino y el territorio.\n</p>\n\n<p>\nLa primera edición de Albino procede de viñedos situados en la región\nvitivinícola de Tierra de Barros, conocida por sus suelos arcillosos\ny su larga tradición agrícola.\n</p>\n\n</section>",
+              "geo_p2": "<script type=\"application/ld+json\">\n{\n \"@context\": \"https://schema.org\",\n \"@type\": \"Article\",\n \"headline\": \"La calidad no siempre hace ruido\",\n \"description\": \"Reflexión sobre la calidad en el vino contemporáneo y los territorios menos visibles del mapa vitivinícola.\",\n \"author\": {\n   \"@type\": \"Organization\",\n   \"name\": \"Albino\"\n },\n \"publisher\": {\n   \"@type\": \"Organization\",\n   \"name\": \"Albino\",\n   \"logo\": {\n     \"@type\": \"ImageObject\",\n     \"url\": \"https://albinovino.com/logo.png\"\n   }\n },\n \"mainEntityOfPage\": \"https://albinovino.com/journal/la-calidad-no-siempre-hace-ruido\",\n \"articleSection\": \"Vino contemporáneo\",\n \"keywords\": [\n   \"vino contemporáneo\",\n   \"calidad en el vino\",\n   \"vino español\",\n   \"Tierra de Barros\",\n   \"vino de Extremadura\"\n ]\n}\n</script>"
+            }
+          }
+        },
+        "block_order": [
+          "entry_rtCrk4"
+        ],
+        "settings": {}
       }
     },
     "content_for_index": []
