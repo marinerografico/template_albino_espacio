@@ -70,6 +70,32 @@
           "newsletter_subtitle": "Nada más. Nada menos.",
           "newsletter_placeholder": "Tu correo electrónico"
         }
+      },
+      "albino-presencia": {
+        "type": "albino-presencia",
+        "blocks": {
+          "location_Vacyzj": {
+            "type": "location",
+            "settings": {
+              "name": "Almacén Albino",
+              "city": "Aceuchal (Badajoz)",
+              "type": "Almacén",
+              "url": ""
+            }
+          }
+        },
+        "block_order": [
+          "location_Vacyzj"
+        ],
+        "settings": {
+          "hero_title": "Presencia",
+          "tagline_1": "ESPACIOS AFINES",
+          "tagline_2": "Restaurantes, tiendas y proyectos que comparten mirada.",
+          "listado_title": "Dónde encontrar Albino.",
+          "invitation": "Si crees que tu espacio y Albino encajan, hablemos.",
+          "form_title": "Cuéntanos sobre tu espacio.",
+          "form_intro": "Buscamos espacios que compartan sensibilidad y cuidado. Déjanos algunos detalles y te escribimos."
+        }
       }
     },
     "content_for_index": []
