@@ -15,7 +15,7 @@
         "tierra": {
           "type": "entry",
           "settings": {
-            "article_url": "shopify://blogs/noticias",
+            "article_url": "shopify://pages/tierra-de-barros",
             "title": "Tierra de Barros",
             "kicker": "Suelo · Origen · Extremadura",
             "intro": "Tierra de Barros es una comarca del sur de Extremadura donde la arcilla aparece a simple vista. El suelo es de un rojo denso, casi terroso, que retiene el agua y obliga a las raíces a profundizar.",
@@ -67,66 +67,9 @@
         "intro": "Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura. Este cuaderno recoge notas sobre el territorio, la cultura del vino y la mirada que sostiene el proyecto.",
         "read_more_label": "Leer artículo"
       }
-    },
-    "albino_journal_miywiG": {
-      "type": "albino-journal",
-      "blocks": {
-        "entry_RJN7FP": {
-          "type": "entry",
-          "settings": {
-            "article_url": "",
-            "title": "Tierra de Barros",
-            "kicker": "Suelo · Origen · Extremadura",
-            "intro": "Tierra de Barros es una comarca del sur de Extremadura donde la arcilla aparece a simple vista.",
-            "image_alt": "Viñedos en Tierra de Barros"
-          }
-        },
-        "entry_hhQWQm": {
-          "type": "entry",
-          "settings": {
-            "article_url": "",
-            "title": "La vendimia",
-            "kicker": "Manos · Ritmo · Cosecha",
-            "intro": "Tierra de Barros es una comarca del sur de Extremadura donde la arcilla aparece a simple vista.",
-            "image_alt": "Viñedos en Tierra de Barros"
-          }
-        },
-        "entry_Rbp8gB": {
-          "type": "entry",
-          "settings": {
-            "article_url": "",
-            "title": "El vino como objeto cultural",
-            "kicker": "Cultura · Memoria · Territorio",
-            "intro": "Tierra de Barros es una comarca del sur de Extremadura donde la arcilla aparece a simple vista.",
-            "image_alt": "Viñedos en Tierra de Barros"
-          }
-        },
-        "entry_3KrhGd": {
-          "type": "entry",
-          "settings": {
-            "article_url": "",
-            "title": "La mirada",
-            "kicker": "Equilibrio · Silencio · Esencial",
-            "intro": "Tierra de Barros es una comarca del sur de Extremadura donde la arcilla aparece a simple vista.",
-            "image_alt": "Viñedos en Tierra de Barros"
-          }
-        }
-      },
-      "block_order": [
-        "entry_RJN7FP",
-        "entry_hhQWQm",
-        "entry_Rbp8gB",
-        "entry_3KrhGd"
-      ],
-      "name": "Albino Journal",
-      "settings": {
-        "intro": "Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura. Este cuaderno recoge notas sobre el territorio, la cultura del vino y la mirada que sostiene el proyecto.",
-        "read_more_label": "Leer artículo"
-      }
     }
   },
   "order": [
-    "main",
-    "albino_journal_miywiG"
+    "main"
   ]
 }
