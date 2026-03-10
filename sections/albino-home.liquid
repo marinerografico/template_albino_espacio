@@ -97,16 +97,14 @@
     </div>
     <div class="mt-12 w-full flex flex-row flex-wrap items-center justify-start gap-6">
       {% if section.settings.product_variant_id != blank %}
-        <form method="post" action="/cart/add" class="inline-block">
-          <input type="hidden" name="id" value="{{ section.settings.product_variant_id }}">
-          <input type="hidden" name="quantity" value="1">
-          <button
-            type="submit"
-            class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0"
-          >
-            <span>{{ section.settings.primary_cta_label }}</span>
-          </button>
-        </form>
+        <button
+          type="button"
+          class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0"
+          data-add-to-cart
+          data-variant-id="{{ section.settings.product_variant_id }}"
+        >
+          <span>{{ section.settings.primary_cta_label }}</span>
+        </button>
       {% else %}
         <a href="{{ section.settings.primary_cta_link | default: routes.collections_url | default: '/collections/all' }}" class="inline-block uppercase hover:bg-[#111111] hover:text-[#F5F4F1] transition-colors duración-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-[#111111] border rounded-none pt-4 pr-10 pb-4 pl-10 shrink-0">
           <span>{{ section.settings.primary_cta_label }}</span>
@@ -134,7 +132,14 @@
       </div>
       <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
         <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack2_price }}</span></span>
-        <a href="{{ section.settings.packs_collection_link | default: routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span>{{ section.settings.pack_add_label }}</span></a>
+        <button
+          type="button"
+          class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duración-300 font-geist-mono font-light tracking-tight"
+          data-add-to-cart
+          data-variant-id="{{ section.settings.pack2_variant_id }}"
+        >
+          <span>{{ section.settings.pack_add_label }}</span>
+        </button>
       </div>
     </div>
 
@@ -148,7 +153,14 @@
       </div>
       <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
         <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack3_price }}</span></span>
-        <a href="{{ section.settings.packs_collection_link | default: routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span>{{ section.settings.pack_add_label }}</span></a>
+        <button
+          type="button"
+          class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"
+          data-add-to-cart
+          data-variant-id="{{ section.settings.pack3_variant_id }}"
+        >
+          <span>{{ section.settings.pack_add_label }}</span>
+        </button>
       </div>
     </div>
 
@@ -162,7 +174,14 @@
       </div>
       <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
         <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack6_price }}</span></span>
-        <a href="{{ section.settings.packs_collection_link | default: routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span>{{ section.settings.pack_add_label }}</span></a>
+        <button
+          type="button"
+          class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"
+          data-add-to-cart
+          data-variant-id="{{ section.settings.pack6_variant_id }}"
+        >
+          <span>{{ section.settings.pack_add_label }}</span>
+        </button>
       </div>
     </div>
 
@@ -176,7 +195,14 @@
       </div>
       <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto pt-2 md:pt-0">
         <span class="text-base md:text-lg font-geist-mono font-light tracking-tight transition-colors duration-500 group-hover:text-[#B56B80]"><span>{{ section.settings.pack12_price }}</span></span>
-        <a href="{{ section.settings.packs_collection_link | default: routes.collections_url | default: '#' }}" class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"><span>{{ section.settings.pack_add_label }}</span></a>
+        <button
+          type="button"
+          class="pack-add-link text-xs md:text-sm uppercase border-b border-[#111111] pb-1 group-hover:text-[#B56B80] group-hover:border-[#B56B80] transition-colors duration-300 font-geist-mono font-light tracking-tight"
+          data-add-to-cart
+          data-variant-id="{{ section.settings.pack12_variant_id }}"
+        >
+          <span>{{ section.settings.pack_add_label }}</span>
+        </button>
       </div>
     </div>
   </div>
@@ -401,6 +427,11 @@
     },
     {
       "type": "text",
+      "id": "pack2_variant_id",
+      "label": "ID variante pack 2 botellas"
+    },
+    {
+      "type": "text",
       "id": "pack3_title",
       "label": "Pack 3 – título",
       "default": "3 Botellas"
@@ -416,6 +447,11 @@
       "id": "pack3_price",
       "label": "Pack 3 – precio",
       "default": "84€"
+    },
+    {
+      "type": "text",
+      "id": "pack3_variant_id",
+      "label": "ID variante pack 3 botellas"
     },
     {
       "type": "text",
@@ -437,6 +473,11 @@
     },
     {
       "type": "text",
+      "id": "pack6_variant_id",
+      "label": "ID variante pack 6 botellas"
+    },
+    {
+      "type": "text",
       "id": "pack12_title",
       "label": "Pack 12 – título",
       "default": "12 Botellas"
@@ -452,6 +493,11 @@
       "id": "pack12_price",
       "label": "Pack 12 – precio",
       "default": "300€"
+    },
+    {
+      "type": "text",
+      "id": "pack12_variant_id",
+      "label": "ID variante pack 12 botellas"
     },
     {
       "type": "header",
