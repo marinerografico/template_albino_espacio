@@ -47,6 +47,18 @@
               {% endif %}
             </section>
           {% endif %}
+
+          {%- comment -%} Enlaces internos para SEO (Nosotros, Producto, Journal) {%- endcomment -%}
+          {% if section.settings.show_internal_links %}
+            <nav class="mt-8 pt-6 border-t border-[#e5e4e1]" aria-label="Enlaces relacionados">
+              <p class="text-[11px] font-geist-mono uppercase tracking-[0.2em] text-stone-500 mb-3">Explorar</p>
+              <ul class="flex flex-wrap gap-x-6 gap-y-2">
+                <li><a href="{{ pages['nosotros'].url | default: routes.root_url | append: 'pages/nosotros' }}" class="text-sm font-body font-light text-stone-700 hover:text-stone-900 border-b border-transparent hover:border-stone-900 pb-0.5 transition-colors">Nosotros</a></li>
+                <li><a href="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}" class="text-sm font-body font-light text-stone-700 hover:text-stone-900 border-b border-transparent hover:border-stone-900 pb-0.5 transition-colors">Albino</a></li>
+                <li><a href="{{ blog.url }}" class="text-sm font-body font-light text-stone-700 hover:text-stone-900 border-b border-transparent hover:border-stone-900 pb-0.5 transition-colors">Journal</a></li>
+              </ul>
+            </nav>
+          {% endif %}
         </div>
         <figure class="md:justify-self-end">
           {% if article.image %}
@@ -130,6 +142,22 @@
       "id": "geo_p2",
       "label": "Párrafo 2",
       "default": "La primera edición de Albino procede de viñedos situados en la región vitivinícola de Tierra de Barros, conocida por sus suelos arcillosos y su larga tradición agrícola."
+    },
+    {
+      "type": "header",
+      "content": "Enlaces internos (SEO)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_internal_links",
+      "label": "Mostrar enlaces a Nosotros, Producto y Journal",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "URL del producto Albino",
+      "info": "Por defecto: /products/albino-edicion-2026"
     }
   ],
   "presets": [

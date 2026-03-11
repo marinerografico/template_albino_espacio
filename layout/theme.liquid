@@ -16,9 +16,9 @@
   {%- comment -%} SEO title — específico por tipo de página {%- endcomment -%}
   <title>
     {%- if template == 'index' -%}
-      Albino — vino tinto dulce de Tierra de Barros (Extremadura)
+      Albino | Vino contemporáneo de Tierra de Barros (Extremadura)
     {%- elsif template contains 'product' and product -%}
-      {{ product.title }} — Albino, vino tinto dulce de Tierra de Barros (Extremadura)
+      {{ product.title }} | Vino contemporáneo de Tierra de Barros — Albino
     {%- elsif template contains 'page.nosotros' -%}
       Nosotros — Albino, vino de Tierra de Barros (Extremadura)
     {%- elsif template contains 'page.presencia' -%}
@@ -30,7 +30,7 @@
     {%- elsif template contains 'article.journal' and article -%}
       {{ article.title }} — Journal, Albino
     {%- elsif template contains 'blog.journal' and blog -%}
-      {{ blog.title | default: 'Journal' }} — Albino
+      Journal | Vino contemporáneo, Tierra de Barros y cultura — Albino
     {%- else -%}
       {{ page_title }} — Albino, vino tinto dulce de Tierra de Barros (Extremadura)
     {%- endif -%}
@@ -43,7 +43,7 @@
     {% if template == 'index' %}
       <meta name="description" content="Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura. Un proyecto editorial y agrícola que combina tradición de viñedo y cultura contemporánea.">
     {% elsif template contains 'product' and product %}
-      <meta name="description" content="Descubre {{ product.title }} de Albino: vino tinto dulce joven de Tierra de Barros, Extremadura. Edición limitada de vino español con mirada contemporánea.">
+      <meta name="description" content="{{ product.title }}: vino contemporáneo elaborado en Tierra de Barros, Extremadura. Tempranillo de suelos arcillosos. Edición limitada con mirada editorial.">
     {% elsif template contains 'page.nosotros' %}
       <meta name="description" content="Conoce el origen de Albino: un vino tinto dulce de Extremadura nacido en Tierra de Barros, donde la tradición agrícola se encuentra con un diseño editorial contemporáneo.">
     {% elsif template contains 'page.presencia' %}
@@ -82,10 +82,10 @@
   {% assign og_image = shop.brand.logo | default: shop.logo %}
 
   {% if template == 'index' %}
-    {% assign og_title = 'Albino — vino tinto dulce de Tierra de Barros (Extremadura)' %}
+    {% assign og_title = 'Albino | Vino contemporáneo de Tierra de Barros (Extremadura)' %}
     {% assign og_description = 'Vino tinto dulce joven de edición limitada, elaborado en Tierra de Barros, Extremadura. Tradición agrícola y diseño contemporáneo.' %}
   {% elsif template contains 'product' and product %}
-    {% assign og_title = product.title | append: ' — Albino' %}
+    {% assign og_title = product.title | append: ' | Vino contemporáneo de Tierra de Barros — Albino' %}
     {% assign og_description = product.description | strip_html | truncate: 200 %}
     {% assign og_type = 'product' %}
     {% if product.featured_image %}
@@ -111,7 +111,7 @@
       {% assign og_image = article.image %}
     {% endif %}
   {% elsif template contains 'blog.journal' and blog %}
-    {% assign og_title = blog.title | default: 'Journal' | append: ' — Albino' %}
+    {% assign og_title = 'Journal | Vino contemporáneo, Tierra de Barros y cultura — Albino' %}
     {% assign og_description = 'Notas editoriales de Albino sobre vino tinto dulce joven, Tierra de Barros (Extremadura) y la cultura del territorio.' %}
   {% endif %}
 

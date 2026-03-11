@@ -90,6 +90,17 @@
       </div>
     </div>
   </div>
+
+  {%- comment -%} Bloque SEO contextual: texto semántico para Google y GEO (vino contemporáneo, Tierra de Barros, Extremadura) {%- endcomment -%}
+  {% if section.settings.show_seo_block %}
+    <div class="reveal mt-16 md:mt-24 pt-10 border-t border-[#e5e4e1]">
+      <div class="max-w-[720px]">
+        <p class="text-sm md:text-base font-body font-light leading-relaxed text-stone-600">
+          {{ section.settings.seo_text | default: product.description | default: 'Albino es un vino tinto dulce elaborado con uva Tempranillo procedente de viñedos situados en Tierra de Barros, Extremadura. La primera edición explora una mirada contemporánea sobre el vino y el territorio, combinando tradición familiar con diseño actual. Producción limitada.' }}
+        </p>
+      </div>
+    </div>
+  {% endif %}
 </section>
 {% endif %}
 
@@ -127,6 +138,23 @@
       "id": "secondary_link_label",
       "label": "Texto del enlace secundario",
       "default": "Seguir comprando"
+    },
+    {
+      "type": "header",
+      "content": "SEO contextual"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_seo_block",
+      "label": "Mostrar bloque de texto contextual (SEO/GEO)",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "seo_text",
+      "label": "Texto contextual del producto",
+      "info": "Para Google y motores de IA. Incluye: Tierra de Barros, Extremadura, Tempranillo, vino contemporáneo.",
+      "default": "Albino es un vino tinto dulce elaborado con uva Tempranillo procedente de viñedos situados en Tierra de Barros, Extremadura. La primera edición explora una mirada contemporánea sobre el vino y el territorio, combinando tradición familiar con diseño actual. Producción limitada."
     }
   ]
 }
