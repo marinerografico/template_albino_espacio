@@ -21,7 +21,11 @@
 En **Theme editor → Página Mirada**:
 - **URL del producto**: enlace al producto (por defecto `/products/albino-edicion-2026`).
 - **Vídeos de fondo**: sube MP4 a **Content → Files**, copia la URL y pégala en cada paso (Mira el momento, Acércate al vino, Prueba, Vuelve a mirar). Sin vídeo se muestra un fondo oscuro.
-- **Audios**: sube los MP3 a **Content → Files**, copia la URL y pégala en cada campo de audio.
+- **Audios (flujo completo)**: sube los MP3 a **Content → Files**, copia la URL y pégala en cada campo:
+  - **Intro** — se reproduce al activar la experiencia sonora
+  - **Información del vino** — al llegar a la ficha
+  - **Descubrir el vino** — al llegar a esa sección
+  - **Pasos 1–4** — Aprender a mirarlo
 
 ## Opción B: Sección reutilizable
 
@@ -55,8 +59,9 @@ O la URL personalizada si usas dominio propio.
 
 El JS mantiene `audioEnabled` en memoria. No requiere cookies ni localStorage. Los botones "Escuchar" solo se muestran cuando el usuario ha pulsado "Activar experiencia sonora".
 
-### Experiencia sonora y scroll conectados
+### Experiencia sonora — flujo completo
 
-- **Reproducción automática**: Con la experiencia sonora activada, el audio se reproduce automáticamente al llegar a cada momento (≥50% visible). No hay botones "Escuchar".
-- **Recorrido guiado**: Al activar la experiencia sonora aparece el botón "Recorrido guiado". Al pulsarlo, se reproduce el paso 1 y al terminar cada audio se hace scroll al siguiente momento y se reproduce automáticamente.
-- **Scroll → audio**: Si la experiencia sonora está activada y el usuario hace scroll hasta un momento, se reproduce automáticamente el audio de ese paso y continúa la secuencia.
+- **Intro**: Al activar la experiencia sonora se reproduce el audio intro (si está configurado). Al terminar, hace scroll a Información del vino y continúa.
+- **Secuencia**: Información del vino → Descubrir el vino → Paso 1 → Paso 2 → Paso 3 → Paso 4. Cada audio, al terminar, hace scroll al siguiente y reproduce.
+- **Scroll → audio**: Si la experiencia sonora está activada y el usuario hace scroll hasta una sección con audio, se reproduce automáticamente y continúa la secuencia.
+- **Recorrido guiado**: Empieza por el intro (o por Información del vino si no hay intro) y recorre todo el flujo.

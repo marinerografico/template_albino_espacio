@@ -29,13 +29,26 @@
   }
 
   function initModeButtons() {
-    if (btnAudioOn) btnAudioOn.addEventListener('click', function () { setAudioEnabled(true); });
+    if (btnAudioOn) btnAudioOn.addEventListener('click', function () {
+      setAudioEnabled(true);
+      var introUrl = getIntroAudioUrl();
+      if (introUrl) {
+        guidedScrollActive = true;
+        playIntroAndContinue();
+      }
+    });
     if (btnAudioOff) btnAudioOff.addEventListener('click', function () { setAudioEnabled(false); });
     if (btnGuidedTour) btnGuidedTour.addEventListener('click', function () {
-      var step1 = document.getElementById('step-1');
-      if (step1) {
+      var introUrl = getIntroAudioUrl();
+      if (introUrl) {
         guidedScrollActive = true;
-        playStepAndContinue(step1);
+        playIntroAndContinue();
+      } else {
+        var first = document.getElementById(AUDIO_ORDER[0]);
+        if (first && getAudioUrlForElement(first)) {
+          guidedScrollActive = true;
+          playSectionAndContinue(first);
+        }
       }
     });
   }
@@ -99,20 +112,20 @@
     });
   }
 
-  function getNextStepArticle(currentArticle) {
-    if (!currentArticle || !currentArticle.id) return null;
-    var match = currentArticle.id.match(/step-(\d+)/);
-    if (!match) return null;
-    var nextNum = parseInt(match[1], 10) + 1;
-    var nextId = 'step-' + nextNum;
-    return document.getElementById(nextId);
+  var AUDIO_ORDER = ['product-info', 'discover-wine', 'step-1', 'step-2', 'step-3', 'step-4'];
+
+  function getNextAudioSection(currentEl) {
+    if (!currentEl || !currentEl.id) return null;
+    var idx = AUDIO_ORDER.indexOf(currentEl.id);
+    if (idx < 0 || idx >= AUDIO_ORDER.length - 1) return null;
+    return document.getElementById(AUDIO_ORDER[idx + 1]);
   }
 
-  function getAudioUrlForArticle(article) {
-    if (!article) return null;
-    var url = article.getAttribute('data-audio-url');
+  function getAudioUrlForElement(el) {
+    if (!el) return null;
+    var url = el.getAttribute('data-audio-url');
     if (url) return url;
-    var dataAudio = article.getAttribute('data-audio');
+    var dataAudio = el.getAttribute('data-audio');
     if (dataAudio) {
       var base = (window.ALBINO_CONFIG && window.ALBINO_CONFIG.links && window.ALBINO_CONFIG.links.audioBase) || '';
       return base.replace(/\/?$/, '/') + dataAudio;
@@ -120,14 +133,29 @@
     return null;
   }
 
-  function playStepAndContinue(article) {
-    var url = getAudioUrlForArticle(article);
+  function getIntroAudioUrl() {
+    var root = document.getElementById('mirada-page-root');
+    return root ? root.getAttribute('data-audio-intro') : null;
+  }
+
+  function playSectionAndContinue(section) {
+    var url = getAudioUrlForElement(section);
     if (!url || !audioPlayer) return;
-    article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (section && section.scrollIntoView) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     audioPlayer.src = url;
-    audioPlayer._activeArticle = article;
+    audioPlayer._activeSection = section;
     audioPlayer.play().catch(function () {
-      audioPlayer._activeArticle = null;
+      audioPlayer._activeSection = null;
+    });
+  }
+
+  function playIntroAndContinue() {
+    var url = getIntroAudioUrl();
+    if (!url || !audioPlayer) return;
+    audioPlayer.src = url;
+    audioPlayer._activeSection = { id: 'intro' };
+    audioPlayer.play().catch(function () {
+      audioPlayer._activeSection = null;
     });
   }
 
@@ -136,21 +164,32 @@
   function initAudioSequence() {
     if (!audioPlayer) return;
     audioPlayer.addEventListener('ended', function () {
-      var article = audioPlayer._activeArticle;
-      audioPlayer._activeArticle = null;
-      var nextArticle = article ? getNextStepArticle(article) : null;
-      if (nextArticle && getAudioUrlForArticle(nextArticle)) {
-        guidedScrollActive = true;
-        playStepAndContinue(nextArticle);
+      var section = audioPlayer._activeSection;
+      audioPlayer._activeSection = null;
+      if (!section) return;
+      if (section.id === 'intro') {
+        var first = document.getElementById(AUDIO_ORDER[0]);
+        if (first && getAudioUrlForElement(first)) {
+          guidedScrollActive = true;
+          playSectionAndContinue(first);
+        } else {
+          guidedScrollActive = false;
+        }
       } else {
-        guidedScrollActive = false;
+        var next = getNextAudioSection(section);
+        if (next && getAudioUrlForElement(next)) {
+          guidedScrollActive = true;
+          playSectionAndContinue(next);
+        } else {
+          guidedScrollActive = false;
+        }
       }
     });
   }
 
   function initScrollToAudio() {
     if (typeof IntersectionObserver === 'undefined') return;
-    var steps = ['step-1', 'step-2', 'step-3', 'step-4'];
+    var sections = AUDIO_ORDER;
     var observed = {};
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -161,14 +200,13 @@
         if (guidedScrollActive || !audioEnabled) return;
         var id = entry.target.id;
         if (!id || observed[id]) return;
-        var article = entry.target;
-        if (!getAudioUrlForArticle(article) || !audioPlayer) return;
+        if (!getAudioUrlForElement(entry.target) || !audioPlayer) return;
         observed[id] = true;
         guidedScrollActive = true;
-        playStepAndContinue(article);
+        playSectionAndContinue(entry.target);
       });
     }, { threshold: 0.5, rootMargin: '0px' });
-    steps.forEach(function (id) {
+    sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) observer.observe(el);
     });

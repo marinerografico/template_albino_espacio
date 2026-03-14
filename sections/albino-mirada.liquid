@@ -4,7 +4,7 @@
 
 {{ 'mirada.css' | asset_url | stylesheet_tag }}
 
-<div class="mirada-page" id="mirada-page-root">
+<div class="mirada-page" id="mirada-page-root" data-audio-intro="{% if section.settings.audio_intro != blank %}{{ section.settings.audio_intro }}{% endif %}" data-audio-product-info="{% if section.settings.audio_product_info != blank %}{{ section.settings.audio_product_info }}{% endif %}" data-audio-discover="{% if section.settings.audio_discover != blank %}{{ section.settings.audio_discover }}{% endif %}">
   <div id="mirada-audio-band" class="fixed bottom-0 left-0 right-0 z-40 py-3 px-6 bg-[#111111] text-[#F5F4F1] font-geist-mono text-[10px] uppercase tracking-[0.2em] text-center translate-y-full transition-transform duration-300 pointer-events-none" aria-live="polite" hidden>
     Audio activado
   </div>
@@ -47,7 +47,7 @@
     </section>
 
     <!-- Product info -->
-    <section id="product-info" class="min-h-[100vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="product-title">
+    <section id="product-info" class="mirada-audio-section min-h-[100vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="product-title" data-audio-url="{% if section.settings.audio_product_info != blank %}{{ section.settings.audio_product_info }}{% endif %}">
       <div class="w-full max-w-[560px] mx-auto text-center">
         <h2 id="product-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-12">
           Información del vino
@@ -94,7 +94,7 @@
     </section>
 
     <!-- Descubrir -->
-    <section id="discover-wine" class="min-h-[120vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="discover-title">
+    <section id="discover-wine" class="mirada-audio-section min-h-[120vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="discover-title" data-audio-url="{% if section.settings.audio_discover != blank %}{{ section.settings.audio_discover }}{% endif %}">
       <div class="text-center max-w-[560px] mx-auto">
         <h2 id="discover-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-20">
           Descubrir el vino
@@ -152,7 +152,7 @@
         </div>
       </div>
 
-      <article id="step-1" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-1-title" data-audio-url="{% if section.settings.audio_step_1 != blank %}{{ section.settings.audio_step_1 }}{% else %}{{ 'audio-step-1.mp3' | asset_url }}{% endif %}">
+      <article id="step-1" class="learn-moment mirada-audio-section min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-1-title" data-audio-url="{% if section.settings.audio_step_1 != blank %}{{ section.settings.audio_step_1 }}{% else %}{{ 'audio-step-1.mp3' | asset_url }}{% endif %}">
         <div class="absolute inset-0" aria-hidden="true">
           {% if section.settings.video_step_1 != blank %}
             <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
@@ -170,7 +170,7 @@
         </div>
       </article>
 
-      <article id="step-2" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-2-title" data-audio-url="{% if section.settings.audio_step_2 != blank %}{{ section.settings.audio_step_2 }}{% else %}{{ 'audio-step-2.mp3' | asset_url }}{% endif %}">
+      <article id="step-2" class="learn-moment mirada-audio-section min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-2-title" data-audio-url="{% if section.settings.audio_step_2 != blank %}{{ section.settings.audio_step_2 }}{% else %}{{ 'audio-step-2.mp3' | asset_url }}{% endif %}">
         <div class="absolute inset-0" aria-hidden="true">
           {% if section.settings.video_step_2 != blank %}
             <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
@@ -188,7 +188,7 @@
         </div>
       </article>
 
-      <article id="step-3" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-3-title" data-audio-url="{% if section.settings.audio_step_3 != blank %}{{ section.settings.audio_step_3 }}{% else %}{{ 'audio-step-3.mp3' | asset_url }}{% endif %}">
+      <article id="step-3" class="learn-moment mirada-audio-section min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-3-title" data-audio-url="{% if section.settings.audio_step_3 != blank %}{{ section.settings.audio_step_3 }}{% else %}{{ 'audio-step-3.mp3' | asset_url }}{% endif %}">
         <div class="absolute inset-0" aria-hidden="true">
           {% if section.settings.video_step_3 != blank %}
             <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
@@ -206,7 +206,7 @@
         </div>
       </article>
 
-      <article id="step-4" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-4-title" data-audio-url="{% if section.settings.audio_step_4 != blank %}{{ section.settings.audio_step_4 }}{% else %}{{ 'audio-step-4.mp3' | asset_url }}{% endif %}">
+      <article id="step-4" class="learn-moment mirada-audio-section min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-4-title" data-audio-url="{% if section.settings.audio_step_4 != blank %}{{ section.settings.audio_step_4 }}{% else %}{{ 'audio-step-4.mp3' | asset_url }}{% endif %}">
         <div class="absolute inset-0" aria-hidden="true">
           {% if section.settings.video_step_4 != blank %}
             <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
@@ -310,7 +310,22 @@
     },
     {
       "type": "header",
-      "content": "Audios (opcional)"
+      "content": "Audios — flujo completo"
+    },
+    {
+      "type": "url",
+      "id": "audio_intro",
+      "label": "Audio intro — Hero (al activar experiencia sonora)"
+    },
+    {
+      "type": "url",
+      "id": "audio_product_info",
+      "label": "Audio — Información del vino"
+    },
+    {
+      "type": "url",
+      "id": "audio_discover",
+      "label": "Audio — Descubrir el vino"
     },
     {
       "type": "url",
