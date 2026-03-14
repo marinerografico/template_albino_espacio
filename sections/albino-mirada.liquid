@@ -5,7 +5,7 @@
 {{ 'mirada.css' | asset_url | stylesheet_tag }}
 
 <div class="mirada-page" id="mirada-page-root">
-  <div id="mirada-audio-band" class="fixed top-16 left-0 right-0 z-40 py-3 px-6 bg-[#111111] text-[#F5F4F1] font-geist-mono text-[10px] uppercase tracking-[0.2em] text-center -translate-y-full transition-transform duration-300 pointer-events-none" aria-live="polite" hidden>
+  <div id="mirada-audio-band" class="fixed bottom-0 left-0 right-0 z-40 py-3 px-6 bg-[#111111] text-[#F5F4F1] font-geist-mono text-[10px] uppercase tracking-[0.2em] text-center translate-y-full transition-transform duration-300 pointer-events-none" aria-live="polite" hidden>
     Audio activado
   </div>
   <h1 class="sr-only">{{ shop.name }} — El vino que cambia la mirada</h1>
@@ -249,16 +249,21 @@
           <div id="form-miradas-feedback" class="mb-4 min-h-[1.5rem]" role="status" aria-live="polite" aria-atomic="true"></div>
           <button type="submit" class="mirada-btn mirada-btn-primary w-full">Enviar</button>
         </form>
-        <a href="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}" class="block mt-12 text-center font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 transition-colors reveal delay-200">
-          Ver el vino
-        </a>
+        <div class="mt-16 flex flex-wrap justify-center gap-8 reveal delay-200">
+          <a href="{{ routes.root_url }}" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#111111] pb-1 text-stone-900 transition-colors font-medium">
+            Ir a Albino
+          </a>
+          <a href="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 transition-colors">
+            Ver el vino
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="py-24 text-center">
-    <a href="{{ routes.root_url }}" class="font-geist-mono text-[11px] uppercase tracking-[0.2em] text-[#6A6A6A] hover:text-stone-900 transition-colors">
-      Albino
+    <a href="{{ routes.root_url }}">
+      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b5f3471a-2cd4-4d4e-8cfe-9b57d216d48d_3840w.png" alt="Albino" class="w-[120px] md:w-[150px] h-auto object-contain mx-auto opacity-60 hover:opacity-100 transition-opacity" width="150" height="60">
     </a>
   </footer>
 </div>

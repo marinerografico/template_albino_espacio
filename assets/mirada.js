@@ -23,7 +23,7 @@
     var band = document.getElementById('mirada-audio-band');
     if (band) {
       band.hidden = !audioEnabled;
-      band.classList.toggle('-translate-y-full', !audioEnabled);
+      band.classList.toggle('translate-y-full', !audioEnabled);
       band.classList.toggle('translate-y-0', audioEnabled);
     }
   }
