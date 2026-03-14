@@ -94,22 +94,22 @@
 
     <!-- Descubrir -->
     <section id="discover-wine" class="mirada-audio-section min-h-[120vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="discover-title" data-audio-url="{% if section.settings.audio_discover != blank %}{{ section.settings.audio_discover }}{% endif %}">
-      <div class="text-center max-w-[560px] mx-auto">
-        <h2 id="discover-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-20">
+      <div class="w-full max-w-[720px] mx-auto">
+        <h2 id="discover-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-16 md:mb-20 text-center">
           Descubrir el vino
         </h2>
-        <div class="flex flex-col md:flex-row gap-12 md:gap-8 lg:gap-12 reveal delay-100">
-          <div class="flex-1 min-w-0">
-            <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] mb-4">Qué es</p>
-            <p class="font-body text-lg md:text-xl text-stone-900 leading-relaxed">Tempranillo dulce de Tierra de Barros.</p>
+        <div class="flex flex-col md:flex-row reveal delay-100">
+          <div class="flex-1 min-w-0 py-6 border-b border-[#e5e4e1] md:py-0 md:px-6 md:border-b-0 md:border-l md:border-[#e5e4e1] md:first:border-l-0 text-center md:text-left">
+            <p class="font-geist-mono text-[10px] uppercase tracking-[0.25em] text-[#6A6A6A] mb-3">Qué es</p>
+            <p class="font-body text-base md:text-lg text-stone-900 leading-relaxed">Tempranillo dulce de Tierra de Barros.</p>
           </div>
-          <div class="flex-1 min-w-0">
-            <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] mb-4">Cómo se siente</p>
-            <p class="font-body text-lg md:text-xl text-stone-900 leading-relaxed">Cercano, directo, pensado para compartir.</p>
+          <div class="flex-1 min-w-0 py-6 border-b border-[#e5e4e1] md:py-0 md:px-6 md:border-b-0 md:border-l md:border-[#e5e4e1] text-center md:text-left">
+            <p class="font-geist-mono text-[10px] uppercase tracking-[0.25em] text-[#6A6A6A] mb-3">Cómo se siente</p>
+            <p class="font-body text-base md:text-lg text-stone-900 leading-relaxed">Cercano, directo, pensado para compartir.</p>
           </div>
-          <div class="flex-1 min-w-0">
-            <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] mb-4">Qué propone</p>
-            <p class="font-body text-lg md:text-xl text-stone-900 leading-relaxed">No reinventar el vino, sino mirarlo de otra manera.</p>
+          <div class="flex-1 min-w-0 py-6 md:py-0 md:px-6 md:border-l md:border-[#e5e4e1] text-center md:text-left">
+            <p class="font-geist-mono text-[10px] uppercase tracking-[0.25em] text-[#6A6A6A] mb-3">Qué propone</p>
+            <p class="font-body text-base md:text-lg text-stone-900 leading-relaxed">No reinventar el vino, sino mirarlo de otra manera.</p>
           </div>
         </div>
         <div class="mt-16 flex flex-wrap justify-center gap-8 reveal delay-200 mirada-quick-links">
