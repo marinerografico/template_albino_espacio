@@ -1,9 +1,21 @@
 /**
  * MIRADA — Estilos mínimos. La mayoría usa clases de albino.css (espacio-title, reveal, etc.).
- * Solo botones y elementos específicos que no existen en el tema base.
+ * Aprender a mirarlo: full viewport por momento, vídeo fondo, scroll-snap.
  */
 .mirada-page {
   background-color: #F5F4F1;
+}
+
+/* Scroll-snap: cada momento ocupa la pantalla, el scroll cambia de momento */
+.mirada-page-root {
+  scroll-snap-type: y proximity;
+}
+.learn-moment {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mirada-page-root { scroll-snap-type: none; }
 }
 
 .mirada-btn {

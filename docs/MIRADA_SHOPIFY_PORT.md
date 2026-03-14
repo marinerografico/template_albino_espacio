@@ -20,6 +20,7 @@
 
 En **Theme editor → Página Mirada**:
 - **URL del producto**: enlace al producto (por defecto `/products/albino-edicion-2026`).
+- **Vídeos de fondo**: sube MP4 a **Content → Files**, copia la URL y pégala en cada paso (Mira el momento, Acércate al vino, Prueba, Vuelve a mirar). Sin vídeo se muestra un fondo oscuro.
 - **Audios**: sube los MP3 a **Content → Files**, copia la URL y pégala en cada campo de audio.
 
 ## Opción B: Sección reutilizable
