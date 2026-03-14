@@ -89,16 +89,13 @@
 
     <!-- Descubrir -->
     <section id="discover-wine" class="min-h-[120vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="discover-title">
-      <div class="text-center max-w-[640px] mx-auto">
+      <div class="text-center max-w-[560px] mx-auto">
         <h2 id="discover-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-12">
           Descubrir el vino
         </h2>
-        <div class="text-base md:text-lg text-[#6A6A6A] leading-relaxed space-y-6 reveal delay-100">
-          <p>Albino nace en Tierra de Barros, en Extremadura.</p>
-          <p>Un vino tinto dulce de la variedad tempranillo.</p>
-          <p>Un vino cercano. Pensado para compartir.</p>
-          <p>Albino no pretende reinventar el vino. Solo propone mirarlo de otra manera.</p>
-        </div>
+        <p class="font-body text-lg md:text-xl text-stone-900 leading-relaxed reveal delay-100">
+          Un vino cercano. Pensado para compartir. Albino no pretende reinventar el vino. Solo propone mirarlo de otra manera.
+        </p>
         <div class="mt-16 flex flex-wrap justify-center gap-8 reveal delay-200 mirada-quick-links">
           <button type="button" id="btn-product-popup" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 transition-colors bg-transparent cursor-pointer" data-product-url="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}">
             Ver producto
