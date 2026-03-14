@@ -4,7 +4,10 @@
 
 {{ 'mirada.css' | asset_url | stylesheet_tag }}
 
-<div class="mirada-page">
+<div class="mirada-page" id="mirada-page-root">
+  <div id="mirada-audio-band" class="fixed top-16 left-0 right-0 z-40 py-3 px-6 bg-[#111111] text-[#F5F4F1] font-geist-mono text-[10px] uppercase tracking-[0.2em] text-center -translate-y-full transition-transform duration-300 pointer-events-none" aria-live="polite" hidden>
+    Audio activado
+  </div>
   <h1 class="sr-only">{{ shop.name }} — El vino que cambia la mirada</h1>
 
   <main>
@@ -15,8 +18,11 @@
         <h2 id="hero-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
           El vino que cambia la mirada
         </h2>
+        <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] reveal delay-100 mb-4">
+          Has escaneado la etiqueta sonora.
+        </p>
         <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] reveal delay-100 mb-16">
-          Has escaneado la etiqueta sonora de Albino.
+          Elige cómo quieres recorrerla.
         </p>
 
         <div class="flex flex-col gap-4 mb-6 reveal delay-200" role="group" aria-label="Elegir modo de experiencia">
@@ -90,12 +96,23 @@
     <!-- Descubrir -->
     <section id="discover-wine" class="min-h-[120vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="discover-title">
       <div class="text-center max-w-[560px] mx-auto">
-        <h2 id="discover-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-12">
+        <h2 id="discover-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-20">
           Descubrir el vino
         </h2>
-        <p class="font-body text-lg md:text-xl text-stone-900 leading-relaxed reveal delay-100">
-          Un vino cercano. Pensado para compartir. Albino no pretende reinventar el vino. Solo propone mirarlo de otra manera.
-        </p>
+        <div class="space-y-16 reveal delay-100">
+          <div>
+            <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] mb-4">Qué es</p>
+            <p class="font-body text-lg md:text-xl text-stone-900 leading-relaxed">Tempranillo dulce de Tierra de Barros.</p>
+          </div>
+          <div>
+            <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] mb-4">Cómo se siente</p>
+            <p class="font-body text-lg md:text-xl text-stone-900 leading-relaxed">Cercano, directo, pensado para compartir.</p>
+          </div>
+          <div>
+            <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] mb-4">Qué propone</p>
+            <p class="font-body text-lg md:text-xl text-stone-900 leading-relaxed">No reinventar el vino, sino mirarlo de otra manera.</p>
+          </div>
+        </div>
         <div class="mt-16 flex flex-wrap justify-center gap-8 reveal delay-200 mirada-quick-links">
           <button type="button" id="btn-product-popup" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 transition-colors bg-transparent cursor-pointer" data-product-url="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}">
             Ver producto
@@ -147,6 +164,7 @@
           <div class="absolute inset-0 bg-black/30 mix-blend-multiply pointer-events-none"></div>
         </div>
         <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
+          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/70 mb-6">01</p>
           <h3 id="step-1-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Mira el momento</h3>
           <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/95 mb-12">Antes de probar el vino, tómate un momento. Cada persona mira el mundo de una forma distinta. A veces con los ojos. A veces con los sentidos.</p>
         </div>
@@ -164,6 +182,7 @@
           <div class="absolute inset-0 bg-black/30 mix-blend-multiply pointer-events-none"></div>
         </div>
         <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
+          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/70 mb-6">02</p>
           <h3 id="step-2-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Acércate al vino</h3>
           <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/95 mb-12">Acerca la copa. No hace falta encontrar palabras. Solo percibe.</p>
         </div>
@@ -181,6 +200,7 @@
           <div class="absolute inset-0 bg-black/30 mix-blend-multiply pointer-events-none"></div>
         </div>
         <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
+          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/70 mb-6">03</p>
           <h3 id="step-3-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Prueba</h3>
           <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/95 mb-12">Bebe despacio. No intentes entenderlo todo. Solo deja que ocurra.</p>
         </div>
@@ -198,6 +218,7 @@
           <div class="absolute inset-0 bg-black/30 mix-blend-multiply pointer-events-none"></div>
         </div>
         <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
+          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/70 mb-6">04</p>
           <h3 id="step-4-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Vuelve a mirar</h3>
           <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/95 mb-12">Ahora vuelve a mirar el momento. Quizá no haya cambiado nada. O quizá sí.</p>
         </div>
@@ -207,9 +228,12 @@
     <!-- Archivo de miradas -->
     <section id="miradas-form" class="min-h-[100vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="miradas-title">
       <div class="w-full max-w-[560px] mx-auto">
-        <h2 id="miradas-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-16 text-center">
+        <h2 id="miradas-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-6 text-center">
           ¿Cómo ves este vino?
         </h2>
+        <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] text-center mb-16 reveal delay-100">
+          Cada persona mira Albino de una forma distinta.<br>Esta también puede ser tu mirada.
+        </p>
         <form id="form-miradas" class="mirada-form reveal delay-100" novalidate>
           <fieldset class="border-none p-0 m-0 mb-8">
             <legend class="sr-only">Elige una opción</legend>

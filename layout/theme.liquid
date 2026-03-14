@@ -318,12 +318,18 @@
   {%- endunless -%}
 
   {% render 'albino-config' %}
-  {% render 'cookie-banner' %}
-  {% render 'header' %}
+  {% if template contains 'page.mirada' %}
+    {% render 'header-mirada' %}
+  {% else %}
+    {% render 'cookie-banner' %}
+    {% render 'header' %}
+  {% endif %}
   <main id="main-content" role="main">
     {{ content_for_layout }}
   </main>
-  {% render 'footer' %}
+  {% unless template contains 'page.mirada' %}
+    {% render 'footer' %}
+  {% endunless %}
 
   <script src="{{ 'albino.js' | asset_url }}" defer></script><script>
   (function () {
