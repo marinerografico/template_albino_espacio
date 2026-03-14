@@ -1,0 +1,403 @@
+/**
+ * MIRADA — Estilos mobile-first para la experiencia NFC de Albino.
+ * Diseño: silencioso, elegante, editorial, accesible.
+ * Reglas: mucho espacio en blanco, tipografía grande, botones generosos.
+ */
+
+/* Variables locales */
+.mirada-page {
+  --mirada-bg: #F5F4F1;
+  --mirada-text: #111111;
+  --mirada-muted: #4a4a4a;
+  --mirada-border: #e5e4e1;
+  --mirada-accent: #B56B80;
+  --mirada-spacing: 1.5rem;
+  --mirada-spacing-lg: 2.5rem;
+  --mirada-spacing-xl: 4rem;
+}
+
+/* Layout base */
+.mirada-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mirada-page main {
+  flex: 1;
+}
+
+.mirada-container {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: var(--mirada-spacing-lg) var(--mirada-spacing);
+}
+
+@media (min-width: 768px) {
+  .mirada-container {
+    padding: var(--mirada-spacing-xl) var(--mirada-spacing-lg);
+  }
+}
+
+/* Secciones */
+.mirada-section {
+  padding: var(--mirada-spacing-xl) 0;
+  border-bottom: 1px solid var(--mirada-border);
+}
+
+.mirada-section:last-of-type {
+  border-bottom: none;
+}
+
+/* Hero */
+.mirada-hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.mirada-hero-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mirada-muted);
+  margin-bottom: 0.5rem;
+}
+
+.mirada-hero-title {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--mirada-text);
+  margin-bottom: 1rem;
+}
+
+.mirada-hero-intro {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--mirada-muted);
+  margin-bottom: 2rem;
+}
+
+/* Selector de modo */
+.mirada-mode-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.mirada-audio-status {
+  font-size: 0.85rem;
+  color: var(--mirada-muted);
+  margin-bottom: 1.5rem;
+}
+
+.mirada-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.mirada-link {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  color: var(--mirada-text);
+  transition: color 0.2s;
+}
+
+.mirada-link:hover,
+.mirada-link:focus {
+  color: var(--mirada-accent);
+}
+
+.mirada-link:focus-visible {
+  outline: 2px solid var(--mirada-text);
+  outline-offset: 4px;
+}
+
+/* Botones */
+.mirada-btn {
+  display: inline-block;
+  width: 100%;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 1.5rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid var(--mirada-text);
+  background: transparent;
+  color: var(--mirada-text);
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.mirada-btn:hover,
+.mirada-btn:focus {
+  background: var(--mirada-text);
+  color: var(--mirada-bg);
+}
+
+.mirada-btn:focus-visible {
+  outline: 2px solid var(--mirada-text);
+  outline-offset: 4px;
+}
+
+.mirada-btn-primary {
+  background: var(--mirada-text);
+  color: var(--mirada-bg);
+}
+
+.mirada-btn-primary:hover,
+.mirada-btn-primary:focus {
+  background: #333;
+  color: var(--mirada-bg);
+}
+
+.mirada-btn-secondary {
+  border-color: var(--mirada-muted);
+  color: var(--mirada-muted);
+}
+
+.mirada-btn-secondary:hover,
+.mirada-btn-secondary:focus {
+  border-color: var(--mirada-text);
+  color: var(--mirada-text);
+}
+
+.mirada-btn-outline {
+  border: 1px solid var(--mirada-text);
+}
+
+.mirada-btn-audio {
+  max-width: 160px;
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 0.8rem;
+}
+
+.mirada-product-actions,
+.mirada-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.mirada-mt {
+  margin-top: 1rem;
+}
+
+/* Títulos de sección */
+.mirada-section-title {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--mirada-text);
+  margin-bottom: 1.25rem;
+}
+
+/* Product info */
+.mirada-product-dl {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.mirada-product-dl dt {
+  font-family: 'Geist Mono', monospace;
+  font-weight: 400;
+  color: var(--mirada-muted);
+}
+
+.mirada-product-dl dd {
+  margin: 0;
+  color: var(--mirada-text);
+}
+
+/* Nutrition */
+.mirada-nutrition-note {
+  font-size: 0.85rem;
+  color: var(--mirada-muted);
+  margin-bottom: 1rem;
+}
+
+.mirada-nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.mirada-nutrition-table td {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--mirada-border);
+}
+
+.mirada-nutrition-table td:last-child {
+  text-align: right;
+}
+
+.mirada-responsible {
+  font-size: 0.85rem;
+  color: var(--mirada-muted);
+  margin-top: 1.5rem;
+}
+
+/* Prose */
+.mirada-prose {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--mirada-text);
+}
+
+.mirada-prose p {
+  margin-bottom: 1rem;
+}
+
+.mirada-prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* Learn to look */
+.mirada-learn-intro {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--mirada-muted);
+  margin-bottom: 2rem;
+}
+
+.mirada-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mirada-step {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--mirada-border);
+}
+
+.mirada-step:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.mirada-step-title {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--mirada-text);
+  margin-bottom: 0.75rem;
+}
+
+.mirada-step-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--mirada-text);
+  margin-bottom: 1rem;
+}
+
+/* Form */
+.mirada-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.mirada-radio {
+  display: block;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--mirada-border);
+}
+
+.mirada-radio:last-child {
+  border-bottom: none;
+}
+
+.mirada-radio input {
+  margin-right: 0.75rem;
+  accent-color: var(--mirada-text);
+}
+
+.mirada-textarea-label {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.mirada-textarea-label span {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--mirada-muted);
+  margin-bottom: 0.5rem;
+}
+
+.mirada-textarea-label textarea {
+  width: 100%;
+  padding: 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid var(--mirada-border);
+  background: var(--mirada-bg);
+  resize: vertical;
+}
+
+.mirada-textarea-label textarea:focus {
+  outline: 2px solid var(--mirada-text);
+  outline-offset: 2px;
+}
+
+/* Footer */
+.mirada-footer {
+  padding: 2rem var(--mirada-spacing);
+  text-align: center;
+  border-top: 1px solid var(--mirada-border);
+}
+
+.mirada-footer-link {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--mirada-muted);
+  text-decoration: none;
+}
+
+.mirada-footer-link:hover,
+.mirada-footer-link:focus {
+  color: var(--mirada-text);
+}
+
+/* Utilidades */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

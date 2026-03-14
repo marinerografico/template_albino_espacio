@@ -13,6 +13,34 @@
     gtag('config', 'G-4RZSC3PJDM');
   </script>
 
+  {%- comment -%} Meta Pixel (Facebook) {%- endcomment -%}
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1610389630179841');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1610389630179841&ev=PageView&noscript=1"
+  /></noscript>
+  {% if template contains 'product' and product %}
+  <script>
+    fbq('track', 'ViewContent', {
+      content_ids: ['{{ product.id }}'],
+      content_type: 'product',
+      content_name: {{ product.title | json }},
+      value: {{ product.selected_or_first_available_variant.price | divided_by: 100.0 }},
+      currency: '{{ cart.currency.iso_code | default: "EUR" }}'
+    });
+  </script>
+  {% endif %}
+
   {%- comment -%} SEO title — específico por tipo de página {%- endcomment -%}
   <title>
     {%- if template == 'index' -%}

@@ -41,12 +41,13 @@ ensureDir(path.join(DIST, 'assets'));
 rewriteAndCopyHtml(path.join(SRC, 'pages', 'index.html'), path.join(DIST, 'index.html'));
 rewriteAndCopyHtml(path.join(SRC, 'pages', 'nosotros.html'), path.join(DIST, 'nosotros.html'));
 rewriteAndCopyHtml(path.join(SRC, 'pages', 'presencia.html'), path.join(DIST, 'presencia.html'));
+rewriteAndCopyHtml(path.join(SRC, 'pages', 'mirada.html'), path.join(DIST, 'mirada.html'));
 
 // Config
 copyFile(path.join(CONFIG, 'site.js'), path.join(DIST, 'config', 'site.js'));
 
-// JS (order matters: binder after config, sticky-logo last for home)
-const jsFiles = ['age-gate.js', 'binder.js', 'main.js', 'reveal.js', 'accordion.js', 'mobile-menu.js', 'hover-preview.js', 'sticky-logo.js', 'presence.js'];
+// JS (order matters: binder after config, sticky-logo last for home; mirada.js standalone)
+const jsFiles = ['age-gate.js', 'binder.js', 'main.js', 'reveal.js', 'accordion.js', 'mobile-menu.js', 'hover-preview.js', 'sticky-logo.js', 'presence.js', 'mirada.js'];
 jsFiles.forEach(name => {
   const src = path.join(SRC, 'js', name);
   if (fs.existsSync(src)) copyFile(src, path.join(DIST, 'js', name));
@@ -54,6 +55,7 @@ jsFiles.forEach(name => {
 
 // CSS
 copyFile(path.join(SRC, 'styles', 'albino.css'), path.join(DIST, 'assets', 'albino.css'));
+copyFile(path.join(SRC, 'styles', 'mirada.css'), path.join(DIST, 'assets', 'mirada.css'));
 
 // Public assets (p. ej. BDOGrotesk-DemiBold.woff2)
 const publicAssets = path.join(ROOT, 'public', 'assets');

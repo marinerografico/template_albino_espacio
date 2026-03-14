@@ -115,12 +115,22 @@
       body: JSON.stringify({ id: Number(variantId), quantity: quantity })
     })
       .then(function (res) { return res.json(); })
-      .then(function () {
+      .then(function (item) {
         if (window.AlbinoCart && typeof window.AlbinoCart.refreshCount === 'function') {
           window.AlbinoCart.refreshCount();
         }
         if (window.AlbinoCartModal && typeof window.AlbinoCartModal.open === 'function') {
           window.AlbinoCartModal.open();
+        }
+        if (typeof fbq === 'function' && item && item.product_id) {
+          fbq('track', 'AddToCart', {
+            content_ids: [String(item.product_id)],
+            content_type: 'product',
+            content_name: item.product_title || item.title,
+            value: (item.final_price || item.price) / 100,
+            currency: 'EUR',
+            num_items: item.quantity || 1
+          });
         }
       })
       .catch(function () {
@@ -207,6 +217,16 @@
             }
             if (window.AlbinoCartModal && typeof window.AlbinoCartModal.open === 'function') {
               window.AlbinoCartModal.open();
+            }
+            if (typeof fbq === 'function' && data && data.product_id) {
+              fbq('track', 'AddToCart', {
+                content_ids: [String(data.product_id)],
+                content_type: 'product',
+                content_name: data.product_title || data.title,
+                value: (data.final_price || data.price) / 100,
+                currency: 'EUR',
+                num_items: data.quantity || 1
+              });
             }
           });
         })

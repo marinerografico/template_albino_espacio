@@ -8,6 +8,8 @@ window.ALBINO_CONFIG = {
     elaboracion: "/nosotros.html",
     nosotros: "/nosotros.html",
     presencia: "/presencia.html",
+    mirada: "/mirada.html",
+    product: "/products/albino",
     mision: "#",
     journal: "#",
     tienda: "/collections",
