@@ -54,3 +54,9 @@ O la URL personalizada si usas dominio propio.
 ## Estado `audioEnabled`
 
 El JS mantiene `audioEnabled` en memoria. No requiere cookies ni localStorage. Los botones "Escuchar" solo se muestran cuando el usuario ha pulsado "Activar experiencia sonora".
+
+### Experiencia sonora y scroll conectados
+
+- **Recorrido guiado**: Al activar la experiencia sonora aparece el botón "Recorrido guiado". Al pulsarlo, se reproduce el paso 1 y al terminar cada audio se hace scroll al siguiente momento y se reproduce automáticamente.
+- **Click en Escuchar**: En cualquier momento, al pulsar "Escuchar" se reproduce ese paso y al terminar continúa con el siguiente.
+- **Scroll → audio**: Si la experiencia sonora está activada y el usuario hace scroll hasta un momento (≥50% visible), se reproduce automáticamente el audio de ese paso y continúa la secuencia.

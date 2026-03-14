@@ -13,6 +13,7 @@
   var btnToggleNutrition = document.getElementById('btn-toggle-nutrition');
   var audioButtons = document.querySelectorAll('.mirada-btn-audio');
   var form = document.getElementById('form-miradas');
+  var btnGuidedTour = document.getElementById('btn-guided-tour');
 
   function setAudioEnabled(enabled) {
     audioEnabled = !!enabled;
@@ -20,11 +21,19 @@
     if (btnAudioOff) btnAudioOff.setAttribute('aria-pressed', String(!audioEnabled));
     if (audioStatus) audioStatus.hidden = !audioEnabled;
     audioButtons.forEach(function (btn) { btn.hidden = !audioEnabled; });
+    if (btnGuidedTour) btnGuidedTour.hidden = !audioEnabled;
   }
 
   function initModeButtons() {
     if (btnAudioOn) btnAudioOn.addEventListener('click', function () { setAudioEnabled(true); });
     if (btnAudioOff) btnAudioOff.addEventListener('click', function () { setAudioEnabled(false); });
+    if (btnGuidedTour) btnGuidedTour.addEventListener('click', function () {
+      var step1 = document.getElementById('step-1');
+      if (step1) {
+        guidedScrollActive = true;
+        playStepAndContinue(step1);
+      }
+    });
   }
 
   function initQuickLinks() {
@@ -50,28 +59,96 @@
     });
   }
 
+  function getStepArticle(btn) {
+    var article = btn && btn.closest ? btn.closest('article') : null;
+    return article;
+  }
+
+  function getNextStepArticle(currentArticle) {
+    if (!currentArticle || !currentArticle.id) return null;
+    var match = currentArticle.id.match(/step-(\d+)/);
+    if (!match) return null;
+    var nextNum = parseInt(match[1], 10) + 1;
+    var nextId = 'step-' + nextNum;
+    return document.getElementById(nextId);
+  }
+
+  function getAudioButtonForArticle(article) {
+    if (!article) return null;
+    var btn = article.querySelector('.mirada-btn-audio');
+    return btn && btn.getAttribute('data-audio-url') ? btn : null;
+  }
+
+  function playStepAndContinue(article) {
+    var btn = getAudioButtonForArticle(article);
+    if (!btn || !audioPlayer) return;
+    var url = btn.getAttribute('data-audio-url');
+    if (!url && btn.getAttribute('data-audio')) {
+      var base = (window.ALBINO_CONFIG && window.ALBINO_CONFIG.links && window.ALBINO_CONFIG.links.audioBase) || '';
+      url = base.replace(/\/?$/, '/') + btn.getAttribute('data-audio');
+    }
+    if (!url) return;
+    article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    audioPlayer.src = url;
+    audioPlayer._activeBtn = btn;
+    btn.textContent = 'Reproduciendo…';
+    audioPlayer.play().catch(function () {
+      if (audioPlayer._activeBtn) audioPlayer._activeBtn.textContent = 'Escuchar';
+      audioPlayer._activeBtn = null;
+    });
+  }
+
+  var guidedScrollActive = false;
+
   function initAudioButtons() {
     if (!audioPlayer) return;
-    var activeBtn = null;
     audioButtons.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var url = btn.getAttribute('data-audio-url');
-        if (!url && btn.getAttribute('data-audio')) {
-          var base = (window.ALBINO_CONFIG && window.ALBINO_CONFIG.links && window.ALBINO_CONFIG.links.audioBase) || '';
-          url = base.replace(/\/?$/, '/') + btn.getAttribute('data-audio');
-        }
-        if (!url) return;
-        audioPlayer.src = url;
-        activeBtn = btn;
-        btn.textContent = 'Reproduciendo…';
-        audioPlayer.play().catch(function () {
-          if (activeBtn) activeBtn.textContent = 'Escuchar';
-        });
+        var article = getStepArticle(btn);
+        if (!article) return;
+        guidedScrollActive = true;
+        playStepAndContinue(article);
       });
     });
     audioPlayer.addEventListener('ended', function () {
-      if (activeBtn) activeBtn.textContent = 'Escuchar';
-      activeBtn = null;
+      var btn = audioPlayer._activeBtn;
+      if (btn) btn.textContent = 'Escuchar';
+      audioPlayer._activeBtn = null;
+      var article = btn ? getStepArticle(btn) : null;
+      var nextArticle = article ? getNextStepArticle(article) : null;
+      if (nextArticle && getAudioButtonForArticle(nextArticle)) {
+        guidedScrollActive = true;
+        playStepAndContinue(nextArticle);
+      } else {
+        guidedScrollActive = false;
+      }
+    });
+  }
+
+  function initScrollToAudio() {
+    if (typeof IntersectionObserver === 'undefined') return;
+    var steps = ['step-1', 'step-2', 'step-3', 'step-4'];
+    var observed = {};
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          if (entry.target.id) observed[entry.target.id] = false;
+          return;
+        }
+        if (guidedScrollActive || !audioEnabled) return;
+        var id = entry.target.id;
+        if (!id || observed[id]) return;
+        var article = entry.target;
+        var btn = getAudioButtonForArticle(article);
+        if (!btn || !audioPlayer) return;
+        observed[id] = true;
+        guidedScrollActive = true;
+        playStepAndContinue(article);
+      });
+    }, { threshold: 0.5, rootMargin: '0px' });
+    steps.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
     });
   }
 
@@ -133,6 +210,7 @@
     initQuickLinks();
     initNutritionToggle();
     initAudioButtons();
+    initScrollToAudio();
     initForm();
   }
 
