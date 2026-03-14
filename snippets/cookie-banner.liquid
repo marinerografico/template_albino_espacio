@@ -1,0 +1,44 @@
+{% comment %}
+  Banner de consentimiento de cookies. Minimalista, tono cercano.
+  Cumple: información clara, aceptar/rechazar, enlace a política.
+  No se muestra si el usuario ya ha elegido (localStorage).
+{% endcomment %}
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc" hidden>
+  <h2 id="cookie-banner-title" class="sr-only">Uso de cookies</h2>
+  <div class="cookie-banner-inner">
+    <p id="cookie-banner-desc" class="cookie-banner-text">
+      En Albino usamos cookies para que la web funcione bien y podamos mejorar tu experiencia. Puedes aceptarlas o rechazar las no esenciales.
+      <a href="{{ routes.root_url }}pages/politica-cookies" class="cookie-banner-link">Política de cookies</a>
+    </p>
+    <div class="cookie-banner-actions">
+      <button type="button" id="cookie-banner-accept" class="cookie-banner-btn cookie-banner-btn-primary">Aceptar</button>
+      <button type="button" id="cookie-banner-reject" class="cookie-banner-btn cookie-banner-btn-secondary">Rechazar</button>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  var KEY = 'albino_cookie_consent';
+  var banner = document.getElementById('cookie-banner');
+  if (!banner) return;
+  if (localStorage.getItem(KEY)) {
+    return;
+  }
+  banner.hidden = false;
+  document.body.classList.add('cookie-banner-visible');
+
+  function hide() {
+    banner.hidden = true;
+    document.body.classList.remove('cookie-banner-visible');
+  }
+
+  document.getElementById('cookie-banner-accept').addEventListener('click', function() {
+    localStorage.setItem(KEY, 'accepted');
+    hide();
+  });
+  document.getElementById('cookie-banner-reject').addEventListener('click', function() {
+    localStorage.setItem(KEY, 'rejected');
+    hide();
+  });
+})();
+</script>

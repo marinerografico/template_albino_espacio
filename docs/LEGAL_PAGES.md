@@ -27,3 +27,7 @@ En **Content → Pages** crea:
 ## Instagram
 
 En **Theme settings → Footer** añade la URL de tu perfil de Instagram (ej: `https://instagram.com/albino`).
+
+## Banner de cookies
+
+El tema incluye un banner de consentimiento (`snippets/cookie-banner.liquid`) que aparece en la primera visita. Guarda la elección en `localStorage` (clave: `albino_cookie_consent`). Para cumplimiento estricto de GDPR, considera cargar GA y Meta Pixel solo tras el consentimiento (actualmente se cargan al inicio).

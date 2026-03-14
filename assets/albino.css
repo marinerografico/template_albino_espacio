@@ -330,3 +330,90 @@ body[data-age-gate-active] #age-gate {
   gap: 1.5rem 2.5rem;
   justify-content: center;
 }
+
+/* Cookie banner — barra inferior minimalista, estilos Albino */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: #F5F4F1;
+  border-top: 1px solid #e5e4e1;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 -4px 24px rgba(17, 17, 17, 0.06);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cookie-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+@media (min-width: 768px) {
+  .cookie-banner-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+}
+.cookie-banner-text {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #111111;
+  margin: 0;
+}
+.cookie-banner-link {
+  color: #111111;
+  border-bottom: 1px solid #111111;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+.cookie-banner-link:hover {
+  color: #B56B80;
+  border-bottom-color: #B56B80;
+}
+.cookie-banner-actions {
+  display: flex;
+  gap: 0.75rem 1rem;
+  flex-shrink: 0;
+}
+.cookie-banner-btn {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.cookie-banner-btn-primary {
+  background: #111111;
+  color: #F5F4F1;
+  border: 1px solid #111111;
+}
+.cookie-banner-btn-primary:hover,
+.cookie-banner-btn-primary:focus-visible {
+  background: #333;
+  border-color: #333;
+}
+.cookie-banner-btn-secondary {
+  background: transparent;
+  color: #111111;
+  border: 1px solid #e5e4e1;
+}
+.cookie-banner-btn-secondary:hover,
+.cookie-banner-btn-secondary:focus-visible {
+  border-color: #111111;
+}
+.cookie-banner-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #F5F4F1, 0 0 0 4px #111111;
+}
