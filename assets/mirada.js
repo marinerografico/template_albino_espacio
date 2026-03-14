@@ -77,13 +77,28 @@
 
   function initForm() {
     if (!form) return;
+    var feedback = document.getElementById('form-miradas-feedback');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var selected = form.querySelector('input[name="mirada"]:checked');
       var textarea = form.querySelector('textarea[name="tu_mirada"]');
       var mirada = selected ? selected.value : '';
       var tuMirada = textarea ? textarea.value.trim() : '';
-      if (!mirada && !tuMirada) return;
+      if (!mirada && !tuMirada) {
+        if (feedback) {
+          feedback.setAttribute('role', 'alert');
+          feedback.textContent = 'Por favor, elige una opción o escribe tu mirada.';
+          feedback.className = 'mb-4 min-h-[1.5rem] text-[#B56B80]';
+          var firstRadio = form.querySelector('input[name="mirada"]');
+        if (firstRadio) firstRadio.focus();
+        }
+        return;
+      }
+      if (feedback) {
+        feedback.removeAttribute('role');
+        feedback.setAttribute('role', 'status');
+        feedback.textContent = '';
+      }
       if (window.ALBINO_CONFIG && window.ALBINO_CONFIG.miradasEndpoint) {
         fetch(window.ALBINO_CONFIG.miradasEndpoint, {
           method: 'POST',
@@ -91,11 +106,23 @@
           body: JSON.stringify({ mirada: mirada, tu_mirada: tuMirada })
         }).then(function () {
           form.reset();
-          alert('Gracias por compartir tu mirada.');
-        }).catch(function () {});
+          if (feedback) {
+            feedback.textContent = 'Gracias por compartir tu mirada.';
+            feedback.className = 'mb-4 min-h-[1.5rem] text-stone-900';
+          }
+        }).catch(function () {
+          if (feedback) {
+            feedback.setAttribute('role', 'alert');
+            feedback.textContent = 'No se pudo enviar. Inténtalo de nuevo.';
+            feedback.className = 'mb-4 min-h-[1.5rem] text-[#B56B80]';
+          }
+        });
       } else {
         form.reset();
-        alert('Gracias por compartir tu mirada.');
+        if (feedback) {
+          feedback.textContent = 'Gracias por compartir tu mirada.';
+          feedback.className = 'mb-4 min-h-[1.5rem] text-stone-900';
+        }
       }
     });
   }
