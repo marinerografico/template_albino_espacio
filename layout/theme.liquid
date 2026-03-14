@@ -51,6 +51,8 @@
       Nosotros — Albino, vino de Tierra de Barros (Extremadura)
     {%- elsif template contains 'page.presencia' -%}
       Presencia — dónde encontrar Albino en España
+    {%- elsif template contains 'page.mirada' -%}
+      Albino — El vino que cambia la mirada
     {%- elsif template contains 'page.journal-article' -%}
       {{ page.title }} — Journal, Albino
     {%- elsif template contains 'page.journal' -%}
@@ -76,6 +78,8 @@
       <meta name="description" content="Conoce el origen de Albino: un vino tinto dulce de Extremadura nacido en Tierra de Barros, donde la tradición agrícola se encuentra con un diseño editorial contemporáneo.">
     {% elsif template contains 'page.presencia' %}
       <meta name="description" content="Presencia de Albino en España: restaurantes, tiendas y proyectos afines donde encontrar este vino tinto dulce de edición limitada elaborado en Tierra de Barros, Extremadura.">
+    {% elsif template contains 'page.mirada' %}
+      <meta name="description" content="Has escaneado la etiqueta sonora de Albino. Descubre el vino, la información nutricional y aprende a mirarlo.">
     {% elsif template contains 'page.journal-article' %}
       <meta name="description" content="{{ page.title }} — Artículo del Journal de Albino sobre vino tinto dulce joven, Tierra de Barros y Extremadura.">
     {% elsif template contains 'page.journal' %}
@@ -280,7 +284,7 @@
   }
   </script>
 </head>
-<body class="antialiased selection:bg-[#B56B80] selection:text-[#F5F4F1] overflow-x-hidden text-[#111111] font-body bg-[#F5F4F1]">
+<body class="antialiased selection:bg-[#B56B80] selection:text-[#F5F4F1] overflow-x-hidden text-[#111111] font-body bg-[#F5F4F1]{% if template contains 'page.mirada' %} mirada-page{% endif %}">
   {%- unless request.design_mode -%}
     <div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" aria-describedby="age-gate-desc">
       <div class="age-gate-inner">

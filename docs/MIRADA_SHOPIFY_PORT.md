@@ -1,23 +1,26 @@
 # Port de /mirada a Shopify
 
-Guía para convertir la landing HTML/CSS/JS en una página o sección de Shopify.
+**Ya implementado** en el tema Shopify. Archivos creados:
 
-## Archivos fuente
+| Archivo | Uso |
+|---------|-----|
+| `templates/page.mirada.liquid` | Plantilla de página |
+| `sections/albino-mirada.liquid` | Sección con todo el contenido |
+| `assets/mirada.css` | Estilos |
+| `assets/mirada.js` | Lógica (audio, scroll, form) |
 
-| Origen | Destino Shopify |
-|--------|-----------------|
-| `src/pages/mirada.html` | `templates/page.mirada.liquid` |
-| `src/styles/mirada.css` | `assets/mirada.css` |
-| `src/js/mirada.js` | `assets/mirada.js` |
+## Cómo usar
 
-## Opción A: Page template
+1. **Sincronizar el tema** con Shopify (GitHub o Shopify CLI).
+2. En **Content → Pages**, crear o editar una página.
+3. En **Plantilla**, elegir **mirada**.
+4. Guardar. La URL será `/pages/{handle}` (p. ej. `/pages/mirada`).
 
-1. Crear `templates/page.mirada.liquid` con el contenido de `mirada.html`.
-2. Sustituir rutas estáticas por Liquid:
-   - `/products/albino` → `{{ product.url }}` o `{{ routes.root_url }}products/albino`
-   - Rutas de audio → `{{ 'audio-step-1.mp3' | asset_url }}`
-3. Subir audios a **Content → Files** (Shopify Admin).
-4. Crear una página en **Content → Pages** y asignar la plantilla "mirada".
+## Configuración de la sección
+
+En **Theme editor → Página Mirada**:
+- **URL del producto**: enlace al producto (por defecto `/products/albino-edicion-2026`).
+- **Audios**: sube los MP3 a **Content → Files**, copia la URL y pégala en cada campo de audio.
 
 ## Opción B: Sección reutilizable
 

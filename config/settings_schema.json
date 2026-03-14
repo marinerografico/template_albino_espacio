@@ -249,5 +249,16 @@
         "default": "Nos pondremos en contacto."
       }
     ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "footer_instagram_url",
+        "label": "URL de Instagram",
+        "info": "Ej: https://instagram.com/albino"
+      }
+    ]
   }
 ]

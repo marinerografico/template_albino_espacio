@@ -1,0 +1,209 @@
+{% comment %}
+  Sección Mirada — Experiencia NFC mobile-first.
+  Sube los audios (audio-step-1.mp3, etc.) a Content → Files y añade la URL en el schema,
+  o añádelos al tema en assets/ para usar asset_url.
+{% endcomment %}
+
+{{ 'mirada.css' | asset_url | stylesheet_tag }}
+
+<div class="mirada-page">
+  <h1 class="sr-only">{{ shop.name }} — El vino que cambia la mirada</h1>
+
+  <main>
+    <section id="mirada-hero" class="mirada-section mirada-hero" aria-labelledby="hero-title">
+      <div class="mirada-container">
+        <p class="mirada-hero-label">Albino</p>
+        <h2 id="hero-title" class="mirada-hero-title">El vino que cambia la mirada</h2>
+        <p class="mirada-hero-intro">Has escaneado la etiqueta sonora de Albino.</p>
+
+        <div class="mirada-mode-selector" role="group" aria-label="Elegir modo de experiencia">
+          <button type="button" id="btn-audio-on" class="mirada-btn mirada-btn-primary" aria-pressed="false">
+            Activar experiencia sonora
+          </button>
+          <button type="button" id="btn-audio-off" class="mirada-btn mirada-btn-secondary" aria-pressed="true">
+            Explorar sin audio
+          </button>
+        </div>
+
+        <p id="audio-status" class="mirada-audio-status" aria-live="polite" hidden>
+          Experiencia sonora activada. Los botones «Escuchar» están disponibles.
+        </p>
+
+        <nav class="mirada-quick-links" aria-label="Accesos rápidos">
+          <a href="#product-info" class="mirada-link">Información del vino</a>
+          <a href="#learn-to-look" class="mirada-link">Aprender a mirarlo</a>
+        </nav>
+      </div>
+    </section>
+
+    <section id="product-info" class="mirada-section" aria-labelledby="product-title">
+      <div class="mirada-container">
+        <h2 id="product-title" class="mirada-section-title">Información del vino</h2>
+        <dl class="mirada-product-dl">
+          <dt>Nombre</dt><dd>Albino</dd>
+          <dt>Tipo</dt><dd>Vino tinto dulce joven</dd>
+          <dt>Variedad</dt><dd>Tempranillo</dd>
+          <dt>Origen</dt><dd>Tierra de Barros · Extremadura</dd>
+          <dt>Alcohol</dt><dd>12,5 % vol</dd>
+          <dt>Formato</dt><dd>75 cl</dd>
+          <dt>Alérgenos</dt><dd>Contiene sulfitos</dd>
+        </dl>
+        <div class="mirada-product-actions">
+          <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-secondary" aria-expanded="false" aria-controls="nutrition-info">
+            Ver información nutricional
+          </button>
+          <a href="{{ section.settings.product_url }}" class="mirada-btn mirada-btn-outline">Ver botella</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="nutrition-info" class="mirada-section mirada-nutrition" aria-labelledby="nutrition-title" hidden>
+      <div class="mirada-container">
+        <h2 id="nutrition-title" class="mirada-section-title">Información nutricional</h2>
+        <p class="mirada-nutrition-note">Valores por 100 ml</p>
+        <table class="mirada-nutrition-table">
+          <tbody>
+            <tr><td>Energía</td><td>350 kJ / 85 kcal</td></tr>
+            <tr><td>Carbohidratos</td><td>4 g</td></tr>
+            <tr><td>de los cuales azúcares</td><td>4 g</td></tr>
+            <tr><td>Grasas</td><td>0 g</td></tr>
+            <tr><td>Proteínas</td><td>0 g</td></tr>
+            <tr><td>Sal</td><td>0 g</td></tr>
+          </tbody>
+        </table>
+        <p class="mirada-responsible">Consumir con responsabilidad.</p>
+      </div>
+    </section>
+
+    <section id="discover-wine" class="mirada-section" aria-labelledby="discover-title">
+      <div class="mirada-container">
+        <h2 id="discover-title" class="mirada-section-title">Descubrir el vino</h2>
+        <div class="mirada-prose">
+          <p>Albino nace en Tierra de Barros, en Extremadura.</p>
+          <p>Un vino tinto dulce de la variedad tempranillo.</p>
+          <p>Un vino cercano. Pensado para compartir.</p>
+          <p>Albino no pretende reinventar el vino. Solo propone mirarlo de otra manera.</p>
+        </div>
+        <a href="{{ section.settings.product_url }}" class="mirada-btn mirada-btn-primary">Ver producto</a>
+      </div>
+    </section>
+
+    <section id="learn-to-look" class="mirada-section" aria-labelledby="learn-title">
+      <div class="mirada-container">
+        <h2 id="learn-title" class="mirada-section-title">Aprender a mirarlo</h2>
+        <p class="mirada-learn-intro">Esta no es una cata tradicional.<br>Es una invitación a percibir el momento.</p>
+
+        <div class="mirada-steps">
+          <article class="mirada-step" id="step-1">
+            <h3 class="mirada-step-title">Mira el momento</h3>
+            <p class="mirada-step-text">Antes de probar el vino, tómate un momento. Cada persona mira el mundo de una forma distinta. A veces con los ojos. A veces con los sentidos.</p>
+            {% if section.settings.audio_step_1 != blank %}
+            <button type="button" class="mirada-btn mirada-btn-audio mirada-audio-btn" data-audio-url="{{ section.settings.audio_step_1 }}" aria-label="Escuchar paso 1" hidden>Escuchar</button>
+            {% else %}
+            <button type="button" class="mirada-btn mirada-btn-audio mirada-audio-btn" data-audio-url="{{ 'audio-step-1.mp3' | asset_url }}" aria-label="Escuchar paso 1" hidden>Escuchar</button>
+            {% endif %}
+          </article>
+
+          <article class="mirada-step" id="step-2">
+            <h3 class="mirada-step-title">Acércate al vino</h3>
+            <p class="mirada-step-text">Acerca la copa. No hace falta encontrar palabras. Solo percibe.</p>
+            {% if section.settings.audio_step_2 != blank %}
+            <button type="button" class="mirada-btn mirada-btn-audio mirada-audio-btn" data-audio-url="{{ section.settings.audio_step_2 }}" aria-label="Escuchar paso 2" hidden>Escuchar</button>
+            {% else %}
+            <button type="button" class="mirada-btn mirada-btn-audio mirada-audio-btn" data-audio-url="{{ 'audio-step-2.mp3' | asset_url }}" aria-label="Escuchar paso 2" hidden>Escuchar</button>
+            {% endif %}
+          </article>
+
+          <article class="mirada-step" id="step-3">
+            <h3 class="mirada-step-title">Prueba</h3>
+            <p class="mirada-step-text">Bebe despacio. No intentes entenderlo todo. Solo deja que ocurra.</p>
+            {% if section.settings.audio_step_3 != blank %}
+            <button type="button" class="mirada-btn mirada-btn-audio mirada-audio-btn" data-audio-url="{{ section.settings.audio_step_3 }}" aria-label="Escuchar paso 3" hidden>Escuchar</button>
+            {% else %}
+            <button type="button" class="mirada-btn mirada-btn-audio mirada-audio-btn" data-audio-url="{{ 'audio-step-3.mp3' | asset_url }}" aria-label="Escuchar paso 3" hidden>Escuchar</button>
+            {% endif %}
+          </article>
+
+          <article class="mirada-step" id="step-4">
+            <h3 class="mirada-step-title">Vuelve a mirar</h3>
+            <p class="mirada-step-text">Ahora vuelve a mirar el momento. Quizá no haya cambiado nada. O quizá sí. El vino no cambia el mundo. Solo cambia la forma de mirarlo.</p>
+            {% if section.settings.audio_step_4 != blank %}
+            <button type="button" class="mirada-btn mirada-btn-audio mirada-audio-btn" data-audio-url="{{ section.settings.audio_step_4 }}" aria-label="Escuchar paso 4" hidden>Escuchar</button>
+            {% else %}
+            <button type="button" class="mirada-btn mirada-btn-audio mirada-audio-btn" data-audio-url="{{ 'audio-step-4.mp3' | asset_url }}" aria-label="Escuchar paso 4" hidden>Escuchar</button>
+            {% endif %}
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="miradas-form" class="mirada-section" aria-labelledby="miradas-title">
+      <div class="mirada-container">
+        <h2 id="miradas-title" class="mirada-section-title">¿Cómo ves este vino?</h2>
+        <form id="form-miradas" class="mirada-form" novalidate>
+          <fieldset class="mirada-fieldset">
+            <legend class="sr-only">Elige una opción</legend>
+            <label class="mirada-radio"><input type="radio" name="mirada" value="cercano"> Cercano</label>
+            <label class="mirada-radio"><input type="radio" name="mirada" value="profundo"> Profundo</label>
+            <label class="mirada-radio"><input type="radio" name="mirada" value="inesperado"> Inesperado</label>
+            <label class="mirada-radio"><input type="radio" name="mirada" value="calido"> Cálido</label>
+          </fieldset>
+          <label class="mirada-textarea-label">
+            <span>Tu mirada</span>
+            <textarea name="tu_mirada" rows="3" placeholder="Opcional"></textarea>
+          </label>
+          <button type="submit" class="mirada-btn mirada-btn-primary">Enviar</button>
+        </form>
+        <a href="{{ section.settings.product_url }}" class="mirada-btn mirada-btn-outline mirada-mt">Ver el vino</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mirada-footer">
+    <a href="{{ routes.root_url }}" class="mirada-footer-link">Albino</a>
+  </footer>
+</div>
+
+<audio id="mirada-audio-player" preload="metadata" aria-hidden="true"></audio>
+
+<script src="{{ 'mirada.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Mirada",
+  "tag": "section",
+  "class": "section-mirada",
+  "settings": [
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "URL del producto",
+      "default": "/products/albino-edicion-2026"
+    },
+    {
+      "type": "header",
+      "content": "Audios (opcional)"
+    },
+    {
+      "type": "url",
+      "id": "audio_step_1",
+      "label": "Audio paso 1 — Mira el momento"
+    },
+    {
+      "type": "url",
+      "id": "audio_step_2",
+      "label": "Audio paso 2 — Acércate al vino"
+    },
+    {
+      "type": "url",
+      "id": "audio_step_3",
+      "label": "Audio paso 3 — Prueba"
+    },
+    {
+      "type": "url",
+      "id": "audio_step_4",
+      "label": "Audio paso 4 — Vuelve a mirar"
+    }
+  ]
+}
+{% endschema %}

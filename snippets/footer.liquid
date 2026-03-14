@@ -1,15 +1,29 @@
 <footer class="w-full pt-12 pb-6 md:pt-24 reveal" role="contentinfo">
-  <div class="w-full px-4 md:px-6">
-    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b5f3471a-2cd4-4d4e-8cfe-9b57d216d48d_3840w.png" alt="Albino" class="w-full h-auto object-contain mb-8 md:mb-12" width="600" height="auto">
-    <div class="flex flex-col md:flex-row justify-between items-center text-sm font-geist-mono font-light tracking-tight border-t border-[#e5e4e1] pt-6 text-stone-900">
-      <p><span data-bind="claims.footerCopy">© 2024 Albino.</span></p>
-      <div class="flex gap-4 mt-4 md:mt-0">
-        <a href="{{ routes.root_url }}blogs/journal" class="hover:text-[#111111] transition-colors">
-          <span class="font-geist-mono text-[11px] uppercase tracking-[0.2em]">Journal</span>
-        </a>
-        <a href="#" class="hover:text-[#111111] transition-colors"><span data-bind="claims.instagram">Instagram</span></a>
-        <a href="{{ routes.root_url }}policies/terms-of-service" class="hover:text-[#111111] transition-colors"><span data-bind="claims.terms">Términos y Condiciones</span></a>
+  <div class="w-full max-w-[1200px] mx-auto px-8 md:px-16 lg:px-24">
+    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b5f3471a-2cd4-4d4e-8cfe-9b57d216d48d_3840w.png" alt="Albino" class="w-full max-w-[400px] h-auto object-contain mb-8 md:mb-12" width="600" height="auto">
+    <div class="space-y-6 border-t border-[#e5e4e1] pt-6 text-stone-900">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+        <p class="font-geist-mono text-[10px] md:text-xs font-light tracking-[0.2em] uppercase">
+          © {{ 'now' | date: '%Y' }} Albino.
+        </p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-1" aria-label="Navegación">
+          <a href="{{ routes.root_url }}blogs/journal" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Journal</a>
+          <a href="{{ pages['mirada'].url | default: routes.root_url | append: 'pages/mirada' }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Mirada</a>
+          {% if settings.footer_instagram_url != blank %}
+            <a href="{{ settings.footer_instagram_url }}" target="_blank" rel="noopener noreferrer" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Instagram</a>
+          {% else %}
+            <a href="#" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Instagram</a>
+          {% endif %}
+        </nav>
       </div>
+      <nav class="flex flex-wrap gap-x-6 gap-y-1 font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em]" aria-label="Información legal">
+        <a href="{{ routes.root_url }}pages/aviso-legal" class="transition-colors hover:text-[#B56B80] text-stone-900">Aviso Legal</a>
+        <a href="{{ routes.root_url }}policies/privacy-policy" class="transition-colors hover:text-[#B56B80] text-stone-900">Política de Privacidad</a>
+        <a href="{{ routes.root_url }}pages/politica-cookies" class="transition-colors hover:text-[#B56B80] text-stone-900">Política de Cookies</a>
+        <a href="{{ routes.root_url }}policies/terms-of-service" class="transition-colors hover:text-[#B56B80] text-stone-900">Condiciones de Compra</a>
+        <a href="{{ routes.root_url }}policies/shipping-policy" class="transition-colors hover:text-[#B56B80] text-stone-900">Envíos</a>
+        <a href="{{ routes.root_url }}policies/refund-policy" class="transition-colors hover:text-[#B56B80] text-stone-900">Devoluciones</a>
+      </nav>
     </div>
   </div>
 </footer>
