@@ -52,7 +52,7 @@
           <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-secondary" aria-expanded="false" aria-controls="nutrition-info">
             Ver información nutricional
           </button>
-          <a href="{{ section.settings.product_url }}" class="mirada-btn mirada-btn-outline">Ver botella</a>
+          <a href="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-outline">Ver botella</a>
         </div>
       </div>
     </section>
@@ -84,7 +84,7 @@
           <p>Un vino cercano. Pensado para compartir.</p>
           <p>Albino no pretende reinventar el vino. Solo propone mirarlo de otra manera.</p>
         </div>
-        <a href="{{ section.settings.product_url }}" class="mirada-btn mirada-btn-primary">Ver producto</a>
+        <a href="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-primary">Ver producto</a>
       </div>
     </section>
 
@@ -154,7 +154,7 @@
           </label>
           <button type="submit" class="mirada-btn mirada-btn-primary">Enviar</button>
         </form>
-        <a href="{{ section.settings.product_url }}" class="mirada-btn mirada-btn-outline mirada-mt">Ver el vino</a>
+        <a href="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-outline mirada-mt">Ver el vino</a>
       </div>
     </section>
   </main>
@@ -177,8 +177,7 @@
     {
       "type": "url",
       "id": "product_url",
-      "label": "URL del producto",
-      "default": "/products/albino-edicion-2026"
+      "label": "URL del producto"
     },
     {
       "type": "header",
