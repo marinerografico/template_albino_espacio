@@ -55,12 +55,12 @@
           <div class="flex justify-between border-b border-[#e5e4e1] py-4"><dt class="text-[#6A6A6A]">Formato</dt><dd>75 cl</dd></div>
           <div class="flex justify-between py-4"><dt class="text-[#6A6A6A]">Alérgenos</dt><dd>Contiene sulfitos</dd></div>
         </dl>
-        <div class="mt-16 flex flex-col sm:flex-row gap-4 justify-center reveal delay-200 mirada-quick-links">
-          <a href="#discover-wine" class="mirada-btn mirada-btn-secondary text-center">Continuar</a>
-          <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-secondary" aria-expanded="false" aria-controls="nutrition-info">
+        <div class="mt-16 flex flex-col sm:flex-row gap-4 justify-center items-center reveal delay-200 mirada-quick-links">
+          <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-primary order-1 sm:order-1" aria-expanded="false" aria-controls="nutrition-info">
             Ver información nutricional
           </button>
-          <a href="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-outline text-center">Ver botella</a>
+          <a href="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-outline text-center order-2 sm:order-2">Comprar Albino online</a>
+          <a href="#discover-wine" class="mirada-btn mirada-btn-tertiary text-center order-3 sm:order-3">Saltar información nutricional</a>
         </div>
       </div>
     </section>
@@ -138,7 +138,7 @@
         </div>
       </div>
 
-      <article id="step-1" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-1-title">
+      <article id="step-1" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-1-title" data-audio-url="{% if section.settings.audio_step_1 != blank %}{{ section.settings.audio_step_1 }}{% else %}{{ 'audio-step-1.mp3' | asset_url }}{% endif %}">
         <div class="absolute inset-0" aria-hidden="true">
           {% if section.settings.video_step_1 != blank %}
             <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
@@ -152,15 +152,10 @@
         <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
           <h3 id="step-1-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Mira el momento</h3>
           <p class="text-lg md:text-xl text-[#F5F4F1]/95 leading-relaxed mb-12">Antes de probar el vino, tómate un momento. Cada persona mira el mundo de una forma distinta. A veces con los ojos. A veces con los sentidos.</p>
-          {% if section.settings.audio_step_1 != blank %}
-          <button type="button" class="mirada-btn-audio font-geist-mono text-[11px] uppercase tracking-[0.2em] border-b border-[#F5F4F1] pb-1 text-[#F5F4F1] hover:text-[#B56B80] hover:border-[#B56B80] transition-colors" data-audio-url="{{ section.settings.audio_step_1 }}" aria-label="Escuchar audio del paso 1: Mira el momento" hidden>Escuchar</button>
-          {% else %}
-          <button type="button" class="mirada-btn-audio font-geist-mono text-[11px] uppercase tracking-[0.2em] border-b border-[#F5F4F1] pb-1 text-[#F5F4F1] hover:text-[#B56B80] hover:border-[#B56B80] transition-colors" data-audio-url="{{ 'audio-step-1.mp3' | asset_url }}" aria-label="Escuchar audio del paso 1: Mira el momento" hidden>Escuchar</button>
-          {% endif %}
         </div>
       </article>
 
-      <article id="step-2" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-2-title">
+      <article id="step-2" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-2-title" data-audio-url="{% if section.settings.audio_step_2 != blank %}{{ section.settings.audio_step_2 }}{% else %}{{ 'audio-step-2.mp3' | asset_url }}{% endif %}">
         <div class="absolute inset-0" aria-hidden="true">
           {% if section.settings.video_step_2 != blank %}
             <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
@@ -174,15 +169,10 @@
         <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
           <h3 id="step-2-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Acércate al vino</h3>
           <p class="text-lg md:text-xl text-[#F5F4F1]/95 leading-relaxed mb-12">Acerca la copa. No hace falta encontrar palabras. Solo percibe.</p>
-          {% if section.settings.audio_step_2 != blank %}
-          <button type="button" class="mirada-btn-audio font-geist-mono text-[11px] uppercase tracking-[0.2em] border-b border-[#F5F4F1] pb-1 text-[#F5F4F1] hover:text-[#B56B80] hover:border-[#B56B80] transition-colors" data-audio-url="{{ section.settings.audio_step_2 }}" aria-label="Escuchar audio del paso 2: Acércate al vino" hidden>Escuchar</button>
-          {% else %}
-          <button type="button" class="mirada-btn-audio font-geist-mono text-[11px] uppercase tracking-[0.2em] border-b border-[#F5F4F1] pb-1 text-[#F5F4F1] hover:text-[#B56B80] hover:border-[#B56B80] transition-colors" data-audio-url="{{ 'audio-step-2.mp3' | asset_url }}" aria-label="Escuchar audio del paso 2: Acércate al vino" hidden>Escuchar</button>
-          {% endif %}
         </div>
       </article>
 
-      <article id="step-3" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-3-title">
+      <article id="step-3" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-3-title" data-audio-url="{% if section.settings.audio_step_3 != blank %}{{ section.settings.audio_step_3 }}{% else %}{{ 'audio-step-3.mp3' | asset_url }}{% endif %}">
         <div class="absolute inset-0" aria-hidden="true">
           {% if section.settings.video_step_3 != blank %}
             <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
@@ -196,15 +186,10 @@
         <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
           <h3 id="step-3-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Prueba</h3>
           <p class="text-lg md:text-xl text-[#F5F4F1]/95 leading-relaxed mb-12">Bebe despacio. No intentes entenderlo todo. Solo deja que ocurra.</p>
-          {% if section.settings.audio_step_3 != blank %}
-          <button type="button" class="mirada-btn-audio font-geist-mono text-[11px] uppercase tracking-[0.2em] border-b border-[#F5F4F1] pb-1 text-[#F5F4F1] hover:text-[#B56B80] hover:border-[#B56B80] transition-colors" data-audio-url="{{ section.settings.audio_step_3 }}" aria-label="Escuchar audio del paso 3: Prueba" hidden>Escuchar</button>
-          {% else %}
-          <button type="button" class="mirada-btn-audio font-geist-mono text-[11px] uppercase tracking-[0.2em] border-b border-[#F5F4F1] pb-1 text-[#F5F4F1] hover:text-[#B56B80] hover:border-[#B56B80] transition-colors" data-audio-url="{{ 'audio-step-3.mp3' | asset_url }}" aria-label="Escuchar audio del paso 3: Prueba" hidden>Escuchar</button>
-          {% endif %}
         </div>
       </article>
 
-      <article id="step-4" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-4-title">
+      <article id="step-4" class="learn-moment min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-4-title" data-audio-url="{% if section.settings.audio_step_4 != blank %}{{ section.settings.audio_step_4 }}{% else %}{{ 'audio-step-4.mp3' | asset_url }}{% endif %}">
         <div class="absolute inset-0" aria-hidden="true">
           {% if section.settings.video_step_4 != blank %}
             <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
@@ -218,11 +203,6 @@
         <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
           <h3 id="step-4-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Vuelve a mirar</h3>
           <p class="text-lg md:text-xl text-[#F5F4F1]/95 leading-relaxed mb-12">Ahora vuelve a mirar el momento. Quizá no haya cambiado nada. O quizá sí. Albino no cambia radicalmente el mundo, solo la forma de mirarlo.</p>
-          {% if section.settings.audio_step_4 != blank %}
-          <button type="button" class="mirada-btn-audio font-geist-mono text-[11px] uppercase tracking-[0.2em] border-b border-[#F5F4F1] pb-1 text-[#F5F4F1] hover:text-[#B56B80] hover:border-[#B56B80] transition-colors" data-audio-url="{{ section.settings.audio_step_4 }}" aria-label="Escuchar audio del paso 4: Vuelve a mirar" hidden>Escuchar</button>
-          {% else %}
-          <button type="button" class="mirada-btn-audio font-geist-mono text-[11px] uppercase tracking-[0.2em] border-b border-[#F5F4F1] pb-1 text-[#F5F4F1] hover:text-[#B56B80] hover:border-[#B56B80] transition-colors" data-audio-url="{{ 'audio-step-4.mp3' | asset_url }}" aria-label="Escuchar audio del paso 4: Vuelve a mirar" hidden>Escuchar</button>
-          {% endif %}
         </div>
       </article>
     </section>

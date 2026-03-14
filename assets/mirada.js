@@ -11,7 +11,6 @@
   var audioStatus = document.getElementById('audio-status');
   var nutritionSection = document.getElementById('nutrition-info');
   var btnToggleNutrition = document.getElementById('btn-toggle-nutrition');
-  var audioButtons = document.querySelectorAll('.mirada-btn-audio');
   var form = document.getElementById('form-miradas');
   var btnGuidedTour = document.getElementById('btn-guided-tour');
 
@@ -20,7 +19,6 @@
     if (btnAudioOn) btnAudioOn.setAttribute('aria-pressed', String(audioEnabled));
     if (btnAudioOff) btnAudioOff.setAttribute('aria-pressed', String(!audioEnabled));
     if (audioStatus) audioStatus.hidden = !audioEnabled;
-    audioButtons.forEach(function (btn) { btn.hidden = !audioEnabled; });
     if (btnGuidedTour) btnGuidedTour.hidden = !audioEnabled;
   }
 
@@ -50,13 +48,13 @@
   }
 
   function initProductModal() {
-    var btn = document.getElementById('btn-product-popup');
+    var triggerBtns = document.querySelectorAll('#btn-product-popup, #btn-product-popup-info');
     var modal = document.getElementById('mirada-product-modal');
     var iframe = document.getElementById('mirada-product-iframe');
     var closeBtn = document.getElementById('mirada-product-modal-close');
-    if (!btn || !modal || !iframe) return;
-    function openModal() {
-      var url = btn.getAttribute('data-product-url');
+    if (!triggerBtns.length || !modal || !iframe) return;
+    function openModal(btn) {
+      var url = btn && btn.getAttribute('data-product-url');
       if (url) {
         if (url.charAt(0) === '/') url = window.location.origin + url;
         iframe.src = url;
@@ -73,7 +71,9 @@
       iframe.src = '';
       document.body.style.overflow = '';
     }
-    btn.addEventListener('click', openModal);
+    triggerBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () { openModal(btn); });
+    });
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', function (e) {
       if (e.target === modal) closeModal();
@@ -93,11 +93,6 @@
     });
   }
 
-  function getStepArticle(btn) {
-    var article = btn && btn.closest ? btn.closest('article') : null;
-    return article;
-  }
-
   function getNextStepArticle(currentArticle) {
     if (!currentArticle || !currentArticle.id) return null;
     var match = currentArticle.id.match(/step-(\d+)/);
@@ -107,50 +102,38 @@
     return document.getElementById(nextId);
   }
 
-  function getAudioButtonForArticle(article) {
+  function getAudioUrlForArticle(article) {
     if (!article) return null;
-    var btn = article.querySelector('.mirada-btn-audio');
-    return btn && btn.getAttribute('data-audio-url') ? btn : null;
+    var url = article.getAttribute('data-audio-url');
+    if (url) return url;
+    var dataAudio = article.getAttribute('data-audio');
+    if (dataAudio) {
+      var base = (window.ALBINO_CONFIG && window.ALBINO_CONFIG.links && window.ALBINO_CONFIG.links.audioBase) || '';
+      return base.replace(/\/?$/, '/') + dataAudio;
+    }
+    return null;
   }
 
   function playStepAndContinue(article) {
-    var btn = getAudioButtonForArticle(article);
-    if (!btn || !audioPlayer) return;
-    var url = btn.getAttribute('data-audio-url');
-    if (!url && btn.getAttribute('data-audio')) {
-      var base = (window.ALBINO_CONFIG && window.ALBINO_CONFIG.links && window.ALBINO_CONFIG.links.audioBase) || '';
-      url = base.replace(/\/?$/, '/') + btn.getAttribute('data-audio');
-    }
-    if (!url) return;
+    var url = getAudioUrlForArticle(article);
+    if (!url || !audioPlayer) return;
     article.scrollIntoView({ behavior: 'smooth', block: 'start' });
     audioPlayer.src = url;
-    audioPlayer._activeBtn = btn;
-    btn.textContent = 'Reproduciendo…';
+    audioPlayer._activeArticle = article;
     audioPlayer.play().catch(function () {
-      if (audioPlayer._activeBtn) audioPlayer._activeBtn.textContent = 'Escuchar';
-      audioPlayer._activeBtn = null;
+      audioPlayer._activeArticle = null;
     });
   }
 
   var guidedScrollActive = false;
 
-  function initAudioButtons() {
+  function initAudioSequence() {
     if (!audioPlayer) return;
-    audioButtons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var article = getStepArticle(btn);
-        if (!article) return;
-        guidedScrollActive = true;
-        playStepAndContinue(article);
-      });
-    });
     audioPlayer.addEventListener('ended', function () {
-      var btn = audioPlayer._activeBtn;
-      if (btn) btn.textContent = 'Escuchar';
-      audioPlayer._activeBtn = null;
-      var article = btn ? getStepArticle(btn) : null;
+      var article = audioPlayer._activeArticle;
+      audioPlayer._activeArticle = null;
       var nextArticle = article ? getNextStepArticle(article) : null;
-      if (nextArticle && getAudioButtonForArticle(nextArticle)) {
+      if (nextArticle && getAudioUrlForArticle(nextArticle)) {
         guidedScrollActive = true;
         playStepAndContinue(nextArticle);
       } else {
@@ -173,8 +156,7 @@
         var id = entry.target.id;
         if (!id || observed[id]) return;
         var article = entry.target;
-        var btn = getAudioButtonForArticle(article);
-        if (!btn || !audioPlayer) return;
+        if (!getAudioUrlForArticle(article) || !audioPlayer) return;
         observed[id] = true;
         guidedScrollActive = true;
         playStepAndContinue(article);
@@ -244,7 +226,7 @@
     initQuickLinks();
     initProductModal();
     initNutritionToggle();
-    initAudioButtons();
+    initAudioSequence();
     initScrollToAudio();
     initForm();
   }

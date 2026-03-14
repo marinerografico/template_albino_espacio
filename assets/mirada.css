@@ -70,8 +70,25 @@
   color: #F5F4F1;
 }
 
+.mirada-btn-tertiary {
+  background: transparent;
+  color: #6A6A6A;
+  border: none;
+  border-bottom: 1px solid transparent;
+}
+
+.mirada-btn-tertiary:hover,
+.mirada-btn-tertiary:focus-visible {
+  color: #111111;
+  border-bottom-color: #a0a09e;
+}
+
 .mirada-btn:focus-visible,
 .mirada-btn-audio:focus-visible {
   outline: none;
+  box-shadow: 0 0 0 2px #F5F4F1, 0 0 0 4px #111111;
+}
+
+.mirada-btn-tertiary:focus-visible {
   box-shadow: 0 0 0 2px #F5F4F1, 0 0 0 4px #111111;
 }
