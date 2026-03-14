@@ -8,7 +8,7 @@
         </p>
         <nav class="flex flex-wrap gap-x-6 gap-y-1" aria-label="Navegación">
           <a href="{{ routes.root_url }}blogs/journal" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Journal</a>
-          <a href="{{ pages['mirada'].url | default: routes.root_url | append: 'pages/mirada' }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Mirada</a>
+          <a href="{{ routes.root_url }}pages/mirada" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Mirada</a>
           {% if settings.footer_instagram_url != blank %}
             <a href="{{ settings.footer_instagram_url }}" target="_blank" rel="noopener noreferrer" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors hover:text-[#B56B80] text-stone-900">Instagram</a>
           {% else %}
