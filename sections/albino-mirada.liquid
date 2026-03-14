@@ -61,12 +61,11 @@
           <div class="flex justify-between border-b border-[#e5e4e1] py-4"><dt class="text-[#6A6A6A]">Formato</dt><dd>75 cl</dd></div>
           <div class="flex justify-between py-4"><dt class="text-[#6A6A6A]">Alérgenos</dt><dd>Contiene sulfitos</dd></div>
         </dl>
-        <div class="mt-16 flex flex-col sm:flex-row gap-4 justify-center items-center reveal delay-200 mirada-quick-links">
-          <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-primary order-1 sm:order-1" aria-expanded="false" aria-controls="nutrition-info">
+        <div class="mt-16 flex flex-col gap-4 justify-center items-stretch sm:items-center reveal delay-200 mirada-quick-links">
+          <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-primary w-full sm:w-auto" aria-expanded="false" aria-controls="nutrition-info">
             Ver información nutricional
           </button>
-          <a href="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-outline text-center order-2 sm:order-2">Comprar Albino online</a>
-          <a href="#discover-wine" class="mirada-btn mirada-btn-tertiary text-center order-3 sm:order-3">Saltar información nutricional</a>
+          <button type="button" id="btn-skip-nutrition" class="mirada-btn mirada-btn-tertiary text-center w-full sm:w-auto bg-transparent border-0 cursor-pointer">Saltar información nutricional</button>
         </div>
       </div>
     </section>

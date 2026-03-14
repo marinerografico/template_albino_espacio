@@ -109,7 +109,18 @@
       nutritionSection.hidden = !isHidden;
       btnToggleNutrition.setAttribute('aria-expanded', String(!isHidden));
       btnToggleNutrition.textContent = isHidden ? 'Ocultar información nutricional' : 'Ver información nutricional';
+      if (!isHidden) nutritionSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+    var btnSkipNutrition = document.getElementById('btn-skip-nutrition');
+    if (btnSkipNutrition) {
+      btnSkipNutrition.addEventListener('click', function () {
+        nutritionSection.hidden = true;
+        btnToggleNutrition.setAttribute('aria-expanded', 'false');
+        btnToggleNutrition.textContent = 'Ver información nutricional';
+        var discover = document.getElementById('discover-wine');
+        if (discover) discover.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
   }
 
   var AUDIO_ORDER = ['product-info', 'discover-wine', 'step-1', 'step-2', 'step-3', 'step-4'];
