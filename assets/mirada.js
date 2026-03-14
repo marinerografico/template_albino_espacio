@@ -11,7 +11,7 @@
   var audioStatus = document.getElementById('audio-status');
   var nutritionSection = document.getElementById('nutrition-info');
   var btnToggleNutrition = document.getElementById('btn-toggle-nutrition');
-  var audioButtons = document.querySelectorAll('.mirada-audio-btn');
+  var audioButtons = document.querySelectorAll('.mirada-btn-audio');
   var form = document.getElementById('form-miradas');
 
   function setAudioEnabled(enabled) {
