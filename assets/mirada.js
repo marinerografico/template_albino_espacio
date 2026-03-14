@@ -49,6 +49,40 @@
     });
   }
 
+  function initProductModal() {
+    var btn = document.getElementById('btn-product-popup');
+    var modal = document.getElementById('mirada-product-modal');
+    var iframe = document.getElementById('mirada-product-iframe');
+    var closeBtn = document.getElementById('mirada-product-modal-close');
+    if (!btn || !modal || !iframe) return;
+    function openModal() {
+      var url = btn.getAttribute('data-product-url');
+      if (url) {
+        if (url.charAt(0) === '/') url = window.location.origin + url;
+        iframe.src = url;
+      }
+      modal.classList.remove('pointer-events-none');
+      modal.classList.add('opacity-100');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.add('pointer-events-none');
+      modal.classList.remove('opacity-100');
+      modal.setAttribute('aria-hidden', 'true');
+      iframe.src = '';
+      document.body.style.overflow = '';
+    }
+    btn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+    });
+  }
+
   function initNutritionToggle() {
     if (!btnToggleNutrition || !nutritionSection) return;
     btnToggleNutrition.addEventListener('click', function () {
@@ -208,6 +242,7 @@
     setAudioEnabled(false);
     initModeButtons();
     initQuickLinks();
+    initProductModal();
     initNutritionToggle();
     initAudioButtons();
     initScrollToAudio();

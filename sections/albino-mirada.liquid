@@ -55,7 +55,8 @@
           <div class="flex justify-between border-b border-[#e5e4e1] py-4"><dt class="text-[#6A6A6A]">Formato</dt><dd>75 cl</dd></div>
           <div class="flex justify-between py-4"><dt class="text-[#6A6A6A]">Alérgenos</dt><dd>Contiene sulfitos</dd></div>
         </dl>
-        <div class="mt-16 flex flex-col sm:flex-row gap-4 justify-center reveal delay-200">
+        <div class="mt-16 flex flex-col sm:flex-row gap-4 justify-center reveal delay-200 mirada-quick-links">
+          <a href="#discover-wine" class="mirada-btn mirada-btn-secondary text-center">Continuar</a>
           <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-secondary" aria-expanded="false" aria-controls="nutrition-info">
             Ver información nutricional
           </button>
@@ -98,11 +99,31 @@
           <p>Un vino cercano. Pensado para compartir.</p>
           <p>Albino no pretende reinventar el vino. Solo propone mirarlo de otra manera.</p>
         </div>
-        <a href="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}" class="inline-block mt-16 font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 transition-colors reveal delay-200">
-          Ver producto
-        </a>
+        <div class="mt-16 flex flex-wrap justify-center gap-8 reveal delay-200 mirada-quick-links">
+          <button type="button" id="btn-product-popup" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 transition-colors bg-transparent cursor-pointer" data-product-url="{{ section.settings.product_url | default: '/products/albino-edicion-2026' }}">
+            Ver producto
+          </button>
+          <a href="#learn-to-look" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#111111] pb-1 text-stone-900 transition-colors font-medium">
+            Aprender a mirarlo
+          </a>
+        </div>
       </div>
     </section>
+
+    <!-- Modal producto (solo en Mirada) -->
+    <div id="mirada-product-modal" class="fixed inset-0 z-50 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true" role="dialog" aria-labelledby="mirada-product-modal-title" aria-modal="true">
+      <div class="absolute inset-4 md:inset-8 lg:inset-16 bg-[#F5F4F1] flex flex-col shadow-xl">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-[#e5e4e1] shrink-0">
+          <h2 id="mirada-product-modal-title" class="font-geist-mono text-xs tracking-[0.2em] uppercase text-stone-900">Producto</h2>
+          <button type="button" id="mirada-product-modal-close" class="p-2 hover:text-[#B56B80] text-stone-900" aria-label="Cerrar">
+            <i data-lucide="x" stroke-width="1.5" class="w-5 h-5"></i>
+          </button>
+        </div>
+        <div class="flex-1 min-h-0 overflow-hidden">
+          <iframe id="mirada-product-iframe" src="" class="w-full h-full border-0" title="Producto Albino"></iframe>
+        </div>
+      </div>
+    </div>
 
     <!-- Aprender a mirarlo — full viewport por momento, vídeo de fondo, scroll-snap -->
     <section id="learn-to-look" class="learn-moments" aria-labelledby="learn-title">
