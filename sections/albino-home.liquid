@@ -219,7 +219,14 @@
           {{ section.settings.story_paragraph | newline_to_br }}
         </p>
       </div>
-      <a href="{{ section.settings.story_cta_link | default: routes.root_url | append: 'pages/mirada' }}" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 w-fit mt-12 text-stone-900">
+      {% if pages['mirada'] %}
+        {% assign story_cta_url = pages['mirada'].url %}
+      {% elsif section.settings.story_cta_link != blank %}
+        {% assign story_cta_url = section.settings.story_cta_link %}
+      {% else %}
+        {% assign story_cta_url = routes.root_url | append: 'pages/mirada' %}
+      {% endif %}
+      <a href="{{ story_cta_url }}" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 w-fit mt-12 text-stone-900">
         <span>{{ section.settings.story_cta_label }}</span>
       </a>
     </div>
