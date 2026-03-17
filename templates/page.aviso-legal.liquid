@@ -7,7 +7,10 @@
     <h1 class="legal-page-title">{{ page.title }}</h1>
   </header>
   <div class="legal-page-content page-content">
-    {{ page.content }}
+    {% if page.content != blank %}
+      {{ page.content }}
+    {% else %}
+      <p class="legal-page-empty">El contenido de esta página está vacío. Añádelo en <strong>Content → Pages → {{ page.title }}</strong> en el Admin de Shopify.</p>
+    {% endif %}
   </div>
 </article>
-

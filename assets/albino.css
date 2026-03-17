@@ -440,16 +440,16 @@ body[data-age-gate-active] #age-gate {
 .legal-page {
   max-width: 720px;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 3rem;
+  padding: 7rem 1.25rem 3rem;
 }
 @media (min-width: 768px) {
   .legal-page {
-    padding: 2rem 1.5rem 4rem;
+    padding: 8rem 1.5rem 4rem;
   }
 }
 @media (min-width: 1024px) {
   .legal-page {
-    padding: 3rem 2rem 5rem;
+    padding: 9rem 2rem 5rem;
   }
 }
 .legal-page-header {
@@ -460,19 +460,16 @@ body[data-age-gate-active] #age-gate {
     margin-bottom: 2rem;
   }
 }
+/* Título al estilo Nosotros (ORIGEN): heading-page */
 .legal-page-title {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: normal;
+  text-transform: uppercase;
   color: #111111;
   margin: 0;
-}
-@media (min-width: 768px) {
-  .legal-page-title {
-    font-size: 1.875rem;
-  }
 }
 .legal-page-content {
   font-family: 'BDO Grotesk', sans-serif;
@@ -524,6 +521,11 @@ body[data-age-gate-active] #age-gate {
 .legal-page-content a:hover {
   color: #B56B80;
   border-bottom-color: #B56B80;
+}
+.legal-page-empty {
+  color: #6A6A6A;
+  font-size: 0.9375rem;
+  line-height: 1.6;
 }
 /* Imágenes en contenido legal: responsive, CDN-friendly, lazy por JS */
 .legal-page-content img {
