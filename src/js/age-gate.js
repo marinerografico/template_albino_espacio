@@ -29,7 +29,6 @@
     var noBtn = document.getElementById('age-gate-no');
     var askPanel = document.getElementById('age-gate-ask');
     var deniedPanel = document.getElementById('age-gate-denied');
-    var backBtn = document.getElementById('age-gate-back');
     var leaveLink = document.getElementById('age-gate-leave');
 
     if (yesBtn) {
@@ -46,13 +45,6 @@
       noBtn.addEventListener('click', function () {
         if (askPanel) askPanel.hidden = true;
         if (deniedPanel) deniedPanel.hidden = false;
-      });
-    }
-
-    if (backBtn) {
-      backBtn.addEventListener('click', function () {
-        if (deniedPanel) deniedPanel.hidden = true;
-        if (askPanel) askPanel.hidden = false;
       });
     }
 

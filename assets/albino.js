@@ -23,7 +23,6 @@
     var noBtn = document.getElementById('age-gate-no');
     var askPanel = document.getElementById('age-gate-ask');
     var deniedPanel = document.getElementById('age-gate-denied');
-    var backBtn = document.getElementById('age-gate-back');
     var leaveLink = document.getElementById('age-gate-leave');
     if (yesBtn) {
       yesBtn.addEventListener('click', function () {
@@ -33,6 +32,7 @@
           if (gate.parentNode) gate.parentNode.removeChild(gate);
           document.body.style.overflow = '';
           document.body.removeAttribute('data-age-gate-active');
+          document.dispatchEvent(new CustomEvent('albino-age-gate-dismissed'));
         }, duration);
       });
     }
@@ -40,12 +40,6 @@
       noBtn.addEventListener('click', function () {
         if (askPanel) askPanel.hidden = true;
         if (deniedPanel) deniedPanel.hidden = false;
-      });
-    }
-    if (backBtn) {
-      backBtn.addEventListener('click', function () {
-        if (deniedPanel) deniedPanel.hidden = true;
-        if (askPanel) askPanel.hidden = false;
       });
     }
     if (leaveLink) {

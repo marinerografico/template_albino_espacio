@@ -302,9 +302,8 @@
           </div>
         </div>
         <div id="age-gate-denied" hidden>
-          <p class="age-gate-denied-text">No podemos continuar.</p>
+          <p class="age-gate-denied-text">Este sitio es solo para mayores de 18 años. El consumo de alcohol por menores está prohibido por ley.</p>
           <div class="age-gate-denied-actions">
-            <button type="button" id="age-gate-back" class="age-gate-btn">Volver</button>
             <a href="{{ routes.root_url }}" id="age-gate-leave" class="age-gate-link">Salir</a>
           </div>
         </div>
@@ -334,7 +333,17 @@
     {% render 'footer' %}
   {% endunless %}
 
-  <script src="{{ 'albino.js' | asset_url }}" defer></script><script>
+  <script src="{{ 'albino.js' | asset_url }}" defer></script>
+  <script>
+  (function(){
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.legal-page-content img').forEach(function(img) {
+        img.loading = 'lazy';
+      });
+    });
+  })();
+  </script>
+  <script>
   (function () {
     function closeAgeGate() {
       var gate = document.getElementById('age-gate');
@@ -347,17 +356,13 @@
       if (e.target && e.target.id === 'age-gate-yes') {
         localStorage.setItem('albino_age_verified', 'true');
         closeAgeGate();
+        document.dispatchEvent(new CustomEvent('albino-age-gate-dismissed'));
       } else if (e.target && e.target.id === 'age-gate-no') {
-        // Mostrar estado "No podemos continuar"
+        // Mostrar mensaje de acceso denegado a menores
         var ask = document.getElementById('age-gate-ask');
         var denied = document.getElementById('age-gate-denied');
         if (ask) ask.hidden = true;
         if (denied) denied.hidden = false;
-      } else if (e.target && e.target.id === 'age-gate-back') {
-        var ask2 = document.getElementById('age-gate-ask');
-        var denied2 = document.getElementById('age-gate-denied');
-        if (denied2) denied2.hidden = true;
-        if (ask2) ask2.hidden = false;
       } else if (e.target && e.target.id === 'age-gate-leave') {
         e.preventDefault();
         if (window.history.length > 1) window.history.back();

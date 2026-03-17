@@ -2,6 +2,8 @@
   Banner de consentimiento de cookies. Minimalista, tono cercano.
   Cumple: información clara, aceptar/rechazar, enlace a política.
   No se muestra si el usuario ya ha elegido (localStorage).
+  Solo se muestra TRAS pasar el age gate, para no mostrar dos diálogos seguidos.
+  Duración del consentimiento: 12 meses (GDPR).
 {% endcomment %}
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc" hidden>
   <h2 id="cookie-banner-title" class="sr-only">Uso de cookies</h2>
@@ -18,27 +20,81 @@
 </div>
 <script>
 (function() {
-  var KEY = 'albino_cookie_consent';
+  var CONSENT_KEY = 'albino_cookie_consent';
+  var CONSENT_DURATION_DAYS = 365;
   var banner = document.getElementById('cookie-banner');
   if (!banner) return;
-  if (localStorage.getItem(KEY)) {
-    return;
+
+  function getConsent() {
+    try {
+      var raw = localStorage.getItem(CONSENT_KEY);
+      if (!raw) return null;
+      if (raw === 'accepted' || raw === 'rejected') return { choice: raw };
+      var data = JSON.parse(raw);
+      if (data.expiresAt && Date.now() > data.expiresAt) return null;
+      return data;
+    } catch (e) { return null; }
   }
-  banner.hidden = false;
-  document.body.classList.add('cookie-banner-visible');
+
+  function setConsent(choice) {
+    var expiresAt = Date.now() + (CONSENT_DURATION_DAYS * 24 * 60 * 60 * 1000);
+    localStorage.setItem(CONSENT_KEY, JSON.stringify({ choice: choice, expiresAt: expiresAt }));
+  }
+
+  function show() {
+    if (getConsent()) return;
+    banner.hidden = false;
+    document.body.classList.add('cookie-banner-visible');
+  }
 
   function hide() {
     banner.hidden = true;
     document.body.classList.remove('cookie-banner-visible');
   }
 
+  function syncWithShopifyPrivacy(accepted) {
+    if (typeof window.Shopify !== 'undefined' && window.Shopify.loadFeatures) {
+      window.Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function(err) {
+        if (!err && window.Shopify.customerPrivacy && window.Shopify.customerPrivacy.setTrackingConsent) {
+          window.Shopify.customerPrivacy.setTrackingConsent({
+            analytics: accepted,
+            marketing: accepted,
+            preferences: accepted
+          }, function() {});
+        }
+      });
+    }
+  }
+
   document.getElementById('cookie-banner-accept').addEventListener('click', function() {
-    localStorage.setItem(KEY, 'accepted');
+    setConsent('accepted');
+    syncWithShopifyPrivacy(true);
     hide();
   });
   document.getElementById('cookie-banner-reject').addEventListener('click', function() {
-    localStorage.setItem(KEY, 'rejected');
+    setConsent('rejected');
+    syncWithShopifyPrivacy(false);
     hide();
   });
+
+  if (document.body.hasAttribute('data-age-gate-active')) {
+    document.addEventListener('albino-age-gate-dismissed', show);
+  } else {
+    show();
+  }
+
+  var existing = getConsent();
+  if (existing && typeof window.Shopify !== 'undefined' && window.Shopify.loadFeatures) {
+    window.Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function(err) {
+      if (!err && window.Shopify.customerPrivacy && window.Shopify.customerPrivacy.setTrackingConsent) {
+        var allowed = existing.choice === 'accepted';
+        window.Shopify.customerPrivacy.setTrackingConsent({
+          analytics: allowed,
+          marketing: allowed,
+          preferences: allowed
+        }, function() {});
+      }
+    });
+  }
 })();
 </script>

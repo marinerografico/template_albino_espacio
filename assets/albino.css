@@ -435,3 +435,100 @@ body[data-age-gate-active] #age-gate {
   outline: none;
   box-shadow: 0 0 0 2px #F5F4F1, 0 0 0 4px #111111;
 }
+
+/* Páginas legales — Aviso Legal, Política de Cookies, Políticas de Shopify */
+.legal-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+@media (min-width: 768px) {
+  .legal-page {
+    padding: 2rem 1.5rem 4rem;
+  }
+}
+@media (min-width: 1024px) {
+  .legal-page {
+    padding: 3rem 2rem 5rem;
+  }
+}
+.legal-page-header {
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) {
+  .legal-page-header {
+    margin-bottom: 2rem;
+  }
+}
+.legal-page-title {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #111111;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .legal-page-title {
+    font-size: 1.875rem;
+  }
+}
+.legal-page-content {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #111111;
+}
+@media (min-width: 768px) {
+  .legal-page-content {
+    font-size: 1rem;
+  }
+}
+.legal-page-content p {
+  margin: 0 0 1rem;
+}
+.legal-page-content p:last-child {
+  margin-bottom: 0;
+}
+.legal-page-content h2 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+.legal-page-content h2:first-child {
+  margin-top: 0;
+}
+.legal-page-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+.legal-page-content ul,
+.legal-page-content ol {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+.legal-page-content ul { list-style-type: disc; }
+.legal-page-content ol { list-style-type: decimal; }
+.legal-page-content li {
+  margin-bottom: 0.25rem;
+}
+.legal-page-content a {
+  color: #111111;
+  border-bottom: 1px solid #111111;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+.legal-page-content a:hover {
+  color: #B56B80;
+  border-bottom-color: #B56B80;
+}
+/* Imágenes en contenido legal: responsive, CDN-friendly, lazy por JS */
+.legal-page-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+}
