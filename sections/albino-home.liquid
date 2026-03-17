@@ -27,11 +27,17 @@
 </section>
 
 <section class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden reveal">
-  {% if section.settings.image_clay_texture != blank %}
-    <img src="{{ section.settings.image_clay_texture | image_url: width: 1920 }}" class="w-full h-full object-cover absolute inset-0" alt="Textura de arcilla de Tierra de Barros" width="1920" height="1080" loading="lazy">
-  {% else %}
-    <img data-bind-src="assets.clayTexture" class="w-full h-full object-cover absolute inset-0" alt="Textura de arcilla de Tierra de Barros" width="1920" height="1080" loading="lazy">
-  {% endif %}
+  <div class="absolute inset-0">
+    {% if section.settings.hero_clay_video_url != blank %}
+      <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+        <source src="{{ section.settings.hero_clay_video_url | escape }}" type="video/mp4">
+      </video>
+    {% elsif section.settings.image_clay_texture != blank %}
+      <img src="{{ section.settings.image_clay_texture | image_url: width: 1920 }}" class="w-full h-full object-cover" alt="Textura de arcilla de Tierra de Barros" width="1920" height="1080" loading="lazy">
+    {% else %}
+      <img data-bind-src="assets.clayTexture" class="w-full h-full object-cover" alt="Textura de arcilla de Tierra de Barros" width="1920" height="1080" loading="lazy">
+    {% endif %}
+  </div>
   <div class="absolute inset-0 bg-[#B55239]/20 mix-blend-multiply pointer-events-none"></div>
   <div class="absolute inset-0 z-10 reveal delay-200 flex items-center justify-center px-6">
     <p class="text-center leading-tight">
@@ -301,9 +307,16 @@
       "info": "Si está vacío, se usa el logotipo global (Theme settings → Imágenes y marca)."
     },
     {
+      "type": "text",
+      "id": "hero_clay_video_url",
+      "label": "Vídeo hero arcilla (MP4)",
+      "info": "Si está definido, se usa en lugar de la imagen. Sube el MP4 a Content → Files y pega la URL."
+    },
+    {
       "type": "image_picker",
       "id": "image_clay_texture",
-      "label": "Textura arcilla (hero)"
+      "label": "Imagen textura arcilla (hero)",
+      "info": "Se usa si no hay vídeo."
     },
     {
       "type": "image_picker",
