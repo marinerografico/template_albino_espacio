@@ -263,7 +263,11 @@
       <a href="{{ story_cta_url }}" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono border-b border-[#a0a09e] hover:border-[#111111] pb-1 w-fit mt-12 text-stone-900">{{ section.settings.story_cta_label }}</a>
     </div>
     <div class="md:w-[60%] order-1 md:order-2 reveal delay-200 w-full">
-      {% if section.settings.image_manos_uvas != blank %}
+      {% if section.settings.story_manos_video_url != blank %}
+        <video class="aspect-[4/5] filter grayscale-[30%] contrast-125 w-full object-cover" autoplay muted loop playsinline>
+          <source src="{{ section.settings.story_manos_video_url | escape }}" type="video/mp4">
+        </video>
+      {% elsif section.settings.image_manos_uvas != blank %}
         <img src="{{ section.settings.image_manos_uvas | image_url: width: 800 }}" class="aspect-[4/5] filter grayscale-[30%] contrast-125 w-full object-cover" alt="Manos con uvas en viñedo de Tierra de Barros" width="800" height="1000" loading="lazy">
       {% else %}
         <img data-bind-src="assets.manosUvas" class="aspect-[4/5] filter grayscale-[30%] contrast-125 w-full object-cover" alt="Manos con uvas en viñedo de Tierra de Barros" width="800" height="1000" loading="lazy">
@@ -349,9 +353,16 @@
       "label": "Pack 12 botellas"
     },
     {
+      "type": "text",
+      "id": "story_manos_video_url",
+      "label": "Vídeo manos con uvas (bloque historia)",
+      "info": "MP4. Si está definido, se usa en lugar de la imagen. Content → Files."
+    },
+    {
       "type": "image_picker",
       "id": "image_manos_uvas",
-      "label": "Manos con uvas (bloque historia)"
+      "label": "Imagen manos con uvas (bloque historia)",
+      "info": "Se usa si no hay vídeo."
     },
     {
       "type": "header",
