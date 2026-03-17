@@ -1,5 +1,16 @@
 [
   {
+    "name": "Imágenes y marca",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logotipo",
+        "info": "Se usa en header, footer y páginas. Si está vacío, se usa la imagen por defecto."
+      }
+    ]
+  },
+  {
     "name": "Menú y navegación",
     "settings": [
       {

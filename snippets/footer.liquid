@@ -1,6 +1,10 @@
 <footer class="w-full pt-12 pb-6 md:pt-24 reveal" role="contentinfo">
   <div class="w-full max-w-[1200px] mx-auto px-8 md:px-16 lg:px-24">
-    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b5f3471a-2cd4-4d4e-8cfe-9b57d216d48d_3840w.png" alt="Logotipo de Albino, vino tinto dulce de Tierra de Barros" class="w-full max-w-[400px] h-auto object-contain mb-8 md:mb-12" width="400" height="120">
+    {% if settings.logo != blank %}
+      <img src="{{ settings.logo | image_url: width: 800 }}" alt="Logotipo de Albino, vino tinto dulce de Tierra de Barros" class="w-full max-w-[400px] h-auto object-contain mb-8 md:mb-12" width="400" height="120">
+    {% else %}
+      <img data-bind-src="assets.logo" alt="Logotipo de Albino, vino tinto dulce de Tierra de Barros" class="w-full max-w-[400px] h-auto object-contain mb-8 md:mb-12" width="400" height="120">
+    {% endif %}
     <div class="space-y-6 border-t border-[#e5e4e1] pt-6 text-stone-900">
       <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
         <p class="font-geist-mono text-[10px] md:text-xs font-light tracking-[0.2em] uppercase">

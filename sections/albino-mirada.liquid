@@ -256,7 +256,11 @@
 
   <footer class="py-24 text-center">
     <a href="{{ routes.root_url }}">
-      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b5f3471a-2cd4-4d4e-8cfe-9b57d216d48d_3840w.png" alt="Logotipo de Albino, vino de Tierra de Barros" class="w-[120px] md:w-[150px] h-auto object-contain mx-auto opacity-60 hover:opacity-100 transition-opacity" width="150" height="60" loading="lazy">
+      {% if settings.logo != blank %}
+        <img src="{{ settings.logo | image_url: width: 300 }}" alt="Logotipo de Albino, vino de Tierra de Barros" class="w-[120px] md:w-[150px] h-auto object-contain mx-auto opacity-60 hover:opacity-100 transition-opacity" width="150" height="60" loading="lazy">
+      {% else %}
+        <img data-bind-src="assets.logo" alt="Logotipo de Albino, vino de Tierra de Barros" class="w-[120px] md:w-[150px] h-auto object-contain mx-auto opacity-60 hover:opacity-100 transition-opacity" width="150" height="60" loading="lazy">
+      {% endif %}
     </a>
   </footer>
 </div>
