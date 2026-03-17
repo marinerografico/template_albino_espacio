@@ -13,6 +13,24 @@ img.w-full {
   background-color: unset;
 }
 
+/* Hover preview: oculto off-screen por defecto, JS lo posiciona */
+#hover-img-preview-aura {
+  left: -999px;
+  top: -999px;
+  transform: translate(-50%, -50%) scale(0.85);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Accordion: icono colapsado por defecto, paneles cerrados */
+[data-accordion-toggle] .accordion-icon {
+  transform: rotate(180deg);
+}
+.accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
 .font-display {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;

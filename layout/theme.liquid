@@ -26,9 +26,7 @@
     fbq('init', '1610389630179841');
     fbq('track', 'PageView');
   </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1610389630179841&ev=PageView&noscript=1"
-  /></noscript>
+  <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1610389630179841&amp;ev=PageView&amp;noscript=1" alt="" aria-hidden="true" hidden></noscript>
   {% if template contains 'product' and product %}
   <script>
     fbq('track', 'ViewContent', {
@@ -71,23 +69,23 @@
     <meta name="description" content="{{ page_description | escape }}">
   {% else %}
     {% if template == 'index' %}
-      <meta name="description" content="Albino es un vino tinto dulce joven de edición limitada elaborado en Tierra de Barros, Extremadura. Un proyecto editorial y agrícola que combina tradición de viñedo y cultura contemporánea.">
+      <meta name="description" content="Vino tinto dulce de edición limitada elaborado en Tierra de Barros, Extremadura. Tradición de viñedo y cultura contemporánea.">
     {% elsif template contains 'product' and product %}
       <meta name="description" content="{{ product.title }}: vino contemporáneo elaborado en Tierra de Barros, Extremadura. Tempranillo de suelos arcillosos. Edición limitada con mirada editorial.">
     {% elsif template contains 'page.nosotros' %}
-      <meta name="description" content="Conoce el origen de Albino: un vino tinto dulce de Extremadura nacido en Tierra de Barros, donde la tradición agrícola se encuentra con un diseño editorial contemporáneo.">
+      <meta name="description" content="Origen de Albino: vino tinto dulce de Extremadura en Tierra de Barros. Tradición agrícola y diseño editorial contemporáneo.">
     {% elsif template contains 'page.presencia' %}
-      <meta name="description" content="Presencia de Albino en España: restaurantes, tiendas y proyectos afines donde encontrar este vino tinto dulce de edición limitada elaborado en Tierra de Barros, Extremadura.">
+      <meta name="description" content="Dónde encontrar Albino en España: restaurantes, tiendas y proyectos afines. Vino tinto dulce de Tierra de Barros.">
     {% elsif template contains 'page.mirada' %}
       <meta name="description" content="Experiencia interactiva de Albino para conocer el producto físico. Descubre el vino, la información nutricional y aprende a mirarlo.">
     {% elsif template contains 'page.journal-article' %}
-      <meta name="description" content="{{ page.title }} — Artículo del Journal de Albino sobre vino tinto dulce joven, Tierra de Barros y Extremadura.">
+      <meta name="description" content="{{ page.title }} — Artículo del Journal de Albino sobre vino y Tierra de Barros.">
     {% elsif template contains 'page.journal' %}
-      <meta name="description" content="Journal de Albino: artículos editoriales sobre vino tinto dulce joven, Tierra de Barros en Extremadura y la cultura agrícola que sostiene el proyecto.">
+      <meta name="description" content="Journal de Albino: artículos sobre vino tinto dulce, Tierra de Barros y la cultura agrícola del territorio.">
     {% elsif template contains 'article.journal' and article %}
       <meta name="description" content="{{ article.excerpt | default: article.content | strip_html | truncate: 160 }}">
     {% elsif template contains 'blog.journal' and blog %}
-      <meta name="description" content="Journal de Albino: artículos editoriales sobre vino tinto dulce joven, Tierra de Barros en Extremadura y la cultura agrícola que sostiene el proyecto.">
+      <meta name="description" content="Journal de Albino: artículos sobre vino tinto dulce, Tierra de Barros y la cultura agrícola del territorio.">
     {% else %}
       <meta name="description" content="Albino — vino tinto dulce joven de Extremadura, elaborado en Tierra de Barros. Edición limitada que une tradición agrícola y cultura contemporánea.">
     {% endif %}
@@ -145,6 +143,9 @@
   {% elsif template contains 'blog.journal' and blog %}
     {% assign og_title = 'Journal | Vino contemporáneo, Tierra de Barros y cultura — Albino' %}
     {% assign og_description = 'Notas editoriales de Albino sobre vino tinto dulce joven, Tierra de Barros (Extremadura) y la cultura del territorio.' %}
+  {% elsif template contains 'page.mirada' %}
+    {% assign og_title = 'Albino — El vino que cambia la mirada' %}
+    {% assign og_description = 'Experiencia interactiva de Albino para conocer el producto físico. Descubre el vino, la información nutricional y aprende a mirarlo.' %}
   {% endif %}
 
   <meta property="og:title" content="{{ og_title | default: shop.name | escape }}">
@@ -155,6 +156,9 @@
     <meta property="og:image" content="{{ og_image | image_url: width: 1200 }}">
   {% endif %}
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ og_title | default: shop.name | escape }}">
+  <meta name="twitter:description" content="{{ og_description | default: page_description | default: shop.meta_description | escape }}">
+  {% if og_image %}<meta name="twitter:image" content="{{ og_image | image_url: width: 1200 }}">{% endif %}
 
   {%- comment -%} Schema.org / JSON-LD para SEO y GEO {%- endcomment -%}
   <script type="application/ld+json">
@@ -290,8 +294,7 @@
     <div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" aria-describedby="age-gate-desc">
       <div class="age-gate-inner">
         <div id="age-gate-ask">
-          <h2 id="age-gate-title" class="espacio-title font-display heading-page text-stone-900 mb-1">Antes de entrar,</h2>
-          <h2 class="espacio-title font-display heading-page text-stone-900 mb-6">¿eres mayor de edad?</h2>
+          <h2 id="age-gate-title" class="espacio-title font-display heading-page text-stone-900 mb-6">Antes de entrar, ¿eres mayor de edad?</h2>
           <p id="age-gate-desc" class="age-gate-micro">Esto es un producto solo para mayores de 18 años.</p>
           <div class="age-gate-actions">
             <button type="button" id="age-gate-yes" class="age-gate-btn">Sí</button>
@@ -302,7 +305,7 @@
           <p class="age-gate-denied-text">No podemos continuar.</p>
           <div class="age-gate-denied-actions">
             <button type="button" id="age-gate-back" class="age-gate-btn">Volver</button>
-            <a href="#" id="age-gate-leave" class="age-gate-link">Salir</a>
+            <a href="{{ routes.root_url }}" id="age-gate-leave" class="age-gate-link">Salir</a>
           </div>
         </div>
       </div>
