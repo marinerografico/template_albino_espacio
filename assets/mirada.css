@@ -393,6 +393,7 @@
   border: none;
   padding: 0;
   margin: 0 0 2rem;
+  text-align: left;
 }
 
 .mirada-radio-label {
