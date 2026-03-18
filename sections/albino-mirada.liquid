@@ -16,6 +16,7 @@
   data-audio-step-4="{% if section.settings.audio_step_4 != blank %}{{ section.settings.audio_step_4 }}{% endif %}"
   data-audio-outro="{% if section.settings.audio_outro != blank %}{{ section.settings.audio_outro }}{% endif %}"
   data-product-url="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}">
+  <button type="button" id="btn-accessible-toggle" class="mirada-accessible-tag" aria-pressed="false" aria-label="Usar modo accesible">Modo accesible</button>
   <h1 class="sr-only">{{ shop.name }} — El vino que cambia la mirada</h1>
 
   <div id="mirada-audio-band" class="mirada-audio-band" aria-live="polite" hidden>
@@ -234,7 +235,6 @@ Esta también puede ser tu mirada.</p>
   </main>
 
   <footer class="mirada-footer">
-    <button type="button" id="btn-accessible-toggle" class="mirada-footer-accessible" aria-pressed="false" aria-label="Usar modo accesible">Modo accesible</button>
     <a href="{{ routes.root_url }}">
       {% if settings.logo != blank %}
         <img src="{{ settings.logo | image_url: width: 300 }}" alt="Logotipo de Albino, vino de Tierra de Barros" class="mirada-footer-logo" width="150" height="60" loading="lazy">
