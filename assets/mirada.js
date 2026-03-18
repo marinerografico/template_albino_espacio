@@ -150,13 +150,14 @@
   }
 
   function initQuickLinks() {
+    var scrollBehavior = prefersReducedMotion() ? 'auto' : 'smooth';
     document.querySelectorAll('.mirada-quick-links a[href^="#"]').forEach(function (link) {
       link.addEventListener('click', function (e) {
         var id = link.getAttribute('href').slice(1);
         var target = document.getElementById(id);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
         }
       });
     });
@@ -171,7 +172,7 @@
       section.hidden = !hidden;
       btn.setAttribute('aria-expanded', String(!hidden));
       btn.textContent = hidden ? 'Ocultar información nutricional' : 'Ver información nutricional';
-      if (!hidden) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!hidden) section.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
     });
   }
 
