@@ -33,12 +33,14 @@
   <div class="absolute inset-0 bg-[#B55239]/20 mix-blend-multiply pointer-events-none"></div>
   <div class="absolute inset-0 z-10 flex items-center justify-center px-8 md:px-16">
     <div class="w-full max-w-[560px] text-center">
-      <h2 class="espacio-title font-display heading-page reveal text-[#F5F4F1] mb-4">
-        {{ section.settings.tierra_title }}
-      </h2>
-      <p class="font-db-serif italic text-[#F5F4F1] text-[14px] md:text-base lowercase mb-12" style="letter-spacing: 0;">
-        {{ section.settings.tierra_subtitle }}
-      </p>
+      <div class="mb-12" style="line-height: 30pt;">
+        <h2 class="espacio-title font-display heading-page reveal text-[#F5F4F1] mb-0">
+          {{ section.settings.tierra_title }}
+        </h2>
+        <p class="font-db-serif italic text-[#F5F4F1] text-[14px] md:text-base lowercase mb-0 mt-0" style="letter-spacing: 0;">
+          {{ section.settings.tierra_subtitle }}
+        </p>
+      </div>
       <div class="space-y-6 text-[#F5F4F1]">
         {% assign tierra_items = section.settings.tierra_lines | split: newline %}
         {% for line in tierra_items %}
@@ -62,11 +64,11 @@
     <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
       {{ section.settings.esfuerzo_title }}
     </h2>
-    <div class="space-y-4 text-stone-900">
+    <div class="text-stone-900" style="line-height: 30pt;">
       {% assign esfuerzo_items = section.settings.esfuerzo_text | split: newline %}
       {% for line in esfuerzo_items %}
         {% if line != blank %}
-          <p class="font-db-serif italic text-[14px] md:text-base lowercase leading-relaxed" style="letter-spacing: 0;">{{ line | strip }}</p>
+          <p class="font-db-serif italic text-[14px] md:text-base lowercase mb-0 mt-0" style="letter-spacing: 0;">{{ line | strip }}</p>
         {% endif %}
       {% endfor %}
     </div>

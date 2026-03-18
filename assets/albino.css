@@ -36,9 +36,17 @@ img.w-full {
   font-weight: 600;
 }
 
-.font-body {
+.font-body,
+body.font-body {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;
+  font-size: 12px !important;
+}
+/* Bodycopy BDO Grotesk: 12px aunque tenga text-sm/base/lg de Tailwind */
+.font-body.text-sm,
+.font-body.text-base,
+.font-body.text-lg,
+.font-body.text-xl {
   font-size: 12px !important;
 }
 
