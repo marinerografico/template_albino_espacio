@@ -6,17 +6,17 @@
 {% endcapture %}
 
 <!-- 1. ORIGEN -->
-<section class="min-h-[120vh] flex items-center justify-center px-6 pt-32">
-  <div class="text-center">
-    <h1 class="espacio-title font-display heading-page reveal text-stone-900">
+<section class="min-h-[100vh] flex items-start justify-start px-8 md:px-16 pt-40 md:pt-52 pb-24 bg-[#f5f2ed]">
+  <div class="text-left max-w-[90%] md:max-w-[480px]">
+    <h1 class="espacio-title font-display heading-page reveal text-stone-900 leading-[1.15]">
       {{ section.settings.origen_title }}
     </h1>
   </div>
 </section>
 
 <!-- Separador -->
-<section class="py-12 px-6">
-  <p class="text-center font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
+<section class="py-16 md:py-24 px-8 md:px-16 bg-[#f5f2ed]">
+  <p class="text-left font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
 </section>
 
 <!-- 2. TIERRA -->
@@ -31,53 +31,57 @@
     {% endif %}
   </div>
   <div class="absolute inset-0 bg-[#B55239]/20 mix-blend-multiply pointer-events-none"></div>
-  <div class="absolute inset-0 z-10 flex items-center justify-center px-6">
-    <div class="w-full max-w-[560px] text-center">
-      <h2 class="espacio-title font-display heading-page reveal text-[#F5F4F1] mb-2">
+  <div class="absolute inset-0 z-10 flex items-center justify-center px-8 md:px-16">
+    <div class="w-full max-w-[560px] text-left">
+      <h2 class="espacio-title font-display heading-page reveal text-[#F5F4F1] mb-4">
         {{ section.settings.tierra_title }}
       </h2>
-      <p class="font-body text-[#F5F4F1] text-[13px] md:text-sm mb-8">
+      <p class="font-db-serif italic text-[#F5F4F1] text-[14px] md:text-base lowercase mb-10" style="letter-spacing: 0;">
         {{ section.settings.tierra_subtitle }}
       </p>
-      <p class="espacio-line-1 text-base md:text-lg text-[#F5F4F1] space-y-3">
+      <div class="space-y-4 text-[#F5F4F1]">
         {% assign tierra_items = section.settings.tierra_lines | split: newline %}
         {% for line in tierra_items %}
-          {% if line != blank %}<span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono" style="line-height: 1.1;">{{ line | strip }}</span>{% endif %}
+          {% if line != blank %}
+            <p class="font-display uppercase text-[12px] md:text-[14px] leading-tight" style="margin-left: {{ forloop.index0 | times: 24 }}px; letter-spacing: 3px;">{{ line | strip }}</p>
+          {% endif %}
         {% endfor %}
-      </p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Separador -->
-<section class="py-12 px-6">
-  <p class="text-center font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
+<section class="py-16 md:py-24 px-8 md:px-16 bg-[#f5f2ed]">
+  <p class="text-left font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
 </section>
 
 <!-- 3. ESFUERZO -->
-<section class="min-h-[80vh] flex items-center justify-center px-6 md:px-12">
-  <div class="w-full max-w-[560px] text-center">
+<section class="min-h-[80vh] flex items-end justify-end px-8 md:px-16 pb-40 md:pb-52 bg-[#f5f2ed]">
+  <div class="w-full max-w-[480px] text-right">
     <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
       {{ section.settings.esfuerzo_title }}
     </h2>
-    <div class="font-body text-stone-900 space-y-2 text-left">
+    <div class="space-y-4 text-stone-900">
       {% assign esfuerzo_items = section.settings.esfuerzo_text | split: newline %}
       {% for line in esfuerzo_items %}
-        {% if line != blank %}<p class="mb-2 last:mb-0">{{ line | strip }}</p>{% endif %}
+        {% if line != blank %}
+          <p class="font-db-serif italic text-[14px] md:text-base lowercase leading-relaxed" style="letter-spacing: 0;">{{ line | strip }}</p>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
 </section>
 
 <!-- Separador -->
-<section class="py-12 px-6">
-  <p class="text-center font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
+<section class="py-16 md:py-24 px-8 md:px-16 bg-[#f5f2ed]">
+  <p class="text-right font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
 </section>
 
 <!-- 4. Aquí empieza el vino -->
-<section class="min-h-[120vh] flex items-center justify-center px-6">
-  <div class="reveal flex flex-col items-center text-center">
-    <p class="font-display text-stone-900 mb-12 text-lg md:text-xl">
+<section class="min-h-[100vh] flex flex-col items-center justify-center px-8 md:px-16 py-24 md:py-32 bg-[#f5f2ed]">
+  <div class="reveal flex flex-col items-center text-center max-w-[560px]">
+    <p class="font-db-serif italic text-stone-900 mb-16 text-xl md:text-2xl lowercase leading-relaxed" style="letter-spacing: 0;">
       {{ section.settings.cierre_text }}
     </p>
     {% if section.settings.cta_image != blank %}
