@@ -26,18 +26,26 @@
       toggle.textContent = accessibleMode ? 'Modo accesible activado' : 'Usar modo accesible';
     }
     if (msg) msg.hidden = !accessibleMode;
-    if (accessibleMode) setAudioEnabled(false);
+    if (accessibleMode) {
+      setAudioEnabled(false);
+    } else {
+      setAudioEnabled(audioEnabled);
+    }
   }
 
   function setAudioEnabled(on) {
     if (accessibleMode) on = false;
     audioEnabled = !!on;
-    var btnOn = document.getElementById('btn-audio-on');
-    var btnOff = document.getElementById('btn-audio-off');
+    var btnToggle = document.getElementById('btn-audio-toggle');
+    var heroActions = document.getElementById('hero-audio-actions');
     var status = document.getElementById('audio-status');
     var band = document.getElementById('mirada-audio-band');
-    if (btnOn) btnOn.setAttribute('aria-pressed', String(audioEnabled));
-    if (btnOff) btnOff.setAttribute('aria-pressed', String(!audioEnabled));
+    if (heroActions) heroActions.hidden = !!accessibleMode;
+    if (btnToggle) {
+      btnToggle.setAttribute('aria-pressed', String(audioEnabled));
+      btnToggle.setAttribute('aria-label', audioEnabled ? 'Desactivar audio' : 'Activar experiencia sonora');
+      btnToggle.textContent = audioEnabled ? 'Desactivar audio' : 'Activar experiencia sonora';
+    }
     if (status) status.hidden = !audioEnabled;
     if (band) {
       band.hidden = !audioEnabled;
@@ -104,15 +112,19 @@
   }
 
   function initAudioButtons() {
-    var btnOn = document.getElementById('btn-audio-on');
-    var btnOff = document.getElementById('btn-audio-off');
-    if (btnOn) btnOn.addEventListener('click', function () {
-      setAudioEnabled(true);
-      vibrate(80);
-      var url = getAudioUrl('intro');
-      if (url && !accessibleMode) playAudio(url);
-    });
-    if (btnOff) btnOff.addEventListener('click', function () { setAudioEnabled(false); });
+    var btnToggle = document.getElementById('btn-audio-toggle');
+    if (btnToggle) {
+      btnToggle.addEventListener('click', function () {
+        if (audioEnabled) {
+          setAudioEnabled(false);
+        } else {
+          setAudioEnabled(true);
+          vibrate(80);
+          var url = getAudioUrl('intro');
+          if (url && !accessibleMode) playAudio(url);
+        }
+      });
+    }
   }
 
   function initSectionAudioButtons() {
