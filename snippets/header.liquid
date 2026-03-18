@@ -16,7 +16,7 @@
         {% endfor %}
       {% else %}
         <a href="{{ routes.root_url }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}">Inicio</a>
-        <a href="{{ pages['nosotros'].url | default: routes.root_url | append: 'pages/nosotros' }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}{% if request.path contains 'nosotros' %}text-[#B56B80] hover:text-[#111111]{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}{% endif %}">Nosotros</a>
+        <a href="{{ pages['nosotros'].url | default: routes.root_url | append: 'pages/nosotros' }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}{% if request.path contains 'nosotros' %}text-[#B56B80] hover:text-[#111111]{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}{% endif %}">Origen</a>
         <a href="{{ pages['presencia'].url | default: routes.root_url | append: 'pages/presencia' }}" class="font-geist-mono text-[10px] md:text-xs uppercase font-light tracking-[0.2em] transition-colors {% if template.name == 'index' %}hover:text-[#B56B80] text-stone-900{% else %}{% if request.path contains 'presencia' %}text-[#B56B80] hover:text-[#111111]{% else %}text-[#111111] hover:text-[#B56B80]{% endif %}{% endif %}">Presencia</a>
       {% endif %}
     </nav>
@@ -64,7 +64,7 @@
       {% endfor %}
     {% else %}
       <a href="{{ routes.root_url }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900">Inicio</a>
-      <a href="{{ pages['nosotros'].url | default: routes.root_url | append: 'pages/nosotros' }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900 {% if request.path contains 'nosotros' %}text-[#B56B80]{% endif %}">Nosotros</a>
+      <a href="{{ pages['nosotros'].url | default: routes.root_url | append: 'pages/nosotros' }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900 {% if request.path contains 'nosotros' %}text-[#B56B80]{% endif %}">Origen</a>
       <a href="{{ pages['presencia'].url | default: routes.root_url | append: 'pages/presencia' }}" class="font-display text-4xl font-light tracking-tight transition-colors hover:text-[#B56B80] text-stone-900 {% if request.path contains 'presencia' %}text-[#B56B80]{% endif %}">Presencia</a>
     {% endif %}
     <a href="{{ routes.cart_url }}" class="font-display text-4xl font-light tracking-tight transition-colors mt-4 hover:text-[#B56B80] text-stone-900" data-shopify-cart="mobile">Carrito</a>

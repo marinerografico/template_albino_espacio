@@ -1,55 +1,112 @@
 /**
- * MIRADA — Lógica para la experiencia NFC de Albino (Shopify).
- * Estado: audioEnabled (true/false). Sin autoplay.
- * Los botones usan data-audio-url (URL completa) o data-audio (nombre + base).
+ * MIRADA — Experiencia NFC editorial para Albino.
+ * Estados: audioEnabled, accessibleMode.
+ * Modo inmersivo: audio por sección, transiciones, haptic.
+ * Modo accesible: sin autoplay, estructura semántica, labels claros.
  */
 (function () {
-  var audioEnabled = false;
-  var audioPlayer = document.getElementById('mirada-audio-player');
-  var btnAudioOn = document.getElementById('btn-audio-on');
-  var btnAudioOff = document.getElementById('btn-audio-off');
-  var audioStatus = document.getElementById('audio-status');
-  var nutritionSection = document.getElementById('nutrition-info');
-  var btnToggleNutrition = document.getElementById('btn-toggle-nutrition');
-  var form = document.getElementById('form-miradas');
-  var btnGuidedTour = document.getElementById('btn-guided-tour');
+  'use strict';
 
-  function setAudioEnabled(enabled) {
-    audioEnabled = !!enabled;
-    if (btnAudioOn) btnAudioOn.setAttribute('aria-pressed', String(audioEnabled));
-    if (btnAudioOff) btnAudioOff.setAttribute('aria-pressed', String(!audioEnabled));
-    if (audioStatus) audioStatus.hidden = !audioEnabled;
-    if (btnGuidedTour) btnGuidedTour.hidden = !audioEnabled;
+  var root = document.getElementById('mirada-page-root');
+  var audioPlayer = document.getElementById('mirada-audio-player');
+  var audioEnabled = false;
+  var accessibleMode = false;
+
+  function prefersReducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function setAccessibleMode(on) {
+    accessibleMode = !!on;
+    document.body.classList.toggle('mirada-accessible', accessibleMode);
+    var toggle = document.getElementById('btn-accessible-toggle');
+    var msg = document.getElementById('accessible-mode-msg');
+    if (toggle) {
+      toggle.setAttribute('aria-pressed', String(accessibleMode));
+      toggle.textContent = accessibleMode ? 'Modo accesible activado' : 'Usar modo accesible';
+    }
+    if (msg) msg.hidden = !accessibleMode;
+    if (accessibleMode) setAudioEnabled(false);
+  }
+
+  function setAudioEnabled(on) {
+    if (accessibleMode) on = false;
+    audioEnabled = !!on;
+    var btnOn = document.getElementById('btn-audio-on');
+    var btnOff = document.getElementById('btn-audio-off');
+    var status = document.getElementById('audio-status');
     var band = document.getElementById('mirada-audio-band');
+    if (btnOn) btnOn.setAttribute('aria-pressed', String(audioEnabled));
+    if (btnOff) btnOff.setAttribute('aria-pressed', String(!audioEnabled));
+    if (status) status.hidden = !audioEnabled;
     if (band) {
       band.hidden = !audioEnabled;
-      band.classList.toggle('translate-y-full', !audioEnabled);
-      band.classList.toggle('translate-y-0', audioEnabled);
+      band.classList.toggle('mirada-audio-band-visible', audioEnabled);
+    }
+    document.querySelectorAll('.mirada-btn-audio, .learn-moment-audio').forEach(function (el) {
+      el.hidden = !audioEnabled;
+    });
+    if (audioEnabled && navigator.vibrate) navigator.vibrate(50);
+  }
+
+  function getAudioUrl(key) {
+    if (!root) return null;
+    var attr = 'data-audio-' + key.replace(/_/g, '-');
+    return root.getAttribute(attr) || null;
+  }
+
+  function playAudio(url) {
+    if (!url || !audioPlayer) return;
+    audioPlayer.src = url;
+    audioPlayer.play().catch(function () {});
+  }
+
+  function vibrate(ms) {
+    if (accessibleMode) return;
+    if (navigator.vibrate) navigator.vibrate(ms || 30);
+  }
+
+  function initAccessibleToggle() {
+    if (prefersReducedMotion()) setAccessibleMode(true);
+    var toggle = document.getElementById('btn-accessible-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        setAccessibleMode(!accessibleMode);
+      });
     }
   }
 
-  function initModeButtons() {
-    if (btnAudioOn) btnAudioOn.addEventListener('click', function () {
+  function initAudioButtons() {
+    var btnOn = document.getElementById('btn-audio-on');
+    var btnOff = document.getElementById('btn-audio-off');
+    if (btnOn) btnOn.addEventListener('click', function () {
       setAudioEnabled(true);
-      var introUrl = getIntroAudioUrl();
-      if (introUrl) {
-        guidedScrollActive = true;
-        playIntroAndContinue();
-      }
+      vibrate(80);
+      var url = getAudioUrl('intro');
+      if (url && !accessibleMode) playAudio(url);
     });
-    if (btnAudioOff) btnAudioOff.addEventListener('click', function () { setAudioEnabled(false); });
-    if (btnGuidedTour) btnGuidedTour.addEventListener('click', function () {
-      var introUrl = getIntroAudioUrl();
-      if (introUrl) {
-        guidedScrollActive = true;
-        playIntroAndContinue();
-      } else {
-        var first = document.getElementById(AUDIO_ORDER[0]);
-        if (first && getAudioUrlForElement(first)) {
-          guidedScrollActive = true;
-          playSectionAndContinue(first);
-        }
-      }
+    if (btnOff) btnOff.addEventListener('click', function () { setAudioEnabled(false); });
+  }
+
+  function initSectionAudioButtons() {
+    document.getElementById('btn-audio-product')?.addEventListener('click', function () {
+      playAudio(getAudioUrl('product'));
+    });
+    document.getElementById('btn-audio-nutrition')?.addEventListener('click', function () {
+      playAudio(getAudioUrl('nutrition'));
+    });
+    document.getElementById('btn-audio-discover')?.addEventListener('click', function () {
+      playAudio(getAudioUrl('discover'));
+    });
+    document.getElementById('btn-audio-outro')?.addEventListener('click', function () {
+      playAudio(getAudioUrl('outro'));
+    });
+    document.querySelectorAll('.learn-moment-audio').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var step = btn.getAttribute('data-audio');
+        playAudio(getAudioUrl('step_' + step));
+        if (step === '3') vibrate(60);
+      });
     });
   }
 
@@ -66,179 +123,42 @@
     });
   }
 
-  function initProductModal() {
-    var triggerBtns = document.querySelectorAll('#btn-product-popup, #btn-product-popup-info');
-    var modal = document.getElementById('mirada-product-modal');
-    var iframe = document.getElementById('mirada-product-iframe');
-    var closeBtn = document.getElementById('mirada-product-modal-close');
-    if (!triggerBtns.length || !modal || !iframe) return;
-    function openModal(btn) {
-      var url = btn && btn.getAttribute('data-product-url');
-      if (url) {
-        if (url.charAt(0) === '/') url = window.location.origin + url;
-        iframe.src = url;
-      }
-      modal.classList.remove('pointer-events-none');
-      modal.classList.add('opacity-100');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-      modal.classList.add('pointer-events-none');
-      modal.classList.remove('opacity-100');
-      modal.setAttribute('aria-hidden', 'true');
-      iframe.src = '';
-      document.body.style.overflow = '';
-    }
-    triggerBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () { openModal(btn); });
-    });
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
-    });
-  }
-
   function initNutritionToggle() {
-    if (!btnToggleNutrition || !nutritionSection) return;
-    btnToggleNutrition.addEventListener('click', function () {
-      var isHidden = nutritionSection.hidden;
-      nutritionSection.hidden = !isHidden;
-      btnToggleNutrition.setAttribute('aria-expanded', String(!isHidden));
-      btnToggleNutrition.textContent = isHidden ? 'Ocultar información nutricional' : 'Ver información nutricional';
-      if (!isHidden) nutritionSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var btn = document.getElementById('btn-toggle-nutrition');
+    var section = document.getElementById('nutrition-info');
+    var btnSkip = document.getElementById('btn-skip-nutrition');
+    if (!btn || !section) return;
+    btn.addEventListener('click', function () {
+      var hidden = section.hidden;
+      section.hidden = !hidden;
+      btn.setAttribute('aria-expanded', String(!hidden));
+      btn.textContent = hidden ? 'Ocultar información nutricional' : 'Ver información nutricional';
+      if (!hidden) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-    var btnSkipNutrition = document.getElementById('btn-skip-nutrition');
-    if (btnSkipNutrition) {
-      btnSkipNutrition.addEventListener('click', function () {
-        nutritionSection.hidden = true;
-        btnToggleNutrition.setAttribute('aria-expanded', 'false');
-        btnToggleNutrition.textContent = 'Ver información nutricional';
-        var discover = document.getElementById('discover-wine');
-        if (discover) discover.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    }
-  }
-
-  var AUDIO_ORDER = ['product-info', 'discover-wine', 'step-1', 'step-2', 'step-3', 'step-4'];
-
-  function getNextAudioSection(currentEl) {
-    if (!currentEl || !currentEl.id) return null;
-    var idx = AUDIO_ORDER.indexOf(currentEl.id);
-    if (idx < 0 || idx >= AUDIO_ORDER.length - 1) return null;
-    return document.getElementById(AUDIO_ORDER[idx + 1]);
-  }
-
-  function getAudioUrlForElement(el) {
-    if (!el) return null;
-    var url = el.getAttribute('data-audio-url');
-    if (url) return url;
-    var dataAudio = el.getAttribute('data-audio');
-    if (dataAudio) {
-      var base = (window.ALBINO_CONFIG && window.ALBINO_CONFIG.links && window.ALBINO_CONFIG.links.audioBase) || '';
-      return base.replace(/\/?$/, '/') + dataAudio;
-    }
-    return null;
-  }
-
-  function getIntroAudioUrl() {
-    var root = document.getElementById('mirada-page-root');
-    return root ? root.getAttribute('data-audio-intro') : null;
-  }
-
-  function playSectionAndContinue(section) {
-    var url = getAudioUrlForElement(section);
-    if (!url || !audioPlayer) return;
-    if (section && section.scrollIntoView) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    audioPlayer.src = url;
-    audioPlayer._activeSection = section;
-    audioPlayer.play().catch(function () {
-      audioPlayer._activeSection = null;
-    });
-  }
-
-  function playIntroAndContinue() {
-    var url = getIntroAudioUrl();
-    if (!url || !audioPlayer) return;
-    audioPlayer.src = url;
-    audioPlayer._activeSection = { id: 'intro' };
-    audioPlayer.play().catch(function () {
-      audioPlayer._activeSection = null;
-    });
-  }
-
-  var guidedScrollActive = false;
-
-  function initAudioSequence() {
-    if (!audioPlayer) return;
-    audioPlayer.addEventListener('ended', function () {
-      var section = audioPlayer._activeSection;
-      audioPlayer._activeSection = null;
-      if (!section) return;
-      if (section.id === 'intro') {
-        var first = document.getElementById(AUDIO_ORDER[0]);
-        if (first && getAudioUrlForElement(first)) {
-          guidedScrollActive = true;
-          playSectionAndContinue(first);
-        } else {
-          guidedScrollActive = false;
-        }
-      } else {
-        var next = getNextAudioSection(section);
-        if (next && getAudioUrlForElement(next)) {
-          guidedScrollActive = true;
-          playSectionAndContinue(next);
-        } else {
-          guidedScrollActive = false;
-        }
-      }
-    });
-  }
-
-  function initScrollToAudio() {
-    if (typeof IntersectionObserver === 'undefined') return;
-    var sections = AUDIO_ORDER;
-    var observed = {};
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) {
-          if (entry.target.id) observed[entry.target.id] = false;
-          return;
-        }
-        if (guidedScrollActive || !audioEnabled) return;
-        var id = entry.target.id;
-        if (!id || observed[id]) return;
-        if (!getAudioUrlForElement(entry.target) || !audioPlayer) return;
-        observed[id] = true;
-        guidedScrollActive = true;
-        playSectionAndContinue(entry.target);
-      });
-    }, { threshold: 0.5, rootMargin: '0px' });
-    sections.forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) observer.observe(el);
+    if (btnSkip) btnSkip.addEventListener('click', function () {
+      section.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = 'Ver información nutricional';
+      document.getElementById('discover-wine')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 
   function initForm() {
-    if (!form) return;
+    var form = document.getElementById('form-miradas');
     var feedback = document.getElementById('form-miradas-feedback');
+    if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var selected = form.querySelector('input[name="mirada"]:checked');
-      var textarea = form.querySelector('textarea[name="tu_mirada"]');
+      var textarea = form.querySelector('#tu-mirada');
       var mirada = selected ? selected.value : '';
       var tuMirada = textarea ? textarea.value.trim() : '';
       if (!mirada && !tuMirada) {
         if (feedback) {
           feedback.setAttribute('role', 'alert');
           feedback.textContent = 'Por favor, elige una opción o escribe tu mirada.';
-          feedback.className = 'mb-4 min-h-[1.5rem] text-[#B56B80]';
-          var firstRadio = form.querySelector('input[name="mirada"]');
-        if (firstRadio) firstRadio.focus();
+          feedback.className = 'mirada-form-feedback mirada-form-feedback-error';
+          form.querySelector('input[name="mirada"]')?.focus();
         }
         return;
       }
@@ -246,9 +166,11 @@
         feedback.removeAttribute('role');
         feedback.setAttribute('role', 'status');
         feedback.textContent = '';
+        feedback.className = 'mirada-form-feedback';
       }
-      if (window.ALBINO_CONFIG && window.ALBINO_CONFIG.miradasEndpoint) {
-        fetch(window.ALBINO_CONFIG.miradasEndpoint, {
+      var endpoint = window.ALBINO_CONFIG?.miradasEndpoint;
+      if (endpoint) {
+        fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ mirada: mirada, tu_mirada: tuMirada })
@@ -256,34 +178,45 @@
           form.reset();
           if (feedback) {
             feedback.textContent = 'Gracias por compartir tu mirada.';
-            feedback.className = 'mb-4 min-h-[1.5rem] text-stone-900';
+            feedback.className = 'mirada-form-feedback mirada-form-feedback-success';
           }
         }).catch(function () {
           if (feedback) {
             feedback.setAttribute('role', 'alert');
             feedback.textContent = 'No se pudo enviar. Inténtalo de nuevo.';
-            feedback.className = 'mb-4 min-h-[1.5rem] text-[#B56B80]';
+            feedback.className = 'mirada-form-feedback mirada-form-feedback-error';
           }
         });
       } else {
         form.reset();
         if (feedback) {
           feedback.textContent = 'Gracias por compartir tu mirada.';
-          feedback.className = 'mb-4 min-h-[1.5rem] text-stone-900';
+          feedback.className = 'mirada-form-feedback mirada-form-feedback-success';
         }
       }
     });
   }
 
+  function initReveal() {
+    if (accessibleMode || prefersReducedMotion()) return;
+    if (typeof IntersectionObserver === 'undefined') return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.classList.add('reveal-in');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+  }
+
   function init() {
     setAudioEnabled(false);
-    initModeButtons();
+    initAccessibleToggle();
+    initAudioButtons();
+    initSectionAudioButtons();
     initQuickLinks();
-    initProductModal();
     initNutritionToggle();
-    initAudioSequence();
-    initScrollToAudio();
     initForm();
+    initReveal();
   }
 
   if (document.readyState === 'loading') {

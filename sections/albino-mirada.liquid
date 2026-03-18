@@ -1,31 +1,38 @@
 {% comment %}
-  Sección Mirada — Experiencia NFC. Estilo home/nosotros: minimalista, mucho espacio, reveal.
+  MIRADA — Experiencia NFC editorial para Albino.
+  Mobile-first, premium, minimal. Dos modos: inmersivo y accesible.
+  Jerarquía: Hero → Producto → Nutrición → Descubrir → Aprender → Archivo → CTA
 {% endcomment %}
 
 {{ 'mirada.css' | asset_url | stylesheet_tag }}
 
-<div class="mirada-page" id="mirada-page-root" data-audio-intro="{% if section.settings.audio_intro != blank %}{{ section.settings.audio_intro }}{% endif %}" data-audio-product-info="{% if section.settings.audio_product_info != blank %}{{ section.settings.audio_product_info }}{% endif %}" data-audio-discover="{% if section.settings.audio_discover != blank %}{{ section.settings.audio_discover }}{% endif %}">
-  <div id="mirada-audio-band" class="fixed bottom-0 left-0 right-0 z-40 py-3 px-6 bg-[#111111] text-[#F5F4F1] font-geist-mono text-[10px] uppercase tracking-[0.2em] text-center translate-y-full transition-transform duration-300 pointer-events-none" aria-live="polite" hidden>
-    Audio activado
-  </div>
+<div class="mirada-page" id="mirada-page-root"
+  data-audio-intro="{% if section.settings.audio_intro != blank %}{{ section.settings.audio_intro }}{% endif %}"
+  data-audio-product="{% if section.settings.audio_product_info != blank %}{{ section.settings.audio_product_info }}{% endif %}"
+  data-audio-nutrition="{% if section.settings.audio_nutrition != blank %}{{ section.settings.audio_nutrition }}{% endif %}"
+  data-audio-discover="{% if section.settings.audio_discover != blank %}{{ section.settings.audio_discover }}{% endif %}"
+  data-audio-learn-intro="{% if section.settings.audio_learn_intro != blank %}{{ section.settings.audio_learn_intro }}{% endif %}"
+  data-audio-step-1="{% if section.settings.audio_step_1 != blank %}{{ section.settings.audio_step_1 }}{% endif %}"
+  data-audio-step-2="{% if section.settings.audio_step_2 != blank %}{{ section.settings.audio_step_2 }}{% endif %}"
+  data-audio-step-3="{% if section.settings.audio_step_3 != blank %}{{ section.settings.audio_step_3 }}{% endif %}"
+  data-audio-step-4="{% if section.settings.audio_step_4 != blank %}{{ section.settings.audio_step_4 }}{% endif %}"
+  data-audio-outro="{% if section.settings.audio_outro != blank %}{{ section.settings.audio_outro }}{% endif %}"
+  data-product-url="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}">
   <h1 class="sr-only">{{ shop.name }} — El vino que cambia la mirada</h1>
 
-  <main>
-    <!-- Hero -->
-    <section id="mirada-hero" class="min-h-[120vh] flex items-center justify-center px-6 pt-32" aria-labelledby="hero-title">
-      <div class="text-center max-w-[560px] mx-auto">
-        <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] mb-4 reveal">Albino</p>
-        <h2 id="hero-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
-          El vino que cambia la mirada
-        </h2>
-        <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] reveal delay-100 mb-4">
-          Una experiencia interactiva para conocer el producto físico.
-        </p>
-        <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] reveal delay-100 mb-16">
-          Elige cómo quieres recorrerla.
-        </p>
+  <div id="mirada-audio-band" class="mirada-audio-band" aria-live="polite" hidden>
+    Audio activado
+  </div>
 
-        <div class="flex flex-col gap-4 mb-6 reveal delay-200" role="group" aria-label="Elegir modo de experiencia">
+  <main>
+    <!-- 1. HERO / ENTRY -->
+    <section id="mirada-hero" class="mirada-section mirada-hero" aria-labelledby="hero-title">
+      <div class="mirada-hero-inner">
+        <p class="mirada-label reveal">Albino</p>
+        <h2 id="hero-title" class="mirada-heading reveal">El vino que cambia la mirada</h2>
+        <p class="mirada-hero-sub reveal delay-100">Has escaneado la etiqueta sonora de Albino.</p>
+
+        <div class="mirada-hero-actions" role="group" aria-label="Elegir modo de experiencia">
           <button type="button" id="btn-audio-on" class="mirada-btn mirada-btn-primary" aria-pressed="false">
             Activar experiencia sonora
           </button>
@@ -34,232 +41,218 @@
           </button>
         </div>
 
-        <p id="audio-status" class="font-geist-mono text-[11px] text-[#6A6A6A] mb-8" aria-live="polite" hidden>
+        <p id="audio-status" class="mirada-audio-status" aria-live="polite" hidden>
           Experiencia sonora activada.
         </p>
+        <p id="accessible-mode-msg" class="mirada-accessible-msg" aria-live="polite" hidden>
+          Esta experiencia se adapta a tu forma de escuchar.
+        </p>
 
-        <nav class="flex flex-wrap justify-center gap-8 reveal delay-300 mirada-quick-links" aria-label="Accesos rápidos">
-          <a href="#product-info" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 transition-colors">Información del vino</a>
-          <a href="#learn-to-look" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 transition-colors">Aprender a mirarlo</a>
-          <button type="button" id="btn-guided-tour" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#a0a09e] hover:border-[#111111] pb-1 text-stone-900 transition-colors bg-transparent cursor-pointer hidden" aria-label="Escuchar recorrido guiado de los 4 momentos">Recorrido guiado</button>
+        <nav class="mirada-quick-links reveal delay-200" aria-label="Accesos rápidos">
+          <a href="#product-info" class="mirada-link">Información del vino</a>
+          <a href="#learn-to-look" class="mirada-link">Aprender a mirarlo</a>
         </nav>
+        <button type="button" id="btn-accessible-toggle" class="mirada-btn mirada-btn-tertiary mt-8 text-[10px]" aria-pressed="false" aria-label="Usar modo accesible">
+          Usar modo accesible
+        </button>
       </div>
     </section>
 
-    <!-- Product info -->
-    <section id="product-info" class="mirada-audio-section min-h-[100vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="product-title" data-audio-url="{% if section.settings.audio_product_info != blank %}{{ section.settings.audio_product_info }}{% endif %}">
-      <div class="w-full max-w-[560px] mx-auto text-center">
-        <h2 id="product-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-12">
-          Información del vino
-        </h2>
-        <dl class="text-left font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.18em] text-stone-900 space-y-4 reveal delay-100">
-          <div class="flex justify-between border-b border-[#e5e4e1] py-4"><dt class="text-[#6A6A6A]">Nombre</dt><dd>Albino</dd></div>
-          <div class="flex justify-between border-b border-[#e5e4e1] py-4"><dt class="text-[#6A6A6A]">Tipo</dt><dd>Vino tinto dulce joven</dd></div>
-          <div class="flex justify-between border-b border-[#e5e4e1] py-4"><dt class="text-[#6A6A6A]">Variedad</dt><dd>Tempranillo</dd></div>
-          <div class="flex justify-between border-b border-[#e5e4e1] py-4"><dt class="text-[#6A6A6A]">Origen</dt><dd>Tierra de Barros · Extremadura</dd></div>
-          <div class="flex justify-between border-b border-[#e5e4e1] py-4"><dt class="text-[#6A6A6A]">Alcohol</dt><dd>12,5 % vol</dd></div>
-          <div class="flex justify-between border-b border-[#e5e4e1] py-4"><dt class="text-[#6A6A6A]">Formato</dt><dd>75 cl</dd></div>
-          <div class="flex justify-between py-4"><dt class="text-[#6A6A6A]">Alérgenos</dt><dd>Contiene sulfitos</dd></div>
+    <!-- 2. PRODUCT INFORMATION -->
+    <section id="product-info" class="mirada-section mirada-product" aria-labelledby="product-title">
+      <div class="mirada-block">
+        <h2 id="product-title" class="mirada-heading reveal">Información del vino</h2>
+        <dl class="mirada-dl reveal delay-100">
+          <div class="mirada-dl-row"><dt>Nombre</dt><dd>Albino</dd></div>
+          <div class="mirada-dl-row"><dt>Tipo</dt><dd>Vino tinto dulce joven</dd></div>
+          <div class="mirada-dl-row"><dt>Variedad</dt><dd>Tempranillo</dd></div>
+          <div class="mirada-dl-row"><dt>Origen</dt><dd>Tierra de Barros · Extremadura</dd></div>
+          <div class="mirada-dl-row"><dt>Alcohol</dt><dd>12,5 % vol</dd></div>
+          <div class="mirada-dl-row"><dt>Formato</dt><dd>75 cl</dd></div>
+          <div class="mirada-dl-row mirada-dl-row-last"><dt>Alérgenos</dt><dd>Contiene sulfitos</dd></div>
         </dl>
-        <div class="mt-16 flex flex-col gap-4 justify-center items-stretch sm:items-center reveal delay-200 mirada-quick-links">
-          <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-primary w-full sm:w-auto" aria-expanded="false" aria-controls="nutrition-info">
+        <div class="mirada-product-actions reveal delay-200">
+          <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-primary" aria-expanded="false" aria-controls="nutrition-info">
             Ver información nutricional
+          </button>
+          <a href="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}" id="btn-ver-botella" class="mirada-btn mirada-btn-secondary">
+            Ver botella
+          </a>
+          <button type="button" id="btn-audio-product" class="mirada-btn mirada-btn-audio" aria-label="Escuchar información del vino" hidden>
+            Escuchar información del vino
           </button>
           <button type="button" id="btn-skip-nutrition" class="mirada-btn mirada-btn-tertiary text-center w-full sm:w-auto bg-transparent border-0 cursor-pointer">Saltar información nutricional</button>
         </div>
       </div>
     </section>
 
-    <!-- Nutrition (expandible) -->
-    <section id="nutrition-info" class="min-h-[80vh] flex items-center justify-center px-6 py-32" aria-labelledby="nutrition-title" hidden>
-      <div class="w-full max-w-[560px] mx-auto text-center">
-        <h2 id="nutrition-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-8">
-          Información nutricional
-        </h2>
-        <p class="font-geist-mono text-[11px] text-[#6A6A6A] mb-8 reveal delay-100">Valores por 100 ml</p>
-        <table class="w-full font-geist-mono text-[11px] md:text-xs tracking-[0.15em] text-stone-900 reveal delay-100" role="table" aria-describedby="nutrition-title">
+    <!-- 3. NUTRITION INFORMATION -->
+    <section id="nutrition-info" class="mirada-section mirada-nutrition" aria-labelledby="nutrition-title" hidden>
+      <div class="mirada-block">
+        <h2 id="nutrition-title" class="mirada-heading reveal">Información nutricional</h2>
+        <p class="mirada-label reveal delay-100">Valores por 100 ml</p>
+        <table class="mirada-table reveal delay-100" role="table" aria-describedby="nutrition-title">
           <caption class="sr-only">Valores nutricionales por 100 ml de vino Albino</caption>
           <tbody>
-            <tr class="border-b border-[#e5e4e1]"><td class="py-4 text-left">Energía</td><td class="py-4 text-right">350 kJ / 85 kcal</td></tr>
-            <tr class="border-b border-[#e5e4e1]"><td class="py-4 text-left">Carbohidratos</td><td class="py-4 text-right">4 g</td></tr>
-            <tr class="border-b border-[#e5e4e1]"><td class="py-4 text-left">de los cuales azúcares</td><td class="py-4 text-right">4 g</td></tr>
-            <tr class="border-b border-[#e5e4e1]"><td class="py-4 text-left">Grasas</td><td class="py-4 text-right">0 g</td></tr>
-            <tr class="border-b border-[#e5e4e1]"><td class="py-4 text-left">Proteínas</td><td class="py-4 text-right">0 g</td></tr>
-            <tr><td class="py-4 text-left">Sal</td><td class="py-4 text-right">0 g</td></tr>
+            <tr><td>Energía</td><td>350 kJ / 85 kcal</td></tr>
+            <tr><td>Carbohidratos</td><td>4 g</td></tr>
+            <tr><td>de los cuales azúcares</td><td>4 g</td></tr>
+            <tr><td>Grasas</td><td>0 g</td></tr>
+            <tr><td>Proteínas</td><td>0 g</td></tr>
+            <tr><td>Sal</td><td>0 g</td></tr>
           </tbody>
         </table>
-        <p class="font-geist-mono text-[11px] text-[#6A6A6A] mt-12 reveal delay-200">Consumir con responsabilidad.</p>
+        <p class="mirada-nutrition-note reveal delay-200">Consumir con responsabilidad.</p>
+        <button type="button" id="btn-audio-nutrition" class="mirada-btn mirada-btn-audio" aria-label="Escuchar información nutricional" hidden>
+          Escuchar información nutricional
+        </button>
       </div>
     </section>
 
-    <!-- Descubrir -->
-    <section id="discover-wine" class="mirada-audio-section min-h-[120vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="discover-title" data-audio-url="{% if section.settings.audio_discover != blank %}{{ section.settings.audio_discover }}{% endif %}">
-      <div class="w-full max-w-[720px] mx-auto">
-        <h2 id="discover-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-16 md:mb-20 text-center">
-          Descubrir el vino
-        </h2>
-        <div class="flex flex-col md:flex-row reveal delay-100">
-          <div class="flex-1 min-w-0 py-6 border-b border-[#e5e4e1] md:py-0 md:px-6 md:border-b-0 md:border-l md:border-[#e5e4e1] md:first:border-l-0 text-center md:text-left">
-            <p class="font-geist-mono text-[10px] uppercase tracking-[0.25em] text-[#6A6A6A] mb-3">Qué es</p>
-            <p class="font-body text-base md:text-lg text-stone-900 leading-relaxed">Tempranillo dulce. Tierra de Barros.</p>
-          </div>
-          <div class="flex-1 min-w-0 py-6 border-b border-[#e5e4e1] md:py-0 md:px-6 md:border-b-0 md:border-l md:border-[#e5e4e1] text-center md:text-left">
-            <p class="font-geist-mono text-[10px] uppercase tracking-[0.25em] text-[#6A6A6A] mb-3">Cómo se siente</p>
-            <p class="font-body text-base md:text-lg text-stone-900 leading-relaxed">Cercano. Directo. Para compartir.</p>
-          </div>
-          <div class="flex-1 min-w-0 py-6 md:py-0 md:px-6 md:border-l md:border-[#e5e4e1] text-center md:text-left">
-            <p class="font-geist-mono text-[10px] uppercase tracking-[0.25em] text-[#6A6A6A] mb-3">Qué propone</p>
-            <p class="font-body text-base md:text-lg text-stone-900 leading-relaxed">Mirar de otra manera.</p>
-          </div>
+    <!-- 4. DESCUBRIR EL VINO -->
+    <section id="discover-wine" class="mirada-section mirada-discover" aria-labelledby="discover-title">
+      <div class="mirada-block mirada-discover-block">
+        <h2 id="discover-title" class="mirada-heading reveal">Descubrir el vino</h2>
+        <div class="mirada-discover-content reveal delay-100">
+          <p>Albino nace en Tierra de Barros, en Extremadura.</p>
+          <p>Un vino tinto dulce de la variedad tempranillo.</p>
+          <p>Un vino cercano. Pensado para compartir.</p>
+          <p>Albino no pretende reinventar el vino. Solo propone mirarlo de otra manera.</p>
         </div>
-        <div class="mt-16 flex flex-wrap justify-center gap-8 reveal delay-200 mirada-quick-links">
-          <a href="#learn-to-look" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#111111] pb-1 text-stone-900 transition-colors font-medium">
-            Aprender a mirarlo
-          </a>
-        </div>
+        <button type="button" id="btn-audio-discover" class="mirada-btn mirada-btn-audio" aria-label="Escuchar Descubrir el vino" hidden>
+          Escuchar
+        </button>
       </div>
     </section>
 
-    <!-- Modal producto (solo en Mirada) -->
-    <div id="mirada-product-modal" class="fixed inset-0 z-50 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true" role="dialog" aria-labelledby="mirada-product-modal-title" aria-modal="true">
-      <div class="absolute inset-4 md:inset-8 lg:inset-16 bg-[#F5F4F1] flex flex-col shadow-xl">
-        <div class="flex items-center justify-between px-6 py-4 border-b border-[#e5e4e1] shrink-0">
-          <h2 id="mirada-product-modal-title" class="font-geist-mono text-xs tracking-[0.2em] uppercase text-stone-900">Producto</h2>
-          <button type="button" id="mirada-product-modal-close" class="p-2 hover:text-[#B56B80] text-stone-900" aria-label="Cerrar">
-            <i data-lucide="x" stroke-width="1.5" class="w-5 h-5"></i>
-          </button>
-        </div>
-        <div class="flex-1 min-h-0 overflow-hidden">
-          <iframe id="mirada-product-iframe" src="" class="w-full h-full border-0" title="Producto Albino"></iframe>
-        </div>
-      </div>
-    </div>
-
-    <!-- Aprender a mirarlo — full viewport por momento, vídeo de fondo, scroll-snap -->
-    <section id="learn-to-look" class="learn-moments" aria-labelledby="learn-title">
-      <div class="min-h-[80vh] flex items-center justify-center px-6 py-32" id="learn-intro">
-        <div class="text-center max-w-[640px] mx-auto">
-          <h2 id="learn-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
-            Aprender a mirarlo
-          </h2>
-          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] reveal delay-100">
-            Esta no es una cata tradicional. Es una invitación a percibir el momento.
-          </p>
-        </div>
+    <!-- 5. APRENDER A MIRARLO -->
+    <section id="learn-to-look" class="mirada-learn" aria-labelledby="learn-title">
+      <div class="mirada-learn-intro reveal" id="learn-intro">
+        <h2 id="learn-title" class="mirada-heading">Aprender a mirarlo</h2>
+        <p class="mirada-learn-intro-text">Esta no es una cata tradicional.
+Es una invitación a percibir el momento.</p>
       </div>
 
-      <article id="step-1" class="learn-moment mirada-audio-section min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-1-title" data-audio-url="{% if section.settings.audio_step_1 != blank %}{{ section.settings.audio_step_1 }}{% else %}{{ 'audio-step-1.mp3' | asset_url }}{% endif %}">
-        <div class="absolute inset-0" aria-hidden="true">
+      <article id="step-1" class="learn-moment" aria-labelledby="step-1-title" data-step="1">
+        <div class="learn-moment-bg" aria-hidden="true">
           {% if section.settings.video_step_1 != blank %}
-            <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
+            <video class="learn-moment-video" autoplay muted loop playsinline aria-hidden="true">
               <source src="{{ section.settings.video_step_1 | escape }}" type="video/mp4">
             </video>
           {% else %}
-            <div class="w-full h-full bg-[#2a2520]"></div>
+            <div class="learn-moment-bg-fallback"></div>
           {% endif %}
-          <div class="absolute inset-0 bg-black/30 mix-blend-multiply pointer-events-none"></div>
+          <div class="learn-moment-overlay"></div>
         </div>
-        <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
-          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/70 mb-6">01</p>
-          <h3 id="step-1-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Mira el momento</h3>
-          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/95 mb-12">Antes de probar el vino, tómate un momento. Cada persona mira el mundo de una forma distinta. A veces con los ojos. A veces con los sentidos.</p>
+        <div class="learn-moment-content">
+          <p class="learn-moment-num" aria-hidden="true">01</p>
+          <h3 id="step-1-title" class="learn-moment-title">Mira el momento</h3>
+          <p class="learn-moment-text">Antes de probar el vino, tómate un momento. Cada persona mira el mundo de una forma distinta. A veces con los ojos. A veces con los sentidos.</p>
+          <button type="button" class="mirada-btn mirada-btn-audio learn-moment-audio" data-audio="step-1" aria-label="Paso 1. Escuchar: Mira el momento antes de probar el vino" hidden>Escuchar</button>
         </div>
       </article>
 
-      <article id="step-2" class="learn-moment mirada-audio-section min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-2-title" data-audio-url="{% if section.settings.audio_step_2 != blank %}{{ section.settings.audio_step_2 }}{% else %}{{ 'audio-step-2.mp3' | asset_url }}{% endif %}">
-        <div class="absolute inset-0" aria-hidden="true">
+      <article id="step-2" class="learn-moment" aria-labelledby="step-2-title" data-step="2">
+        <div class="learn-moment-bg" aria-hidden="true">
           {% if section.settings.video_step_2 != blank %}
-            <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
+            <video class="learn-moment-video" autoplay muted loop playsinline aria-hidden="true">
               <source src="{{ section.settings.video_step_2 | escape }}" type="video/mp4">
             </video>
           {% else %}
-            <div class="w-full h-full bg-[#2a2520]"></div>
+            <div class="learn-moment-bg-fallback"></div>
           {% endif %}
-          <div class="absolute inset-0 bg-black/30 mix-blend-multiply pointer-events-none"></div>
+          <div class="learn-moment-overlay"></div>
         </div>
-        <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
-          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/70 mb-6">02</p>
-          <h3 id="step-2-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Acércate al vino</h3>
-          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/95 mb-12">Acerca la copa. No hace falta encontrar palabras. Solo percibe.</p>
+        <div class="learn-moment-content">
+          <p class="learn-moment-num" aria-hidden="true">02</p>
+          <h3 id="step-2-title" class="learn-moment-title">Acércate al vino</h3>
+          <p class="learn-moment-text">Acerca la copa. No hace falta encontrar palabras. Solo percibe.</p>
+          <button type="button" class="mirada-btn mirada-btn-audio learn-moment-audio" data-audio="step-2" aria-label="Paso 2. Escuchar: Acércate al vino" hidden>Escuchar</button>
         </div>
       </article>
 
-      <article id="step-3" class="learn-moment mirada-audio-section min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-3-title" data-audio-url="{% if section.settings.audio_step_3 != blank %}{{ section.settings.audio_step_3 }}{% else %}{{ 'audio-step-3.mp3' | asset_url }}{% endif %}">
-        <div class="absolute inset-0" aria-hidden="true">
+      <article id="step-3" class="learn-moment" aria-labelledby="step-3-title" data-step="3">
+        <div class="learn-moment-bg" aria-hidden="true">
           {% if section.settings.video_step_3 != blank %}
-            <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
+            <video class="learn-moment-video" autoplay muted loop playsinline aria-hidden="true">
               <source src="{{ section.settings.video_step_3 | escape }}" type="video/mp4">
             </video>
           {% else %}
-            <div class="w-full h-full bg-[#2a2520]"></div>
+            <div class="learn-moment-bg-fallback"></div>
           {% endif %}
-          <div class="absolute inset-0 bg-black/30 mix-blend-multiply pointer-events-none"></div>
+          <div class="learn-moment-overlay"></div>
         </div>
-        <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
-          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/70 mb-6">03</p>
-          <h3 id="step-3-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Prueba</h3>
-          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/95 mb-12">Bebe despacio. No intentes entenderlo todo. Solo deja que ocurra.</p>
+        <div class="learn-moment-content">
+          <p class="learn-moment-num" aria-hidden="true">03</p>
+          <h3 id="step-3-title" class="learn-moment-title">Prueba</h3>
+          <p class="learn-moment-text">Bebe despacio. No intentes entenderlo todo. Solo deja que ocurra.</p>
+          <button type="button" class="mirada-btn mirada-btn-audio learn-moment-audio" data-audio="step-3" aria-label="Paso 3. Escuchar: Prueba el vino" hidden>Escuchar</button>
         </div>
       </article>
 
-      <article id="step-4" class="learn-moment mirada-audio-section min-h-screen flex items-center justify-center relative overflow-hidden" aria-labelledby="step-4-title" data-audio-url="{% if section.settings.audio_step_4 != blank %}{{ section.settings.audio_step_4 }}{% else %}{{ 'audio-step-4.mp3' | asset_url }}{% endif %}">
-        <div class="absolute inset-0" aria-hidden="true">
+      <article id="step-4" class="learn-moment" aria-labelledby="step-4-title" data-step="4">
+        <div class="learn-moment-bg" aria-hidden="true">
           {% if section.settings.video_step_4 != blank %}
-            <video class="w-full h-full object-cover" autoplay muted loop playsinline aria-hidden="true">
+            <video class="learn-moment-video" autoplay muted loop playsinline aria-hidden="true">
               <source src="{{ section.settings.video_step_4 | escape }}" type="video/mp4">
             </video>
           {% else %}
-            <div class="w-full h-full bg-[#2a2520]"></div>
+            <div class="learn-moment-bg-fallback"></div>
           {% endif %}
-          <div class="absolute inset-0 bg-black/30 mix-blend-multiply pointer-events-none"></div>
+          <div class="learn-moment-overlay"></div>
         </div>
-        <div class="relative z-10 text-center px-6 max-w-[640px] mx-auto">
-          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/70 mb-6">04</p>
-          <h3 id="step-4-title" class="espacio-title font-display heading-page text-[#F5F4F1] mb-8">Vuelve a mirar</h3>
-          <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#F5F4F1]/95 mb-12">Ahora vuelve a mirar el momento. Quizá no haya cambiado nada. O quizá sí.</p>
+        <div class="learn-moment-content">
+          <p class="learn-moment-num" aria-hidden="true">04</p>
+          <h3 id="step-4-title" class="learn-moment-title">Vuelve a mirar</h3>
+          <p class="learn-moment-text">Ahora vuelve a mirar el momento. Quizá no haya cambiado nada. O quizá sí. El vino no cambia el mundo. Solo cambia la forma de mirarlo.</p>
+          <button type="button" class="mirada-btn mirada-btn-audio learn-moment-audio" data-audio="step-4" aria-label="Paso 4. Escuchar: Vuelve a mirar" hidden>Escuchar</button>
         </div>
       </article>
     </section>
 
-    <!-- Archivo de miradas -->
-    <section id="miradas-form" class="min-h-[100vh] flex items-center justify-center px-6 py-32 md:py-40" aria-labelledby="miradas-title">
-      <div class="w-full max-w-[560px] mx-auto">
-        <h2 id="miradas-title" class="espacio-title font-display heading-page reveal text-stone-900 mb-6 text-center">
-          ¿Cómo ves este vino?
-        </h2>
-        <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#6A6A6A] text-center mb-16 reveal delay-100">
-          Cada persona mira Albino de una forma distinta.<br>Esta también puede ser tu mirada.
-        </p>
+    <!-- 6. ARCHIVO DE MIRADAS -->
+    <section id="miradas-form" class="mirada-section mirada-archive" aria-labelledby="miradas-title">
+      <div class="mirada-block">
+        <h2 id="miradas-title" class="mirada-heading reveal">¿Cómo ves este vino?</h2>
+        <p class="mirada-archive-intro reveal delay-100">Cada persona ve Albino de una manera distinta.
+Esta también puede ser tu mirada.</p>
         <form id="form-miradas" class="mirada-form reveal delay-100" novalidate>
-          <fieldset class="border-none p-0 m-0 mb-8">
+          <fieldset class="mirada-fieldset">
             <legend class="sr-only">Elige una opción</legend>
-            <label class="block py-6 border-b border-[#e5e4e1] font-geist-mono text-[11px] uppercase tracking-[0.2em] text-stone-900 cursor-pointer"><input type="radio" name="mirada" value="cercano" class="mr-4 accent-[#111111]"> Cercano</label>
-            <label class="block py-6 border-b border-[#e5e4e1] font-geist-mono text-[11px] uppercase tracking-[0.2em] text-stone-900 cursor-pointer"><input type="radio" name="mirada" value="profundo" class="mr-4 accent-[#111111]"> Profundo</label>
-            <label class="block py-6 border-b border-[#e5e4e1] font-geist-mono text-[11px] uppercase tracking-[0.2em] text-stone-900 cursor-pointer"><input type="radio" name="mirada" value="inesperado" class="mr-4 accent-[#111111]"> Inesperado</label>
-            <label class="block py-6 border-b border-[#e5e4e1] font-geist-mono text-[11px] uppercase tracking-[0.2em] text-stone-900 cursor-pointer"><input type="radio" name="mirada" value="calido" class="mr-4 accent-[#111111]"> Cálido</label>
+            <label class="mirada-radio-label"><input type="radio" name="mirada" value="cercano" class="mirada-radio"> Cercano</label>
+            <label class="mirada-radio-label"><input type="radio" name="mirada" value="profundo" class="mirada-radio"> Profundo</label>
+            <label class="mirada-radio-label"><input type="radio" name="mirada" value="inesperado" class="mirada-radio"> Inesperado</label>
+            <label class="mirada-radio-label"><input type="radio" name="mirada" value="calido" class="mirada-radio"> Cálido</label>
           </fieldset>
-          <label class="block mb-8" for="tu-mirada">
-            <span class="block font-geist-mono text-[11px] uppercase tracking-[0.2em] text-[#6A6A6A] mb-4">Tu mirada</span>
-            <textarea id="tu-mirada" name="tu_mirada" rows="3" placeholder="Opcional" class="w-full p-4 font-body text-base border border-[#e5e4e1] bg-[#F5F4F1] focus:outline-none focus:ring-2 focus:ring-[#111111]" aria-describedby="form-miradas-feedback"></textarea>
+          <label class="mirada-textarea-label" for="tu-mirada">
+            <span class="mirada-textarea-label-text">Tu mirada</span>
+            <textarea id="tu-mirada" name="tu_mirada" rows="3" placeholder="Opcional" class="mirada-textarea" aria-describedby="form-miradas-feedback"></textarea>
           </label>
-          <div id="form-miradas-feedback" class="mb-4 min-h-[1.5rem]" role="status" aria-live="polite" aria-atomic="true"></div>
-          <button type="submit" class="mirada-btn mirada-btn-primary w-full">Enviar</button>
+          <div id="form-miradas-feedback" class="mirada-form-feedback" role="status" aria-live="polite" aria-atomic="true"></div>
+          <button type="submit" class="mirada-btn mirada-btn-primary w-full">Dejar mi mirada</button>
         </form>
-        <div class="mt-16 flex flex-wrap justify-center gap-8 reveal delay-200">
-          <a href="{{ routes.root_url }}" class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.2em] border-b border-[#111111] pb-1 text-stone-900 transition-colors font-medium">
-            Ir a Albino
-          </a>
+        <button type="button" id="btn-audio-outro" class="mirada-btn mirada-btn-audio" aria-label="Escuchar cierre" hidden>Escuchar cierre</button>
+      </div>
+    </section>
+
+    <!-- 7. PRODUCT CTA -->
+    <section id="mirada-cta" class="mirada-section mirada-cta" aria-labelledby="cta-title">
+      <div class="mirada-block mirada-cta-block">
+        <h2 id="cta-title" class="sr-only">Producto</h2>
+        <div class="mirada-cta-actions">
+          <a href="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-secondary">Ver el vino</a>
+          <a href="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-primary">Comprar botella</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="py-24 text-center">
+  <footer class="mirada-footer">
     <a href="{{ routes.root_url }}">
       {% if settings.logo != blank %}
-        <img src="{{ settings.logo | image_url: width: 300 }}" alt="Logotipo de Albino, vino de Tierra de Barros" class="w-[120px] md:w-[150px] h-auto object-contain mx-auto opacity-60 hover:opacity-100 transition-opacity" width="150" height="60" loading="lazy">
+        <img src="{{ settings.logo | image_url: width: 300 }}" alt="Logotipo de Albino, vino de Tierra de Barros" class="mirada-footer-logo" width="150" height="60" loading="lazy">
       {% else %}
-        <img data-bind-src="assets.logo" alt="Logotipo de Albino, vino de Tierra de Barros" class="w-[120px] md:w-[150px] h-auto object-contain mx-auto opacity-60 hover:opacity-100 transition-opacity" width="150" height="60" loading="lazy">
+        <img data-bind-src="assets.logo" alt="Logotipo de Albino, vino de Tierra de Barros" class="mirada-footer-logo" width="150" height="60" loading="lazy">
       {% endif %}
     </a>
   </footer>
@@ -321,8 +314,18 @@
     },
     {
       "type": "url",
+      "id": "audio_nutrition",
+      "label": "Audio — Información nutricional"
+    },
+    {
+      "type": "url",
       "id": "audio_discover",
       "label": "Audio — Descubrir el vino"
+    },
+    {
+      "type": "url",
+      "id": "audio_learn_intro",
+      "label": "Audio — Intro Aprender a mirarlo"
     },
     {
       "type": "url",
@@ -343,6 +346,11 @@
       "type": "url",
       "id": "audio_step_4",
       "label": "Audio paso 4 — Vuelve a mirar"
+    },
+    {
+      "type": "url",
+      "id": "audio_outro",
+      "label": "Audio — Cierre Archivo de miradas"
     }
   ]
 }
