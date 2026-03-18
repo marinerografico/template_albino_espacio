@@ -20,19 +20,31 @@
 </section>
 
 <!-- 2. TIERRA -->
-<section class="min-h-[80vh] flex items-center justify-center px-6 md:px-12">
-  <div class="w-full max-w-[560px] text-center">
-    <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-2">
-      {{ section.settings.tierra_title }}
-    </h2>
-    <p class="font-body text-[#6A6A6A] mb-8">
-      {{ section.settings.tierra_subtitle }}
-    </p>
-    <div class="font-body text-stone-900 space-y-2 text-left">
-      {% assign tierra_items = section.settings.tierra_lines | split: newline %}
-      {% for line in tierra_items %}
-        {% if line != blank %}<p class="mb-2 last:mb-0">{{ line | strip }}</p>{% endif %}
-      {% endfor %}
+<section class="relative w-full min-h-[60vh] md:min-h-[80vh] overflow-hidden reveal">
+  <div class="absolute inset-0 bg-stone-800">
+    {% if section.settings.tierra_video_url != blank %}
+      <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+        <source src="{{ section.settings.tierra_video_url | escape }}" type="video/mp4">
+      </video>
+    {% elsif section.settings.tierra_image != blank %}
+      <img src="{{ section.settings.tierra_image | image_url: width: 1920 }}" class="w-full h-full object-cover" alt="Tierra de Barros" width="1920" height="1080" loading="lazy">
+    {% endif %}
+  </div>
+  <div class="absolute inset-0 bg-[#B55239]/20 mix-blend-multiply pointer-events-none"></div>
+  <div class="absolute inset-0 z-10 flex items-center justify-center px-6">
+    <div class="w-full max-w-[560px] text-center">
+      <h2 class="espacio-title font-display heading-page reveal text-[#F5F4F1] mb-2">
+        {{ section.settings.tierra_title }}
+      </h2>
+      <p class="font-body text-[#F5F4F1] text-[13px] md:text-sm mb-8">
+        {{ section.settings.tierra_subtitle }}
+      </p>
+      <p class="espacio-line-1 text-base md:text-lg text-[#F5F4F1] space-y-3">
+        {% assign tierra_items = section.settings.tierra_lines | split: newline %}
+        {% for line in tierra_items %}
+          {% if line != blank %}<span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono" style="line-height: 1.1;">{{ line | strip }}</span>{% endif %}
+        {% endfor %}
+      </p>
     </div>
   </div>
 </section>
@@ -96,6 +108,17 @@
     {
       "type": "header",
       "content": "2 · Tierra"
+    },
+    {
+      "type": "text",
+      "id": "tierra_video_url",
+      "label": "Vídeo de fondo (MP4)",
+      "info": "Sube el MP4 a Content → Files y pega la URL."
+    },
+    {
+      "type": "image_picker",
+      "id": "tierra_image",
+      "label": "Imagen de fondo (si no hay vídeo)"
     },
     {
       "type": "text",
