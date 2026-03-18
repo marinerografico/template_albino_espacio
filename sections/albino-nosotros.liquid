@@ -1,96 +1,79 @@
-{% comment %} Sección página Nosotros: versión narrativa con bloques Tierra / Manos / Mirada / Equilibrio / Lo esencial. {% endcomment %}
+{% comment %}
+  Página Origen (antes Nosotros). Estructura simplificada:
+  ORIGEN — TIERRA — ESFUERZO — Aquí empieza el vino — Imagen + CTA
+{% endcomment %}
+{% capture newline %}
+{% endcapture %}
 
-<!-- 1. ORIGEN (silencio) -->
+<!-- 1. ORIGEN -->
 <section class="min-h-[120vh] flex items-center justify-center px-6 pt-32">
   <div class="text-center">
     <h1 class="espacio-title font-display heading-page reveal text-stone-900">
-      <span class="origen-hero-line">{{ section.settings.origen_title }}</span>
+      {{ section.settings.origen_title }}
     </h1>
   </div>
 </section>
 
-<!-- 2. TIERRA (materia) -->
-<section class="min-h-[120vh] relative overflow-hidden">
-  <div class="absolute inset-0">
-    {% if section.settings.tierra_video_url != blank %}
-      <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-        <source src="{{ section.settings.tierra_video_url | escape }}" type="video/mp4">
-      </video>
-    {% elsif section.settings.tierra_image != blank %}
-      <img src="{{ section.settings.tierra_image | image_url: width: 1600 }}" alt="{{ section.settings.tierra_image_alt | escape }}" class="w-full h-full object-cover">
-    {% endif %}
-    <div class="absolute inset-0 bg-[#B55239]/20 mix-blend-multiply pointer-events-none"></div>
-  </div>
-  <div class="absolute inset-0 flex items-center justify-center">
-    <div class="reveal px-6 md:px-16 lg:px-24 max-w-[520px] text-center relative z-10">
-      <h2 class="espacio-title font-display heading-page reveal text-[#F5F4F1] mb-3">
-        <span class="origen-hero-line" data-full-text="{{ section.settings.tierra_title }}">{{ section.settings.tierra_title }}</span>
-      </h2>
-      <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#F5F4F1]">
-        {{ section.settings.tierra_subtitle }}
-      </p>
-    </div>
-  </div>
+<!-- Separador -->
+<section class="py-12 px-6">
+  <p class="text-center font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
 </section>
 
-<!-- 3. MANOS (cuerpo / esfuerzo) -->
-<section class="min-h-[140vh] flex items-center justify-center px-6 md:px-12 lg:px-24">
-  <div class="w-full max-w-[960px] mx-auto grid md:grid-cols-2 gap-16 items-center">
-    <div class="reveal flex justify-center">
-      {% if section.settings.manos_video_url != blank %}
-        <video class="w-full max-w-[420px] aspect-[4/5] object-cover filter grayscale-[25%] contrast-110" autoplay muted loop playsinline>
-          <source src="{{ section.settings.manos_video_url | escape }}" type="video/mp4">
-        </video>
-      {% elsif section.settings.manos_image != blank %}
-        <img src="{{ section.settings.manos_image | image_url: width: 800 }}" alt="{{ section.settings.manos_image_alt | escape }}" class="w-full max-w-[420px] aspect-[4/5] object-cover filter grayscale-[25%] contrast-110">
-      {% endif %}
-    </div>
-    <div class="reveal md:text-left text-center">
-      <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-4">
-        <span class="origen-hero-line" data-full-text="{{ section.settings.manos_title }}">{{ section.settings.manos_title }}</span>
-      </h2>
-      <p class="font-geist-mono text-[11px] md:text-xs uppercase tracking-[0.18em] text-[#6A6A6A] leading-relaxed">
-        {{ section.settings.manos_text }}
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- 4. MIRADA (idea) -->
-<section class="min-h-[140vh] flex items-center justify-center px-6">
-  <div class="reveal text-center max-w-[640px] mx-auto">
-    <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
-      <span class="origen-hero-line" data-full-text="{{ section.settings.mirada_title }}">{{ section.settings.mirada_title }}</span>
+<!-- 2. TIERRA -->
+<section class="min-h-[80vh] flex items-center justify-center px-6 md:px-12">
+  <div class="w-full max-w-[560px] text-center">
+    <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-2">
+      {{ section.settings.tierra_title }}
     </h2>
-    <p class="text-base md:text-lg reveal delay-100 text-[#6A6A6A]">
-      <span class="block tracking-[0.32em] uppercase text-[11px] md:text-xs font-geist-mono">
-        {{ section.settings.mirada_text | newline_to_br }}
-      </span>
+    <p class="font-body text-[#6A6A6A] mb-8">
+      {{ section.settings.tierra_subtitle }}
     </p>
+    <div class="font-body text-stone-900 space-y-2 text-left">
+      {% assign tierra_items = section.settings.tierra_lines | split: newline %}
+      {% for line in tierra_items %}
+        {% if line != blank %}<p class="mb-2 last:mb-0">{{ line | strip }}</p>{% endif %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 
-<!-- 5. EQUILIBRIO (síntesis) -->
+<!-- Separador -->
+<section class="py-12 px-6">
+  <p class="text-center font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
+</section>
+
+<!-- 3. ESFUERZO -->
+<section class="min-h-[80vh] flex items-center justify-center px-6 md:px-12">
+  <div class="w-full max-w-[560px] text-center">
+    <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
+      {{ section.settings.esfuerzo_title }}
+    </h2>
+    <div class="font-body text-stone-900 space-y-2 text-left">
+      {% assign esfuerzo_items = section.settings.esfuerzo_text | split: newline %}
+      {% for line in esfuerzo_items %}
+        {% if line != blank %}<p class="mb-2 last:mb-0">{{ line | strip }}</p>{% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Separador -->
+<section class="py-12 px-6">
+  <p class="text-center font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
+</section>
+
+<!-- 4. Aquí empieza el vino -->
 <section class="min-h-[120vh] flex items-center justify-center px-6">
-  <div class="reveal text-center">
-    <h2 class="espacio-title font-display heading-page reveal text-stone-900">
-      <span class="origen-hero-line" data-full-text="{{ section.settings.equilibrio_title }}">{{ section.settings.equilibrio_title }}</span>
-    </h2>
-  </div>
-</section>
-
-<!-- 6. LO ESENCIAL (objeto) -->
-<section class="min-h-[140vh] flex items-center justify-center px-6">
-  <div class="reveal flex flex-col items-center">
-    {% if section.settings.bottle_image != blank %}
-      <img src="{{ section.settings.bottle_image | image_url: width: 800 }}" alt="{{ section.settings.bottle_image_alt | escape }}" class="w-full max-w-[340px] md:max-w-[380px] h-auto object-contain mix-blend-multiply opacity-90 filter contrast-110 mb-10">
+  <div class="reveal flex flex-col items-center text-center">
+    <p class="font-display text-stone-900 mb-12 text-lg md:text-xl">
+      {{ section.settings.cierre_text }}
+    </p>
+    {% if section.settings.cta_image != blank %}
+      <img src="{{ section.settings.cta_image | image_url: width: 800 }}" alt="{{ section.settings.cta_image_alt | escape }}" class="w-full max-w-[340px] md:max-w-[380px] h-auto object-contain mix-blend-multiply opacity-90 filter contrast-110 mb-10">
     {% endif %}
-    <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-4 text-center">
-      <span class="origen-hero-line" data-full-text="{{ section.settings.loesencial_title }}">{{ section.settings.loesencial_title }}</span>
-    </h2>
-    {% if section.settings.loesencial_link != blank %}
-      <a href="{{ section.settings.loesencial_link }}" class="inline-block uppercase hover:text-[#111111] transition-colors duración-500 ease-out text-xs md:text-sm font-light tracking-tight font-geist-mono text-[#6A6A6A] border-b border-[#a0a09e] hover:border-[#111111] pb-1">
-        {{ section.settings.loesencial_cta }}
+    {% if section.settings.cta_url != blank and section.settings.cta_label != blank %}
+      <a href="{{ section.settings.cta_url }}" class="inline-block uppercase hover:text-[#111111] transition-colors duration-500 ease-out text-xs md:text-sm font-light font-geist-mono text-[#6A6A6A] border-b border-[#a0a09e] hover:border-[#111111] pb-1">
+        {{ section.settings.cta_label }}
       </a>
     {% endif %}
   </div>
@@ -98,7 +81,7 @@
 
 {% schema %}
 {
-  "name": "Albino Nosotros",
+  "name": "Origen",
   "settings": [
     {
       "type": "header",
@@ -107,7 +90,7 @@
     {
       "type": "text",
       "id": "origen_title",
-      "label": "Título origen",
+      "label": "Título",
       "default": "ORIGEN"
     },
     {
@@ -117,128 +100,75 @@
     {
       "type": "text",
       "id": "tierra_title",
-      "label": "Título Tierra",
-      "default": "Tierra"
+      "label": "Título",
+      "default": "TIERRA"
     },
     {
       "type": "text",
       "id": "tierra_subtitle",
-      "label": "Subtítulo Tierra",
-      "default": "Tierra de Barros · Extremadura"
-    },
-    {
-      "type": "url",
-      "id": "tierra_video_url",
-      "label": "URL vídeo Tierra (opcional)"
-    },
-    {
-      "type": "image_picker",
-      "id": "tierra_image",
-      "label": "Imagen Tierra (fallback si no hay vídeo)"
-    },
-    {
-      "type": "text",
-      "id": "tierra_image_alt",
-      "label": "Alt imagen Tierra",
-      "default": "Textura de tierra"
-    },
-    {
-      "type": "header",
-      "content": "3 · Manos"
-    },
-    {
-      "type": "text",
-      "id": "manos_title",
-      "label": "Título Manos",
-      "default": "Manos"
+      "label": "Subtítulo",
+      "default": "Tierra de Barros, Extremadura"
     },
     {
       "type": "textarea",
-      "id": "manos_text",
-      "label": "Texto Manos",
-      "default": "Esfuerzo que no se exhibe. Se repite cada año."
-    },
-    {
-      "type": "url",
-      "id": "manos_video_url",
-      "label": "URL vídeo Manos (opcional)"
-    },
-    {
-      "type": "image_picker",
-      "id": "manos_image",
-      "label": "Imagen Manos (fallback si no hay vídeo)"
-    },
-    {
-      "type": "text",
-      "id": "manos_image_alt",
-      "label": "Alt imagen Manos",
-      "default": "Manos trabajando la vid"
+      "id": "tierra_lines",
+      "label": "Líneas (una por línea)",
+      "default": "Arcilla roja.\nClima seco.\nUn paisaje abierto."
     },
     {
       "type": "header",
-      "content": "4 · Mirada"
+      "content": "3 · Esfuerzo"
     },
     {
       "type": "text",
-      "id": "mirada_title",
-      "label": "Título Mirada",
-      "default": "Mirada"
+      "id": "esfuerzo_title",
+      "label": "Título",
+      "default": "ESFUERZO"
     },
     {
       "type": "textarea",
-      "id": "mirada_text",
-      "label": "Texto Mirada (multilínea)",
-      "default": "No reinventamos la tradición.\nLa miramos distinto."
+      "id": "esfuerzo_text",
+      "label": "Texto (multilínea)",
+      "default": "Un trabajo que se repite cada año.\nSiempre afinándose."
     },
     {
       "type": "header",
-      "content": "5 · Equilibrio"
+      "content": "4 · Cierre e imagen"
     },
     {
       "type": "text",
-      "id": "equilibrio_title",
-      "label": "Título Equilibrio",
-      "default": "Equilibrio"
-    },
-    {
-      "type": "header",
-      "content": "6 · Lo esencial"
+      "id": "cierre_text",
+      "label": "Texto de cierre",
+      "default": "Aquí empieza el vino."
     },
     {
       "type": "image_picker",
-      "id": "bottle_image",
-      "label": "Imagen botella"
+      "id": "cta_image",
+      "label": "Imagen (botella Albino)"
     },
     {
       "type": "text",
-      "id": "bottle_image_alt",
-      "label": "Alt imagen botella",
+      "id": "cta_image_alt",
+      "label": "Alt imagen",
       "default": "Botella Albino"
     },
     {
-      "type": "text",
-      "id": "loesencial_title",
-      "label": "Título Lo esencial",
-      "default": "Lo esencial"
-    },
-    {
       "type": "url",
-      "id": "loesencial_link",
-      "label": "URL CTA Lo esencial"
+      "id": "cta_url",
+      "label": "URL del CTA"
     },
     {
       "type": "text",
-      "id": "loesencial_cta",
-      "label": "Texto CTA Lo esencial",
-      "default": "Descubrir la edición"
+      "id": "cta_label",
+      "label": "Texto del CTA",
+      "default": "Explorar la mirada"
     }
   ],
   "presets": [
     {
-      "name": "Albino Nosotros",
+      "name": "Origen",
       "settings": {}
     }
   ]
 }
 {% endschema %}
-
