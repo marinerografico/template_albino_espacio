@@ -208,7 +208,7 @@ body, .font-body, .font-display {
 .heading-page {
   font-size: 18px;
   line-height: 22px;
-  letter-spacing: 0;
+  letter-spacing: 3px;
   margin-right: 0;
   text-transform: uppercase;
 }
@@ -476,7 +476,7 @@ body[data-age-gate-active] #age-gate {
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
-  letter-spacing: 0;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: #111111;
   margin: 0;
