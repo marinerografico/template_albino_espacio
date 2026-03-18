@@ -43,6 +43,15 @@ img.w-full {
 
 .font-geist-mono {
   font-family: 'BDO Grotesk', sans-serif !important;
+  letter-spacing: 0;
+}
+
+/* Interletrado 0% en toda la web */
+body, .font-body, .font-display {
+  letter-spacing: 0;
+}
+[class*="tracking"] {
+  letter-spacing: 0 !important;
 }
 
 @font-face {
@@ -63,6 +72,7 @@ img.w-full {
 
 .font-db-serif {
   font-family: 'DB Serif', serif;
+  letter-spacing: 0.2em !important;
 }
 
 /* Reveal on scroll */
@@ -198,7 +208,7 @@ img.w-full {
 .heading-page {
   font-size: 18px;
   line-height: 22px;
-  letter-spacing: normal;
+  letter-spacing: 0;
   margin-right: 0;
   text-transform: uppercase;
 }
@@ -292,7 +302,7 @@ body[data-age-gate-active] #age-gate {
   font-size: 0.75rem;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0;
   color: #111111;
   background: none;
   border: none;
@@ -317,7 +327,7 @@ body[data-age-gate-active] #age-gate {
   font-family: 'BDO Grotesk', sans-serif;
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0;
   color: #111111;
   border-bottom: 1px solid #111111;
   padding-bottom: 2px;
@@ -405,7 +415,7 @@ body[data-age-gate-active] #age-gate {
   font-size: 0.7rem;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0;
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: color 0.2s, background 0.2s, border-color 0.2s;
@@ -466,7 +476,7 @@ body[data-age-gate-active] #age-gate {
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
-  letter-spacing: normal;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: #111111;
   margin: 0;
