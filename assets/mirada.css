@@ -134,6 +134,7 @@
 /* Buttons */
 .mirada-btn {
   font-family: 'BDO Grotesk', sans-serif;
+  letter-spacing: 1px;
   font-size: 0.7rem;
   font-weight: 400;
   text-transform: uppercase;

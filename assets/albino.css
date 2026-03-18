@@ -39,6 +39,7 @@ img.w-full {
 .font-body {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;
+  font-size: 12px !important;
 }
 
 .font-geist-mono {
@@ -52,6 +53,33 @@ body, .font-body, .font-display {
 }
 [class*="tracking"] {
   letter-spacing: 3px !important;
+}
+
+/* Menú y CTA: 1px interletrado, 12px */
+a[href="#main-content"],
+#main-header nav a,
+#main-header #header-cart-link .font-geist-mono,
+#main-header #header-cart-link span,
+#mobile-menu nav a,
+#cart-modal .font-geist-mono,
+#cart-modal button,
+#cart-modal [class*="tracking"],
+footer nav a,
+footer nav,
+footer .font-geist-mono,
+[data-add-to-cart],
+.pack-add-link,
+a.font-geist-mono.border-b,
+button.font-geist-mono,
+a.font-geist-mono.border,
+.mirada-btn,
+.mirada-cta-actions a,
+.mirada-accessible-tag,
+#age-gate .age-gate-btn,
+#age-gate .age-gate-link,
+.cookie-banner-btn {
+  letter-spacing: 1px !important;
+  font-size: 12px !important;
 }
 
 @font-face {
@@ -484,14 +512,9 @@ body[data-age-gate-active] #age-gate {
 .legal-page-content {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 0.9375rem;
+  font-size: 12px;
   line-height: 1.6;
   color: #111111;
-}
-@media (min-width: 768px) {
-  .legal-page-content {
-    font-size: 1rem;
-  }
 }
 .legal-page-content p {
   margin: 0 0 1rem;
