@@ -233,10 +233,11 @@ a.font-geist-mono.border,
 }
 
 /* H2 unificado: mismo estilo y animación que #espacio-heading en todas las páginas */
-.heading-page {
+.heading-page,
+.espacio-title.heading-page {
   font-size: 18px;
   line-height: 22px;
-  letter-spacing: 3px;
+  letter-spacing: 1px !important;
   margin-right: 0;
   text-transform: uppercase;
 }
