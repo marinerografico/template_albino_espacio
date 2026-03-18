@@ -43,15 +43,15 @@ img.w-full {
 
 .font-geist-mono {
   font-family: 'BDO Grotesk', sans-serif !important;
-  letter-spacing: 0;
+  letter-spacing: 3px;
 }
 
-/* Interletrado 0% en toda la web */
+/* BDO Grotesk: 3px interletrado */
 body, .font-body, .font-display {
-  letter-spacing: 0;
+  letter-spacing: 3px;
 }
 [class*="tracking"] {
-  letter-spacing: 0 !important;
+  letter-spacing: 3px !important;
 }
 
 @font-face {
@@ -72,7 +72,7 @@ body, .font-body, .font-display {
 
 .font-db-serif {
   font-family: 'DB Serif', serif;
-  letter-spacing: 0.2em !important;
+  letter-spacing: 0 !important;
 }
 
 /* Reveal on scroll */
