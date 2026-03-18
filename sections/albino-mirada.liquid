@@ -1,10 +1,8 @@
 {% comment %}
   MIRADA — Experiencia NFC editorial para Albino.
   Mobile-first, premium, minimal. Dos modos: inmersivo y accesible.
-  Jerarquía: Hero → Producto → Nutrición → Descubrir → Aprender → Archivo → CTA
+  mirada.css se carga en el head (layout) para evitar FOUC en el hero.
 {% endcomment %}
-
-{{ 'mirada.css' | asset_url | stylesheet_tag }}
 
 <div class="mirada-page" id="mirada-page-root"
   data-audio-intro="{% if section.settings.audio_intro != blank %}{{ section.settings.audio_intro }}{% endif %}"
@@ -52,9 +50,6 @@
           <a href="#product-info" class="mirada-link">Información del vino</a>
           <a href="#learn-to-look" class="mirada-link">Aprender a mirarlo</a>
         </nav>
-        <button type="button" id="btn-accessible-toggle" class="mirada-btn mirada-btn-tertiary mt-8 text-[10px]" aria-pressed="false" aria-label="Usar modo accesible">
-          Usar modo accesible
-        </button>
       </div>
     </section>
 
@@ -75,13 +70,12 @@
           <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-primary" aria-expanded="false" aria-controls="nutrition-info">
             Ver información nutricional
           </button>
-          <a href="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}" id="btn-ver-botella" class="mirada-btn mirada-btn-secondary">
+          <a href="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-secondary">
             Ver botella
           </a>
           <button type="button" id="btn-audio-product" class="mirada-btn mirada-btn-audio" aria-label="Escuchar información del vino" hidden>
-            Escuchar información del vino
+            Escuchar
           </button>
-          <button type="button" id="btn-skip-nutrition" class="mirada-btn mirada-btn-tertiary text-center w-full sm:w-auto bg-transparent border-0 cursor-pointer">Saltar información nutricional</button>
         </div>
       </div>
     </section>
@@ -103,9 +97,6 @@
           </tbody>
         </table>
         <p class="mirada-nutrition-note reveal delay-200">Consumir con responsabilidad.</p>
-        <button type="button" id="btn-audio-nutrition" class="mirada-btn mirada-btn-audio" aria-label="Escuchar información nutricional" hidden>
-          Escuchar información nutricional
-        </button>
       </div>
     </section>
 
@@ -119,9 +110,6 @@
           <p>Un vino cercano. Pensado para compartir.</p>
           <p>Albino no pretende reinventar el vino. Solo propone mirarlo de otra manera.</p>
         </div>
-        <button type="button" id="btn-audio-discover" class="mirada-btn mirada-btn-audio" aria-label="Escuchar Descubrir el vino" hidden>
-          Escuchar
-        </button>
       </div>
     </section>
 
@@ -131,6 +119,9 @@
         <h2 id="learn-title" class="mirada-heading">Aprender a mirarlo</h2>
         <p class="mirada-learn-intro-text">Esta no es una cata tradicional.
 Es una invitación a percibir el momento.</p>
+        <button type="button" id="btn-audio-learn" class="mirada-btn mirada-btn-audio" aria-label="Escuchar recorrido guiado de los 4 momentos" hidden>
+          Escuchar recorrido
+        </button>
       </div>
 
       <article id="step-1" class="learn-moment" aria-labelledby="step-1-title" data-step="1">
@@ -148,7 +139,6 @@ Es una invitación a percibir el momento.</p>
           <p class="learn-moment-num" aria-hidden="true">01</p>
           <h3 id="step-1-title" class="learn-moment-title">Mira el momento</h3>
           <p class="learn-moment-text">Antes de probar el vino, tómate un momento. Cada persona mira el mundo de una forma distinta. A veces con los ojos. A veces con los sentidos.</p>
-          <button type="button" class="mirada-btn mirada-btn-audio learn-moment-audio" data-audio="step-1" aria-label="Paso 1. Escuchar: Mira el momento antes de probar el vino" hidden>Escuchar</button>
         </div>
       </article>
 
@@ -167,7 +157,6 @@ Es una invitación a percibir el momento.</p>
           <p class="learn-moment-num" aria-hidden="true">02</p>
           <h3 id="step-2-title" class="learn-moment-title">Acércate al vino</h3>
           <p class="learn-moment-text">Acerca la copa. No hace falta encontrar palabras. Solo percibe.</p>
-          <button type="button" class="mirada-btn mirada-btn-audio learn-moment-audio" data-audio="step-2" aria-label="Paso 2. Escuchar: Acércate al vino" hidden>Escuchar</button>
         </div>
       </article>
 
@@ -186,7 +175,6 @@ Es una invitación a percibir el momento.</p>
           <p class="learn-moment-num" aria-hidden="true">03</p>
           <h3 id="step-3-title" class="learn-moment-title">Prueba</h3>
           <p class="learn-moment-text">Bebe despacio. No intentes entenderlo todo. Solo deja que ocurra.</p>
-          <button type="button" class="mirada-btn mirada-btn-audio learn-moment-audio" data-audio="step-3" aria-label="Paso 3. Escuchar: Prueba el vino" hidden>Escuchar</button>
         </div>
       </article>
 
@@ -205,7 +193,6 @@ Es una invitación a percibir el momento.</p>
           <p class="learn-moment-num" aria-hidden="true">04</p>
           <h3 id="step-4-title" class="learn-moment-title">Vuelve a mirar</h3>
           <p class="learn-moment-text">Ahora vuelve a mirar el momento. Quizá no haya cambiado nada. O quizá sí. El vino no cambia el mundo. Solo cambia la forma de mirarlo.</p>
-          <button type="button" class="mirada-btn mirada-btn-audio learn-moment-audio" data-audio="step-4" aria-label="Paso 4. Escuchar: Vuelve a mirar" hidden>Escuchar</button>
         </div>
       </article>
     </section>
@@ -231,7 +218,6 @@ Esta también puede ser tu mirada.</p>
           <div id="form-miradas-feedback" class="mirada-form-feedback" role="status" aria-live="polite" aria-atomic="true"></div>
           <button type="submit" class="mirada-btn mirada-btn-primary w-full">Dejar mi mirada</button>
         </form>
-        <button type="button" id="btn-audio-outro" class="mirada-btn mirada-btn-audio" aria-label="Escuchar cierre" hidden>Escuchar cierre</button>
       </div>
     </section>
 
@@ -240,14 +226,15 @@ Esta también puede ser tu mirada.</p>
       <div class="mirada-block mirada-cta-block">
         <h2 id="cta-title" class="sr-only">Producto</h2>
         <div class="mirada-cta-actions">
-          <a href="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-secondary">Ver el vino</a>
           <a href="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}" class="mirada-btn mirada-btn-primary">Comprar botella</a>
+          <a href="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}" class="mirada-link mirada-cta-link">Ver el vino</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="mirada-footer">
+    <button type="button" id="btn-accessible-toggle" class="mirada-footer-accessible" aria-pressed="false" aria-label="Usar modo accesible">Modo accesible</button>
     <a href="{{ routes.root_url }}">
       {% if settings.logo != blank %}
         <img src="{{ settings.logo | image_url: width: 300 }}" alt="Logotipo de Albino, vino de Tierra de Barros" class="mirada-footer-logo" width="150" height="60" loading="lazy">

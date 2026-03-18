@@ -43,7 +43,7 @@
       band.hidden = !audioEnabled;
       band.classList.toggle('mirada-audio-band-visible', audioEnabled);
     }
-    document.querySelectorAll('.mirada-btn-audio, .learn-moment-audio').forEach(function (el) {
+    document.querySelectorAll('.mirada-btn-audio').forEach(function (el) {
       el.hidden = !audioEnabled;
     });
     if (audioEnabled && navigator.vibrate) navigator.vibrate(50);
@@ -61,6 +61,18 @@
     audioPlayer.play().catch(function () {});
   }
 
+  function initAudioEnded() {
+    if (!audioPlayer) return;
+    audioPlayer.addEventListener('ended', function () {
+      if (learnAudioIndex > 0 && learnAudioIndex < LEARN_AUDIO_ORDER.length) {
+        if (LEARN_AUDIO_ORDER[learnAudioIndex - 1] === 'step_3') vibrate(60);
+        playNextLearnStep();
+      } else if (learnAudioIndex >= LEARN_AUDIO_ORDER.length) {
+        learnAudioIndex = 0;
+      }
+    });
+  }
+
   function vibrate(ms) {
     if (accessibleMode) return;
     if (navigator.vibrate) navigator.vibrate(ms || 30);
@@ -73,6 +85,21 @@
       toggle.addEventListener('click', function () {
         setAccessibleMode(!accessibleMode);
       });
+    }
+  }
+
+  var LEARN_AUDIO_ORDER = ['step_1', 'step_2', 'step_3', 'step_4'];
+  var learnAudioIndex = 0;
+
+  function playNextLearnStep() {
+    if (learnAudioIndex >= LEARN_AUDIO_ORDER.length) {
+      learnAudioIndex = 0;
+      return;
+    }
+    var url = getAudioUrl(LEARN_AUDIO_ORDER[learnAudioIndex]);
+    if (url) {
+      playAudio(url);
+      learnAudioIndex++;
     }
   }
 
@@ -92,22 +119,22 @@
     document.getElementById('btn-audio-product')?.addEventListener('click', function () {
       playAudio(getAudioUrl('product'));
     });
-    document.getElementById('btn-audio-nutrition')?.addEventListener('click', function () {
-      playAudio(getAudioUrl('nutrition'));
-    });
-    document.getElementById('btn-audio-discover')?.addEventListener('click', function () {
-      playAudio(getAudioUrl('discover'));
-    });
-    document.getElementById('btn-audio-outro')?.addEventListener('click', function () {
-      playAudio(getAudioUrl('outro'));
-    });
-    document.querySelectorAll('.learn-moment-audio').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var step = btn.getAttribute('data-audio');
-        playAudio(getAudioUrl('step_' + step));
-        if (step === '3') vibrate(60);
+    var btnLearn = document.getElementById('btn-audio-learn');
+    if (btnLearn) {
+      btnLearn.addEventListener('click', function () {
+        learnAudioIndex = 0;
+        var introUrl = getAudioUrl('learn_intro');
+        if (introUrl) {
+          audioPlayer.addEventListener('ended', function onIntroEnd() {
+            audioPlayer.removeEventListener('ended', onIntroEnd);
+            playNextLearnStep();
+          }, { once: true });
+          playAudio(introUrl);
+        } else {
+          playNextLearnStep();
+        }
       });
-    });
+    }
   }
 
   function initQuickLinks() {
@@ -126,7 +153,6 @@
   function initNutritionToggle() {
     var btn = document.getElementById('btn-toggle-nutrition');
     var section = document.getElementById('nutrition-info');
-    var btnSkip = document.getElementById('btn-skip-nutrition');
     if (!btn || !section) return;
     btn.addEventListener('click', function () {
       var hidden = section.hidden;
@@ -134,12 +160,6 @@
       btn.setAttribute('aria-expanded', String(!hidden));
       btn.textContent = hidden ? 'Ocultar información nutricional' : 'Ver información nutricional';
       if (!hidden) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    if (btnSkip) btnSkip.addEventListener('click', function () {
-      section.hidden = true;
-      btn.setAttribute('aria-expanded', 'false');
-      btn.textContent = 'Ver información nutricional';
-      document.getElementById('discover-wine')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 
@@ -213,6 +233,7 @@
     initAccessibleToggle();
     initAudioButtons();
     initSectionAudioButtons();
+    initAudioEnded();
     initQuickLinks();
     initNutritionToggle();
     initForm();

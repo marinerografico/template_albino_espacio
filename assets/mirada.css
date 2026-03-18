@@ -481,6 +481,39 @@
 }
 .mirada-footer a:hover .mirada-footer-logo { opacity: 1; }
 
+.mirada-footer-accessible {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #6A6A6A;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  padding: 0 0 2px;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.mirada-footer-accessible:hover,
+.mirada-footer-accessible:focus-visible {
+  color: #111111;
+  border-bottom-color: #a0a09e;
+}
+.mirada-footer-accessible:focus-visible {
+  outline: none;
+  box-shadow: 0 2px 0 0 #111111;
+}
+
+.mirada-cta-link {
+  margin-top: 0.25rem;
+}
+@media (min-width: 640px) {
+  .mirada-cta-link { margin-top: 0; }
+}
+
 /* Reveal (immersive mode) */
 .reveal {
   opacity: 0;
