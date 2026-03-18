@@ -32,18 +32,18 @@
   </div>
   <div class="absolute inset-0 bg-[#B55239]/20 mix-blend-multiply pointer-events-none"></div>
   <div class="absolute inset-0 z-10 flex items-center justify-center px-8 md:px-16">
-    <div class="w-full max-w-[560px] text-left">
+    <div class="w-full max-w-[560px] text-center">
       <h2 class="espacio-title font-display heading-page reveal text-[#F5F4F1] mb-4">
         {{ section.settings.tierra_title }}
       </h2>
-      <p class="font-db-serif italic text-[#F5F4F1] text-[14px] md:text-base lowercase mb-10" style="letter-spacing: 0;">
+      <p class="font-db-serif italic text-[#F5F4F1] text-[14px] md:text-base lowercase mb-12" style="letter-spacing: 0;">
         {{ section.settings.tierra_subtitle }}
       </p>
-      <div class="space-y-4 text-[#F5F4F1]">
+      <div class="space-y-6 text-[#F5F4F1]">
         {% assign tierra_items = section.settings.tierra_lines | split: newline %}
         {% for line in tierra_items %}
           {% if line != blank %}
-            <p class="font-display uppercase text-[12px] md:text-[14px] leading-tight" style="margin-left: {{ forloop.index0 | times: 24 }}px; letter-spacing: 3px;">{{ line | strip }}</p>
+            <p class="font-display uppercase text-[12px] md:text-[14px] tracking-[0.32em] leading-tight">{{ line | strip }}</p>
           {% endif %}
         {% endfor %}
       </div>
@@ -140,7 +140,7 @@
       "type": "textarea",
       "id": "tierra_lines",
       "label": "Líneas (una por línea)",
-      "default": "Arcilla roja.\nClima seco.\nUn paisaje abierto."
+      "default": "Arcilla roja.\nClima seco.\nLlanura."
     },
     {
       "type": "header",
