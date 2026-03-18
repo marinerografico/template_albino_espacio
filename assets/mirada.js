@@ -19,12 +19,13 @@
   function setAccessibleMode(on) {
     accessibleMode = !!on;
     document.body.classList.toggle('mirada-accessible', accessibleMode);
-    var toggle = document.getElementById('btn-accessible-toggle');
+    var toggles = document.querySelectorAll('#btn-accessible-toggle, #btn-accessible-hero');
     var msg = document.getElementById('accessible-mode-msg');
-    if (toggle) {
-      toggle.setAttribute('aria-pressed', String(accessibleMode));
-      toggle.textContent = accessibleMode ? 'Modo accesible activado' : 'Usar modo accesible';
-    }
+    toggles.forEach(function (t) {
+      t.setAttribute('aria-pressed', String(accessibleMode));
+      t.setAttribute('aria-label', accessibleMode ? 'Desactivar modo accesible' : 'Usar modo accesible');
+      t.textContent = accessibleMode ? 'Modo accesible activado' : 'Modo accesible';
+    });
     if (msg) msg.hidden = !accessibleMode;
     if (accessibleMode) {
       setAudioEnabled(false);
@@ -40,8 +41,8 @@
     var heroActions = document.getElementById('hero-audio-actions');
     var status = document.getElementById('audio-status');
     var band = document.getElementById('mirada-audio-band');
-    if (heroActions) heroActions.hidden = !!accessibleMode;
     if (btnToggle) {
+      btnToggle.hidden = !!accessibleMode;
       btnToggle.setAttribute('aria-pressed', String(audioEnabled));
       btnToggle.setAttribute('aria-label', audioEnabled ? 'Desactivar audio' : 'Activar experiencia sonora');
       btnToggle.textContent = audioEnabled ? 'Desactivar audio' : 'Activar experiencia sonora';
@@ -88,12 +89,11 @@
 
   function initAccessibleToggle() {
     if (prefersReducedMotion()) setAccessibleMode(true);
-    var toggle = document.getElementById('btn-accessible-toggle');
-    if (toggle) {
+    document.querySelectorAll('#btn-accessible-toggle, #btn-accessible-hero').forEach(function (toggle) {
       toggle.addEventListener('click', function () {
         setAccessibleMode(!accessibleMode);
       });
-    }
+    });
   }
 
   var LEARN_AUDIO_ORDER = ['step_1', 'step_2', 'step_3', 'step_4'];
