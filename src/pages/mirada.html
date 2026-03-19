@@ -49,29 +49,65 @@
             <div class="mirada-dl-row mirada-dl-row-last"><dt>Alérgenos</dt><dd>Contiene sulfitos</dd></div>
           </dl>
           <div class="mirada-product-actions reveal delay-200">
-            <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-primary" aria-expanded="false" aria-controls="nutrition-info">Ver información nutricional</button>
+            <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-primary" aria-expanded="false" aria-controls="label-info">Ver información de la etiqueta</button>
             <a href="/products/albino-edicion-2026" class="mirada-btn mirada-btn-secondary">Ver botella</a>
             <button type="button" id="btn-audio-product" class="mirada-btn mirada-btn-audio" aria-label="Escuchar información del vino" hidden>Escuchar</button>
           </div>
         </div>
       </section>
 
-      <!-- 3. NUTRITION (expandible) -->
-      <section id="nutrition-info" class="mirada-section mirada-nutrition" aria-labelledby="nutrition-title" hidden>
-        <div class="mirada-block mirada-nutrition-block">
-          <h2 id="nutrition-title" class="mirada-nutrition-header reveal">Información nutricional – Valores por 100 ml</h2>
-          <table class="mirada-table reveal delay-100" role="table" aria-describedby="nutrition-title">
-            <caption class="sr-only">Valores nutricionales por 100 ml de vino Albino</caption>
-            <tbody>
-              <tr><td>Energía</td><td>350 kJ / 85 kcal</td></tr>
-              <tr><td>Carbohidratos</td><td>4 g</td></tr>
-              <tr class="mirada-table-sub"><td>de los cuales azúcares</td><td>4 g</td></tr>
-              <tr><td>Grasas</td><td>0 g</td></tr>
-              <tr><td>Proteínas</td><td>0 g</td></tr>
-              <tr><td>Sal</td><td>0 g</td></tr>
-            </tbody>
-          </table>
-          <p class="mirada-nutrition-note reveal delay-200">Consumir con responsabilidad.</p>
+      <!-- 3. INFORMACIÓN DE LA ETIQUETA (expandible) -->
+      <section id="label-info" class="mirada-section mirada-label-info" aria-labelledby="label-info-title" hidden>
+        <div class="mirada-label-info-inner">
+          <h2 id="label-info-title" class="sr-only">Información de la etiqueta</h2>
+
+          <div class="mirada-label-block reveal">
+            <h3 class="mirada-label-block-title">Ingredientes</h3>
+            <p class="mirada-label-block-text">Uva, conservador (<strong>dióxido de azufre</strong>), corrector de acidez (ácido tartárico), estabilizante (goma arábiga).</p>
+          </div>
+
+          <div class="mirada-label-block reveal delay-100">
+            <h3 class="mirada-label-block-title">Información nutricional</h3>
+            <p class="mirada-label-nutrition-header">Por 100 ml</p>
+            <table class="mirada-table reveal" role="table" aria-describedby="label-info-title">
+              <caption class="sr-only">Valores nutricionales por 100 ml de vino Albino</caption>
+              <tbody>
+                <tr><td>Valor energético</td><td>406 kJ / 97 kcal</td></tr>
+                <tr><td>Grasas</td><td>0,1 g</td></tr>
+                <tr class="mirada-table-sub"><td>de las cuales saturadas</td><td>0 g</td></tr>
+                <tr><td>Hidratos de carbono</td><td>6,3 g</td></tr>
+                <tr class="mirada-table-sub"><td>de los cuales azúcares</td><td>6,3 g</td></tr>
+                <tr><td>Proteínas</td><td>0,1 g</td></tr>
+                <tr><td>Sal</td><td>0,01 g</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mirada-label-block reveal delay-100">
+            <h3 class="mirada-label-block-title">Consumo responsable</h3>
+            <div class="mirada-responsible-icons" role="list" aria-label="Advertencias de consumo responsable">
+              <div class="mirada-responsible-icon" role="listitem" title="No consumir durante el embarazo">
+                <svg class="mirada-prohibition-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="#c41e3a" stroke-width="2"/><line x1="8" y1="8" x2="40" y2="40" stroke="#c41e3a" stroke-width="2"/><circle cx="24" cy="20" r="6" fill="#111"/><path d="M18 32 Q24 28 30 32" stroke="#111" stroke-width="2" fill="none"/></svg>
+                <span class="sr-only">No consumir durante el embarazo</span>
+              </div>
+              <div class="mirada-responsible-icon" role="listitem" title="No conducir bajo los efectos del alcohol">
+                <svg class="mirada-prohibition-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="#c41e3a" stroke-width="2"/><line x1="8" y1="8" x2="40" y2="40" stroke="#c41e3a" stroke-width="2"/><rect x="12" y="22" width="18" height="10" rx="2" fill="#111"/><circle cx="16" cy="34" r="3" fill="#111"/><circle cx="32" cy="34" r="3" fill="#111"/></svg>
+                <span class="sr-only">No conducir bajo los efectos del alcohol</span>
+              </div>
+              <div class="mirada-responsible-icon" role="listitem" title="Prohibido para menores de 18 años">
+                <svg class="mirada-prohibition-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="#c41e3a" stroke-width="2"/><line x1="8" y1="8" x2="40" y2="40" stroke="#c41e3a" stroke-width="2"/><text x="24" y="28" text-anchor="middle" font-family="BDO Grotesk,sans-serif" font-size="14" font-weight="600" fill="#111">−18</text></svg>
+                <span class="sr-only">Prohibido para menores de 18 años</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mirada-label-block reveal delay-100">
+            <h3 class="mirada-label-block-title">Reciclabilidad</h3>
+            <div class="mirada-recycle-tags">
+              <span class="mirada-recycle-tag mirada-recycle-glass" aria-label="Reciclar vidrio">Recicla</span>
+              <span class="mirada-recycle-tag mirada-recycle-packaging" aria-label="Reciclar envases">Recicla</span>
+            </div>
+          </div>
         </div>
       </section>
 

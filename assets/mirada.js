@@ -172,13 +172,13 @@
 
   function initNutritionToggle() {
     var btn = document.getElementById('btn-toggle-nutrition');
-    var section = document.getElementById('nutrition-info');
+    var section = document.getElementById('label-info');
     if (!btn || !section) return;
     btn.addEventListener('click', function () {
       var hidden = section.hidden;
       section.hidden = !hidden;
       btn.setAttribute('aria-expanded', String(!hidden));
-      btn.textContent = hidden ? 'Ocultar información nutricional' : 'Ver información nutricional';
+      btn.textContent = hidden ? 'Ocultar información de la etiqueta' : 'Ver información de la etiqueta';
       if (!hidden) section.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
     });
   }
