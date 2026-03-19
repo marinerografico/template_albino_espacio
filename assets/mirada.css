@@ -39,19 +39,19 @@
 
 /* Sections */
 .mirada-section {
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1.5rem;
+  padding: 6rem 1.5rem;
 }
 @media (min-width: 768px) {
-  .mirada-section { padding: 6rem 2rem; }
+  .mirada-section { padding: 10rem 2rem; min-height: 90vh; }
 }
 
 .mirada-block {
   width: 100%;
-  max-width: 560px;
+  max-width: 520px;
   margin: 0 auto;
   text-align: center;
 }
@@ -61,7 +61,7 @@
   padding-top: 8rem;
 }
 .mirada-hero-inner {
-  max-width: 560px;
+  max-width: 520px;
   margin: 0 auto;
   text-align: center;
 }
@@ -78,12 +78,12 @@
 .mirada-heading {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.35;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: #111111;
-  margin: 0 0 1.5rem;
+  margin: 0 0 2rem;
 }
 
 .mirada-hero-sub {
@@ -311,9 +311,10 @@
 /* Learn moments */
 .mirada-learn {
   scroll-snap-type: y proximity;
+  padding: 0;
 }
 .learn-moment {
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -322,15 +323,46 @@
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
+@media (min-width: 768px) {
+  .learn-moment { min-height: 90vh; }
+}
 @media (prefers-reduced-motion: reduce) {
   .learn-moment { scroll-snap-stop: normal; }
 }
 
-.learn-moment-bg {
+/* Bloques solo texto (01, 03) — fondo limpio, mucho aire */
+.learn-moment-clean {
+  background: #F5F4F1;
+  padding: 6rem 1.5rem;
+}
+@media (min-width: 768px) {
+  .learn-moment-clean { padding: 10rem 2rem; }
+}
+.learn-moment-clean .learn-moment-content {
+  max-width: 520px;
+}
+.learn-moment-clean .learn-moment-num {
+  color: #6A6A6A;
+  margin-bottom: 1.5rem;
+}
+.learn-moment-clean .learn-moment-title {
+  color: #111111;
+  margin-bottom: 1.5rem;
+}
+.learn-moment-clean .learn-moment-text {
+  color: #111111;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  margin: 0 0 0.5rem;
+}
+
+/* Bloques con vídeo/imagen (02, 04) */
+.learn-moment-media .learn-moment-bg {
   position: absolute;
   inset: 0;
 }
-.learn-moment-video {
+.learn-moment-video,
+.learn-moment-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -343,7 +375,7 @@
 .learn-moment-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.25);
   mix-blend-mode: multiply;
   pointer-events: none;
 }
@@ -369,21 +401,22 @@
 .learn-moment-title {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.35;
   text-transform: uppercase;
+  letter-spacing: 1px;
   color: #F5F4F1;
-  margin: 0 0 2rem;
+  margin: 0 0 1.5rem;
 }
 
 .learn-moment-text {
   font-family: 'BDO Grotesk', sans-serif;
   font-size: 0.6875rem;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   color: rgba(245,244,241,0.95);
   line-height: 1.6;
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.5rem;
 }
 
 .learn-moment-audio {
@@ -398,13 +431,16 @@
 }
 
 .mirada-learn-intro {
-  min-height: 80vh;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1.5rem;
+  padding: 6rem 1.5rem;
   text-align: center;
+}
+@media (min-width: 768px) {
+  .mirada-learn-intro { padding: 10rem 2rem; }
 }
 
 .mirada-learn-intro-text {

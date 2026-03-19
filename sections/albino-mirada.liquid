@@ -123,17 +123,7 @@ Es una invitación a percibir el momento.</p>
         </button>
       </div>
 
-      <article id="step-1" class="learn-moment" aria-labelledby="step-1-title" data-step="1">
-        <div class="learn-moment-bg" aria-hidden="true">
-          {% if section.settings.video_step_1 != blank %}
-            <video class="learn-moment-video" autoplay muted loop playsinline aria-hidden="true">
-              <source src="{{ section.settings.video_step_1 | escape }}" type="video/mp4">
-            </video>
-          {% else %}
-            <div class="learn-moment-bg-fallback"></div>
-          {% endif %}
-          <div class="learn-moment-overlay"></div>
-        </div>
+      <article id="step-1" class="learn-moment learn-moment-clean" aria-labelledby="step-1-title" data-step="1">
         <div class="learn-moment-content">
           <p class="learn-moment-num" aria-hidden="true">01</p>
           <h3 id="step-1-title" class="learn-moment-title">Mira el momento</h3>
@@ -141,7 +131,7 @@ Es una invitación a percibir el momento.</p>
         </div>
       </article>
 
-      <article id="step-2" class="learn-moment" aria-labelledby="step-2-title" data-step="2">
+      <article id="step-2" class="learn-moment learn-moment-media" aria-labelledby="step-2-title" data-step="2">
         <div class="learn-moment-bg" aria-hidden="true">
           {% if section.settings.video_step_2 != blank %}
             <video class="learn-moment-video" autoplay muted loop playsinline aria-hidden="true">
@@ -159,17 +149,7 @@ Es una invitación a percibir el momento.</p>
         </div>
       </article>
 
-      <article id="step-3" class="learn-moment" aria-labelledby="step-3-title" data-step="3">
-        <div class="learn-moment-bg" aria-hidden="true">
-          {% if section.settings.video_step_3 != blank %}
-            <video class="learn-moment-video" autoplay muted loop playsinline aria-hidden="true">
-              <source src="{{ section.settings.video_step_3 | escape }}" type="video/mp4">
-            </video>
-          {% else %}
-            <div class="learn-moment-bg-fallback"></div>
-          {% endif %}
-          <div class="learn-moment-overlay"></div>
-        </div>
+      <article id="step-3" class="learn-moment learn-moment-clean" aria-labelledby="step-3-title" data-step="3">
         <div class="learn-moment-content">
           <p class="learn-moment-num" aria-hidden="true">03</p>
           <h3 id="step-3-title" class="learn-moment-title">Prueba</h3>
@@ -177,7 +157,7 @@ Es una invitación a percibir el momento.</p>
         </div>
       </article>
 
-      <article id="step-4" class="learn-moment" aria-labelledby="step-4-title" data-step="4">
+      <article id="step-4" class="learn-moment learn-moment-media" aria-labelledby="step-4-title" data-step="4">
         <div class="learn-moment-bg" aria-hidden="true">
           {% if section.settings.video_step_4 != blank %}
             <video class="learn-moment-video" autoplay muted loop playsinline aria-hidden="true">
