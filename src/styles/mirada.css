@@ -75,6 +75,14 @@
   margin: 0 0 1rem;
 }
 
+.mirada-hero-intro {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #333333;
+  margin: 0 0 2rem;
+}
+
 .mirada-heading {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;
@@ -611,6 +619,7 @@
   opacity: 1;
   transform: translateY(0);
 }
+.reveal.delay-50 { transition-delay: 0.075s; }
 .reveal.delay-100 { transition-delay: 0.15s; }
 .reveal.delay-200 { transition-delay: 0.3s; }
 

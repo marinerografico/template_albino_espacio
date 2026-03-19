@@ -96,7 +96,7 @@
         var wasOff = !accessibleMode;
         setAccessibleMode(!accessibleMode);
         if (toggle.id === 'btn-accessible-hero' && wasOff) {
-          var target = document.getElementById('learn-to-look');
+          var target = document.getElementById('product-info');
           if (target) target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
         }
       });
