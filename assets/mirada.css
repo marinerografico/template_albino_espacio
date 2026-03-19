@@ -1,6 +1,6 @@
 /**
- * MIRADA — Etiqueta digital expandida. Editorial, minimal, ritmo pausado.
- * Alterna bloques texto limpio y vídeo/imagen.
+ * MIRADA — Estilos editoriales para experiencia NFC Albino.
+ * Premium, minimal, mobile-first. Coherente con albino.css.
  */
 .mirada-page {
   background-color: #F5F4F1;
@@ -8,69 +8,138 @@
 }
 
 .mirada-page-root {
-  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 }
 @media (prefers-reduced-motion: reduce) {
-  .mirada-page-root { scroll-behavior: auto; }
+  .mirada-page-root { scroll-snap-type: none; }
 }
 
-/* Sections */
-.mirada-section {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6rem 1.5rem;
-}
-@media (min-width: 768px) {
-  .mirada-section { padding: 10rem 2rem; min-height: 90vh; }
-}
-
-.mirada-block {
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* Hero — Legal first */
-.mirada-hero {
-  padding-top: 8rem;
-}
-.mirada-label {
+/* Audio band */
+.mirada-audio-band {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  padding: 0.75rem 1.5rem;
+  background: #111111;
+  color: #F5F4F1;
   font-family: 'BDO Grotesk', sans-serif;
   font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 3px;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+.mirada-audio-band-visible {
+  transform: translateY(0);
+}
+
+/* Sections */
+.mirada-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+}
+@media (min-width: 768px) {
+  .mirada-section { padding: 6rem 2rem; }
+}
+
+.mirada-block {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Hero */
+.mirada-hero {
+  padding-top: 8rem;
+}
+.mirada-hero-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mirada-label {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
   color: #6A6A6A;
-  margin: 0 0 0.5rem;
+  margin: 0 0 1rem;
+}
+
+.mirada-heading {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #111111;
+  margin: 0 0 1.5rem;
 }
 
 .mirada-hero-sub {
   font-family: 'BDO Grotesk', sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  color: #111111;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #6A6A6A;
   margin: 0 0 2.5rem;
 }
 
-.mirada-hero-support {
-  font-family: 'BDO Grotesk', sans-serif;
-  font-size: 0.625rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #6A6A6A;
-  margin: 2rem 0 0;
+.mirada-hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
+
+.mirada-audio-status,
+.mirada-accessible-msg {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.6875rem;
+  color: #6A6A6A;
+  margin: 0 0 0.5rem;
+}
+
+.mirada-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.mirada-link {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #111111;
+  border-bottom: 1px solid #a0a09e;
+  padding-bottom: 2px;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+.mirada-link:hover { border-color: #111111; }
 
 /* Buttons */
 .mirada-btn {
   font-family: 'BDO Grotesk', sans-serif;
+  letter-spacing: 1px;
   font-size: 0.7rem;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 0.875rem 2rem;
+  letter-spacing: 3px;
+  padding: 0.75rem 1.5rem;
   cursor: pointer;
   transition: color 0.2s, background 0.2s, border-color 0.2s;
   -webkit-appearance: none;
@@ -104,23 +173,46 @@
   color: #111111;
 }
 
-.mirada-btn:focus-visible {
+.mirada-btn-tertiary {
+  background: transparent;
+  color: #6A6A6A;
+  border: none;
+  border-bottom: 1px solid transparent;
+}
+.mirada-btn-tertiary:hover,
+.mirada-btn-tertiary:focus-visible {
+  color: #111111;
+  border-bottom-color: #a0a09e;
+}
+
+.mirada-btn-audio {
+  background: transparent;
+  color: #6A6A6A;
+  border: 1px solid #e5e4e1;
+  margin-top: 1rem;
+}
+.mirada-btn-audio:hover,
+.mirada-btn-audio:focus-visible {
+  border-color: #111111;
+  color: #111111;
+}
+
+.mirada-btn:focus-visible,
+.mirada-btn-audio:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px #F5F4F1, 0 0 0 4px #111111;
 }
 
-.mirada-btn.w-full { width: 100%; }
-
 /* Product info */
-.mirada-heading {
-  font-family: 'BDO Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.35;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #111111;
-  margin: 0 0 2rem;
+.mirada-product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  align-items: stretch;
+}
+@media (min-width: 640px) {
+  .mirada-product-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; }
 }
 
 .mirada-dl {
@@ -130,110 +222,115 @@
 .mirada-dl-row {
   display: flex;
   justify-content: space-between;
-  padding: 1.25rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid #e5e4e1;
   font-family: 'BDO Grotesk', sans-serif;
   font-size: 0.6875rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: #111111;
 }
 .mirada-dl-row dt { color: #6A6A6A; margin: 0; }
 .mirada-dl-row dd { margin: 0; }
 .mirada-dl-row-last { border-bottom: none; }
 
-.mirada-product-actions {
-  margin-top: 2.5rem;
+/* Nutrition */
+.mirada-nutrition-block {
+  max-width: 480px;
+  width: 100%;
+  padding: 0 1.5rem;
 }
 
-/* Nutrition inline */
-.mirada-nutrition-inline {
-  margin-top: 3rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid #e5e4e1;
-}
-.mirada-nutrition-inline .mirada-label {
-  margin-bottom: 1rem;
+.mirada-nutrition-header {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #111111;
+  text-align: center;
+  margin: 0 0 2.5rem;
+  padding: 2rem 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .mirada-table {
   width: 100%;
   font-family: 'BDO Grotesk', sans-serif;
-  font-size: 0.6875rem;
-  letter-spacing: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   color: #111111;
   border-collapse: collapse;
 }
-.mirada-table td { padding: 0.875rem 0; border-bottom: 1px solid #e5e4e1; }
-.mirada-table tr:last-child td { border-bottom: none; }
-.mirada-table td:last-child { text-align: right; }
+.mirada-table td {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: top;
+}
+.mirada-table td:first-child {
+  padding-left: 0;
+  text-align: left;
+}
+.mirada-table td:last-child {
+  text-align: right;
+  padding-right: 0;
+}
+.mirada-table tr:last-child td {
+  border-bottom: none;
+}
+.mirada-table-sub td:first-child {
+  padding-left: 1.5rem;
+}
 
 .mirada-nutrition-note {
   font-family: 'BDO Grotesk', sans-serif;
   font-size: 0.625rem;
   color: #6A6A6A;
-  margin: 1rem 0 0;
+  margin: 2rem 0 0;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-/* Transition block */
-.mirada-transition {
-  min-height: 70vh;
-}
-.mirada-transition-text {
+/* Discover */
+.mirada-discover-block { max-width: 720px; }
+.mirada-discover-content {
+  text-align: left;
   font-family: 'BDO Grotesk', sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.6;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.7;
   color: #111111;
-  margin: 0 0 0.5rem;
+  margin: 0 0 1.5rem;
 }
-.mirada-transition .mirada-btn {
-  margin-top: 2.5rem;
-}
+.mirada-discover-content p { margin: 0 0 0.75rem; }
+.mirada-discover-content p:last-child { margin-bottom: 0; }
 
-/* Learn sequence */
+/* Learn moments */
 .mirada-learn {
-  padding: 0;
+  scroll-snap-type: y proximity;
 }
-
 .learn-moment {
-  min-height: 85vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
-@media (min-width: 768px) {
-  .learn-moment { min-height: 90vh; }
-}
-
-/* Text-only blocks (01, 03) */
-.learn-moment-clean {
-  background: #F5F4F1;
-  padding: 6rem 1.5rem;
-}
-@media (min-width: 768px) {
-  .learn-moment-clean { padding: 10rem 2rem; }
+@media (prefers-reduced-motion: reduce) {
+  .learn-moment { scroll-snap-stop: normal; }
 }
 
-.learn-moment-clean .learn-moment-title {
-  color: #111111;
-  margin-bottom: 1.5rem;
-}
-.learn-moment-clean .learn-moment-text {
-  color: #111111;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  margin: 0 0 0.5rem;
-}
-
-/* Media blocks (02, 04) */
-.learn-moment-media .learn-moment-bg {
+.learn-moment-bg {
   position: absolute;
   inset: 0;
 }
-.learn-moment-video,
-.learn-moment-img {
+.learn-moment-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -246,7 +343,7 @@
 .learn-moment-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.3);
   mix-blend-mode: multiply;
   pointer-events: none;
 }
@@ -256,44 +353,83 @@
   z-index: 10;
   text-align: center;
   padding: 2rem 1.5rem;
-  max-width: 520px;
+  max-width: 640px;
   margin: 0 auto;
+}
+
+.learn-moment-num {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(245,244,241,0.7);
+  margin: 0 0 1.5rem;
 }
 
 .learn-moment-title {
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.35;
   text-transform: uppercase;
-  letter-spacing: 1px;
   color: #F5F4F1;
-  margin: 0 0 1.5rem;
+  margin: 0 0 2rem;
 }
 
 .learn-moment-text {
   font-family: 'BDO Grotesk', sans-serif;
   font-size: 0.6875rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: rgba(245,244,241,0.95);
   line-height: 1.6;
-  margin: 0 0 0.5rem;
+  margin: 0 0 1.5rem;
 }
 
-/* Momento block */
-.mirada-momento {
-  min-height: 70vh;
+.learn-moment-audio {
+  margin-top: 1rem;
+  color: rgba(245,244,241,0.9);
+  border-color: rgba(245,244,241,0.4);
 }
-.mirada-momento-text {
+.learn-moment-audio:hover,
+.learn-moment-audio:focus-visible {
+  color: #F5F4F1;
+  border-color: #F5F4F1;
+}
+
+.mirada-learn-intro {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.mirada-learn-intro-text {
   font-family: 'BDO Grotesk', sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.6;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
   color: #6A6A6A;
-  margin: 0 0 0.5rem;
+  line-height: 1.6;
+  white-space: pre-line;
+  margin: 0;
 }
 
-/* Form */
+/* Archive */
+.mirada-archive-intro {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #6A6A6A;
+  text-align: center;
+  margin: 0 0 2.5rem;
+  line-height: 1.6;
+}
+
 .mirada-fieldset {
   border: none;
   padding: 0;
@@ -303,12 +439,12 @@
 
 .mirada-radio-label {
   display: block;
-  padding: 1.25rem 0;
+  padding: 1.5rem 0;
   border-bottom: 1px solid #e5e4e1;
   font-family: 'BDO Grotesk', sans-serif;
   font-size: 0.6875rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: #111111;
   cursor: pointer;
 }
@@ -327,9 +463,9 @@
 .mirada-textarea-label-text {
   display: block;
   font-family: 'BDO Grotesk', sans-serif;
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: #6A6A6A;
   margin-bottom: 0.5rem;
 }
@@ -339,7 +475,7 @@
   padding: 1rem;
   font-family: 'BDO Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 1rem;
   border: 1px solid #e5e4e1;
   background: #F5F4F1;
   resize: vertical;
@@ -358,38 +494,76 @@
 .mirada-form-feedback-error { color: #B56B80; }
 .mirada-form-feedback-success { color: #111111; }
 
-/* CTA / Cierre */
+/* CTA */
 .mirada-cta-block { max-width: 400px; }
-.mirada-cta-text {
-  font-family: 'BDO Grotesk', sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: #111111;
-  margin: 0 0 2rem;
+.mirada-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+@media (min-width: 640px) {
+  .mirada-cta-actions { flex-direction: row; justify-content: center; }
 }
 
 /* Footer */
 .mirada-footer {
-  padding: 4rem 1.5rem;
+  padding: 3rem 1.5rem;
   text-align: center;
 }
 
 .mirada-footer-logo {
-  width: 100px;
+  width: 120px;
   height: auto;
   object-fit: contain;
-  opacity: 0.5;
+  opacity: 0.6;
   transition: opacity 0.2s;
 }
 @media (min-width: 768px) {
-  .mirada-footer-logo { width: 120px; }
+  .mirada-footer-logo { width: 150px; }
 }
 .mirada-footer a:hover .mirada-footer-logo { opacity: 1; }
 
-/* Reveal */
+.mirada-accessible-tag {
+  position: fixed;
+  top: calc(1rem + env(safe-area-inset-top, 0));
+  right: calc(1rem + env(safe-area-inset-right, 0));
+  z-index: 50;
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #6A6A6A;
+  background: rgba(245, 244, 241, 0.95);
+  border: 1px solid #e5e4e1;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+  backdrop-filter: blur(8px);
+}
+.mirada-accessible-tag:hover,
+.mirada-accessible-tag:focus-visible {
+  color: #111111;
+  border-color: #a0a09e;
+  background: #F5F4F1;
+}
+.mirada-accessible-tag:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #111111;
+}
+
+.mirada-cta-link {
+  margin-top: 0.25rem;
+}
+@media (min-width: 640px) {
+  .mirada-cta-link { margin-top: 0; }
+}
+
+/* Reveal (immersive mode) */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(12px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 .reveal.reveal-in {
@@ -406,3 +580,10 @@
     transition: none;
   }
 }
+
+.mirada-accessible .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.mirada-btn.w-full { width: 100%; }

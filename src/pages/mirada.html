@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Albino — Información del vino y experiencia</title>
+  <title>Albino — El vino que cambia la mirada</title>
   <meta name="description" content="Experiencia interactiva de Albino para conocer el producto físico. Descubre el vino, la información nutricional y aprende a mirarlo.">
   <link rel="canonical" href="https://albinovino.com/pages/mirada">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,155 +14,194 @@
 </head>
 <body class="mirada-page antialiased text-[#111111] bg-[#F5F4F1]">
   <!--
-    MIRADA — Etiqueta digital expandida. Legal first, experiencia editorial.
-    Bloques: Entrada legal, Información vino, Transición, Secuencia 4 momentos, Momento, Formulario, Cierre.
+    MIRADA — Experiencia NFC editorial para Albino.
+    Secciones: Hero, ProductInfo, NutritionInfo, DiscoverWine, LearnToLook, MiradasForm.
+    Modos: inmersivo (audio) y accesible (sin animaciones).
   -->
 
-  <div class="mirada-page-root" id="mirada-page-root">
-    <h1 class="sr-only">Albino — Información del vino</h1>
+  <div class="mirada-page mirada-page-root" id="mirada-page-root">
+    <h1 class="sr-only">Albino — El vino que cambia la mirada</h1>
+
+    <div id="mirada-audio-band" class="mirada-audio-band" aria-live="polite" hidden>Audio activado</div>
 
     <main>
-      <!-- BLOQUE 1 — ENTRADA / LEGAL FIRST -->
+      <!-- 1. HERO -->
       <section id="mirada-hero" class="mirada-section mirada-hero" aria-labelledby="hero-title">
-        <div class="mirada-block">
-          <p class="mirada-label reveal">ALBINO</p>
-          <p class="mirada-hero-sub reveal">Edición</p>
-          <a href="#product-info" class="mirada-btn mirada-btn-primary reveal delay-100">VER INFORMACIÓN DEL VINO</a>
-          <p class="mirada-hero-support reveal delay-200">Información legal y nutricional</p>
+        <div class="mirada-hero-inner">
+          <p class="mirada-label reveal">Albino</p>
+          <h2 id="hero-title" class="mirada-heading reveal">El vino que cambia la mirada</h2>
+          <p class="mirada-hero-sub reveal delay-100">Has escaneado la etiqueta sonora de Albino. Activa el audio o el modo accesible para una experiencia sin animaciones.</p>
+
+          <div id="hero-audio-actions" class="mirada-hero-actions" role="group" aria-label="Experiencia sonora">
+            <button type="button" id="btn-audio-toggle" class="mirada-btn mirada-btn-primary" aria-pressed="false" aria-label="Activar experiencia sonora">Activar experiencia sonora</button>
+            <button type="button" id="btn-accessible-hero" class="mirada-btn mirada-btn-secondary" aria-pressed="false" aria-label="Usar modo accesible">Modo accesible</button>
+          </div>
+
+          <p id="audio-status" class="mirada-audio-status" aria-live="polite" hidden>Experiencia sonora activada.</p>
+          <p id="accessible-mode-msg" class="mirada-accessible-msg" aria-live="polite" hidden>Esta experiencia se adapta a tu forma de escuchar.</p>
+
+          <nav class="mirada-quick-links reveal delay-200" aria-label="Accesos rápidos">
+            <a href="#product-info" class="mirada-link">Información del vino</a>
+            <a href="#learn-to-look" class="mirada-link">Aprender a mirarlo</a>
+          </nav>
         </div>
       </section>
 
-      <!-- BLOQUE 2 — INFORMACIÓN DEL VINO -->
+      <!-- 2. PRODUCT INFO -->
       <section id="product-info" class="mirada-section mirada-product" aria-labelledby="product-title">
         <div class="mirada-block">
-          <h2 id="product-title" class="mirada-heading reveal">INFORMACIÓN DEL VINO</h2>
+          <h2 id="product-title" class="mirada-heading reveal">Información del vino</h2>
           <dl class="mirada-dl reveal delay-100">
-            <div class="mirada-dl-row"><dt>Lugar</dt><dd>Tierra de Barros · Extremadura</dd></div>
+            <div class="mirada-dl-row"><dt>Nombre</dt><dd>Albino</dd></div>
             <div class="mirada-dl-row"><dt>Tipo</dt><dd>Vino tinto dulce joven</dd></div>
             <div class="mirada-dl-row"><dt>Variedad</dt><dd>Tempranillo</dd></div>
+            <div class="mirada-dl-row"><dt>Origen</dt><dd>Tierra de Barros · Extremadura</dd></div>
             <div class="mirada-dl-row"><dt>Alcohol</dt><dd>12,5 % vol</dd></div>
             <div class="mirada-dl-row"><dt>Formato</dt><dd>75 cl</dd></div>
             <div class="mirada-dl-row mirada-dl-row-last"><dt>Alérgenos</dt><dd>Contiene sulfitos</dd></div>
           </dl>
           <div class="mirada-product-actions reveal delay-200">
-            <a href="/products/albino-edicion-2026" class="mirada-btn mirada-btn-secondary">VER ETIQUETA COMPLETA</a>
-          </div>
-          <div class="mirada-nutrition-inline reveal delay-200">
-            <p class="mirada-label">Información nutricional — Valores por 100 ml</p>
-            <table class="mirada-table" role="table">
-              <caption class="sr-only">Valores nutricionales por 100 ml</caption>
-              <tbody>
-                <tr><td>Energía</td><td>350 kJ / 85 kcal</td></tr>
-                <tr><td>Carbohidratos</td><td>4 g</td></tr>
-                <tr><td>de los cuales azúcares</td><td>4 g</td></tr>
-                <tr><td>Grasas</td><td>0 g</td></tr>
-                <tr><td>Proteínas</td><td>0 g</td></tr>
-                <tr><td>Sal</td><td>0 g</td></tr>
-              </tbody>
-            </table>
-            <p class="mirada-nutrition-note">Consumir con responsabilidad.</p>
+            <button type="button" id="btn-toggle-nutrition" class="mirada-btn mirada-btn-primary" aria-expanded="false" aria-controls="nutrition-info">Ver información nutricional</button>
+            <a href="/products/albino-edicion-2026" class="mirada-btn mirada-btn-secondary">Ver botella</a>
+            <button type="button" id="btn-audio-product" class="mirada-btn mirada-btn-audio" aria-label="Escuchar información del vino" hidden>Escuchar</button>
           </div>
         </div>
       </section>
 
-      <!-- BLOQUE 3 — TRANSICIÓN -->
-      <section id="mirada-transition" class="mirada-section mirada-transition" aria-labelledby="transition-title">
-        <div class="mirada-block">
-          <p class="mirada-transition-text reveal">La etiqueta contiene información.</p>
-          <p class="mirada-transition-text reveal delay-100">Pero no todo se entiende igual.</p>
-          <a href="#learn-step-1" class="mirada-btn mirada-btn-primary reveal delay-200">EXPLORAR LA MIRADA</a>
+      <!-- 3. NUTRITION (expandible) -->
+      <section id="nutrition-info" class="mirada-section mirada-nutrition" aria-labelledby="nutrition-title" hidden>
+        <div class="mirada-block mirada-nutrition-block">
+          <h2 id="nutrition-title" class="mirada-nutrition-header reveal">Información nutricional – Valores por 100 ml</h2>
+          <table class="mirada-table reveal delay-100" role="table" aria-describedby="nutrition-title">
+            <caption class="sr-only">Valores nutricionales por 100 ml de vino Albino</caption>
+            <tbody>
+              <tr><td>Energía</td><td>350 kJ / 85 kcal</td></tr>
+              <tr><td>Carbohidratos</td><td>4 g</td></tr>
+              <tr class="mirada-table-sub"><td>de los cuales azúcares</td><td>4 g</td></tr>
+              <tr><td>Grasas</td><td>0 g</td></tr>
+              <tr><td>Proteínas</td><td>0 g</td></tr>
+              <tr><td>Sal</td><td>0 g</td></tr>
+            </tbody>
+          </table>
+          <p class="mirada-nutrition-note reveal delay-200">Consumir con responsabilidad.</p>
         </div>
       </section>
 
-      <!-- BLOQUE 4 — SECUENCIA -->
+      <!-- 4. DESCUBRIR EL VINO -->
+      <section id="discover-wine" class="mirada-section mirada-discover" aria-labelledby="discover-title">
+        <div class="mirada-block mirada-discover-block">
+          <h2 id="discover-title" class="mirada-heading reveal">Descubrir el vino</h2>
+          <div class="mirada-discover-content reveal delay-100">
+            <p>Albino nace en Tierra de Barros, en Extremadura.</p>
+            <p>Un vino tinto dulce de la variedad tempranillo.</p>
+            <p>Un vino cercano. Pensado para compartir.</p>
+            <p>Albino no pretende reinventar el vino. Solo propone mirarlo de otra manera.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. APRENDER A MIRARLO -->
       <section id="learn-to-look" class="mirada-learn" aria-labelledby="learn-title">
-        <article id="learn-step-1" class="learn-moment learn-moment-clean" aria-labelledby="step-1-title">
-          <div class="learn-moment-content">
-            <h3 id="step-1-title" class="learn-moment-title">MIRA</h3>
-            <p class="learn-moment-text">Observa la etiqueta.</p>
-            <p class="learn-moment-text">No busques entenderla.</p>
-          </div>
-        </article>
-
-        <article id="learn-step-2" class="learn-moment learn-moment-media" aria-labelledby="step-2-title">
-          <div class="learn-moment-bg" aria-hidden="true">
-            <div class="learn-moment-bg-fallback"></div>
-            <div class="learn-moment-overlay"></div>
-          </div>
-          <div class="learn-moment-content">
-            <h3 id="step-2-title" class="learn-moment-title">ACÉRCATE</h3>
-            <p class="learn-moment-text">Sirve el vino.</p>
-            <p class="learn-moment-text">Mira cómo cambia con la luz.</p>
-          </div>
-        </article>
-
-        <article id="learn-step-3" class="learn-moment learn-moment-clean" aria-labelledby="step-3-title">
-          <div class="learn-moment-content">
-            <h3 id="step-3-title" class="learn-moment-title">PRUEBA</h3>
-            <p class="learn-moment-text">Ahora sí.</p>
-            <p class="learn-moment-text">Y vuelve a mirar.</p>
-          </div>
-        </article>
-
-        <article id="learn-step-4" class="learn-moment learn-moment-media" aria-labelledby="step-4-title">
-          <div class="learn-moment-bg" aria-hidden="true">
-            <div class="learn-moment-bg-fallback"></div>
-            <div class="learn-moment-overlay"></div>
-          </div>
-          <div class="learn-moment-content">
-            <h3 id="step-4-title" class="learn-moment-title">VUELVE A MIRAR</h3>
-            <p class="learn-moment-text">No es solo el vino.</p>
-            <p class="learn-moment-text">Es lo que empieza a aparecer.</p>
-          </div>
-        </article>
-      </section>
-
-      <!-- BLOQUE 5 — MOMENTO -->
-      <section id="mirada-momento" class="mirada-section mirada-momento" aria-labelledby="momento-title">
-        <div class="mirada-block">
-          <h2 id="momento-title" class="mirada-heading reveal">MIRA EL MOMENTO</h2>
-          <p class="mirada-momento-text reveal delay-100">No hay una forma correcta.</p>
-          <p class="mirada-momento-text reveal delay-200">Solo atención.</p>
+        <div class="mirada-learn-intro reveal" id="learn-intro">
+          <h2 id="learn-title" class="mirada-heading">Aprender a mirarlo</h2>
+          <p class="mirada-learn-intro-text">Esta no es una cata tradicional.
+Es una invitación a percibir el momento.</p>
+          <button type="button" id="btn-audio-learn" class="mirada-btn mirada-btn-audio" aria-label="Escuchar recorrido guiado de los 4 momentos" hidden>Escuchar recorrido</button>
         </div>
+
+        <article id="step-1" class="learn-moment" aria-labelledby="step-1-title" data-step="1">
+          <div class="learn-moment-bg" aria-hidden="true">
+            <div class="learn-moment-bg-fallback"></div>
+            <div class="learn-moment-overlay"></div>
+          </div>
+          <div class="learn-moment-content">
+            <p class="learn-moment-num" aria-hidden="true">01</p>
+            <h3 id="step-1-title" class="learn-moment-title">Mira el momento</h3>
+            <p class="learn-moment-text">Antes de probar el vino, tómate un momento. Cada persona mira el mundo de una forma distinta. A veces con los ojos. A veces con los sentidos.</p>
+          </div>
+        </article>
+
+        <article id="step-2" class="learn-moment" aria-labelledby="step-2-title" data-step="2">
+          <div class="learn-moment-bg" aria-hidden="true">
+            <div class="learn-moment-bg-fallback"></div>
+            <div class="learn-moment-overlay"></div>
+          </div>
+          <div class="learn-moment-content">
+            <p class="learn-moment-num" aria-hidden="true">02</p>
+            <h3 id="step-2-title" class="learn-moment-title">Acércate al vino</h3>
+            <p class="learn-moment-text">Acerca la copa. No hace falta encontrar palabras. Solo percibe.</p>
+          </div>
+        </article>
+
+        <article id="step-3" class="learn-moment" aria-labelledby="step-3-title" data-step="3">
+          <div class="learn-moment-bg" aria-hidden="true">
+            <div class="learn-moment-bg-fallback"></div>
+            <div class="learn-moment-overlay"></div>
+          </div>
+          <div class="learn-moment-content">
+            <p class="learn-moment-num" aria-hidden="true">03</p>
+            <h3 id="step-3-title" class="learn-moment-title">Prueba</h3>
+            <p class="learn-moment-text">Bebe despacio. No intentes entenderlo todo. Solo deja que ocurra.</p>
+          </div>
+        </article>
+
+        <article id="step-4" class="learn-moment" aria-labelledby="step-4-title" data-step="4">
+          <div class="learn-moment-bg" aria-hidden="true">
+            <div class="learn-moment-bg-fallback"></div>
+            <div class="learn-moment-overlay"></div>
+          </div>
+          <div class="learn-moment-content">
+            <p class="learn-moment-num" aria-hidden="true">04</p>
+            <h3 id="step-4-title" class="learn-moment-title">Vuelve a mirar</h3>
+            <p class="learn-moment-text">Ahora vuelve a mirar el momento. Quizá no haya cambiado nada. O quizá sí. El vino no cambia el mundo. Solo cambia la forma de mirarlo.</p>
+          </div>
+        </article>
       </section>
 
-      <!-- BLOQUE 6 — INTERACCIÓN -->
+      <!-- 6. ARCHIVO DE MIRADAS -->
       <section id="miradas-form" class="mirada-section mirada-archive" aria-labelledby="miradas-title">
         <div class="mirada-block">
-          <h2 id="miradas-title" class="mirada-heading reveal">¿Cómo lo ves ahora?</h2>
+          <h2 id="miradas-title" class="mirada-heading reveal">¿Cómo ves este vino?</h2>
+          <p class="mirada-archive-intro reveal delay-100">Cada persona ve Albino de una manera distinta.
+Esta también puede ser tu mirada.</p>
           <form id="form-miradas" class="mirada-form reveal delay-100" novalidate>
             <fieldset class="mirada-fieldset">
               <legend class="sr-only">Elige una opción</legend>
-              <label class="mirada-radio-label"><input type="radio" name="mirada" value="ligero" class="mirada-radio"> Ligero</label>
-              <label class="mirada-radio-label"><input type="radio" name="mirada" value="intenso" class="mirada-radio"> Intenso</label>
-              <label class="mirada-radio-label"><input type="radio" name="mirada" value="distinto" class="mirada-radio"> Distinto</label>
+              <label class="mirada-radio-label"><input type="radio" name="mirada" value="cercano" class="mirada-radio"> Cercano</label>
+              <label class="mirada-radio-label"><input type="radio" name="mirada" value="profundo" class="mirada-radio"> Profundo</label>
+              <label class="mirada-radio-label"><input type="radio" name="mirada" value="inesperado" class="mirada-radio"> Inesperado</label>
+              <label class="mirada-radio-label"><input type="radio" name="mirada" value="calido" class="mirada-radio"> Cálido</label>
             </fieldset>
             <label class="mirada-textarea-label" for="tu-mirada">
               <span class="mirada-textarea-label-text">Tu mirada</span>
-              <textarea id="tu-mirada" name="tu_mirada" rows="2" placeholder="Opcional" class="mirada-textarea" aria-describedby="form-miradas-feedback"></textarea>
+              <textarea id="tu-mirada" name="tu_mirada" rows="3" placeholder="Opcional" class="mirada-textarea" aria-describedby="form-miradas-feedback"></textarea>
             </label>
-            <div id="form-miradas-feedback" class="mirada-form-feedback" role="status" aria-live="polite"></div>
-            <button type="submit" class="mirada-btn mirada-btn-primary w-full">ENVIAR</button>
+            <div id="form-miradas-feedback" class="mirada-form-feedback" role="status" aria-live="polite" aria-atomic="true"></div>
+            <button type="submit" class="mirada-btn mirada-btn-primary w-full">Dejar mi mirada</button>
           </form>
         </div>
       </section>
 
-      <!-- BLOQUE 7 — CIERRE -->
+      <!-- 7. CTA -->
       <section id="mirada-cta" class="mirada-section mirada-cta" aria-labelledby="cta-title">
         <div class="mirada-block mirada-cta-block">
-          <h2 id="cta-title" class="sr-only">Cierre</h2>
-          <p class="mirada-cta-text reveal">El vino se descubre mirando.</p>
-          <a href="/products/albino-edicion-2026" class="mirada-btn mirada-btn-primary reveal delay-100">VOLVER AL VINO</a>
+          <h2 id="cta-title" class="sr-only">Producto</h2>
+          <div class="mirada-cta-actions">
+            <a href="/products/albino-edicion-2026" class="mirada-btn mirada-btn-primary">Comprar botella</a>
+          </div>
         </div>
       </section>
     </main>
 
+    <button type="button" id="btn-accessible-toggle" class="mirada-accessible-tag" aria-pressed="false" aria-label="Usar modo accesible">Modo accesible</button>
     <footer class="mirada-footer">
       <a href="/">
         <img data-bind-src="assets.logo" alt="Albino" class="mirada-footer-logo" width="150" height="60" loading="lazy">
       </a>
     </footer>
   </div>
+
+  <audio id="mirada-audio-player" preload="metadata" aria-hidden="true"></audio>
 
   <script src="../config/site.js"></script>
   <script src="../js/mirada.js"></script>
