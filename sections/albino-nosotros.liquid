@@ -1,6 +1,5 @@
 {% comment %}
-  Página Origen (antes Nosotros). Estructura simplificada:
-  ORIGEN — TIERRA — ESFUERZO — Aquí empieza el vino — Imagen + CTA
+  Página Origen: ORIGEN — TIERRA — ESFUERZO — COHEXIÓN — CIERRE (imagen + CTA)
 {% endcomment %}
 {% capture newline %}
 {% endcapture %}
@@ -49,7 +48,7 @@
         {% assign tierra_items = section.settings.tierra_lines | split: newline %}
         {% for line in tierra_items %}
           {% if line != blank %}
-            <p class="font-display uppercase text-[12px] md:text-[14px] tracking-[0.32em] leading-tight">{{ line | strip }}</p>
+            <p class="font-display uppercase text-[12px] tracking-[0.32em] leading-tight">{{ line | strip }}</p>
           {% endif %}
         {% endfor %}
       </div>
@@ -84,7 +83,29 @@
   <p class="text-right font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
 </section>
 
-<!-- 4. Aquí empieza el vino -->
+<!-- 4. COHEXIÓN -->
+<section class="min-h-[80vh] flex items-center justify-center px-8 md:px-16 py-24 md:py-32 bg-[#f5f2ed]">
+  <div class="w-full max-w-[560px] text-center">
+    <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
+      {{ section.settings.cohesion_title }}
+    </h2>
+    <div class="text-stone-900" style="line-height: 30pt;">
+      {% assign cohesion_items = section.settings.cohesion_text | split: newline %}
+      {% for line in cohesion_items %}
+        {% if line != blank %}
+          <p class="font-db-serif italic text-[14px] md:text-base lowercase mb-0 mt-0" style="letter-spacing: 0;">{{ line | strip }}</p>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Separador -->
+<section class="py-16 md:py-24 px-8 md:px-16 bg-[#f5f2ed]">
+  <p class="text-center font-geist-mono text-stone-400 text-[10px] tracking-[0.2em]">—</p>
+</section>
+
+<!-- 5. CIERRE -->
 <section class="min-h-[100vh] flex flex-col items-center justify-center px-8 md:px-16 py-24 md:py-32 bg-[#f5f2ed]">
   <div class="reveal flex flex-col items-center text-center max-w-[560px]">
     <p class="font-db-serif italic text-stone-900 mb-16 text-xl md:text-2xl lowercase leading-relaxed" style="letter-spacing: 0;">
@@ -162,11 +183,27 @@
       "type": "textarea",
       "id": "esfuerzo_text",
       "label": "Texto (multilínea)",
-      "default": "Un trabajo que se repite cada año.\nSiempre afinándose."
+      "default": "Una forma de hacer que viene de antes.\nY que sigue afinándose."
     },
     {
       "type": "header",
-      "content": "4 · Cierre e imagen"
+      "content": "4 · Cohesión"
+    },
+    {
+      "type": "text",
+      "id": "cohesion_title",
+      "label": "Título",
+      "default": "COHEXIÓN"
+    },
+    {
+      "type": "textarea",
+      "id": "cohesion_text",
+      "label": "Texto (multilínea)",
+      "default": "Entender lo que ya está.\nAceptarlo y avanzar con ello."
+    },
+    {
+      "type": "header",
+      "content": "5 · Cierre e imagen"
     },
     {
       "type": "text",
