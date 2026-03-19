@@ -20,13 +20,15 @@
     accessibleMode = !!on;
     document.body.classList.toggle('mirada-accessible', accessibleMode);
     var toggles = document.querySelectorAll('#btn-accessible-toggle, #btn-accessible-hero');
-    var msg = document.getElementById('accessible-mode-msg');
     toggles.forEach(function (t) {
       t.setAttribute('aria-pressed', String(accessibleMode));
-      t.setAttribute('aria-label', accessibleMode ? 'Desactivar modo accesible' : 'Usar modo accesible');
-      t.textContent = accessibleMode ? 'Modo accesible activado' : 'Modo accesible';
+      t.setAttribute('aria-label', accessibleMode ? 'Desactivar modo accesible' : 'Continuar en modo accesible');
+      if (t.id === 'btn-accessible-hero') {
+        t.textContent = accessibleMode ? 'Modo accesible activado' : 'Continuar en modo accesible';
+      } else {
+        t.textContent = accessibleMode ? 'Modo accesible activado' : 'Modo accesible';
+      }
     });
-    if (msg) msg.hidden = !accessibleMode;
     if (accessibleMode) {
       setAudioEnabled(false);
     } else {
@@ -91,7 +93,12 @@
     if (prefersReducedMotion()) setAccessibleMode(true);
     document.querySelectorAll('#btn-accessible-toggle, #btn-accessible-hero').forEach(function (toggle) {
       toggle.addEventListener('click', function () {
+        var wasOff = !accessibleMode;
         setAccessibleMode(!accessibleMode);
+        if (toggle.id === 'btn-accessible-hero' && wasOff) {
+          var target = document.getElementById('learn-to-look');
+          if (target) target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+        }
       });
     });
   }

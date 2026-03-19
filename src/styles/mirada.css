@@ -102,6 +102,31 @@
   margin-bottom: 1rem;
 }
 
+.mirada-hero-skip {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #6A6A6A;
+  background: none;
+  border: none;
+  padding: 1.5rem 0 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.mirada-hero-skip:hover,
+.mirada-hero-skip:focus-visible {
+  color: #111111;
+}
+.mirada-hero-skip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #111111;
+}
+
 .mirada-audio-status,
 .mirada-accessible-msg {
   font-family: 'BDO Grotesk', sans-serif;
@@ -283,18 +308,15 @@
 }
 
 /* Discover */
-.mirada-discover-block { max-width: 720px; }
-.mirada-discover-content {
-  text-align: left;
+.mirada-discover-block { max-width: 520px; }
+.mirada-discover-single {
   font-family: 'BDO Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: 0.875rem;
+  line-height: 1.6;
   color: #111111;
-  margin: 0 0 1.5rem;
+  margin: 0;
+  text-align: center;
 }
-.mirada-discover-content p { margin: 0 0 0.75rem; }
-.mirada-discover-content p:last-child { margin-bottom: 0; }
 
 /* Learn moments */
 .mirada-learn {
@@ -432,6 +454,19 @@
 }
 
 /* Archive */
+/* Momento */
+.mirada-momento {
+  min-height: 70vh;
+}
+.mirada-momento-text {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: #6A6A6A;
+  margin: 0;
+  text-align: center;
+}
+
 .mirada-archive-intro {
   font-family: 'BDO Grotesk', sans-serif;
   font-size: 0.6875rem;
