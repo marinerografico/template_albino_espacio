@@ -1,127 +1,82 @@
 /**
- * MIRADA — Lógica para la experiencia NFC de Albino.
- * Estado: audioEnabled (true/false). Sin autoplay.
- * Port a Shopify: reemplazar rutas de audio por {{ 'audio-xxx.mp3' | asset_url }}.
+ * MIRADA — Etiqueta digital expandida. Minimal, editorial.
+ * Formulario y reveal suave.
  */
 (function () {
-  var audioEnabled = false;
-  var audioPlayer = document.getElementById('mirada-audio-player');
-  var btnAudioOn = document.getElementById('btn-audio-on');
-  var btnAudioOff = document.getElementById('btn-audio-off');
-  var audioStatus = document.getElementById('audio-status');
-  var nutritionSection = document.getElementById('nutrition-info');
-  var btnToggleNutrition = document.getElementById('btn-toggle-nutrition');
-  var audioButtons = document.querySelectorAll('.mirada-audio-btn');
-  var form = document.getElementById('form-miradas');
+  'use strict';
 
-  function setAudioEnabled(enabled) {
-    audioEnabled = !!enabled;
-    if (btnAudioOn) btnAudioOn.setAttribute('aria-pressed', String(audioEnabled));
-    if (btnAudioOff) btnAudioOff.setAttribute('aria-pressed', String(!audioEnabled));
-    if (audioStatus) {
-      audioStatus.hidden = !audioEnabled;
-    }
-    audioButtons.forEach(function (btn) {
-      btn.hidden = !audioEnabled;
-    });
-  }
-
-  function initModeButtons() {
-    if (btnAudioOn) {
-      btnAudioOn.addEventListener('click', function () {
-        setAudioEnabled(true);
-      });
-    }
-    if (btnAudioOff) {
-      btnAudioOff.addEventListener('click', function () {
-        setAudioEnabled(false);
-      });
-    }
-  }
-
-  function initQuickLinks() {
-    document.querySelectorAll('.mirada-quick-links a[href^="#"]').forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        var id = link.getAttribute('href').slice(1);
-        var target = document.getElementById(id);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  }
-
-  function initNutritionToggle() {
-    if (!btnToggleNutrition || !nutritionSection) return;
-    btnToggleNutrition.addEventListener('click', function () {
-      var isHidden = nutritionSection.hidden;
-      nutritionSection.hidden = !isHidden;
-      btnToggleNutrition.setAttribute('aria-expanded', String(!isHidden));
-      btnToggleNutrition.textContent = isHidden ? 'Ocultar información nutricional' : 'Ver información nutricional';
-    });
-  }
-
-  function initAudioButtons() {
-    if (!audioPlayer) return;
-    var activeBtn = null;
-    audioButtons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var src = btn.getAttribute('data-audio');
-        if (!src) return;
-        var baseUrl = (window.ALBINO_CONFIG && window.ALBINO_CONFIG.links && window.ALBINO_CONFIG.links.audioBase)
-          ? window.ALBINO_CONFIG.links.audioBase
-          : '/assets/';
-        audioPlayer.src = baseUrl.replace(/\/?$/, '/') + src;
-        activeBtn = btn;
-        btn.textContent = 'Reproduciendo…';
-        audioPlayer.play().catch(function () {
-          if (activeBtn) activeBtn.textContent = 'Escuchar';
-        });
-      });
-    });
-    audioPlayer.addEventListener('ended', function () {
-      if (activeBtn) activeBtn.textContent = 'Escuchar';
-      activeBtn = null;
-    });
+  function prefersReducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
   function initForm() {
+    var form = document.getElementById('form-miradas');
+    var feedback = document.getElementById('form-miradas-feedback');
     if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var selected = form.querySelector('input[name="mirada"]:checked');
-      var textarea = form.querySelector('textarea[name="tu_mirada"]');
+      var textarea = form.querySelector('#tu-mirada');
       var mirada = selected ? selected.value : '';
       var tuMirada = textarea ? textarea.value.trim() : '';
       if (!mirada && !tuMirada) {
+        if (feedback) {
+          feedback.setAttribute('role', 'alert');
+          feedback.textContent = 'Por favor, elige una opción o escribe tu mirada.';
+          feedback.className = 'mirada-form-feedback mirada-form-feedback-error';
+          form.querySelector('input[name="mirada"]')?.focus();
+        }
         return;
       }
-      if (window.ALBINO_CONFIG && window.ALBINO_CONFIG.miradasEndpoint) {
-        fetch(window.ALBINO_CONFIG.miradasEndpoint, {
+      if (feedback) {
+        feedback.removeAttribute('role');
+        feedback.setAttribute('role', 'status');
+        feedback.textContent = '';
+        feedback.className = 'mirada-form-feedback';
+      }
+      var endpoint = window.ALBINO_CONFIG?.miradasEndpoint;
+      if (endpoint) {
+        fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ mirada: mirada, tu_mirada: tuMirada })
         }).then(function () {
           form.reset();
-          alert('Gracias por compartir tu mirada.');
+          if (feedback) {
+            feedback.textContent = 'Gracias por compartir tu mirada.';
+            feedback.className = 'mirada-form-feedback mirada-form-feedback-success';
+          }
         }).catch(function () {
-          console.warn('Miradas: endpoint no disponible');
+          if (feedback) {
+            feedback.setAttribute('role', 'alert');
+            feedback.textContent = 'No se pudo enviar. Inténtalo de nuevo.';
+            feedback.className = 'mirada-form-feedback mirada-form-feedback-error';
+          }
         });
       } else {
         form.reset();
-        alert('Gracias por compartir tu mirada.');
+        if (feedback) {
+          feedback.textContent = 'Gracias por compartir tu mirada.';
+          feedback.className = 'mirada-form-feedback mirada-form-feedback-success';
+        }
       }
     });
   }
 
+  function initReveal() {
+    if (prefersReducedMotion()) return;
+    if (typeof IntersectionObserver === 'undefined') return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.classList.add('reveal-in');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+  }
+
   function init() {
-    setAudioEnabled(false);
-    initModeButtons();
-    initQuickLinks();
-    initNutritionToggle();
-    initAudioButtons();
     initForm();
+    initReveal();
   }
 
   if (document.readyState === 'loading') {
