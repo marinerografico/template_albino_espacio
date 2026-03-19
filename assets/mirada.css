@@ -77,10 +77,11 @@
 
 .mirada-hero-intro {
   font-family: 'BDO Grotesk', sans-serif;
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: #333333;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #111111;
   margin: 0 0 2rem;
+  text-align: center;
 }
 
 .mirada-heading {
@@ -106,8 +107,13 @@
 .mirada-hero-actions {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.mirada-hero-actions .mirada-btn {
+  width: 100%;
 }
 
 .mirada-hero-skip {
