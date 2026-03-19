@@ -100,16 +100,16 @@
       <h2 class="espacio-title font-display heading-page reveal text-[#F5F4F1] mb-6">
         {{ section.settings.cohesion_title }}
       </h2>
-      <p class="font-display uppercase text-[12px] tracking-[0.32em] leading-tight text-[#F5F4F1]">
-        {% assign cohesion_items = section.settings.cohesion_text | split: newline %}
-        {% assign first_cohesion = true %}
-        {% for line in cohesion_items %}
-          {% assign line_stripped = line | strip %}
-          {% if line_stripped != blank %}
-            {% if first_cohesion %}{% assign first_cohesion = false %}{% else %} · {% endif %}{{ line_stripped }}
-          {% endif %}
-        {% endfor %}
-      </p>
+    <p class="font-display uppercase text-[12px] tracking-[0.32em] leading-tight text-[#F5F4F1]">
+      {% assign cohesion_items = section.settings.cohesion_text | split: newline %}
+      {% assign first_cohesion = true %}
+      {% for line in cohesion_items %}
+        {% assign line_stripped = line | strip %}
+        {% if line_stripped != blank %}
+          {% if first_cohesion %}{% assign first_cohesion = false %}{% else %} {% endif %}{{ line_stripped }}
+        {% endif %}
+      {% endfor %}
+    </p>
     </div>
   </div>
 </section>
