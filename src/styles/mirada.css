@@ -75,6 +75,17 @@
   margin: 0 0 1rem;
 }
 
+.mirada-hero-title {
+  font-family: 'BDO Grotesk', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #111111;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
 .mirada-hero-intro {
   font-family: 'BDO Grotesk', sans-serif;
   font-size: 0.875rem;

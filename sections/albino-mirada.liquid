@@ -16,8 +16,6 @@
   data-audio-step-4="{% if section.settings.audio_step_4 != blank %}{{ section.settings.audio_step_4 }}{% endif %}"
   data-audio-outro="{% if section.settings.audio_outro != blank %}{{ section.settings.audio_outro }}{% endif %}"
   data-product-url="{{ section.settings.product_url | default: routes.root_url | append: 'products/albino-edicion-2026' }}">
-  <h1 class="sr-only">{{ shop.name }} — El vino que cambia la mirada</h1>
-
   <div id="mirada-audio-band" class="mirada-audio-band" aria-live="polite" hidden>
     Audio activado
   </div>
@@ -26,7 +24,8 @@
     <!-- 1. HERO / ENTRY -->
     <section id="mirada-hero" class="mirada-section mirada-hero" aria-labelledby="hero-title">
       <div class="mirada-hero-inner">
-        <p id="hero-title" class="mirada-hero-intro reveal">Esta es la etiqueta digital de Albino.<br>Información del vino y una forma de mirarlo.</p>
+        <h1 id="hero-title" class="mirada-hero-title reveal">Etiqueta digital de Albino</h1>
+        <p class="mirada-hero-intro reveal">Información del vino y una forma de mirarlo.</p>
         <div class="mirada-hero-actions">
           <a href="#product-info" class="mirada-btn mirada-btn-primary reveal delay-100">VER INFORMACIÓN DEL VINO</a>
           <button type="button" id="btn-accessible-hero" class="mirada-hero-skip reveal delay-200" aria-pressed="false" aria-label="Continuar en modo accesible">
