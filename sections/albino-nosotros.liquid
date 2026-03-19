@@ -21,10 +21,10 @@
 <!-- 2. TIERRA -->
 <section class="relative w-full min-h-[60vh] md:min-h-[80vh] overflow-hidden reveal">
   <div class="absolute inset-0 bg-stone-800">
-    {% if section.settings.tierra_video_url != blank %}
-      <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-        <source src="{{ section.settings.tierra_video_url | escape }}" type="video/mp4">
-      </video>
+    {% if section.settings.tierra_video != blank %}
+      <div class="w-full h-full [&_video]:w-full [&_video]:h-full [&_video]:object-cover">
+        {{ section.settings.tierra_video | video_tag: autoplay: true, loop: true, muted: true }}
+      </div>
     {% elsif section.settings.tierra_image != blank %}
       <img src="{{ section.settings.tierra_image | image_url: width: 1920 }}" class="w-full h-full object-cover" alt="Tierra de Barros" width="1920" height="1080" loading="lazy">
     {% endif %}
@@ -86,10 +86,10 @@
 <!-- 4. COHEXIÓN -->
 <section class="relative w-full min-h-[60vh] md:min-h-[80vh] overflow-hidden reveal">
   <div class="absolute inset-0 bg-stone-800">
-    {% if section.settings.cohesion_video_url != blank %}
-      <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-        <source src="{{ section.settings.cohesion_video_url | escape }}" type="video/mp4">
-      </video>
+    {% if section.settings.cohesion_video != blank %}
+      <div class="w-full h-full [&_video]:w-full [&_video]:h-full [&_video]:object-cover">
+        {{ section.settings.cohesion_video | video_tag: autoplay: true, loop: true, muted: true }}
+      </div>
     {% elsif section.settings.cohesion_image != blank %}
       <img src="{{ section.settings.cohesion_image | image_url: width: 1920 }}" class="w-full h-full object-cover" alt="Cohesión" width="1920" height="1080" loading="lazy">
     {% endif %}
@@ -155,10 +155,9 @@
       "content": "2 · Tierra"
     },
     {
-      "type": "text",
-      "id": "tierra_video_url",
-      "label": "Vídeo de fondo (MP4)",
-      "info": "Sube el MP4 a Content → Files y pega la URL."
+      "type": "video",
+      "id": "tierra_video",
+      "label": "Vídeo de fondo"
     },
     {
       "type": "image_picker",
@@ -204,10 +203,9 @@
       "content": "4 · Cohesión"
     },
     {
-      "type": "text",
-      "id": "cohesion_video_url",
-      "label": "Vídeo de fondo (MP4)",
-      "info": "Sube el MP4 a Content → Files y pega la URL."
+      "type": "video",
+      "id": "cohesion_video",
+      "label": "Vídeo de fondo"
     },
     {
       "type": "image_picker",
