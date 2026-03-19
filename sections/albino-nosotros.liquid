@@ -84,18 +84,32 @@
 </section>
 
 <!-- 4. COHEXIÓN -->
-<section class="min-h-[80vh] flex items-center justify-center px-8 md:px-16 py-24 md:py-32 bg-[#f5f2ed]">
-  <div class="w-full max-w-[560px] text-center">
-    <h2 class="espacio-title font-display heading-page reveal text-stone-900 mb-6">
-      {{ section.settings.cohesion_title }}
-    </h2>
-    <div class="space-y-6 text-stone-900">
-      {% assign cohesion_items = section.settings.cohesion_text | split: newline %}
-      {% for line in cohesion_items %}
-        {% if line != blank %}
-          <p class="font-display uppercase text-[12px] tracking-[0.32em] leading-tight">{{ line | strip }}</p>
-        {% endif %}
-      {% endfor %}
+<section class="relative w-full min-h-[60vh] md:min-h-[80vh] overflow-hidden reveal">
+  <div class="absolute inset-0 bg-stone-800">
+    {% if section.settings.cohesion_video_url != blank %}
+      <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+        <source src="{{ section.settings.cohesion_video_url | escape }}" type="video/mp4">
+      </video>
+    {% elsif section.settings.cohesion_image != blank %}
+      <img src="{{ section.settings.cohesion_image | image_url: width: 1920 }}" class="w-full h-full object-cover" alt="Cohesión" width="1920" height="1080" loading="lazy">
+    {% endif %}
+  </div>
+  <div class="absolute inset-0 bg-[#B55239]/20 mix-blend-multiply pointer-events-none"></div>
+  <div class="absolute inset-0 z-10 flex items-center justify-center px-8 md:px-16">
+    <div class="w-full max-w-[560px] text-center">
+      <h2 class="espacio-title font-display heading-page reveal text-[#F5F4F1] mb-6">
+        {{ section.settings.cohesion_title }}
+      </h2>
+      <p class="font-display uppercase text-[12px] tracking-[0.32em] leading-tight text-[#F5F4F1]">
+        {% assign cohesion_items = section.settings.cohesion_text | split: newline %}
+        {% assign first_cohesion = true %}
+        {% for line in cohesion_items %}
+          {% assign line_stripped = line | strip %}
+          {% if line_stripped != blank %}
+            {% if first_cohesion %}{% assign first_cohesion = false %}{% else %} · {% endif %}{{ line_stripped }}
+          {% endif %}
+        {% endfor %}
+      </p>
     </div>
   </div>
 </section>
@@ -188,6 +202,17 @@
     {
       "type": "header",
       "content": "4 · Cohesión"
+    },
+    {
+      "type": "text",
+      "id": "cohesion_video_url",
+      "label": "Vídeo de fondo (MP4)",
+      "info": "Sube el MP4 a Content → Files y pega la URL."
+    },
+    {
+      "type": "image_picker",
+      "id": "cohesion_image",
+      "label": "Imagen de fondo (si no hay vídeo)"
     },
     {
       "type": "text",

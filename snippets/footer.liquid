@@ -1,4 +1,4 @@
-<footer class="w-full pt-12 pb-6 md:pt-24 reveal" role="contentinfo">
+<footer class="w-full pt-12 pb-6 md:pt-24 reveal {% if template contains 'page.nosotros' %}bg-[#f5f2ed]{% endif %}" role="contentinfo">
   <div class="w-full max-w-[1200px] mx-auto px-8 md:px-16 lg:px-24">
     {% if settings.logo != blank %}
       <img src="{{ settings.logo | image_url: width: 1200 }}" alt="Logotipo de Albino, vino tinto dulce de Tierra de Barros" class="w-full max-w-[1200px] h-auto object-contain mb-8 md:mb-12" width="1200" height="360">
